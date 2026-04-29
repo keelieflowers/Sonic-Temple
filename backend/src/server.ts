@@ -8,7 +8,12 @@ if (!apiKey) {
 }
 
 const port = Number(process.env.PORT ?? 3001);
-const setlistClient = new SetlistClient(apiKey);
+const setlistClient = new SetlistClient(apiKey, {
+  minRequestIntervalMs: Number(process.env.SETLIST_MIN_REQUEST_INTERVAL_MS ?? 600),
+  requestTimeoutMs: Number(process.env.SETLIST_REQUEST_TIMEOUT_MS ?? 10000),
+  retryCount: Number(process.env.SETLIST_RETRY_COUNT ?? 2),
+  retryBaseDelayMs: Number(process.env.SETLIST_RETRY_BASE_DELAY_MS ?? 750)
+});
 const app = createApp(setlistClient);
 
 app.listen(port, () => {

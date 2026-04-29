@@ -12,6 +12,14 @@ cp .env.example .env
 ```
 
 Set `SETLIST_API_KEY` in `backend/.env`.
+You can also tune outbound Setlist request pacing to reduce 429 responses:
+
+- `SETLIST_MIN_REQUEST_INTERVAL_MS` (default `600`)
+- `SETLIST_REQUEST_TIMEOUT_MS` (default `10000`)
+- `SETLIST_RETRY_COUNT` (default `2`)
+- `SETLIST_RETRY_BASE_DELAY_MS` (default `750`)
+
+For your current `2/sec` tier, keep `SETLIST_MIN_REQUEST_INTERVAL_MS` at `600` (or higher) so requests are intentionally slower but more reliable.
 
 ### Run
 
