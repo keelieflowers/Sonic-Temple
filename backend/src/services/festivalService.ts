@@ -1,5 +1,6 @@
 import { ArtistShowResult, LatestSetlist, SongSection } from "../types.js";
 import { SetlistApiArtist, SetlistApiSetlist, SetlistClient } from "./setlistClient.js";
+import { ArtistMbidStore } from "./artistMbidStore.js";
 
 function normalizeArtistName(value: string): string {
   return value
@@ -39,7 +40,7 @@ function similarityScore(query: string, candidate: string): number {
   return overlapScore + containsScore - lengthPenalty - featurePenalty;
 }
 
-function pickBestArtistMatch(
+export function pickBestArtistMatch(
   inputBandName: string,
   artists: SetlistApiArtist[]
 ): SetlistApiArtist | undefined {
@@ -155,13 +156,25 @@ function normalizeLatestSetlist(input: SetlistApiSetlist): LatestSetlist | null 
 
 export async function buildArtistShowResults(
   bandNames: string[],
-  client: SetlistClient
+  client: SetlistClient,
+  mbidStore?: ArtistMbidStore
 ): Promise<ArtistShowResult[]> {
   const results = await Promise.all(
     bandNames.map(async (inputBandName) => {
       try {
-        const artists = await client.searchArtistsByName(inputBandName);
-        const artist = pickBestArtistMatch(inputBandName, artists);
+        const cached = await mbidStore?.get(inputBandName);
+        let artist: SetlistApiArtist | undefined =
+          cached === null || cached === undefined
+            ? undefined
+            : { mbid: cached.mbid, name: cached.matchedArtistName };
+
+        if (!artist) {
+          const artists = await client.searchArtistsByName(inputBandName);
+          artist = pickBestArtistMatch(inputBandName, artists);
+          if (artist?.mbid && artist?.name) {
+            await mbidStore?.set(inputBandName, artist.mbid, artist.name);
+          }
+        }
 
         if (!artist?.mbid || !artist.name) {
           return {
@@ -214,4 +227,48 @@ export async function buildArtistShowResults(
   );
 
   return results;
+}
+
+export async function refreshArtistMbidCache(
+  bandNames: string[],
+  client: SetlistClient,
+  mbidStore: ArtistMbidStore,
+  mode: "append" | "refresh" = "append"
+) {
+  if (mode === "refresh") {
+    await mbidStore.clear();
+  }
+
+  const results = await Promise.all(
+    bandNames.map(async (inputBandName) => {
+      try {
+        const artists = await client.searchArtistsByName(inputBandName);
+        const artist = pickBestArtistMatch(inputBandName, artists);
+        if (!artist?.mbid || !artist?.name) {
+          return { inputBandName, status: "no_artist_match" as const };
+        }
+
+        await mbidStore.set(inputBandName, artist.mbid, artist.name);
+        return {
+          inputBandName,
+          status: "stored" as const,
+          artistMatch: { mbid: artist.mbid, name: artist.name }
+        };
+      } catch (error) {
+        return {
+          inputBandName,
+          status: "api_error" as const,
+          error: error instanceof Error ? error.message : "Unknown API error"
+        };
+      }
+    })
+  );
+
+  return {
+    total: bandNames.length,
+    stored: results.filter((item) => item.status === "stored").length,
+    noArtistMatch: results.filter((item) => item.status === "no_artist_match").length,
+    errors: results.filter((item) => item.status === "api_error").length,
+    results
+  };
 }

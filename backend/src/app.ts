@@ -1,10 +1,11 @@
 import express from "express";
 import { createFestivalRouter } from "./routes/festival.js";
+import { ArtistMbidStore } from "./services/artistMbidStore.js";
 import { SetlistClient } from "./services/setlistClient.js";
 
-export function createApp(setlistClient: SetlistClient) {
+export function createApp(setlistClient: SetlistClient, mbidStore: ArtistMbidStore) {
   const app = express();
   app.use(express.json());
-  app.use("/api/festival", createFestivalRouter(setlistClient));
+  app.use("/api/festival", createFestivalRouter(setlistClient, mbidStore));
   return app;
 }

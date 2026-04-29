@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "artists": {
+    "my chemical romance": {
+      "inputBandName": "My Chemical Romance",
+      "mbid": "c07f0676-9143-4217-8a9f-4c26bd636f13",
+      "matchedArtistName": "My Chemical Romance",
+      "updatedAt": "2026-04-29T19:32:11.780Z"
+    },
+    "tool": {
+      "inputBandName": "Tool",
+      "mbid": "66fc5bf8-daa4-4241-b378-9bc9077939d2",
+      "matchedArtistName": "Tool",
+      "updatedAt": "2026-04-29T19:32:12.040Z"
+    },
+    "bring me the horizon": {
+      "inputBandName": "Bring Me The Horizon",
+      "mbid": "074e3847-f67f-49f9-81f1-8c8cea147e8e",
+      "matchedArtistName": "Bring Me the Horizon",
+      "updatedAt": "2026-04-29T19:32:14.446Z"
+    },
+    "breaking benjamin": {
+      "inputBandName": "Breaking Benjamin",
+      "mbid": "854a1807-025b-42a8-ba8c-2a39717f1d25",
+      "matchedArtistName": "Breaking Benjamin",
+      "updatedAt": "2026-04-29T19:36:21.796Z"
+    }
+  }
+}

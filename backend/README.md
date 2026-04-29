@@ -21,6 +21,32 @@ You can also tune outbound Setlist request pacing to reduce 429 responses:
 
 For your current `2/sec` tier, keep `SETLIST_MIN_REQUEST_INTERVAL_MS` at `600` (or higher) so requests are intentionally slower but more reliable.
 
+### Local MBID store (v0.2.0)
+
+To avoid repeatedly searching artist MBIDs for the same band names, the backend now uses a local JSON file store:
+
+- `ARTIST_MBID_STORE_PATH` (default `./data/artist-mbids.json`)
+
+When `POST /api/festival/artist-shows` runs, it checks this store first for each band name. If missing, it searches Setlist, picks best match, then saves the MBID locally.
+
+Populate/update MBIDs explicitly with:
+
+`POST /api/festival/artist-mbids/refresh`
+
+Request body:
+
+```json
+{
+  "bandNames": ["My Chemical Romance", "Bring Me the Horizon"],
+  "mode": "append"
+}
+```
+
+`mode` options:
+
+- `append` (default): keep existing file entries and add/update only provided bands.
+- `refresh`: clear existing file entries first, then write only provided bands.
+
 ### Run
 
 ```bash

@@ -1,5 +1,7 @@
 import "dotenv/config";
+import path from "node:path";
 import { createApp } from "./app.js";
+import { ArtistMbidStore } from "./services/artistMbidStore.js";
 import { SetlistClient } from "./services/setlistClient.js";
 
 const apiKey = process.env.SETLIST_API_KEY;
@@ -14,7 +16,10 @@ const setlistClient = new SetlistClient(apiKey, {
   retryCount: Number(process.env.SETLIST_RETRY_COUNT ?? 2),
   retryBaseDelayMs: Number(process.env.SETLIST_RETRY_BASE_DELAY_MS ?? 750)
 });
-const app = createApp(setlistClient);
+const mbidStore = new ArtistMbidStore(
+  process.env.ARTIST_MBID_STORE_PATH ?? path.resolve(process.cwd(), "data/artist-mbids.json")
+);
+const app = createApp(setlistClient, mbidStore);
 
 app.listen(port, () => {
   console.log(`Festival backend listening on http://localhost:${port}`);

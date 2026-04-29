@@ -2,6 +2,7 @@ import request from "supertest";
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { createApp } from "../src/app.js";
+import { ArtistMbidStore } from "../src/services/artistMbidStore.js";
 import { buildArtistShowResults } from "../src/services/festivalService.js";
 import { SetlistClient } from "../src/services/setlistClient.js";
 
@@ -11,6 +12,15 @@ function makeClientMock(overrides?: Partial<SetlistClient>) {
     searchSetlistsByArtistMbid: async () => [],
     ...overrides
   } as SetlistClient;
+}
+
+function makeStoreMock(overrides?: Partial<ArtistMbidStore>) {
+  return {
+    get: async () => null,
+    set: async () => undefined,
+    clear: async () => undefined,
+    ...overrides
+  } as ArtistMbidStore;
 }
 
 describe("festivalService", () => {
@@ -85,11 +95,42 @@ describe("festivalService", () => {
     assert.equal(result[0].status, "ok");
     assert.equal(result[0].latestSetlist?.id, "recent-valid");
   });
+
+  it("uses cached MBID and skips artist lookup", async () => {
+    let searchArtistsCalled = 0;
+    const client = makeClientMock({
+      searchArtistsByName: async () => {
+        searchArtistsCalled += 1;
+        return [];
+      },
+      searchSetlistsByArtistMbid: async () => [
+        {
+          id: "cached-setlist",
+          eventDate: "20-04-2026",
+          sets: { set: [{ song: [{ name: "Cached Song" }] }] }
+        }
+      ]
+    });
+
+    const store = makeStoreMock({
+      get: async () => ({
+        inputBandName: "My Chemical Romance",
+        mbid: "cached-mbid",
+        matchedArtistName: "My Chemical Romance",
+        updatedAt: new Date().toISOString()
+      })
+    });
+
+    const result = await buildArtistShowResults(["My Chemical Romance"], client, store);
+    assert.equal(result[0].status, "ok");
+    assert.equal(result[0].artistMatch?.mbid, "cached-mbid");
+    assert.equal(searchArtistsCalled, 0);
+  });
 });
 
 describe("festival route", () => {
   it("returns 400 for invalid request payload", async () => {
-    const app = createApp(makeClientMock());
+    const app = createApp(makeClientMock(), makeStoreMock());
     const response = await request(app).post("/api/festival/artist-shows").send({});
 
     assert.equal(response.status, 400);
@@ -97,7 +138,7 @@ describe("festival route", () => {
   });
 
   it("returns no_artist_match when no artist is found", async () => {
-    const app = createApp(makeClientMock());
+    const app = createApp(makeClientMock(), makeStoreMock());
     const response = await request(app)
       .post("/api/festival/artist-shows")
       .send({ bandNames: ["Unknown Band"] });
@@ -110,7 +151,8 @@ describe("festival route", () => {
     const app = createApp(
       makeClientMock({
         searchArtistsByName: async () => [{ mbid: "mbid-2", name: "Artist" }]
-      })
+      }),
+      makeStoreMock()
     );
 
     const response = await request(app)
@@ -127,7 +169,8 @@ describe("festival route", () => {
         searchArtistsByName: async () => {
           throw new Error("Upstream 500");
         }
-      })
+      }),
+      makeStoreMock()
     );
 
     const response = await request(app)
@@ -137,5 +180,49 @@ describe("festival route", () => {
     assert.equal(response.status, 200);
     assert.equal(response.body.results[0].status, "api_error");
     assert.match(response.body.results[0].error, /Upstream 500/);
+  });
+
+  it("refreshes and stores artist mbids", async () => {
+    const writes: Array<{ inputBandName: string; mbid: string; matchedArtistName: string }> = [];
+    const app = createApp(
+      makeClientMock({
+        searchArtistsByName: async () => [{ mbid: "mcr", name: "My Chemical Romance" }]
+      }),
+      makeStoreMock({
+        set: async (inputBandName, mbid, matchedArtistName) => {
+          writes.push({ inputBandName, mbid, matchedArtistName });
+        }
+      })
+    );
+
+    const response = await request(app)
+      .post("/api/festival/artist-mbids/refresh")
+      .send({ bandNames: ["My Chemical Romance"] });
+
+    assert.equal(response.status, 200);
+    assert.equal(response.body.stored, 1);
+    assert.equal(writes.length, 1);
+    assert.equal(writes[0].mbid, "mcr");
+  });
+
+  it("clears existing store when refresh mode is used", async () => {
+    let clearCalled = 0;
+    const app = createApp(
+      makeClientMock({
+        searchArtistsByName: async () => [{ mbid: "mcr", name: "My Chemical Romance" }]
+      }),
+      makeStoreMock({
+        clear: async () => {
+          clearCalled += 1;
+        }
+      })
+    );
+
+    const response = await request(app)
+      .post("/api/festival/artist-mbids/refresh")
+      .send({ bandNames: ["My Chemical Romance"], mode: "refresh" });
+
+    assert.equal(response.status, 200);
+    assert.equal(clearCalled, 1);
   });
 });
