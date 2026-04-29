@@ -24,6 +24,144 @@
       "mbid": "854a1807-025b-42a8-ba8c-2a39717f1d25",
       "matchedArtistName": "Breaking Benjamin",
       "updatedAt": "2026-04-29T19:36:21.796Z"
+    },
+    "bad omens": {
+      "inputBandName": "Bad Omens",
+      "mbid": "eecada09-acfc-472d-ae55-e9e5a43f12d8",
+      "matchedArtistName": "Bad Omens",
+      "updatedAt": "2026-04-29T22:10:51.554Z"
+    },
+    "spiritbox": {
+      "inputBandName": "Spiritbox",
+      "mbid": "9c935736-7530-41e4-b776-1dbcf534c061",
+      "matchedArtistName": "Spiritbox",
+      "updatedAt": "2026-04-29T22:10:53.232Z"
+    },
+    "rise against": {
+      "inputBandName": "Rise Against",
+      "mbid": "606bf117-494f-4864-891f-09d63ff6aa4b",
+      "matchedArtistName": "Rise Against",
+      "updatedAt": "2026-04-29T22:48:08.970Z"
+    },
+    "holding absence": {
+      "inputBandName": "Holding Absence",
+      "mbid": "93dc11f4-ffc4-4039-a5c2-1c2c035b6eb8",
+      "matchedArtistName": "Holding Absence",
+      "updatedAt": "2026-04-29T22:50:04.941Z"
+    },
+    "kreator": {
+      "inputBandName": "Kreator",
+      "mbid": "39822e8d-f24e-4f07-b51b-28b22e59fbdb",
+      "matchedArtistName": "Kreator",
+      "updatedAt": "2026-04-29T22:50:04.431Z"
+    },
+    "all that remains": {
+      "inputBandName": "All That Remains",
+      "mbid": "4f8b7186-b2a2-40db-97ae-6e1cd46d57b1",
+      "matchedArtistName": "All That Remains",
+      "updatedAt": "2026-04-29T22:53:19.031Z"
+    },
+    "alpha wolf": {
+      "inputBandName": "Alpha Wolf",
+      "mbid": "bd894021-3f45-45a4-b188-fc0b1d16e21a",
+      "matchedArtistName": "Alpha Wolf",
+      "updatedAt": "2026-04-29T22:53:25.632Z"
+    },
+    "citizen": {
+      "inputBandName": "Citizen",
+      "mbid": "9a5b3d06-9d9f-4ec9-bbb9-5b5e47c7cbd8",
+      "matchedArtistName": "Citizen",
+      "updatedAt": "2026-04-29T22:53:31.055Z"
+    },
+    "coheed and cambria": {
+      "inputBandName": "Coheed and Cambria",
+      "mbid": "ae1b47d5-5128-431c-9d30-e08fd90e0767",
+      "matchedArtistName": "Coheed and Cambria",
+      "updatedAt": "2026-04-29T22:53:31.730Z"
+    },
+    "the red jumpsuit apparatus": {
+      "inputBandName": "The Red Jumpsuit Apparatus",
+      "mbid": "f0e820ab-f31a-400d-9c5e-8be1c8c38726",
+      "matchedArtistName": "The Red Jumpsuit Apparatus",
+      "updatedAt": "2026-04-29T23:28:29.131Z"
+    },
+    "windwaker": {
+      "inputBandName": "Windwaker",
+      "mbid": "2b0ef1ab-e19c-4258-be71-d421b4cdae1c",
+      "matchedArtistName": "Windwaker",
+      "updatedAt": "2026-04-29T23:36:46.383Z"
+    },
+    "egypt central": {
+      "inputBandName": "Egypt Central",
+      "mbid": "e76b3a0a-e658-4478-b31e-5a5a24eb65d7",
+      "matchedArtistName": "Egypt Central",
+      "updatedAt": "2026-04-29T23:37:09.738Z"
+    },
+    "the pretty wild": {
+      "inputBandName": "The Pretty Wild",
+      "mbid": "e9698bb2-bfcf-4f47-8e05-b4901e0c270d",
+      "matchedArtistName": "The Pretty Wild",
+      "updatedAt": "2026-04-29T23:37:09.216Z"
+    },
+    "hawthorne heights": {
+      "inputBandName": "Hawthorne Heights",
+      "mbid": "194eeda1-e662-43bc-b9be-32fc1afecc8b",
+      "matchedArtistName": "Hawthorne Heights",
+      "updatedAt": "2026-04-29T23:37:16.336Z"
+    },
+    "nerv": {
+      "inputBandName": "NERV",
+      "mbid": "49a5431c-6e4b-45d5-b4d0-879a923c9dc4",
+      "matchedArtistName": "Nerv",
+      "updatedAt": "2026-04-29T23:37:22.342Z"
+    },
+    "wind walkers": {
+      "inputBandName": "Wind Walkers",
+      "mbid": "c86892ad-0c24-4547-b62d-bc864d98fa36",
+      "matchedArtistName": "Wind Walkers",
+      "updatedAt": "2026-04-29T23:37:32.557Z"
+    },
+    "the used": {
+      "inputBandName": "The Used",
+      "mbid": "8262d8e4-9137-4bb3-a787-3caabbbc13e9",
+      "matchedArtistName": "The Used",
+      "updatedAt": "2026-04-29T23:37:41.664Z"
+    },
+    "attila": {
+      "inputBandName": "Attila",
+      "mbid": "e849a193-3cd6-49c4-89f5-e108f5756459",
+      "matchedArtistName": "Attila",
+      "updatedAt": "2026-04-29T23:37:42.333Z"
+    },
+    "catch your breath": {
+      "inputBandName": "Catch Your Breath",
+      "mbid": "da09ff32-675a-49e9-8362-a97147db5680",
+      "matchedArtistName": "Catch Your Breath",
+      "updatedAt": "2026-04-29T23:38:17.041Z"
+    },
+    "all time low": {
+      "inputBandName": "All Time Low",
+      "mbid": "89fa1615-11b5-444f-b378-6f9b61b944a8",
+      "matchedArtistName": "All Time Low",
+      "updatedAt": "2026-04-29T23:38:21.651Z"
+    },
+    "pierce the veil": {
+      "inputBandName": "Pierce The Veil",
+      "mbid": "8ed919fb-eaee-45a1-ba99-b3ede9ca5f1d",
+      "matchedArtistName": "Pierce the Veil",
+      "updatedAt": "2026-04-29T23:38:19.014Z"
+    },
+    "dayseeker": {
+      "inputBandName": "Dayseeker",
+      "mbid": "d9a9b6aa-c5c5-40dc-95ec-0bff029245c0",
+      "matchedArtistName": "Dayseeker",
+      "updatedAt": "2026-04-29T23:38:56.789Z"
+    },
+    "buckcherry": {
+      "inputBandName": "Buckcherry",
+      "mbid": "822e92ef-72ea-42e0-9af1-b987816b487a",
+      "matchedArtistName": "Buckcherry",
+      "updatedAt": "2026-04-29T23:50:27.671Z"
     }
   }
 }
