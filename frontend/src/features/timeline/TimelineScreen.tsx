@@ -1,8 +1,8 @@
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React, { useMemo, useState } from "react";
 import {
   ActivityIndicator,
-  FlatList,
-  ScrollView,
+  SectionList,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -21,11 +21,18 @@ type DayOption = "Thursday" | "Friday" | "Saturday" | "Sunday";
 
 const DAYS: DayOption[] = ["Thursday", "Friday", "Saturday", "Sunday"];
 
-const DAY_LABELS: Record<DayOption, string> = {
-  Thursday: "Thu · May 14",
-  Friday: "Fri · May 15",
-  Saturday: "Sat · May 16",
-  Sunday: "Sun · May 17",
+const DAY_DATES: Record<DayOption, string> = {
+  Thursday: "May 14",
+  Friday: "May 15",
+  Saturday: "May 16",
+  Sunday: "May 17",
+};
+
+const DAY_SHORT: Record<DayOption, string> = {
+  Thursday: "Thu",
+  Friday: "Fri",
+  Saturday: "Sat",
+  Sunday: "Sun",
 };
 
 function toMinutes(time: string): number {
@@ -115,6 +122,18 @@ export function TimelineScreen({ selectedBands }: Props) {
 
   const conflictMap = useMemo(() => buildConflictMap(dayEntries), [dayEntries]);
 
+  const sections = useMemo(() => {
+    const hourMap = new Map<number, ScheduleEntry[]>();
+    for (const entry of dayEntries) {
+      const hour = Math.floor(toMinutes(entry.startTime) / 60);
+      if (!hourMap.has(hour)) hourMap.set(hour, []);
+      hourMap.get(hour)!.push(entry);
+    }
+    return [...hourMap.entries()]
+      .sort(([a], [b]) => a - b)
+      .map(([hour, data]) => ({ title: formatTime(hour * 60), data }));
+  }, [dayEntries]);
+
   if (selectedBands.length === 0) {
     return (
       <SafeAreaView style={s.centered} edges={["top"]}>
@@ -125,45 +144,20 @@ export function TimelineScreen({ selectedBands }: Props) {
 
   return (
     <SafeAreaView style={s.container} edges={["top"]}>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={s.dayPicker}
-        contentContainerStyle={s.dayPickerContent}
-      >
+      <View style={s.dayPicker}>
         {DAYS.map((day) => {
-          const count = SCHEDULE.filter(
-            (e) => e.day === day && selectedBands.includes(e.artist)
-          ).length;
           const active = activeDay === day;
           return (
             <TouchableOpacity
               key={day}
-              style={[s.dayPill, active && s.dayPillActive]}
+              style={[s.dayTab, active && s.dayTabActive]}
               onPress={() => setActiveDay(day)}
             >
-              <Text style={[s.dayPillText, active && s.dayPillTextActive]}>
-                {DAY_LABELS[day]}
-                {count > 0 ? ` (${count})` : ""}
-              </Text>
+              <Text style={[s.dayDate, active && s.dayTextActive]}>{DAY_DATES[day]}</Text>
+              <Text style={[s.dayName, active && s.dayTextActive]}>{DAY_SHORT[day]}</Text>
             </TouchableOpacity>
           );
         })}
-      </ScrollView>
-
-      <View style={s.syncBar}>
-        {syncing && syncProgress ? (
-          <View style={s.syncProgress}>
-            <ActivityIndicator size="small" color={colors.primary} />
-            <Text style={s.syncText}>
-              Syncing {syncProgress.completed}/{syncProgress.total}...
-            </Text>
-          </View>
-        ) : (
-          <TouchableOpacity style={s.syncButton} onPress={handleSync} disabled={syncing}>
-            <Text style={s.syncButtonText}>Sync for Offline</Text>
-          </TouchableOpacity>
-        )}
       </View>
 
       {dayEntries.length === 0 ? (
@@ -171,10 +165,16 @@ export function TimelineScreen({ selectedBands }: Props) {
           <Text style={s.empty}>No artists selected for {activeDay}.</Text>
         </View>
       ) : (
-        <FlatList
-          contentContainerStyle={{ padding: spacing.md }}
-          data={dayEntries}
+        <SectionList
+          contentContainerStyle={{ padding: spacing.md, paddingBottom: spacing.xl }}
+          sections={sections}
           keyExtractor={(item) => item.artist}
+          renderSectionHeader={({ section }) => (
+            <View style={s.hourHeader}>
+              <Text style={s.hourHeaderText}>{section.title}</Text>
+              <View style={s.hourHeaderLine} />
+            </View>
+          )}
           renderItem={({ item }) => (
             <SetCard
               entry={item}
@@ -183,8 +183,22 @@ export function TimelineScreen({ selectedBands }: Props) {
               colors={colors}
             />
           )}
+          stickySectionHeadersEnabled={false}
         />
       )}
+
+      <TouchableOpacity style={s.fab} onPress={handleSync} disabled={syncing}>
+        {syncing && syncProgress ? (
+          <>
+            <ActivityIndicator size="small" color={colors.card} />
+            <Text style={s.fabProgressText}>
+              {syncProgress.completed}/{syncProgress.total}
+            </Text>
+          </>
+        ) : (
+          <FontAwesome name="cloud-download" size={22} color={colors.card} />
+        )}
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -198,6 +212,7 @@ type SetCardProps = {
 
 function SetCard({ entry, conflictsWith, setlistResult, colors }: SetCardProps) {
   const s = styles(colors);
+  const [expanded, setExpanded] = useState(false);
   const startMin = toMinutes(entry.startTime);
   const endMin = toMinutes(entry.endTime);
   const duration = endMin - startMin;
@@ -207,45 +222,55 @@ function SetCard({ entry, conflictsWith, setlistResult, colors }: SetCardProps) 
 
   return (
     <View style={[s.card, hasConflict && s.cardConflict]}>
-      <View style={s.cardHeader}>
+      <TouchableOpacity style={s.cardHeader} onPress={() => setExpanded((v) => !v)} activeOpacity={0.7}>
         <Text style={s.artistName} numberOfLines={1}>{entry.artist}</Text>
         {hasConflict && (
           <View style={s.conflictBadge}>
             <Text style={s.conflictBadgeText}>CONFLICT</Text>
           </View>
         )}
-      </View>
+        <FontAwesome
+          name={expanded ? "chevron-up" : "chevron-down"}
+          size={14}
+          color={colors.textMuted}
+        />
+      </TouchableOpacity>
 
       <Text style={s.stageLine}>
-        {entry.stage} · {formatTime(startMin)} – {formatTime(endMin)}
+        <Text style={s.stageName}>{entry.stage}</Text>
+        <Text style={s.stageTime}> · {formatTime(startMin)} – {formatTime(endMin)}</Text>
       </Text>
 
-      {hasConflict && (
-        <Text style={s.conflictWith} numberOfLines={2}>
-          Overlaps with: {conflictsWith.join(", ")}
-        </Text>
-      )}
+      {expanded && (
+        <>
+          {hasConflict && (
+            <Text style={s.conflictWith} numberOfLines={2}>
+              Overlaps with: {conflictsWith.join(", ")}
+            </Text>
+          )}
 
-      {songs.length > 0 ? (
-        <View style={s.songList}>
-          {songs.map((song, i) => {
-            const songMin = startMin + (i / songs.length) * duration;
-            return (
-              <View key={i} style={s.songRow}>
-                <Text style={s.songTime}>{formatTime(songMin)}</Text>
-                <Text style={s.songName} numberOfLines={1}>{song}</Text>
-              </View>
-            );
-          })}
-        </View>
-      ) : (
-        <Text style={s.noSetlist}>
-          {setlistResult === null
-            ? "Sync setlists for a song-by-song view"
-            : setlistResult.status === "no_setlist_found"
-            ? "No setlist on record for this artist"
-            : "No songs found in latest setlist"}
-        </Text>
+          {songs.length > 0 ? (
+            <View style={s.songList}>
+              {songs.map((song, i) => {
+                const songMin = startMin + (i / songs.length) * duration;
+                return (
+                  <View key={i} style={s.songRow}>
+                    <Text style={s.songTime}>{formatTime(songMin)}</Text>
+                    <Text style={s.songName} numberOfLines={1}>{song}</Text>
+                  </View>
+                );
+              })}
+            </View>
+          ) : (
+            <Text style={s.noSetlist}>
+              {setlistResult === null
+                ? "Sync setlists for a song-by-song view"
+                : setlistResult.status === "no_setlist_found"
+                ? "No setlist on record for this artist"
+                : "No songs found in latest setlist"}
+            </Text>
+          )}
+        </>
       )}
     </View>
   );
@@ -273,67 +298,78 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       textAlign: "center",
     },
     dayPicker: {
-      flexGrow: 0,
+      flexDirection: "row",
       borderBottomWidth: 1,
       borderBottomColor: colors.divider,
     },
-    dayPickerContent: {
-      paddingHorizontal: spacing.md,
+    dayTab: {
+      flex: 1,
+      alignItems: "center",
       paddingVertical: spacing.sm,
-      gap: spacing.sm,
-    },
-    dayPill: {
-      paddingHorizontal: spacing.md,
-      paddingVertical: spacing.sm,
-      borderRadius: radii.md,
-      backgroundColor: colors.card,
-      minHeight: 44,
+      borderBottomWidth: 3,
+      borderBottomColor: "transparent",
+      minHeight: 52,
       justifyContent: "center",
     },
-    dayPillActive: {
-      backgroundColor: colors.primary,
+    dayTabActive: {
+      borderBottomColor: colors.primary,
     },
-    dayPillText: {
+    dayDate: {
+      color: colors.textMuted,
+      fontSize: fontSizes.xs,
+      fontWeight: "500",
+    },
+    dayName: {
       color: colors.textSecondary,
       fontSize: fontSizes.sm,
-      fontWeight: "600",
-    },
-    dayPillTextActive: {
-      color: colors.card,
-    },
-    syncBar: {
-      paddingHorizontal: spacing.md,
-      paddingVertical: spacing.sm,
-      borderBottomWidth: 1,
-      borderBottomColor: colors.divider,
-      alignItems: "flex-end",
-    },
-    syncButton: {
-      backgroundColor: colors.primary,
-      borderRadius: radii.md,
-      paddingHorizontal: spacing.md,
-      paddingVertical: spacing.sm,
-      minHeight: 44,
-      justifyContent: "center",
-    },
-    syncButtonText: {
-      color: colors.card,
       fontWeight: "700",
-      fontSize: fontSizes.sm,
     },
-    syncProgress: {
+    dayTextActive: {
+      color: colors.primary,
+    },
+    fab: {
+      position: "absolute",
+      bottom: spacing.xl,
+      right: spacing.md,
+      width: 56,
+      height: 56,
+      borderRadius: 28,
+      backgroundColor: colors.primary,
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 2,
+      shadowColor: "#000",
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
+    },
+    fabProgressText: {
+      color: colors.card,
+      fontSize: fontSizes.xs,
+      fontWeight: "700",
+    },
+    hourHeader: {
       flexDirection: "row",
       alignItems: "center",
       gap: spacing.sm,
-      minHeight: 44,
+      marginBottom: spacing.sm,
+      marginTop: spacing.xs,
     },
-    syncText: {
-      color: colors.textSecondary,
-      fontSize: fontSizes.sm,
+    hourHeaderText: {
+      color: colors.textMuted,
+      fontSize: fontSizes.xs,
+      fontWeight: "600",
+      letterSpacing: 0.5,
+    },
+    hourHeaderLine: {
+      flex: 1,
+      height: 1,
+      backgroundColor: colors.divider,
     },
     card: {
       backgroundColor: colors.card,
-      borderRadius: radii.lg,
+      borderRadius: radii.md,
       padding: spacing.md,
       marginBottom: spacing.md,
     },
@@ -350,7 +386,7 @@ const styles = (colors: ReturnType<typeof useColors>) =>
     artistName: {
       flex: 1,
       color: colors.text,
-      fontSize: fontSizes.lg,
+      fontSize: fontSizes.md,
       fontWeight: "700",
     },
     conflictBadge: {
@@ -366,9 +402,16 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       letterSpacing: 0.5,
     },
     stageLine: {
-      color: colors.textSecondary,
       fontSize: fontSizes.sm,
       marginBottom: spacing.xs,
+    },
+    stageName: {
+      color: colors.primary,
+      fontWeight: "700",
+    },
+    stageTime: {
+      color: colors.textMuted,
+      fontWeight: "400",
     },
     conflictWith: {
       color: colors.error,

@@ -1,6 +1,6 @@
 import { ArtistShowResult } from "@/src/shared/Types";
 
-const BASE_URL = "http://localhost:3001";
+const BASE_URL = process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:3001";
 
 export async function fetchArtistShows(bandNames: string[]): Promise<ArtistShowResult[]> {
   const response = await fetch(`${BASE_URL}/api/festival/artist-shows`, {

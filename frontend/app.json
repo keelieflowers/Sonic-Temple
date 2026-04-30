@@ -14,7 +14,11 @@
       "backgroundColor": "#F2EDE4"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.scottflowers14.sonictemple",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -35,6 +39,12 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "4f8a7fde-715b-42a2-a911-a273391a0edf"
+      }
     }
   }
 }

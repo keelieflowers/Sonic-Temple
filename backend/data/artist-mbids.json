@@ -162,6 +162,126 @@
       "mbid": "822e92ef-72ea-42e0-9af1-b987816b487a",
       "matchedArtistName": "Buckcherry",
       "updatedAt": "2026-04-29T23:50:27.671Z"
+    },
+    "lit": {
+      "inputBandName": "Lit",
+      "mbid": "b9fb0c05-86e4-4fef-8d0b-c3576dd7d6ee",
+      "matchedArtistName": "Bo Lit",
+      "updatedAt": "2026-04-30T00:08:59.709Z"
+    },
+    "daughtry": {
+      "inputBandName": "Daughtry",
+      "mbid": "21e3292e-dac8-4609-b57d-402f926aa41f",
+      "matchedArtistName": "Daughtry",
+      "updatedAt": "2026-04-30T00:09:00.425Z"
+    },
+    "soil": {
+      "inputBandName": "Soil",
+      "mbid": "9dd8e506-67cc-4846-a5d8-6fe78804bf4b",
+      "matchedArtistName": "Acidic Soil",
+      "updatedAt": "2026-04-30T00:09:00.951Z"
+    },
+    "hinder": {
+      "inputBandName": "Hinder",
+      "mbid": "b2704b11-9e3f-4785-abbd-4191653113a8",
+      "matchedArtistName": "Hinder",
+      "updatedAt": "2026-04-30T00:09:01.574Z"
+    },
+    "powerman 5000": {
+      "inputBandName": "Powerman 5000",
+      "mbid": "0a41f86c-ced1-44e0-95a2-5c8b2368ab1d",
+      "matchedArtistName": "Powerman 5000",
+      "updatedAt": "2026-04-30T00:09:03.906Z"
+    },
+    "the word alive": {
+      "inputBandName": "The Word Alive",
+      "mbid": "e2cd69b3-ef80-4d53-aa86-a97d6f44573a",
+      "matchedArtistName": "The Word Alive",
+      "updatedAt": "2026-04-30T00:09:15.438Z"
+    },
+    "stone temple pilots": {
+      "inputBandName": "Stone Temple Pilots",
+      "mbid": "8c32bb01-58a3-453b-8050-8c0620edb0e5",
+      "matchedArtistName": "Stone Temple Pilots",
+      "updatedAt": "2026-04-30T00:09:15.961Z"
+    },
+    "yellowcard": {
+      "inputBandName": "Yellowcard",
+      "mbid": "3630fff3-52fc-4e97-ab01-d68fd88e4135",
+      "matchedArtistName": "Yellowcard",
+      "updatedAt": "2026-04-30T00:09:16.588Z"
+    },
+    "dope": {
+      "inputBandName": "DOPE",
+      "mbid": "9dfc5c29-3cd0-4a23-8e5a-4d0cbc856435",
+      "matchedArtistName": "2 Dope",
+      "updatedAt": "2026-04-30T00:09:17.319Z"
+    },
+    "halestorm": {
+      "inputBandName": "Halestorm",
+      "mbid": "eaed2193-e026-493b-ac57-113360407b06",
+      "matchedArtistName": "Halestorm",
+      "updatedAt": "2026-04-30T00:09:17.752Z"
+    },
+    "static-x": {
+      "inputBandName": "Static-X",
+      "mbid": "8ac9e35c-e92d-4030-99ef-ba4127b1555c",
+      "matchedArtistName": "Static‐X",
+      "updatedAt": "2026-04-30T00:09:18.385Z"
+    },
+    "blessthefall": {
+      "inputBandName": "Blessthefall",
+      "mbid": "aafa70a4-2f06-4975-935e-b283fc87de7e",
+      "matchedArtistName": "Blessthefall",
+      "updatedAt": "2026-04-30T00:09:18.941Z"
+    },
+    "paleface swiss": {
+      "inputBandName": "Paleface Swiss",
+      "mbid": "6be0e54b-d3ff-4c17-b7e6-f82d0f624a47",
+      "matchedArtistName": "Paleface Swiss",
+      "updatedAt": "2026-04-30T00:09:19.632Z"
+    },
+    "chevelle": {
+      "inputBandName": "Chevelle",
+      "mbid": "8456e9f7-debf-4579-a86c-33a325a35d2d",
+      "matchedArtistName": "Chevelle",
+      "updatedAt": "2026-04-30T00:09:20.182Z"
+    },
+    "atreyu": {
+      "inputBandName": "Atreyu",
+      "mbid": "17e137fb-59e5-4fd7-af48-afc34995396c",
+      "matchedArtistName": "Atreyu",
+      "updatedAt": "2026-04-30T00:09:20.781Z"
+    },
+    "staind": {
+      "inputBandName": "Staind",
+      "mbid": "777a21a8-0d0f-4cf3-86b4-65bc0eba5649",
+      "matchedArtistName": "Staind",
+      "updatedAt": "2026-04-30T00:09:21.367Z"
+    },
+    "story of the year": {
+      "inputBandName": "Story of the Year",
+      "mbid": "e2c3c508-f0ab-49af-92c9-a81d66d67405",
+      "matchedArtistName": "Story of the Year",
+      "updatedAt": "2026-04-30T00:09:21.936Z"
+    },
+    "shinedown": {
+      "inputBandName": "Shinedown",
+      "mbid": "adc0f033-95c2-4e0b-87bc-c23ed3f26ce6",
+      "matchedArtistName": "Shinedown",
+      "updatedAt": "2026-04-30T00:09:22.579Z"
+    },
+    "simple plan": {
+      "inputBandName": "Simple Plan",
+      "mbid": "b345af35-205e-4eca-8006-029e5c20127e",
+      "matchedArtistName": "Simple Plan",
+      "updatedAt": "2026-04-30T00:09:23.183Z"
+    },
+    "magnolia park": {
+      "inputBandName": "Magnolia Park",
+      "mbid": "e2d4b394-a2cc-4848-bb15-e5b7c55cc059",
+      "matchedArtistName": "Magnolia Park",
+      "updatedAt": "2026-04-30T00:16:05.461Z"
     }
   }
 }
