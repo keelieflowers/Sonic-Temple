@@ -1,13 +1,21 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
+  Animated,
   ActivityIndicator,
+  LayoutAnimation,
+  Platform,
   SectionList,
   StyleSheet,
   Text,
   TouchableOpacity,
+  UIManager,
   View,
 } from "react-native";
+
+if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
+  UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useColors } from "@/src/providers/theme/ThemeProvider";
@@ -17,35 +25,38 @@ import { syncArtistSetlists, SyncProgress } from "@/src/services/sync";
 import { SCHEDULE, ScheduleEntry } from "@/src/data/schedule";
 import { ArtistShowResult } from "@/src/shared/Types";
 
+// ─── Types ────────────────────────────────────────────────────────────────────
+
 type DayOption = "Thursday" | "Friday" | "Saturday" | "Sunday";
 type SectionType = "playing" | "upcoming" | "finished";
-type TimelineSection = { title: string; sectionType: SectionType; data: ScheduleEntry[] };
+type SingleItem = { type: "single"; entry: ScheduleEntry };
+type ConflictItem = { type: "conflict"; entries: ScheduleEntry[] };
+type TimelineItem = SingleItem | ConflictItem;
+type TimelineSection = { title: string; sectionType: SectionType; data: TimelineItem[] };
+
+// ─── Constants ────────────────────────────────────────────────────────────────
 
 const DAYS: DayOption[] = ["Thursday", "Friday", "Saturday", "Sunday"];
 
 const DAY_DATES: Record<DayOption, string> = {
-  Thursday: "May 14",
-  Friday: "May 15",
-  Saturday: "May 16",
-  Sunday: "May 17",
+  Thursday: "May 14", Friday: "May 15", Saturday: "May 16", Sunday: "May 17",
 };
 
 const DAY_SHORT: Record<DayOption, string> = {
-  Thursday: "Thu",
-  Friday: "Fri",
-  Saturday: "Sat",
-  Sunday: "Sun",
+  Thursday: "Thu", Friday: "Fri", Saturday: "Sat", Sunday: "Sun",
 };
 
 const FESTIVAL_DATES: Record<DayOption, string> = {
-  Thursday: "2026-05-14",
-  Friday: "2026-05-15",
-  Saturday: "2026-05-16",
-  Sunday: "2026-05-17",
+  Thursday: "2026-05-14", Friday: "2026-05-15", Saturday: "2026-05-16", Sunday: "2026-05-17",
 };
 
 // Set to a time like "19:30" to simulate live mode, null uses real clock
 const DEV_NOW_OVERRIDE: string | null = null;
+
+// Pixels per minute for conflict column offset
+const PX_PER_MIN = 2.5;
+
+// ─── Utilities ────────────────────────────────────────────────────────────────
 
 function toMinutes(time: string): number {
   const [h, m] = time.split(":").map(Number);
@@ -56,8 +67,13 @@ function formatTime(totalMinutes: number): string {
   const h = Math.floor(totalMinutes / 60);
   const m = Math.floor(totalMinutes % 60);
   const hDisplay = h % 12 || 12;
-  const suffix = h >= 12 ? "PM" : "AM";
-  return `${hDisplay}:${String(m).padStart(2, "0")} ${suffix}`;
+  return `${hDisplay}:${String(m).padStart(2, "0")} ${h >= 12 ? "PM" : "AM"}`;
+}
+
+function formatTimeShort(totalMinutes: number): string {
+  const h = Math.floor(totalMinutes / 60);
+  const m = Math.floor(totalMinutes % 60);
+  return `${h % 12 || 12}:${String(m).padStart(2, "0")}`;
 }
 
 function getNowMinutes(): number {
@@ -69,13 +85,13 @@ function getNowMinutes(): number {
 function getDefaultDay(): DayOption {
   const today = new Date().toISOString().split("T")[0];
   const map: Record<string, DayOption> = {
-    "2026-05-14": "Thursday",
-    "2026-05-15": "Friday",
-    "2026-05-16": "Saturday",
-    "2026-05-17": "Sunday",
+    "2026-05-14": "Thursday", "2026-05-15": "Friday",
+    "2026-05-16": "Saturday", "2026-05-17": "Sunday",
   };
   return map[today] ?? "Thursday";
 }
+
+// ─── Conflict logic ───────────────────────────────────────────────────────────
 
 function buildConflictMap(entries: ScheduleEntry[]): Map<string, string[]> {
   const map = new Map<string, string[]>();
@@ -94,17 +110,79 @@ function buildConflictMap(entries: ScheduleEntry[]): Map<string, string[]> {
   return map;
 }
 
-function groupByHour(entries: ScheduleEntry[], sectionType: SectionType): TimelineSection[] {
-  const hourMap = new Map<number, ScheduleEntry[]>();
+function buildTimelineItems(entries: ScheduleEntry[], conflictMap: Map<string, string[]>): TimelineItem[] {
+  const artistMap = new Map(entries.map((e) => [e.artist, e]));
+  const visited = new Set<string>();
+  const items: TimelineItem[] = [];
+
   for (const entry of entries) {
-    const hour = Math.floor(toMinutes(entry.startTime) / 60);
+    if (visited.has(entry.artist)) continue;
+
+    const hasConflicts = (conflictMap.get(entry.artist)?.length ?? 0) > 0;
+    if (!hasConflicts) {
+      visited.add(entry.artist);
+      items.push({ type: "single", entry });
+      continue;
+    }
+
+    // BFS to find the full connected conflict cluster
+    const cluster: ScheduleEntry[] = [];
+    const queue = [entry.artist];
+    while (queue.length > 0) {
+      const artist = queue.shift()!;
+      if (visited.has(artist)) continue;
+      visited.add(artist);
+      const e = artistMap.get(artist);
+      if (e) cluster.push(e);
+      for (const neighbor of conflictMap.get(artist) ?? []) {
+        if (!visited.has(neighbor)) queue.push(neighbor);
+      }
+    }
+
+    cluster.sort((a, b) => a.startTime.localeCompare(b.startTime));
+    items.push({ type: "conflict", entries: cluster });
+  }
+
+  return items;
+}
+
+function getItemStartTime(item: TimelineItem): string {
+  return item.type === "single" ? item.entry.startTime : item.entries[0].startTime;
+}
+
+function getItemLiveStatus(item: TimelineItem, now: number): "playing" | "finished" | "upcoming" {
+  const starts = item.type === "single"
+    ? [toMinutes(item.entry.startTime)]
+    : item.entries.map((e) => toMinutes(e.startTime));
+  const ends = item.type === "single"
+    ? [toMinutes(item.entry.endTime)]
+    : item.entries.map((e) => toMinutes(e.endTime));
+  const earliest = Math.min(...starts);
+  const latest = Math.max(...ends);
+  if (now >= latest) return "finished";
+  if (now >= earliest) return "playing";
+  return "upcoming";
+}
+
+function groupItemsByHour(items: TimelineItem[], sectionType: SectionType): TimelineSection[] {
+  const hourMap = new Map<number, TimelineItem[]>();
+  for (const item of items) {
+    const hour = Math.floor(toMinutes(getItemStartTime(item)) / 60);
     if (!hourMap.has(hour)) hourMap.set(hour, []);
-    hourMap.get(hour)!.push(entry);
+    hourMap.get(hour)!.push(item);
   }
   return [...hourMap.entries()]
     .sort(([a], [b]) => a - b)
     .map(([hour, data]) => ({ title: formatTime(hour * 60), sectionType, data }));
 }
+
+function itemKey(item: TimelineItem): string {
+  return item.type === "single"
+    ? item.entry.artist
+    : item.entries.map((e) => e.artist).sort().join("|");
+}
+
+// ─── Screen ───────────────────────────────────────────────────────────────────
 
 type Props = { selectedBands: string[] };
 
@@ -113,6 +191,7 @@ export function TimelineScreen({ selectedBands }: Props) {
   const s = styles(colors);
   const queryClient = useQueryClient();
   const [activeDay, setActiveDay] = useState<DayOption>(getDefaultDay);
+  const [viewMode, setViewMode] = useState<"timeline" | "conflicts">("timeline");
   const [syncing, setSyncing] = useState(false);
   const [syncProgress, setSyncProgress] = useState<SyncProgress | null>(null);
   const [nowMinutes, setNowMinutes] = useState<number>(getNowMinutes);
@@ -161,29 +240,37 @@ export function TimelineScreen({ selectedBands }: Props) {
     [activeDay, selectedBands]
   );
 
-  const conflictMap = useMemo(() => buildConflictMap(dayEntries), [dayEntries]);
+  const conflictMap = useMemo(
+    () => viewMode === "conflicts" ? buildConflictMap(dayEntries) : new Map(),
+    [dayEntries, viewMode]
+  );
+  const timelineItems = useMemo(
+    () => viewMode === "conflicts"
+      ? buildTimelineItems(dayEntries, conflictMap)
+      : dayEntries.map((entry): TimelineItem => ({ type: "single", entry })),
+    [dayEntries, conflictMap, viewMode]
+  );
 
   const sections = useMemo((): TimelineSection[] => {
-    if (!isLiveDay) return groupByHour(dayEntries, "upcoming");
+    if (!isLiveDay) return groupItemsByHour(timelineItems, "upcoming");
 
-    const playing: ScheduleEntry[] = [];
-    const upcoming: ScheduleEntry[] = [];
-    const finished: ScheduleEntry[] = [];
+    const playing: TimelineItem[] = [];
+    const upcoming: TimelineItem[] = [];
+    const finished: TimelineItem[] = [];
 
-    for (const entry of dayEntries) {
-      const start = toMinutes(entry.startTime);
-      const end = toMinutes(entry.endTime);
-      if (nowMinutes >= end) finished.push(entry);
-      else if (nowMinutes >= start) playing.push(entry);
-      else upcoming.push(entry);
+    for (const item of timelineItems) {
+      const status = getItemLiveStatus(item, nowMinutes);
+      if (status === "finished") finished.push(item);
+      else if (status === "playing") playing.push(item);
+      else upcoming.push(item);
     }
 
     const result: TimelineSection[] = [];
     if (playing.length > 0) result.push({ title: "PLAYING NOW", sectionType: "playing", data: playing });
-    result.push(...groupByHour(upcoming, "upcoming"));
+    result.push(...groupItemsByHour(upcoming, "upcoming"));
     if (finished.length > 0) result.push({ title: "FINISHED", sectionType: "finished", data: finished });
     return result;
-  }, [dayEntries, nowMinutes, isLiveDay]);
+  }, [timelineItems, nowMinutes, isLiveDay]);
 
   if (selectedBands.length === 0) {
     return (
@@ -211,6 +298,21 @@ export function TimelineScreen({ selectedBands }: Props) {
         })}
       </View>
 
+      <View style={s.modeToggle}>
+        <TouchableOpacity
+          style={[s.modeTab, viewMode === "timeline" && s.modeTabActive]}
+          onPress={() => setViewMode("timeline")}
+        >
+          <Text style={[s.modeTabText, viewMode === "timeline" && s.modeTabTextActive]}>Timeline</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[s.modeTab, viewMode === "conflicts" && s.modeTabActive]}
+          onPress={() => setViewMode("conflicts")}
+        >
+          <Text style={[s.modeTabText, viewMode === "conflicts" && s.modeTabTextActive]}>Conflict Comparison</Text>
+        </TouchableOpacity>
+      </View>
+
       {dayEntries.length === 0 ? (
         <View style={s.centeredFlex}>
           <Text style={s.empty}>No artists selected for {activeDay}.</Text>
@@ -219,7 +321,7 @@ export function TimelineScreen({ selectedBands }: Props) {
         <SectionList
           contentContainerStyle={{ padding: spacing.md, paddingBottom: spacing.xl }}
           sections={sections}
-          keyExtractor={(item) => item.artist}
+          keyExtractor={itemKey}
           renderSectionHeader={({ section }) => {
             if (section.sectionType === "playing") {
               return (
@@ -229,32 +331,43 @@ export function TimelineScreen({ selectedBands }: Props) {
                 </View>
               );
             }
-            if (section.sectionType === "finished") {
-              return (
-                <View style={s.hourHeader}>
-                  <Text style={s.sectionHeaderFinishedText}>{section.title}</Text>
-                  <View style={s.hourHeaderLine} />
-                </View>
-              );
-            }
             return (
               <View style={s.hourHeader}>
-                <Text style={s.hourHeaderText}>{section.title}</Text>
+                <Text style={[
+                  s.hourHeaderText,
+                  section.sectionType === "finished" && s.hourHeaderTextDim,
+                ]}>
+                  {section.title}
+                </Text>
                 <View style={s.hourHeaderLine} />
               </View>
             );
           }}
-          renderItem={({ item, section }) => (
-            <SetCard
-              entry={item}
-              conflictsWith={conflictMap.get(item.artist) ?? []}
-              setlistResult={setlistMap.get(item.artist) ?? null}
-              nowMinutes={nowMinutes}
-              isLiveDay={isLiveDay}
-              isFinished={section.sectionType === "finished"}
-              colors={colors}
-            />
-          )}
+          renderItem={({ item, section }) => {
+            const isFinished = section.sectionType === "finished";
+            if (item.type === "conflict") {
+              return (
+                <ConflictCard
+                  item={item}
+                  setlistMap={setlistMap}
+                  nowMinutes={nowMinutes}
+                  isLiveDay={isLiveDay}
+                  isFinished={isFinished}
+                  colors={colors}
+                />
+              );
+            }
+            return (
+              <SetCard
+                entry={item.entry}
+                setlistResult={setlistMap.get(item.entry.artist) ?? null}
+                nowMinutes={nowMinutes}
+                isLiveDay={isLiveDay}
+                isFinished={isFinished}
+                colors={colors}
+              />
+            );
+          }}
           stickySectionHeadersEnabled={false}
         />
       )}
@@ -263,9 +376,7 @@ export function TimelineScreen({ selectedBands }: Props) {
         {syncing && syncProgress ? (
           <>
             <ActivityIndicator size="small" color={colors.card} />
-            <Text style={s.fabProgressText}>
-              {syncProgress.completed}/{syncProgress.total}
-            </Text>
+            <Text style={s.fabProgressText}>{syncProgress.completed}/{syncProgress.total}</Text>
           </>
         ) : (
           <FontAwesome name="cloud-download" size={22} color={colors.card} />
@@ -275,9 +386,181 @@ export function TimelineScreen({ selectedBands }: Props) {
   );
 }
 
+// ─── Conflict Card ────────────────────────────────────────────────────────────
+
+type ConflictCardProps = {
+  item: ConflictItem;
+  setlistMap: Map<string, ArtistShowResult>;
+  nowMinutes: number;
+  isLiveDay: boolean;
+  isFinished: boolean;
+  colors: ReturnType<typeof useColors>;
+};
+
+function ConflictCard({ item, setlistMap, nowMinutes, isLiveDay, isFinished, colors }: ConflictCardProps) {
+  const s = styles(colors);
+  const { entries } = item;
+  const earliestStart = Math.min(...entries.map((e) => toMinutes(e.startTime)));
+  const latestEnd = Math.max(...entries.map((e) => toMinutes(e.endTime)));
+  const [focusedArtist, setFocusedArtist] = useState<string | null>(null);
+  const [lockedHeight, setLockedHeight] = useState<number | null>(null);
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+
+  const focusedEntry = focusedArtist != null
+    ? (entries.find((e) => e.artist === focusedArtist) ?? null)
+    : null;
+
+  const animateTransition = (next: () => void) => {
+    Animated.timing(fadeAnim, { toValue: 0, duration: 110, useNativeDriver: true }).start(() => {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      next();
+      Animated.timing(fadeAnim, { toValue: 1, duration: 180, useNativeDriver: true }).start();
+    });
+  };
+
+  const handleFocus = (artist: string) => animateTransition(() => setFocusedArtist(artist));
+  const handleCollapse = () => animateTransition(() => setFocusedArtist(null));
+
+  return (
+    <View style={[s.conflictCard, isFinished && s.cardFinished]}>
+      <TouchableOpacity
+        style={s.conflictCardHeader}
+        onPress={focusedEntry != null ? handleCollapse : undefined}
+        activeOpacity={focusedEntry != null ? 0.7 : 1}
+      >
+        <FontAwesome
+          name={focusedEntry != null ? "chevron-left" : "exclamation-circle"}
+          size={12}
+          color={focusedEntry != null ? colors.textMuted : colors.error}
+        />
+        <Text style={s.conflictCardTitle}>CONFLICT</Text>
+        <Text style={s.conflictCardTime}>
+          {formatTime(earliestStart)} – {formatTime(latestEnd)}
+        </Text>
+      </TouchableOpacity>
+
+      {focusedEntry != null ? (
+        <TouchableOpacity
+          style={[
+            s.conflictColumnExpanded,
+            lockedHeight != null && { height: lockedHeight } ,
+          ]}
+          onPress={handleCollapse}
+          activeOpacity={0.95}
+        >
+          <Animated.View style={{ opacity: fadeAnim, width: "100%" }}>
+            <ConflictColumn
+              entry={focusedEntry}
+              setlistResult={setlistMap.get(focusedEntry.artist) ?? null}
+              nowMinutes={nowMinutes}
+              isLiveDay={isLiveDay}
+              offsetPx={0}
+              colors={colors}
+              expanded
+            />
+          </Animated.View>
+        </TouchableOpacity>
+      ) : (
+        <Animated.View
+          style={[s.conflictColumns, { opacity: fadeAnim }]}
+          onLayout={(e) => {
+            const h = e.nativeEvent.layout.height;
+            if (h > 0) setLockedHeight((prev) => Math.max(prev ?? 0, h));
+          }}
+        >
+          {entries.map((entry, i) => {
+            const offsetPx = (toMinutes(entry.startTime) - earliestStart) * PX_PER_MIN;
+            return (
+              <React.Fragment key={entry.artist}>
+                {i > 0 && <View style={s.columnDivider} />}
+                <TouchableOpacity
+                  style={s.conflictColumnTouchable}
+                  onPress={() => handleFocus(entry.artist)}
+                  activeOpacity={0.7}
+                >
+                  <ConflictColumn
+                    entry={entry}
+                    setlistResult={setlistMap.get(entry.artist) ?? null}
+                    nowMinutes={nowMinutes}
+                    isLiveDay={isLiveDay}
+                    offsetPx={offsetPx}
+                    colors={colors}
+                  />
+                </TouchableOpacity>
+              </React.Fragment>
+            );
+          })}
+        </Animated.View>
+      )}
+    </View>
+  );
+}
+
+type ConflictColumnProps = {
+  entry: ScheduleEntry;
+  setlistResult: ArtistShowResult | null;
+  nowMinutes: number;
+  isLiveDay: boolean;
+  offsetPx: number;
+  colors: ReturnType<typeof useColors>;
+  expanded?: boolean;
+};
+
+function ConflictColumn({ entry, setlistResult, nowMinutes, isLiveDay, offsetPx, colors, expanded }: ConflictColumnProps) {
+  const s = styles(colors);
+  const startMin = toMinutes(entry.startTime);
+  const endMin = toMinutes(entry.endTime);
+  const duration = endMin - startMin;
+  const isPlaying = isLiveDay && nowMinutes >= startMin && nowMinutes < endMin;
+  const songs = setlistResult?.latestSetlist?.sections.flatMap((sec) => sec.songs) ?? [];
+
+  return (
+    <View style={[s.conflictColumn, !expanded && { marginTop: offsetPx }]}>
+      <Text style={[s.columnArtist, expanded && s.columnTextCentered]} numberOfLines={2}>{entry.artist}</Text>
+      <Text style={[s.columnStage, expanded && s.columnTextCentered]} numberOfLines={1}>{entry.stage}</Text>
+      <Text style={[s.columnTime, expanded && s.columnTextCentered]}>{formatTime(startMin)} – {formatTime(endMin)}</Text>
+
+      {isPlaying && (
+        <Text style={[s.columnMinsLeft, expanded && s.columnTextCentered]}>{endMin - nowMinutes} min left</Text>
+      )}
+
+      {songs.length > 0 ? (
+        <View style={s.columnSongs}>
+          {songs.map((song, i) => {
+            const songMin = startMin + (i / songs.length) * duration;
+            const nextSongMin = i + 1 < songs.length
+              ? startMin + ((i + 1) / songs.length) * duration
+              : endMin;
+            const status = !isPlaying ? "upcoming"
+              : nowMinutes >= nextSongMin ? "played"
+              : nowMinutes >= songMin ? "current"
+              : "upcoming";
+            return (
+              <Text
+                key={i}
+                style={[
+                  s.columnSong,
+                  status === "current" && s.columnSongCurrent,
+                  status === "played" && s.columnSongPlayed,
+                ]}
+                numberOfLines={1}
+              >
+                {formatTimeShort(songMin)}  {status === "current" ? "▶ " : ""}{song}
+              </Text>
+            );
+          })}
+        </View>
+      ) : (
+        <Text style={[s.columnNoSetlist, expanded && s.columnTextCentered]}>No setlist synced</Text>
+      )}
+    </View>
+  );
+}
+
+// ─── Set Card ─────────────────────────────────────────────────────────────────
+
 type SetCardProps = {
   entry: ScheduleEntry;
-  conflictsWith: string[];
   setlistResult: ArtistShowResult | null;
   nowMinutes: number;
   isLiveDay: boolean;
@@ -285,22 +568,19 @@ type SetCardProps = {
   colors: ReturnType<typeof useColors>;
 };
 
-function SetCard({ entry, conflictsWith, setlistResult, nowMinutes, isLiveDay, isFinished, colors }: SetCardProps) {
+function SetCard({ entry, setlistResult, nowMinutes, isLiveDay, isFinished, colors }: SetCardProps) {
   const s = styles(colors);
   const startMin = toMinutes(entry.startTime);
   const endMin = toMinutes(entry.endTime);
   const duration = endMin - startMin;
-  const hasConflict = conflictsWith.length > 0;
 
   const isPlaying = isLiveDay && nowMinutes >= startMin && nowMinutes < endMin;
   const minsRemaining = isPlaying ? endMin - nowMinutes : 0;
-
   const [expanded, setExpanded] = useState(isPlaying);
-
   const songs = setlistResult?.latestSetlist?.sections.flatMap((sec) => sec.songs) ?? [];
 
   return (
-    <View style={[s.card, hasConflict && s.cardConflict, isFinished && s.cardFinished]}>
+    <View style={[s.card, isFinished && s.cardFinished]}>
       <TouchableOpacity style={s.cardHeader} onPress={() => setExpanded((v) => !v)} activeOpacity={0.7}>
         <Text style={s.artistName} numberOfLines={1}>{entry.artist}</Text>
         {setlistResult?.selectionMode === "festivalVenuePriority" && (
@@ -314,16 +594,7 @@ function SetCard({ entry, conflictsWith, setlistResult, nowMinutes, isLiveDay, i
             <Text style={s.liveBadgeText}>LIVE</Text>
           </View>
         )}
-        {hasConflict && (
-          <View style={s.conflictBadge}>
-            <Text style={s.conflictBadgeText}>CONFLICT</Text>
-          </View>
-        )}
-        <FontAwesome
-          name={expanded ? "chevron-up" : "chevron-down"}
-          size={14}
-          color={colors.textMuted}
-        />
+        <FontAwesome name={expanded ? "chevron-up" : "chevron-down"} size={14} color={colors.textMuted} />
       </TouchableOpacity>
 
       <Text style={s.stageLine}>
@@ -337,12 +608,6 @@ function SetCard({ entry, conflictsWith, setlistResult, nowMinutes, isLiveDay, i
 
       {expanded && (
         <>
-          {hasConflict && (
-            <Text style={s.conflictWith} numberOfLines={2}>
-              Overlaps with: {conflictsWith.join(", ")}
-            </Text>
-          )}
-
           {songs.length > 0 ? (
             <View style={s.songList}>
               {songs.map((song, i) => {
@@ -350,17 +615,12 @@ function SetCard({ entry, conflictsWith, setlistResult, nowMinutes, isLiveDay, i
                 const nextSongMin = i + 1 < songs.length
                   ? startMin + ((i + 1) / songs.length) * duration
                   : endMin;
-
                 const status = !isPlaying ? "upcoming"
                   : nowMinutes >= nextSongMin ? "played"
                   : nowMinutes >= songMin ? "current"
                   : "upcoming";
-
                 return (
-                  <View
-                    key={i}
-                    style={[s.songRow, status === "played" && s.songRowDim]}
-                  >
+                  <View key={i} style={[s.songRow, status === "played" && s.songRowDim]}>
                     <Text style={[
                       s.songTime,
                       status === "current" && s.songTimeCurrent,
@@ -368,14 +628,11 @@ function SetCard({ entry, conflictsWith, setlistResult, nowMinutes, isLiveDay, i
                     ]}>
                       {formatTime(songMin)}
                     </Text>
-                    <Text
-                      style={[
-                        s.songName,
-                        status === "current" && s.songNameCurrent,
-                        status === "played" && s.songNameDim,
-                      ]}
-                      numberOfLines={1}
-                    >
+                    <Text style={[
+                      s.songName,
+                      status === "current" && s.songNameCurrent,
+                      status === "played" && s.songNameDim,
+                    ]} numberOfLines={1}>
                       {status === "current" ? "▶  " : ""}{song}
                     </Text>
                   </View>
@@ -397,234 +654,148 @@ function SetCard({ entry, conflictsWith, setlistResult, nowMinutes, isLiveDay, i
   );
 }
 
+// ─── Styles ───────────────────────────────────────────────────────────────────
+
 const styles = (colors: ReturnType<typeof useColors>) =>
   StyleSheet.create({
     container: { flex: 1, backgroundColor: colors.background },
     centered: {
-      flex: 1,
-      backgroundColor: colors.background,
-      justifyContent: "center",
-      alignItems: "center",
-      padding: spacing.lg,
+      flex: 1, backgroundColor: colors.background,
+      justifyContent: "center", alignItems: "center", padding: spacing.lg,
     },
     centeredFlex: {
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-      padding: spacing.lg,
+      flex: 1, justifyContent: "center", alignItems: "center", padding: spacing.lg,
     },
-    empty: {
-      color: colors.textMuted,
-      fontSize: fontSizes.sm,
-      textAlign: "center",
-    },
-    dayPicker: {
+    empty: { color: colors.textMuted, fontSize: fontSizes.sm, textAlign: "center" },
+
+    // Mode toggle
+    modeToggle: {
       flexDirection: "row",
-      borderBottomWidth: 1,
-      borderBottomColor: colors.divider,
+      margin: spacing.md,
+      marginBottom: 0,
+      backgroundColor: colors.cardSecondary,
+      borderRadius: radii.md,
+      padding: 3,
     },
-    dayTab: {
+    modeTab: {
       flex: 1,
-      alignItems: "center",
-      paddingVertical: spacing.sm,
-      borderBottomWidth: 3,
-      borderBottomColor: "transparent",
-      minHeight: 52,
-      justifyContent: "center",
+      paddingVertical: spacing.xs,
+      alignItems: "center" as const,
+      borderRadius: radii.sm,
     },
-    dayTabActive: {
-      borderBottomColor: colors.primary,
-    },
-    dayDate: {
-      color: colors.textMuted,
-      fontSize: fontSizes.xs,
-      fontWeight: "500",
-    },
-    dayName: {
-      color: colors.textSecondary,
-      fontSize: fontSizes.sm,
-      fontWeight: "700",
-    },
-    dayTextActive: {
-      color: colors.primary,
-    },
-    fab: {
-      position: "absolute",
-      bottom: spacing.xl,
-      right: spacing.md,
-      width: 56,
-      height: 56,
-      borderRadius: 28,
-      backgroundColor: colors.primary,
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 2,
+    modeTabActive: {
+      backgroundColor: colors.card,
       shadowColor: "#000",
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.25,
-      shadowRadius: 4,
-      elevation: 5,
+      shadowOffset: { width: 0, height: 1 },
+      shadowOpacity: 0.1,
+      shadowRadius: 2,
+      elevation: 2,
     },
-    fabProgressText: {
-      color: colors.card,
-      fontSize: fontSizes.xs,
-      fontWeight: "700",
+    modeTabText: { color: colors.textMuted, fontSize: fontSizes.sm, fontWeight: "600" },
+    modeTabTextActive: { color: colors.text },
+
+    // Day picker
+    dayPicker: { flexDirection: "row", borderBottomWidth: 1, borderBottomColor: colors.divider },
+    dayTab: {
+      flex: 1, alignItems: "center", paddingVertical: spacing.sm,
+      borderBottomWidth: 3, borderBottomColor: "transparent", minHeight: 52, justifyContent: "center",
     },
+    dayTabActive: { borderBottomColor: colors.primary },
+    dayDate: { color: colors.textMuted, fontSize: fontSizes.xs, fontWeight: "500" },
+    dayName: { color: colors.textSecondary, fontSize: fontSizes.sm, fontWeight: "700" },
+    dayTextActive: { color: colors.primary },
+
+    // FAB
+    fab: {
+      position: "absolute", bottom: spacing.xl, right: spacing.md,
+      width: 56, height: 56, borderRadius: 28, backgroundColor: colors.primary,
+      alignItems: "center", justifyContent: "center", gap: 2,
+      shadowColor: "#000", shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.25, shadowRadius: 4, elevation: 5,
+    },
+    fabProgressText: { color: colors.card, fontSize: fontSizes.xs, fontWeight: "700" },
+
+    // Section headers
     sectionHeaderPlaying: {
-      flexDirection: "row",
-      alignItems: "center",
-      gap: spacing.sm,
-      marginBottom: spacing.sm,
-      marginTop: spacing.xs,
+      flexDirection: "row", alignItems: "center", gap: spacing.sm,
+      marginBottom: spacing.sm, marginTop: spacing.xs,
     },
-    liveDot: {
-      width: 8,
-      height: 8,
-      borderRadius: 4,
-      backgroundColor: colors.success,
-    },
+    liveDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: colors.success },
     sectionHeaderPlayingText: {
-      color: colors.success,
-      fontSize: fontSizes.xs,
-      fontWeight: "700",
-      letterSpacing: 1,
+      color: colors.success, fontSize: fontSizes.xs, fontWeight: "700", letterSpacing: 1,
     },
     hourHeader: {
-      flexDirection: "row",
-      alignItems: "center",
-      gap: spacing.sm,
-      marginBottom: spacing.sm,
-      marginTop: spacing.xs,
+      flexDirection: "row", alignItems: "center", gap: spacing.sm,
+      marginBottom: spacing.sm, marginTop: spacing.xs,
     },
-    hourHeaderText: {
-      color: colors.textMuted,
-      fontSize: fontSizes.xs,
-      fontWeight: "600",
-      letterSpacing: 0.5,
+    hourHeaderText: { color: colors.textMuted, fontSize: fontSizes.xs, fontWeight: "600", letterSpacing: 0.5 },
+    hourHeaderTextDim: { opacity: 0.5 },
+    hourHeaderLine: { flex: 1, height: 1, backgroundColor: colors.divider },
+
+    // Conflict card
+    conflictCard: {
+      backgroundColor: colors.card, borderRadius: radii.md,
+      borderWidth: 1, borderColor: colors.error,
+      marginBottom: spacing.md, overflow: "hidden",
     },
-    sectionHeaderFinishedText: {
-      color: colors.textMuted,
-      fontSize: fontSizes.xs,
-      fontWeight: "600",
-      letterSpacing: 0.5,
-      opacity: 0.6,
+    conflictCardHeader: {
+      flexDirection: "row", alignItems: "center", gap: spacing.sm,
+      paddingHorizontal: spacing.md, paddingVertical: spacing.sm,
+      borderBottomWidth: 1, borderBottomColor: colors.error,
+      backgroundColor: colors.cardSecondary,
     },
-    hourHeaderLine: {
-      flex: 1,
-      height: 1,
-      backgroundColor: colors.divider,
+    conflictCardTitle: {
+      color: colors.error, fontSize: fontSizes.xs, fontWeight: "700", letterSpacing: 0.5, flex: 1,
     },
+    conflictCardTime: { color: colors.textMuted, fontSize: fontSizes.xs },
+    conflictColumns: {
+      flexDirection: "row", alignItems: "flex-start", padding: spacing.sm,
+    },
+    conflictColumnTouchable: { flex: 1 },
+    conflictColumnExpanded: {
+      paddingVertical: spacing.md,
+      paddingHorizontal: spacing.xl,
+      justifyContent: "center" as const,
+      alignItems: "center" as const,
+    },
+    columnDivider: { width: 1, backgroundColor: colors.divider, alignSelf: "stretch", marginHorizontal: spacing.xs },
+    conflictColumn: { paddingHorizontal: spacing.xs },
+    columnArtist: { color: colors.text, fontSize: fontSizes.sm, fontWeight: "700", marginBottom: 2 },
+    columnStage: { color: colors.primary, fontSize: fontSizes.xs, fontWeight: "600", marginBottom: 2 },
+    columnTime: { color: colors.textMuted, fontSize: fontSizes.xs, marginBottom: spacing.xs },
+    columnMinsLeft: { color: colors.success, fontSize: fontSizes.xs, fontWeight: "600", marginBottom: spacing.xs },
+    columnSongs: { gap: 2 },
+    columnSong: { color: colors.text, fontSize: fontSizes.xs },
+    columnSongCurrent: { color: colors.success, fontWeight: "700" },
+    columnSongPlayed: { color: colors.textMuted, opacity: 0.4 },
+    columnNoSetlist: { color: colors.textMuted, fontSize: fontSizes.xs, fontStyle: "italic" },
+    columnTextCentered: { textAlign: "center" as const },
+    columnSongsCentered: { alignItems: "center" as const },
+
+    // Set card
     card: {
-      backgroundColor: colors.card,
-      borderRadius: radii.md,
-      padding: spacing.md,
-      marginBottom: spacing.md,
+      backgroundColor: colors.card, borderRadius: radii.md,
+      padding: spacing.md, marginBottom: spacing.md,
     },
-    cardConflict: {
-      borderLeftWidth: 3,
-      borderLeftColor: colors.error,
-    },
-    cardFinished: {
-      opacity: 0.45,
-    },
-    cardHeader: {
-      flexDirection: "row",
-      alignItems: "center",
-      gap: spacing.sm,
-      marginBottom: spacing.xs,
-    },
-    artistName: {
-      flex: 1,
-      color: colors.text,
-      fontSize: fontSizes.md,
-      fontWeight: "700",
-    },
+    cardFinished: { opacity: 0.45 },
+    cardHeader: { flexDirection: "row", alignItems: "center", gap: spacing.sm, marginBottom: spacing.xs },
+    artistName: { flex: 1, color: colors.text, fontSize: fontSizes.md, fontWeight: "700" },
     liveBadge: {
-      backgroundColor: colors.success,
-      borderRadius: radii.sm,
-      paddingHorizontal: spacing.sm,
-      paddingVertical: 2,
+      backgroundColor: colors.success, borderRadius: radii.sm, paddingHorizontal: spacing.sm, paddingVertical: 2,
     },
-    liveBadgeText: {
-      color: "#FFFFFF",
-      fontSize: fontSizes.xs,
-      fontWeight: "700",
-      letterSpacing: 0.5,
-    },
-    conflictBadge: {
-      backgroundColor: colors.error,
-      borderRadius: radii.sm,
-      paddingHorizontal: spacing.sm,
-      paddingVertical: 2,
-    },
-    conflictBadgeText: {
-      color: "#FFFFFF",
-      fontSize: fontSizes.xs,
-      fontWeight: "700",
-      letterSpacing: 0.5,
-    },
-    stageLine: {
-      fontSize: fontSizes.sm,
-      marginBottom: spacing.xs,
-    },
-    stageName: {
-      color: colors.primary,
-      fontWeight: "700",
-    },
-    stageTime: {
-      color: colors.textMuted,
-      fontWeight: "400",
-    },
-    minsRemaining: {
-      color: colors.success,
-      fontSize: fontSizes.xs,
-      fontWeight: "600",
-      marginBottom: spacing.xs,
-    },
-    conflictWith: {
-      color: colors.error,
-      fontSize: fontSizes.xs,
-      marginBottom: spacing.sm,
-    },
-    songList: {
-      marginTop: spacing.sm,
-      gap: 2,
-    },
-    songRow: {
-      flexDirection: "row",
-      gap: spacing.sm,
-    },
-    songRowDim: {
-      opacity: 0.35,
-    },
-    songTime: {
-      color: colors.textMuted,
-      fontSize: fontSizes.xs,
-      width: 72,
-    },
-    songTimeCurrent: {
-      color: colors.success,
-      fontWeight: "700",
-    },
-    songTimeDim: {
-      color: colors.textMuted,
-    },
-    songName: {
-      flex: 1,
-      color: colors.text,
-      fontSize: fontSizes.xs,
-    },
-    songNameCurrent: {
-      color: colors.success,
-      fontWeight: "700",
-    },
-    songNameDim: {
-      color: colors.textMuted,
-    },
-    noSetlist: {
-      color: colors.textMuted,
-      fontSize: fontSizes.xs,
-      marginTop: spacing.sm,
-      fontStyle: "italic",
-    },
+    liveBadgeText: { color: "#FFFFFF", fontSize: fontSizes.xs, fontWeight: "700", letterSpacing: 0.5 },
+    stageLine: { fontSize: fontSizes.sm, marginBottom: spacing.xs },
+    stageName: { color: colors.primary, fontWeight: "700" },
+    stageTime: { color: colors.textMuted, fontWeight: "400" },
+    minsRemaining: { color: colors.success, fontSize: fontSizes.xs, fontWeight: "600", marginBottom: spacing.xs },
+    songList: { marginTop: spacing.sm, gap: 2 },
+    songRow: { flexDirection: "row", gap: spacing.sm },
+    songRowDim: { opacity: 0.35 },
+    songTime: { color: colors.textMuted, fontSize: fontSizes.xs, width: 72 },
+    songTimeCurrent: { color: colors.success, fontWeight: "700" },
+    songTimeDim: { color: colors.textMuted },
+    songName: { flex: 1, color: colors.text, fontSize: fontSizes.xs },
+    songNameCurrent: { color: colors.success, fontWeight: "700" },
+    songNameDim: { color: colors.textMuted },
+    noSetlist: { color: colors.textMuted, fontSize: fontSizes.xs, marginTop: spacing.sm, fontStyle: "italic" },
   });

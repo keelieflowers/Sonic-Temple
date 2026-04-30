@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Image, SectionList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useRef, useState } from "react";
+import { Image, SectionList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useColors } from "@/src/providers/theme/ThemeProvider";
@@ -10,7 +10,12 @@ export function ArtistsScreen() {
   const colors = useColors();
   const { lineup, isSelected, toggleBand, selectDay, deselectDay } = useLineup();
   const [collapsedDays, setCollapsedDays] = useState<Set<string>>(new Set());
+  const [searchQuery, setSearchQuery] = useState("");
+  const searchRef = useRef<TextInput>(null);
   const s = styles(colors);
+
+  const isSearching = searchQuery.trim().length > 0;
+  const query = searchQuery.trim().toLowerCase();
 
   const toggleCollapsed = (day: string) => {
     setCollapsedDays((prev) => {
@@ -20,10 +25,14 @@ export function ArtistsScreen() {
     });
   };
 
-  const sections = lineup.map((day) => ({
-    title: day.day,
-    data: collapsedDays.has(day.day) ? [] : day.bands,
-  }));
+  const sections = lineup
+    .map((day) => ({
+      title: day.day,
+      data: isSearching
+        ? day.bands.filter((b) => b.toLowerCase().includes(query))
+        : collapsedDays.has(day.day) ? [] : day.bands,
+    }))
+    .filter((section) => !isSearching || section.data.length > 0);
 
   return (
     <SafeAreaView style={s.container} edges={["top"]}>
@@ -32,6 +41,39 @@ export function ArtistsScreen() {
         style={s.logo}
         resizeMode="contain"
       />
+
+      <View style={s.searchBar}>
+        <FontAwesome name="search" size={14} color={colors.textMuted} />
+        <TextInput
+          ref={searchRef}
+          style={s.searchInput}
+          placeholder="Search artists..."
+          placeholderTextColor={colors.textMuted}
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+          autoCapitalize="none"
+          autoCorrect={false}
+          clearButtonMode="while-editing"
+        />
+        {isSearching && (
+          <TouchableOpacity onPress={() => setSearchQuery("")} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
+            <FontAwesome name="times-circle" size={16} color={colors.textMuted} />
+          </TouchableOpacity>
+        )}
+      </View>
+
+      {!isSearching && (
+        <View style={s.bulkActions}>
+          <TouchableOpacity onPress={() => setCollapsedDays(new Set())}>
+            <Text style={s.bulkActionText}>Expand All</Text>
+          </TouchableOpacity>
+          <Text style={s.bulkActionDivider}>·</Text>
+          <TouchableOpacity onPress={() => setCollapsedDays(new Set(lineup.map((d) => d.day)))}>
+            <Text style={s.bulkActionText}>Collapse All</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+
       <SectionList
         style={s.container}
         contentContainerStyle={{ padding: spacing.md, paddingBottom: spacing.xl }}
@@ -109,6 +151,39 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       width: "100%",
       height: 130,
       marginBottom: spacing.xs,
+    },
+    searchBar: {
+      flexDirection: "row",
+      alignItems: "center",
+      backgroundColor: colors.card,
+      borderRadius: radii.md,
+      marginHorizontal: spacing.md,
+      marginBottom: spacing.sm,
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm,
+      gap: spacing.sm,
+    },
+    searchInput: {
+      flex: 1,
+      color: colors.text,
+      fontSize: fontSizes.md,
+      padding: 0,
+    },
+    bulkActions: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.sm,
+      paddingHorizontal: spacing.md,
+      marginBottom: spacing.xs,
+    },
+    bulkActionText: {
+      color: colors.textMuted,
+      fontSize: fontSizes.xs,
+      fontWeight: "600",
+    },
+    bulkActionDivider: {
+      color: colors.textMuted,
+      fontSize: fontSizes.xs,
     },
     dayHeader: {
       backgroundColor: colors.background,
