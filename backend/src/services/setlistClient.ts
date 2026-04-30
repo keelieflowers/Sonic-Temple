@@ -1,3 +1,5 @@
+import { Logger } from "./logger.js";
+
 const BASE_URL = "https://api.setlist.fm/rest/1.0";
 const ACCEPT = "application/json";
 const API_VERSION = "1.0";
@@ -29,6 +31,7 @@ export type SetlistApiSetlist = {
   artist?: { name?: string };
   tour?: { name?: string };
   venue?: {
+    id?: string;
     name?: string;
     city?: {
       name?: string;
@@ -48,6 +51,7 @@ type SetlistClientOptions = {
   retryCount?: number;
   minRequestIntervalMs?: number;
   retryBaseDelayMs?: number;
+  logger?: Logger;
 };
 
 function sleep(ms: number) {
@@ -60,6 +64,7 @@ export class SetlistClient {
   private readonly retryCount: number;
   private readonly minRequestIntervalMs: number;
   private readonly retryBaseDelayMs: number;
+  private readonly logger?: Logger;
   private queue: Promise<void> = Promise.resolve();
   private nextAllowedRequestAt = 0;
 
@@ -73,6 +78,7 @@ export class SetlistClient {
     this.retryCount = options.retryCount ?? DEFAULT_RETRY_COUNT;
     this.minRequestIntervalMs = options.minRequestIntervalMs ?? DEFAULT_MIN_REQUEST_INTERVAL_MS;
     this.retryBaseDelayMs = options.retryBaseDelayMs ?? DEFAULT_RETRY_BASE_DELAY_MS;
+    this.logger = options.logger?.child("setlistClient");
   }
 
   async searchArtistsByName(artistName: string): Promise<SetlistApiArtist[]> {
@@ -94,6 +100,7 @@ export class SetlistClient {
       const now = Date.now();
       const waitMs = Math.max(0, this.nextAllowedRequestAt - now);
       if (waitMs > 0) {
+        this.logger?.debug("Waiting for request slot", { waitMs });
         await sleep(waitMs);
       }
       this.nextAllowedRequestAt = Math.max(this.nextAllowedRequestAt, Date.now()) + this.minRequestIntervalMs;
@@ -137,7 +144,9 @@ export class SetlistClient {
       });
 
         if (response.status === 429 && attempt < this.retryCount) {
-          await sleep(this.getRetryDelayMs(response, attempt));
+          const waitMs = this.getRetryDelayMs(response, attempt);
+          this.logger?.warn("Setlist API rate limited; retrying", { attempt, waitMs, path });
+          await sleep(waitMs);
           continue;
         }
 
@@ -150,7 +159,14 @@ export class SetlistClient {
     } catch (error) {
         lastError = error;
         if (attempt < this.retryCount) {
-          await sleep(this.retryBaseDelayMs * (attempt + 1));
+          const waitMs = this.retryBaseDelayMs * (attempt + 1);
+          this.logger?.warn("Setlist API request failed; retrying", {
+            attempt,
+            waitMs,
+            path,
+            error: error instanceof Error ? error.message : String(error)
+          });
+          await sleep(waitMs);
           continue;
         }
         throw error;

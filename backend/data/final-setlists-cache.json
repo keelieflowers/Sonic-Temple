@@ -1,0 +1,101 @@
+{
+  "version": "0.0.3",
+  "entries": {
+    "buckcherry|saliva": {
+      "generatedAt": "2026-04-30T15:26:44.937Z",
+      "expiresAt": "2026-05-01T15:26:44.937Z",
+      "results": [
+        {
+          "inputBandName": "Buckcherry",
+          "artistMatch": {
+            "mbid": "822e92ef-72ea-42e0-9af1-b987816b487a",
+            "name": "Buckcherry"
+          },
+          "latestSetlist": {
+            "id": "2b7638d6",
+            "venueId": "53d04329",
+            "eventDate": "11-04-2026",
+            "lastUpdated": "2026-04-15T06:13:55.410+0000",
+            "artistName": "Buckcherry",
+            "venueName": "Harold's Cave Creek Corral",
+            "cityName": "Cave Creek",
+            "state": "Arizona",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Lit Up",
+                  "Roar Like Thunder",
+                  "So Hott",
+                  "Somebody Fucked With Me",
+                  "Whiskey in the Morning",
+                  "Ridin'",
+                  "Let It Burn",
+                  "Too Drunk...",
+                  "Say Fuck It",
+                  "Pain",
+                  "Come On",
+                  "Gluttony",
+                  "Sorry",
+                  "Tight Pants",
+                  "Blackout",
+                  "Crazy Bitch / Sex Machine / Bad Girls / Irresistible Bitch / Proud Mary / Crazy Bitch"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Saliva",
+          "artistMatch": {
+            "mbid": "6e650a01-6489-4dc8-85e1-8ec809dd72a2",
+            "name": "Saliva"
+          },
+          "latestSetlist": {
+            "id": "734a5efd",
+            "venueId": "73d71e25",
+            "eventDate": "26-04-2026",
+            "lastUpdated": "2026-04-28T17:58:42.144+0000",
+            "artistName": "Saliva",
+            "venueName": "Milo Concert Hall",
+            "cityName": "Nizhniy Novgorod",
+            "state": "Nizjnij Novgorod",
+            "countryCode": "RU",
+            "countryName": "Russia",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Ladies and Gentlemen",
+                  "Superstar",
+                  "Musta Been Wrong",
+                  "Time Bomb",
+                  "Come Back Stronger",
+                  "Greater Than Less Than",
+                  "I Walk Alone",
+                  "After Me",
+                  "High on Me",
+                  "Always",
+                  "Doperide",
+                  "Devil's World",
+                  "They Don't Care About Us / Lose Yourself / One Step Closer",
+                  "Your Disease",
+                  "Rest in Pieces",
+                  "Click Click Boom"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        }
+      ]
+    }
+  }
+}

@@ -18,6 +18,7 @@ You can also tune outbound Setlist request pacing to reduce 429 responses:
 - `SETLIST_REQUEST_TIMEOUT_MS` (default `10000`)
 - `SETLIST_RETRY_COUNT` (default `2`)
 - `SETLIST_RETRY_BASE_DELAY_MS` (default `750`)
+- `LOG_LEVEL` (`debug` | `info` | `warn`, default `info`)
 
 For your current `2/sec` tier, keep `SETLIST_MIN_REQUEST_INTERVAL_MS` at `600` (or higher) so requests are intentionally slower but more reliable.
 
@@ -26,6 +27,11 @@ For your current `2/sec` tier, keep `SETLIST_MIN_REQUEST_INTERVAL_MS` at `600` (
 To avoid repeatedly searching artist MBIDs for the same band names, the backend now uses a local JSON file store:
 
 - `ARTIST_MBID_STORE_PATH` (default `./data/artist-mbids.json`)
+- `FINAL_SETLIST_CACHE_PATH` (default `./data/final-setlists-cache.json`)
+- `FINAL_SETLIST_CACHE_TTL_HOURS` (default `24`)
+- `FESTIVAL_VENUES_PATH` (default `./data/festival-venues.json`)
+- `LOCAL_SCHEDULE_PATH` (default `./data/sonic-temple-2026-schedule.json`)
+- `SONIC_TEMPLE_SHOWS_URL` (default live Sonic Temple feed)
 
 When `POST /api/festival/artist-shows` runs, it checks this store first for each band name. If missing, it searches Setlist, picks best match, then saves the MBID locally.
 
@@ -37,15 +43,15 @@ Request body:
 
 ```json
 {
-  "bandNames": ["My Chemical Romance", "Bring Me the Horizon"],
-  "mode": "append"
+  "forceRefresh": false
 }
 ```
 
-`mode` options:
-
-- `append` (default): keep existing file entries and add/update only provided bands.
-- `refresh`: clear existing file entries first, then write only provided bands.
+Behavior:
+- Fetches lineup artist names from live `shows.json` (falls back to local schedule file).
+- Adds only missing MBIDs to cache (never overwrites existing MBIDs).
+- Skips ambiguous MBID matches and returns them in `needsReview`.
+- Regenerates final setlist cache if expired, missing artists, or `forceRefresh=true`.
 
 ### Run
 
@@ -64,7 +70,8 @@ Request body:
 
 ```json
 {
-  "bandNames": ["Bad Omens", "Spiritbox"]
+  "bandNames": ["Bad Omens", "Spiritbox"],
+  "forceRefresh": false
 }
 ```
 
@@ -72,6 +79,11 @@ Response shape:
 
 ```json
 {
+  "cache": {
+    "hit": false,
+    "generatedAt": "2026-04-30T11:00:00.000Z",
+    "expiresAt": "2026-05-01T11:00:00.000Z"
+  },
   "results": [
     {
       "inputBandName": "Bad Omens",

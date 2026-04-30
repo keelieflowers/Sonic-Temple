@@ -1,0 +1,61 @@
+[
+  {
+    "festival": "welcome-to-rockville",
+    "stages": [
+      {
+        "name": "apex",
+        "id": "4bdfafd6"
+      },
+      {
+        "name": "garage",
+        "id": "53dfafc9"
+      },
+      {
+        "name": "inferno",
+        "id": "43dfafcb"
+      },
+      {
+        "name": "vortex",
+        "id": "5bdfafd4"
+      },
+      {
+        "name": "octane",
+        "id": "53dfafd5"
+      }
+    ]
+  },
+  {
+    "festival": "shiprocked",
+    "stages": [
+      {
+        "name": "Carnival Horizon",
+        "id": "7bde4e54"
+      },
+      {
+        "name": "Half Moon Cay",
+        "id": "13d0c969"
+      }
+    ]
+  },
+  {
+    "festival": "sick-new-world",
+    "stages": [
+      {
+        "name": "diablo",
+        "id": "73df8ea1"
+      },
+      {
+        "name": "green",
+        "id": "63df8ea3"
+      },
+      {
+        "name": "purple",
+        "id": "7bdf8eac"
+      },
+      {
+        "name": "spiral",
+        "id": "6bdf8ea2"
+      }
+    ]
+  }
+]
