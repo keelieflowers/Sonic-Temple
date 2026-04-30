@@ -13,6 +13,7 @@ export type SongSection = {
 
 export type LatestSetlist = {
   id: string;
+  venueId?: string;
   eventDate?: string;
   lastUpdated?: string;
   artistName?: string;
@@ -33,5 +34,6 @@ export type ArtistShowResult = {
   artistMatch: ArtistMatch | null;
   latestSetlist: LatestSetlist | null;
   status: ArtistShowStatus;
+  selectionMode?: "festivalVenuePriority" | "recencyFallback";
   error?: string;
 };

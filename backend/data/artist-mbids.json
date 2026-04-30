@@ -324,6 +324,138 @@
       "mbid": "33464f19-aa8b-4bbf-982d-05f5e78643c8",
       "matchedArtistName": "A Skylit Drive",
       "updatedAt": "2026-04-30T00:31:58.630Z"
+    },
+    "sevendust": {
+      "inputBandName": "Sevendust",
+      "mbid": "52b9e109-44a0-45eb-a197-226c4abab232",
+      "matchedArtistName": "Sevendust",
+      "updatedAt": "2026-04-30T00:49:15.330Z"
+    },
+    "butcher babies": {
+      "inputBandName": "Butcher Babies",
+      "mbid": "e43b7e0e-0927-4a66-8cd4-8a6bfb162bd8",
+      "matchedArtistName": "Butcher Babies",
+      "updatedAt": "2026-04-30T00:53:16.671Z"
+    },
+    "pop evil": {
+      "inputBandName": "Pop Evil",
+      "mbid": "8e3ce660-79ed-4072-bd3d-e8db7a409946",
+      "matchedArtistName": "Pop Evil",
+      "updatedAt": "2026-04-30T00:53:17.279Z"
+    },
+    "the plot in you": {
+      "inputBandName": "The Plot In You",
+      "mbid": "c2e7d4ac-5e30-4b55-99b7-e49d99fd7c63",
+      "matchedArtistName": "The Plot in You",
+      "updatedAt": "2026-04-30T00:53:17.874Z"
+    },
+    "black veil brides": {
+      "inputBandName": "Black Veil Brides",
+      "mbid": "33319aed-9bd7-4cd1-903c-716845c1b7cd",
+      "matchedArtistName": "Black Veil Brides",
+      "updatedAt": "2026-04-30T00:53:18.473Z"
+    },
+    "the ghost inside": {
+      "inputBandName": "The Ghost Inside",
+      "mbid": "6fbd58c3-e9b3-4419-a197-0a0f22baed94",
+      "matchedArtistName": "The Ghost Inside",
+      "updatedAt": "2026-04-30T00:53:19.077Z"
+    },
+    "alter bridge": {
+      "inputBandName": "Alter Bridge",
+      "mbid": "60a23fda-a440-4ab9-a344-7dfdd2ed341a",
+      "matchedArtistName": "Alter Bridge",
+      "updatedAt": "2026-04-30T00:53:19.679Z"
+    },
+    "motionless in white": {
+      "inputBandName": "Motionless in White",
+      "mbid": "1c5b9bd6-76e8-4fe7-a6df-3bc0b5a452cc",
+      "matchedArtistName": "Motionless in White",
+      "updatedAt": "2026-04-30T00:53:20.290Z"
+    },
+    "the wonder years": {
+      "inputBandName": "The Wonder Years",
+      "mbid": "ae13e1fc-a2b1-4e3c-bfb9-737d3aeb7dab",
+      "matchedArtistName": "The Wonder Years",
+      "updatedAt": "2026-04-30T00:53:20.894Z"
+    },
+    "good charlotte": {
+      "inputBandName": "Good Charlotte",
+      "mbid": "b267ca80-034e-4dc1-9ed4-ec45f1fed41d",
+      "matchedArtistName": "Good Charlotte",
+      "updatedAt": "2026-04-30T00:53:27.520Z"
+    },
+    "bush": {
+      "inputBandName": "BUSH",
+      "mbid": "ec370707-9879-4d55-91c4-12312260c527",
+      "matchedArtistName": "Atomic Bush",
+      "updatedAt": "2026-04-30T00:53:28.125Z"
+    },
+    "architects": {
+      "inputBandName": "Architects",
+      "mbid": "d67eb114-0109-47fd-98d8-c68b9f15822f",
+      "matchedArtistName": "Architects",
+      "updatedAt": "2026-04-30T00:53:28.712Z"
+    },
+    "the amity affliction": {
+      "inputBandName": "The Amity Affliction",
+      "mbid": "0bfb9d2b-e732-4f28-b2fe-e1d3db9665f1",
+      "matchedArtistName": "The Amity Affliction",
+      "updatedAt": "2026-04-30T00:53:29.306Z"
+    },
+    "p.o.d.": {
+      "inputBandName": "P.O.D.",
+      "mbid": "b3b81e34-2bfa-4d3c-be35-8a528f06fcd0",
+      "matchedArtistName": "P.O.D.",
+      "updatedAt": "2026-04-30T00:53:31.724Z"
+    },
+    "thrown": {
+      "inputBandName": "THROWN",
+      "mbid": "2ac0666d-2890-4832-8fde-feb98168dce5",
+      "matchedArtistName": "Thrown",
+      "updatedAt": "2026-04-30T00:53:33.514Z"
+    },
+    "alestorm": {
+      "inputBandName": "Alestorm",
+      "mbid": "c0252a1b-0133-46bb-8c4f-cade46349ec3",
+      "matchedArtistName": "Alestorm",
+      "updatedAt": "2026-04-30T00:53:34.120Z"
+    },
+    "anberlin": {
+      "inputBandName": "Anberlin",
+      "mbid": "c648509e-9916-4c56-ab63-652a03da16dd",
+      "matchedArtistName": "Anberlin",
+      "updatedAt": "2026-04-30T00:53:34.716Z"
+    },
+    "polaris": {
+      "inputBandName": "Polaris",
+      "mbid": "286431ba-af78-4fc8-9bd5-c20ab0ed4b8c",
+      "matchedArtistName": "Polaris",
+      "updatedAt": "2026-04-30T00:53:36.540Z"
+    },
+    "thrice": {
+      "inputBandName": "Thrice",
+      "mbid": "244afcb7-fa9a-49b1-9aa6-0149512d1c52",
+      "matchedArtistName": "Thrice",
+      "updatedAt": "2026-04-30T00:53:37.127Z"
+    },
+    "godsmack": {
+      "inputBandName": "Godsmack",
+      "mbid": "ac2d1c91-3667-46aa-9fe7-170ca7fce9e2",
+      "matchedArtistName": "Godsmack",
+      "updatedAt": "2026-04-30T00:53:37.720Z"
+    },
+    "we came as romans": {
+      "inputBandName": "We Came As Romans",
+      "mbid": "dc0da7d1-231c-4058-8e6e-1c0801848602",
+      "matchedArtistName": "We Came as Romans",
+      "updatedAt": "2026-04-30T00:53:38.337Z"
+    },
+    "electric callboy": {
+      "inputBandName": "Electric Callboy",
+      "mbid": "cf075492-d880-4afc-b87b-d6b03e33dacc",
+      "matchedArtistName": "Electric Callboy",
+      "updatedAt": "2026-04-30T00:53:38.945Z"
     }
   }
 }

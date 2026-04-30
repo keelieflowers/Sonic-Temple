@@ -1,5 +1,5 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   SectionList,
@@ -18,6 +18,8 @@ import { SCHEDULE, ScheduleEntry } from "@/src/data/schedule";
 import { ArtistShowResult } from "@/src/shared/Types";
 
 type DayOption = "Thursday" | "Friday" | "Saturday" | "Sunday";
+type SectionType = "playing" | "upcoming" | "finished";
+type TimelineSection = { title: string; sectionType: SectionType; data: ScheduleEntry[] };
 
 const DAYS: DayOption[] = ["Thursday", "Friday", "Saturday", "Sunday"];
 
@@ -35,6 +37,16 @@ const DAY_SHORT: Record<DayOption, string> = {
   Sunday: "Sun",
 };
 
+const FESTIVAL_DATES: Record<DayOption, string> = {
+  Thursday: "2026-05-14",
+  Friday: "2026-05-15",
+  Saturday: "2026-05-16",
+  Sunday: "2026-05-17",
+};
+
+// Set to a time like "19:30" to simulate live mode, null uses real clock
+const DEV_NOW_OVERRIDE: string | null = null;
+
 function toMinutes(time: string): number {
   const [h, m] = time.split(":").map(Number);
   return h * 60 + m;
@@ -46,6 +58,23 @@ function formatTime(totalMinutes: number): string {
   const hDisplay = h % 12 || 12;
   const suffix = h >= 12 ? "PM" : "AM";
   return `${hDisplay}:${String(m).padStart(2, "0")} ${suffix}`;
+}
+
+function getNowMinutes(): number {
+  if (DEV_NOW_OVERRIDE) return toMinutes(DEV_NOW_OVERRIDE);
+  const d = new Date();
+  return d.getHours() * 60 + d.getMinutes();
+}
+
+function getDefaultDay(): DayOption {
+  const today = new Date().toISOString().split("T")[0];
+  const map: Record<string, DayOption> = {
+    "2026-05-14": "Thursday",
+    "2026-05-15": "Friday",
+    "2026-05-16": "Saturday",
+    "2026-05-17": "Sunday",
+  };
+  return map[today] ?? "Thursday";
 }
 
 function buildConflictMap(entries: ScheduleEntry[]): Map<string, string[]> {
@@ -65,15 +94,16 @@ function buildConflictMap(entries: ScheduleEntry[]): Map<string, string[]> {
   return map;
 }
 
-function getDefaultDay(): DayOption {
-  const today = new Date().toISOString().split("T")[0];
-  const map: Record<string, DayOption> = {
-    "2026-05-14": "Thursday",
-    "2026-05-15": "Friday",
-    "2026-05-16": "Saturday",
-    "2026-05-17": "Sunday",
-  };
-  return map[today] ?? "Thursday";
+function groupByHour(entries: ScheduleEntry[], sectionType: SectionType): TimelineSection[] {
+  const hourMap = new Map<number, ScheduleEntry[]>();
+  for (const entry of entries) {
+    const hour = Math.floor(toMinutes(entry.startTime) / 60);
+    if (!hourMap.has(hour)) hourMap.set(hour, []);
+    hourMap.get(hour)!.push(entry);
+  }
+  return [...hourMap.entries()]
+    .sort(([a], [b]) => a - b)
+    .map(([hour, data]) => ({ title: formatTime(hour * 60), sectionType, data }));
 }
 
 type Props = { selectedBands: string[] };
@@ -85,6 +115,17 @@ export function TimelineScreen({ selectedBands }: Props) {
   const [activeDay, setActiveDay] = useState<DayOption>(getDefaultDay);
   const [syncing, setSyncing] = useState(false);
   const [syncProgress, setSyncProgress] = useState<SyncProgress | null>(null);
+  const [nowMinutes, setNowMinutes] = useState<number>(getNowMinutes);
+
+  useEffect(() => {
+    const id = setInterval(() => setNowMinutes(getNowMinutes()), 60_000);
+    return () => clearInterval(id);
+  }, []);
+
+  const isLiveDay = useMemo(
+    () => DEV_NOW_OVERRIDE !== null || FESTIVAL_DATES[activeDay] === new Date().toISOString().split("T")[0],
+    [activeDay]
+  );
 
   const handleSync = async () => {
     setSyncing(true);
@@ -106,7 +147,7 @@ export function TimelineScreen({ selectedBands }: Props) {
       try {
         map.set(cached.artistName, JSON.parse(cached.data) as ArtistShowResult);
       } catch {
-        // skip malformed cache entries
+        // skip malformed entries
       }
     }
     return map;
@@ -122,17 +163,27 @@ export function TimelineScreen({ selectedBands }: Props) {
 
   const conflictMap = useMemo(() => buildConflictMap(dayEntries), [dayEntries]);
 
-  const sections = useMemo(() => {
-    const hourMap = new Map<number, ScheduleEntry[]>();
+  const sections = useMemo((): TimelineSection[] => {
+    if (!isLiveDay) return groupByHour(dayEntries, "upcoming");
+
+    const playing: ScheduleEntry[] = [];
+    const upcoming: ScheduleEntry[] = [];
+    const finished: ScheduleEntry[] = [];
+
     for (const entry of dayEntries) {
-      const hour = Math.floor(toMinutes(entry.startTime) / 60);
-      if (!hourMap.has(hour)) hourMap.set(hour, []);
-      hourMap.get(hour)!.push(entry);
+      const start = toMinutes(entry.startTime);
+      const end = toMinutes(entry.endTime);
+      if (nowMinutes >= end) finished.push(entry);
+      else if (nowMinutes >= start) playing.push(entry);
+      else upcoming.push(entry);
     }
-    return [...hourMap.entries()]
-      .sort(([a], [b]) => a - b)
-      .map(([hour, data]) => ({ title: formatTime(hour * 60), data }));
-  }, [dayEntries]);
+
+    const result: TimelineSection[] = [];
+    if (playing.length > 0) result.push({ title: "PLAYING NOW", sectionType: "playing", data: playing });
+    result.push(...groupByHour(upcoming, "upcoming"));
+    if (finished.length > 0) result.push({ title: "FINISHED", sectionType: "finished", data: finished });
+    return result;
+  }, [dayEntries, nowMinutes, isLiveDay]);
 
   if (selectedBands.length === 0) {
     return (
@@ -169,17 +220,38 @@ export function TimelineScreen({ selectedBands }: Props) {
           contentContainerStyle={{ padding: spacing.md, paddingBottom: spacing.xl }}
           sections={sections}
           keyExtractor={(item) => item.artist}
-          renderSectionHeader={({ section }) => (
-            <View style={s.hourHeader}>
-              <Text style={s.hourHeaderText}>{section.title}</Text>
-              <View style={s.hourHeaderLine} />
-            </View>
-          )}
-          renderItem={({ item }) => (
+          renderSectionHeader={({ section }) => {
+            if (section.sectionType === "playing") {
+              return (
+                <View style={s.sectionHeaderPlaying}>
+                  <View style={s.liveDot} />
+                  <Text style={s.sectionHeaderPlayingText}>{section.title}</Text>
+                </View>
+              );
+            }
+            if (section.sectionType === "finished") {
+              return (
+                <View style={s.hourHeader}>
+                  <Text style={s.sectionHeaderFinishedText}>{section.title}</Text>
+                  <View style={s.hourHeaderLine} />
+                </View>
+              );
+            }
+            return (
+              <View style={s.hourHeader}>
+                <Text style={s.hourHeaderText}>{section.title}</Text>
+                <View style={s.hourHeaderLine} />
+              </View>
+            );
+          }}
+          renderItem={({ item, section }) => (
             <SetCard
               entry={item}
               conflictsWith={conflictMap.get(item.artist) ?? []}
               setlistResult={setlistMap.get(item.artist) ?? null}
+              nowMinutes={nowMinutes}
+              isLiveDay={isLiveDay}
+              isFinished={section.sectionType === "finished"}
               colors={colors}
             />
           )}
@@ -207,23 +279,41 @@ type SetCardProps = {
   entry: ScheduleEntry;
   conflictsWith: string[];
   setlistResult: ArtistShowResult | null;
+  nowMinutes: number;
+  isLiveDay: boolean;
+  isFinished: boolean;
   colors: ReturnType<typeof useColors>;
 };
 
-function SetCard({ entry, conflictsWith, setlistResult, colors }: SetCardProps) {
+function SetCard({ entry, conflictsWith, setlistResult, nowMinutes, isLiveDay, isFinished, colors }: SetCardProps) {
   const s = styles(colors);
-  const [expanded, setExpanded] = useState(false);
   const startMin = toMinutes(entry.startTime);
   const endMin = toMinutes(entry.endTime);
   const duration = endMin - startMin;
   const hasConflict = conflictsWith.length > 0;
 
+  const isPlaying = isLiveDay && nowMinutes >= startMin && nowMinutes < endMin;
+  const minsRemaining = isPlaying ? endMin - nowMinutes : 0;
+
+  const [expanded, setExpanded] = useState(isPlaying);
+
   const songs = setlistResult?.latestSetlist?.sections.flatMap((sec) => sec.songs) ?? [];
 
   return (
-    <View style={[s.card, hasConflict && s.cardConflict]}>
+    <View style={[s.card, hasConflict && s.cardConflict, isFinished && s.cardFinished]}>
       <TouchableOpacity style={s.cardHeader} onPress={() => setExpanded((v) => !v)} activeOpacity={0.7}>
         <Text style={s.artistName} numberOfLines={1}>{entry.artist}</Text>
+        {setlistResult?.selectionMode === "festivalVenuePriority" && (
+          <FontAwesome name="star" size={12} color={colors.success} />
+        )}
+        {setlistResult?.selectionMode === "recencyFallback" && (
+          <FontAwesome name="clock-o" size={12} color={colors.textMuted} />
+        )}
+        {isPlaying && (
+          <View style={s.liveBadge}>
+            <Text style={s.liveBadgeText}>LIVE</Text>
+          </View>
+        )}
         {hasConflict && (
           <View style={s.conflictBadge}>
             <Text style={s.conflictBadgeText}>CONFLICT</Text>
@@ -241,6 +331,10 @@ function SetCard({ entry, conflictsWith, setlistResult, colors }: SetCardProps) 
         <Text style={s.stageTime}> · {formatTime(startMin)} – {formatTime(endMin)}</Text>
       </Text>
 
+      {isPlaying && (
+        <Text style={s.minsRemaining}>{minsRemaining} min remaining</Text>
+      )}
+
       {expanded && (
         <>
           {hasConflict && (
@@ -253,10 +347,37 @@ function SetCard({ entry, conflictsWith, setlistResult, colors }: SetCardProps) 
             <View style={s.songList}>
               {songs.map((song, i) => {
                 const songMin = startMin + (i / songs.length) * duration;
+                const nextSongMin = i + 1 < songs.length
+                  ? startMin + ((i + 1) / songs.length) * duration
+                  : endMin;
+
+                const status = !isPlaying ? "upcoming"
+                  : nowMinutes >= nextSongMin ? "played"
+                  : nowMinutes >= songMin ? "current"
+                  : "upcoming";
+
                 return (
-                  <View key={i} style={s.songRow}>
-                    <Text style={s.songTime}>{formatTime(songMin)}</Text>
-                    <Text style={s.songName} numberOfLines={1}>{song}</Text>
+                  <View
+                    key={i}
+                    style={[s.songRow, status === "played" && s.songRowDim]}
+                  >
+                    <Text style={[
+                      s.songTime,
+                      status === "current" && s.songTimeCurrent,
+                      status === "played" && s.songTimeDim,
+                    ]}>
+                      {formatTime(songMin)}
+                    </Text>
+                    <Text
+                      style={[
+                        s.songName,
+                        status === "current" && s.songNameCurrent,
+                        status === "played" && s.songNameDim,
+                      ]}
+                      numberOfLines={1}
+                    >
+                      {status === "current" ? "▶  " : ""}{song}
+                    </Text>
                   </View>
                 );
               })}
@@ -349,6 +470,25 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       fontSize: fontSizes.xs,
       fontWeight: "700",
     },
+    sectionHeaderPlaying: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.sm,
+      marginBottom: spacing.sm,
+      marginTop: spacing.xs,
+    },
+    liveDot: {
+      width: 8,
+      height: 8,
+      borderRadius: 4,
+      backgroundColor: colors.success,
+    },
+    sectionHeaderPlayingText: {
+      color: colors.success,
+      fontSize: fontSizes.xs,
+      fontWeight: "700",
+      letterSpacing: 1,
+    },
     hourHeader: {
       flexDirection: "row",
       alignItems: "center",
@@ -361,6 +501,13 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       fontSize: fontSizes.xs,
       fontWeight: "600",
       letterSpacing: 0.5,
+    },
+    sectionHeaderFinishedText: {
+      color: colors.textMuted,
+      fontSize: fontSizes.xs,
+      fontWeight: "600",
+      letterSpacing: 0.5,
+      opacity: 0.6,
     },
     hourHeaderLine: {
       flex: 1,
@@ -377,6 +524,9 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       borderLeftWidth: 3,
       borderLeftColor: colors.error,
     },
+    cardFinished: {
+      opacity: 0.45,
+    },
     cardHeader: {
       flexDirection: "row",
       alignItems: "center",
@@ -388,6 +538,18 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       color: colors.text,
       fontSize: fontSizes.md,
       fontWeight: "700",
+    },
+    liveBadge: {
+      backgroundColor: colors.success,
+      borderRadius: radii.sm,
+      paddingHorizontal: spacing.sm,
+      paddingVertical: 2,
+    },
+    liveBadgeText: {
+      color: "#FFFFFF",
+      fontSize: fontSizes.xs,
+      fontWeight: "700",
+      letterSpacing: 0.5,
     },
     conflictBadge: {
       backgroundColor: colors.error,
@@ -413,6 +575,12 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       color: colors.textMuted,
       fontWeight: "400",
     },
+    minsRemaining: {
+      color: colors.success,
+      fontSize: fontSizes.xs,
+      fontWeight: "600",
+      marginBottom: spacing.xs,
+    },
     conflictWith: {
       color: colors.error,
       fontSize: fontSizes.xs,
@@ -426,15 +594,32 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       flexDirection: "row",
       gap: spacing.sm,
     },
+    songRowDim: {
+      opacity: 0.35,
+    },
     songTime: {
       color: colors.textMuted,
       fontSize: fontSizes.xs,
       width: 72,
     },
+    songTimeCurrent: {
+      color: colors.success,
+      fontWeight: "700",
+    },
+    songTimeDim: {
+      color: colors.textMuted,
+    },
     songName: {
       flex: 1,
       color: colors.text,
       fontSize: fontSizes.xs,
+    },
+    songNameCurrent: {
+      color: colors.success,
+      fontWeight: "700",
+    },
+    songNameDim: {
+      color: colors.textMuted,
     },
     noSetlist: {
       color: colors.textMuted,

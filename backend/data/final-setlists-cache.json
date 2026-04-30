@@ -96,6 +96,4618 @@
           "selectionMode": "recencyFallback"
         }
       ]
+    },
+    "a skylit drive|avatar|bloodywood|conquer divide|demon hunter|lamb of god|saliva": {
+      "generatedAt": "2026-04-30T21:21:18.520Z",
+      "expiresAt": "2026-05-01T21:21:18.520Z",
+      "results": [
+        {
+          "inputBandName": "A Skylit Drive",
+          "artistMatch": {
+            "mbid": "33464f19-aa8b-4bbf-982d-05f5e78643c8",
+            "name": "A Skylit Drive"
+          },
+          "latestSetlist": {
+            "id": "7b4a02a4",
+            "venueId": "6bd7ca16",
+            "eventDate": "29-04-2026",
+            "lastUpdated": "2026-04-29T18:56:43.914+0000",
+            "artistName": "A Skylit Drive",
+            "venueName": "The Rock Pub",
+            "cityName": "Bangkok",
+            "state": "Bangkok",
+            "countryCode": "TH",
+            "countryName": "Thailand",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "All It Takes for Your Dreams to Come True",
+                  "The Cali Buds",
+                  "Golden",
+                  "Love the Way You Lie",
+                  "Se7en",
+                  "Wires and the Concept of Breathing"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Separate Ways (Worlds Apart)"
+                ]
+              }
+            ],
+            "songCount": 7
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Avatar",
+          "artistMatch": {
+            "mbid": "e51c3136-b94d-49de-8f1e-19faf3ef3566",
+            "name": "Avatar"
+          },
+          "latestSetlist": null,
+          "status": "no_setlist_found",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Bloodywood",
+          "artistMatch": null,
+          "latestSetlist": null,
+          "status": "api_error",
+          "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-04-30T21:21:14.041+0000\"\n}"
+        },
+        {
+          "inputBandName": "Conquer Divide",
+          "artistMatch": {
+            "mbid": "6b6da5b9-5620-4127-b90e-465be8d9b82a",
+            "name": "Conquer Divide"
+          },
+          "latestSetlist": {
+            "id": "53581729",
+            "venueId": "23d720b3",
+            "eventDate": "10-05-2025",
+            "lastUpdated": "2025-05-11T15:01:08.887+0000",
+            "artistName": "Conquer Divide",
+            "venueName": "Adado Riverfront Park",
+            "cityName": "Lansing",
+            "state": "Michigan",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Atonement",
+                  "Chemicals",
+                  "Pressure",
+                  "Eyes Wide Shut",
+                  "Wide Awake",
+                  "Paralyzed",
+                  "Bad Dreams",
+                  "the INVISIBLE",
+                  "system_failure",
+                  "N E W H E A V E N",
+                  "welcome2paradise"
+                ]
+              }
+            ],
+            "songCount": 11
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Demon Hunter",
+          "artistMatch": {
+            "mbid": "73fe4a37-6860-4bb5-b3ec-0d0c367900ea",
+            "name": "Demon Hunter"
+          },
+          "latestSetlist": {
+            "id": "434a0baf",
+            "venueId": "4bd58b86",
+            "eventDate": "28-04-2026",
+            "lastUpdated": "2026-04-29T04:06:39.826+0000",
+            "artistName": "Demon Hunter",
+            "tourName": "There Was a Light Here",
+            "venueName": "Wildwood Smokehouse & Saloon",
+            "cityName": "Iowa City",
+            "state": "Iowa",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Sorrow Light the Way",
+                  "Heaven Don't Cry",
+                  "Collapsing",
+                  "Jesus Wept",
+                  "Cut to Fit",
+                  "I'm Done",
+                  "On My Side",
+                  "Peace",
+                  "Light Bends",
+                  "The Pain in Me Is Gone",
+                  "Cold Winter Sun",
+                  "Someone to Hate",
+                  "I Will Fail You",
+                  "Dead Flowers",
+                  "There Was a Light Here",
+                  "I Am a Stone",
+                  "Not I",
+                  "Cross to Bear",
+                  "The Last One Alive",
+                  "Storm the Gates of Hell"
+                ]
+              }
+            ],
+            "songCount": 20
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Lamb Of God",
+          "artistMatch": {
+            "mbid": "298909e4-ebcb-47b8-95e9-cc53b087fc65",
+            "name": "Lamb of God"
+          },
+          "latestSetlist": {
+            "id": "34f5d0b",
+            "venueId": "6bd0725e",
+            "eventDate": "26-04-2026",
+            "lastUpdated": "2026-04-27T03:44:00.202+0000",
+            "artistName": "Lamb of God",
+            "tourName": "Into Oblivion Tour",
+            "venueName": "MGM Music Hall at Fenway",
+            "cityName": "Boston",
+            "state": "Massachusetts",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Ruin",
+                  "Laid to Rest",
+                  "Blood Junkie",
+                  "Into Oblivion",
+                  "Resurrection Man",
+                  "Grace",
+                  "Desolation",
+                  "512",
+                  "Walk With Me in Hell",
+                  "Parasocial Christ",
+                  "Omerta",
+                  "11th Hour",
+                  "Memento Mori",
+                  "Sepsis",
+                  "Redneck"
+                ]
+              }
+            ],
+            "songCount": 15
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Saliva",
+          "artistMatch": {
+            "mbid": "6e650a01-6489-4dc8-85e1-8ec809dd72a2",
+            "name": "Saliva"
+          },
+          "latestSetlist": {
+            "id": "734a5efd",
+            "venueId": "73d71e25",
+            "eventDate": "26-04-2026",
+            "lastUpdated": "2026-04-30T17:50:22.142+0000",
+            "artistName": "Saliva",
+            "venueName": "Milo Concert Hall",
+            "cityName": "Nizhniy Novgorod",
+            "state": "Nizjnij Novgorod",
+            "countryCode": "RU",
+            "countryName": "Russia",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Ladies and Gentlemen",
+                  "Superstar",
+                  "Musta Been Wrong",
+                  "Time Bomb",
+                  "Come Back Stronger",
+                  "Greater Than Less Than",
+                  "I Walk Alone",
+                  "After Me",
+                  "Rest in Pieces",
+                  "High on Me",
+                  "Always",
+                  "Doperide",
+                  "Devil's World",
+                  "They Don't Care About Us / Lose Yourself / One Step Closer",
+                  "Your Disease"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Hero",
+                  "Click Click Boom"
+                ]
+              }
+            ],
+            "songCount": 17
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        }
+      ]
+    },
+    "a skylit drive|avatar|bloodywood|conquer divide|demon hunter|egypt central|hawthorne heights|lamb of god|nerv|saliva|the pretty wild|the red jumpsuit apparatus|windwaker": {
+      "generatedAt": "2026-04-30T21:29:08.357Z",
+      "expiresAt": "2026-05-01T21:29:08.357Z",
+      "results": [
+        {
+          "inputBandName": "A Skylit Drive",
+          "artistMatch": {
+            "mbid": "33464f19-aa8b-4bbf-982d-05f5e78643c8",
+            "name": "A Skylit Drive"
+          },
+          "latestSetlist": {
+            "id": "7b4a02a4",
+            "venueId": "6bd7ca16",
+            "eventDate": "29-04-2026",
+            "lastUpdated": "2026-04-29T18:56:43.914+0000",
+            "artistName": "A Skylit Drive",
+            "venueName": "The Rock Pub",
+            "cityName": "Bangkok",
+            "state": "Bangkok",
+            "countryCode": "TH",
+            "countryName": "Thailand",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "All It Takes for Your Dreams to Come True",
+                  "The Cali Buds",
+                  "Golden",
+                  "Love the Way You Lie",
+                  "Se7en",
+                  "Wires and the Concept of Breathing"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Separate Ways (Worlds Apart)"
+                ]
+              }
+            ],
+            "songCount": 7
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Avatar",
+          "artistMatch": {
+            "mbid": "e51c3136-b94d-49de-8f1e-19faf3ef3566",
+            "name": "Avatar"
+          },
+          "latestSetlist": null,
+          "status": "no_setlist_found",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Bloodywood",
+          "artistMatch": null,
+          "latestSetlist": null,
+          "status": "api_error",
+          "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-04-30T21:28:50.903+0000\"\n}"
+        },
+        {
+          "inputBandName": "Conquer Divide",
+          "artistMatch": {
+            "mbid": "6b6da5b9-5620-4127-b90e-465be8d9b82a",
+            "name": "Conquer Divide"
+          },
+          "latestSetlist": {
+            "id": "53581729",
+            "venueId": "23d720b3",
+            "eventDate": "10-05-2025",
+            "lastUpdated": "2025-05-11T15:01:08.887+0000",
+            "artistName": "Conquer Divide",
+            "venueName": "Adado Riverfront Park",
+            "cityName": "Lansing",
+            "state": "Michigan",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Atonement",
+                  "Chemicals",
+                  "Pressure",
+                  "Eyes Wide Shut",
+                  "Wide Awake",
+                  "Paralyzed",
+                  "Bad Dreams",
+                  "the INVISIBLE",
+                  "system_failure",
+                  "N E W H E A V E N",
+                  "welcome2paradise"
+                ]
+              }
+            ],
+            "songCount": 11
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Demon Hunter",
+          "artistMatch": {
+            "mbid": "73fe4a37-6860-4bb5-b3ec-0d0c367900ea",
+            "name": "Demon Hunter"
+          },
+          "latestSetlist": {
+            "id": "434a0baf",
+            "venueId": "4bd58b86",
+            "eventDate": "28-04-2026",
+            "lastUpdated": "2026-04-29T04:06:39.826+0000",
+            "artistName": "Demon Hunter",
+            "tourName": "There Was a Light Here",
+            "venueName": "Wildwood Smokehouse & Saloon",
+            "cityName": "Iowa City",
+            "state": "Iowa",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Sorrow Light the Way",
+                  "Heaven Don't Cry",
+                  "Collapsing",
+                  "Jesus Wept",
+                  "Cut to Fit",
+                  "I'm Done",
+                  "On My Side",
+                  "Peace",
+                  "Light Bends",
+                  "The Pain in Me Is Gone",
+                  "Cold Winter Sun",
+                  "Someone to Hate",
+                  "I Will Fail You",
+                  "Dead Flowers",
+                  "There Was a Light Here",
+                  "I Am a Stone",
+                  "Not I",
+                  "Cross to Bear",
+                  "The Last One Alive",
+                  "Storm the Gates of Hell"
+                ]
+              }
+            ],
+            "songCount": 20
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Lamb Of God",
+          "artistMatch": {
+            "mbid": "298909e4-ebcb-47b8-95e9-cc53b087fc65",
+            "name": "Lamb of God"
+          },
+          "latestSetlist": {
+            "id": "34f5d0b",
+            "venueId": "6bd0725e",
+            "eventDate": "26-04-2026",
+            "lastUpdated": "2026-04-27T03:44:00.202+0000",
+            "artistName": "Lamb of God",
+            "tourName": "Into Oblivion Tour",
+            "venueName": "MGM Music Hall at Fenway",
+            "cityName": "Boston",
+            "state": "Massachusetts",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Ruin",
+                  "Laid to Rest",
+                  "Blood Junkie",
+                  "Into Oblivion",
+                  "Resurrection Man",
+                  "Grace",
+                  "Desolation",
+                  "512",
+                  "Walk With Me in Hell",
+                  "Parasocial Christ",
+                  "Omerta",
+                  "11th Hour",
+                  "Memento Mori",
+                  "Sepsis",
+                  "Redneck"
+                ]
+              }
+            ],
+            "songCount": 15
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Saliva",
+          "artistMatch": {
+            "mbid": "6e650a01-6489-4dc8-85e1-8ec809dd72a2",
+            "name": "Saliva"
+          },
+          "latestSetlist": {
+            "id": "734a5efd",
+            "venueId": "73d71e25",
+            "eventDate": "26-04-2026",
+            "lastUpdated": "2026-04-30T17:50:22.142+0000",
+            "artistName": "Saliva",
+            "venueName": "Milo Concert Hall",
+            "cityName": "Nizhniy Novgorod",
+            "state": "Nizjnij Novgorod",
+            "countryCode": "RU",
+            "countryName": "Russia",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Ladies and Gentlemen",
+                  "Superstar",
+                  "Musta Been Wrong",
+                  "Time Bomb",
+                  "Come Back Stronger",
+                  "Greater Than Less Than",
+                  "I Walk Alone",
+                  "After Me",
+                  "Rest in Pieces",
+                  "High on Me",
+                  "Always",
+                  "Doperide",
+                  "Devil's World",
+                  "They Don't Care About Us / Lose Yourself / One Step Closer",
+                  "Your Disease"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Hero",
+                  "Click Click Boom"
+                ]
+              }
+            ],
+            "songCount": 17
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "The Red Jumpsuit Apparatus",
+          "artistMatch": {
+            "mbid": "f0e820ab-f31a-400d-9c5e-8be1c8c38726",
+            "name": "The Red Jumpsuit Apparatus"
+          },
+          "latestSetlist": {
+            "id": "b4f01fa",
+            "venueId": "73d52611",
+            "eventDate": "05-03-2026",
+            "lastUpdated": "2026-03-06T03:51:08.789+0000",
+            "artistName": "The Red Jumpsuit Apparatus",
+            "tourName": "Don't You Fake It 20th Anniversary",
+            "venueName": "The Orpheum",
+            "cityName": "Tampa",
+            "state": "Florida",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Justify",
+                  "Atrophy",
+                  "Misery Loves Its Company",
+                  "Waiting",
+                  "In Fate's Hands",
+                  "Damn Regret",
+                  "False Pretense",
+                  "Seventeen Ain't So Sweet",
+                  "Cat and Mouse",
+                  "Your Guardian Angel",
+                  "Slipping Through (No Kings)",
+                  "Face Down",
+                  "Grim Goodbye"
+                ]
+              }
+            ],
+            "songCount": 13
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Windwaker",
+          "artistMatch": {
+            "mbid": "2b0ef1ab-e19c-4258-be71-d421b4cdae1c",
+            "name": "Windwaker"
+          },
+          "latestSetlist": {
+            "id": "1b402dc0",
+            "venueId": "2bd7bcf2",
+            "eventDate": "28-01-2026",
+            "lastUpdated": "2026-01-29T09:36:37.291+0000",
+            "artistName": "Windwaker",
+            "venueName": "O2 Academy 2 Islington",
+            "cityName": "London",
+            "state": "England",
+            "countryCode": "GB",
+            "countryName": "United Kingdom",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "SIRENS",
+                  "Fractured State of Mind",
+                  "Superstitious Fantasy",
+                  "The Wall",
+                  "Apathy",
+                  "Break the Rules",
+                  "Dopamine Freestyle",
+                  "Venom",
+                  "Victory lap",
+                  "Tabula Rasa"
+                ]
+              }
+            ],
+            "songCount": 10
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Egypt Central",
+          "artistMatch": {
+            "mbid": "e76b3a0a-e658-4478-b31e-5a5a24eb65d7",
+            "name": "Egypt Central"
+          },
+          "latestSetlist": {
+            "id": "1bd17d28",
+            "venueId": "1bd635f0",
+            "eventDate": "18-12-2011",
+            "lastUpdated": "2023-12-18T12:02:51.869+0000",
+            "artistName": "Egypt Central",
+            "tourName": "White Rabbit",
+            "venueName": "The Machine Shop",
+            "cityName": "Flint",
+            "state": "Michigan",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Ghost Town",
+                  "The Drug (Part One)",
+                  "Push Away",
+                  "Taking You Down",
+                  "Over and Under",
+                  "Blame",
+                  "Dying to Leave",
+                  "Walls of Innocence",
+                  "The Way",
+                  "You Make Me Sick"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Kick Ass",
+                  "White Rabbit"
+                ]
+              }
+            ],
+            "songCount": 12
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "The Pretty Wild",
+          "artistMatch": {
+            "mbid": "e9698bb2-bfcf-4f47-8e05-b4901e0c270d",
+            "name": "The Pretty Wild"
+          },
+          "latestSetlist": {
+            "id": "1b4c61d0",
+            "venueId": "bd6c526",
+            "eventDate": "24-04-2026",
+            "lastUpdated": "2026-04-25T04:10:27.739+0000",
+            "artistName": "The Pretty Wild",
+            "venueName": "Nile Theater",
+            "cityName": "Mesa",
+            "state": "Arizona",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "PARADOX",
+                  "bLAcK oPs (m@n!a)",
+                  "OMENS",
+                  "button eyes",
+                  "living ded",
+                  "INFRARED",
+                  "vessüL (SiNGULAR!TY)",
+                  "sLeepwALkeR"
+                ]
+              }
+            ],
+            "songCount": 8
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Hawthorne Heights",
+          "artistMatch": {
+            "mbid": "194eeda1-e662-43bc-b9be-32fc1afecc8b",
+            "name": "Hawthorne Heights"
+          },
+          "latestSetlist": {
+            "id": "634fa2f3",
+            "venueId": "5bd4dbe8",
+            "eventDate": "25-04-2026",
+            "lastUpdated": "2026-04-26T11:27:15.678+0000",
+            "artistName": "Hawthorne Heights",
+            "tourName": "If Only You Were Lonely 20th Anniversary Tour",
+            "venueName": "Croxton Park Hotel",
+            "cityName": "Melbourne",
+            "state": "Victoria",
+            "countryCode": "AU",
+            "countryName": "Australia",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "This Is Who We Are",
+                  "We Are So Last Year",
+                  "Language Lessons (Five Words or Less)",
+                  "Pens and Needles",
+                  "Saying Sorry",
+                  "Dead in the Water",
+                  "I Am on Your Side",
+                  "Breathing in Sequence",
+                  "Light Sleeper",
+                  "Cross Me Off Your List",
+                  "Where Can I Stab Myself in the Ears?",
+                  "Decembers",
+                  "Bring You Back",
+                  "Dandelions / Niki FM",
+                  "Like A Cardinal",
+                  "Ohio Is for Lovers"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "NERV",
+          "artistMatch": {
+            "mbid": "49a5431c-6e4b-45d5-b4d0-879a923c9dc4",
+            "name": "Nerv"
+          },
+          "latestSetlist": {
+            "id": "5b497b40",
+            "venueId": "1bdec5f4",
+            "eventDate": "24-03-2026",
+            "lastUpdated": "2026-03-25T04:23:16.487+0000",
+            "artistName": "Nerv",
+            "venueName": "Atwood Music Hall",
+            "cityName": "Madison",
+            "state": "Wisconsin",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "CHAOS!",
+                  "FAKE!",
+                  "Bad Nature",
+                  "Still Breathing",
+                  "Low",
+                  "Demons",
+                  "Blue",
+                  "PANIC!",
+                  "LOST!",
+                  "Bad Habits"
+                ]
+              }
+            ],
+            "songCount": 10
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        }
+      ]
+    },
+    "a skylit drive|all time low|attila|avatar|bloodywood|breaking benjamin|catch your breath|coheed and cambria|conquer divide|demon hunter|egypt central|flyleaf with lacey sturm|hawthorne heights|holding absence|lamb of god|magnolia park|nerv|pierce the veil|rise against|saliva|the pretty wild|the red jumpsuit apparatus|the used|wind walkers|windwaker": {
+      "generatedAt": "2026-04-30T21:32:47.913Z",
+      "expiresAt": "2026-05-01T21:32:47.913Z",
+      "results": [
+        {
+          "inputBandName": "A Skylit Drive",
+          "artistMatch": {
+            "mbid": "33464f19-aa8b-4bbf-982d-05f5e78643c8",
+            "name": "A Skylit Drive"
+          },
+          "latestSetlist": {
+            "id": "7b4a02a4",
+            "venueId": "6bd7ca16",
+            "eventDate": "29-04-2026",
+            "lastUpdated": "2026-04-29T18:56:43.914+0000",
+            "artistName": "A Skylit Drive",
+            "venueName": "The Rock Pub",
+            "cityName": "Bangkok",
+            "state": "Bangkok",
+            "countryCode": "TH",
+            "countryName": "Thailand",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "All It Takes for Your Dreams to Come True",
+                  "The Cali Buds",
+                  "Golden",
+                  "Love the Way You Lie",
+                  "Se7en",
+                  "Wires and the Concept of Breathing"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Separate Ways (Worlds Apart)"
+                ]
+              }
+            ],
+            "songCount": 7
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Avatar",
+          "artistMatch": {
+            "mbid": "e51c3136-b94d-49de-8f1e-19faf3ef3566",
+            "name": "Avatar"
+          },
+          "latestSetlist": null,
+          "status": "no_setlist_found",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Bloodywood",
+          "artistMatch": null,
+          "latestSetlist": null,
+          "status": "api_error",
+          "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-04-30T21:32:43.159+0000\"\n}"
+        },
+        {
+          "inputBandName": "Conquer Divide",
+          "artistMatch": {
+            "mbid": "6b6da5b9-5620-4127-b90e-465be8d9b82a",
+            "name": "Conquer Divide"
+          },
+          "latestSetlist": {
+            "id": "53581729",
+            "venueId": "23d720b3",
+            "eventDate": "10-05-2025",
+            "lastUpdated": "2025-05-11T15:01:08.887+0000",
+            "artistName": "Conquer Divide",
+            "venueName": "Adado Riverfront Park",
+            "cityName": "Lansing",
+            "state": "Michigan",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Atonement",
+                  "Chemicals",
+                  "Pressure",
+                  "Eyes Wide Shut",
+                  "Wide Awake",
+                  "Paralyzed",
+                  "Bad Dreams",
+                  "the INVISIBLE",
+                  "system_failure",
+                  "N E W H E A V E N",
+                  "welcome2paradise"
+                ]
+              }
+            ],
+            "songCount": 11
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Demon Hunter",
+          "artistMatch": {
+            "mbid": "73fe4a37-6860-4bb5-b3ec-0d0c367900ea",
+            "name": "Demon Hunter"
+          },
+          "latestSetlist": {
+            "id": "434a0baf",
+            "venueId": "4bd58b86",
+            "eventDate": "28-04-2026",
+            "lastUpdated": "2026-04-29T04:06:39.826+0000",
+            "artistName": "Demon Hunter",
+            "tourName": "There Was a Light Here",
+            "venueName": "Wildwood Smokehouse & Saloon",
+            "cityName": "Iowa City",
+            "state": "Iowa",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Sorrow Light the Way",
+                  "Heaven Don't Cry",
+                  "Collapsing",
+                  "Jesus Wept",
+                  "Cut to Fit",
+                  "I'm Done",
+                  "On My Side",
+                  "Peace",
+                  "Light Bends",
+                  "The Pain in Me Is Gone",
+                  "Cold Winter Sun",
+                  "Someone to Hate",
+                  "I Will Fail You",
+                  "Dead Flowers",
+                  "There Was a Light Here",
+                  "I Am a Stone",
+                  "Not I",
+                  "Cross to Bear",
+                  "The Last One Alive",
+                  "Storm the Gates of Hell"
+                ]
+              }
+            ],
+            "songCount": 20
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Egypt Central",
+          "artistMatch": {
+            "mbid": "e76b3a0a-e658-4478-b31e-5a5a24eb65d7",
+            "name": "Egypt Central"
+          },
+          "latestSetlist": {
+            "id": "1bd17d28",
+            "venueId": "1bd635f0",
+            "eventDate": "18-12-2011",
+            "lastUpdated": "2023-12-18T12:02:51.869+0000",
+            "artistName": "Egypt Central",
+            "tourName": "White Rabbit",
+            "venueName": "The Machine Shop",
+            "cityName": "Flint",
+            "state": "Michigan",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Ghost Town",
+                  "The Drug (Part One)",
+                  "Push Away",
+                  "Taking You Down",
+                  "Over and Under",
+                  "Blame",
+                  "Dying to Leave",
+                  "Walls of Innocence",
+                  "The Way",
+                  "You Make Me Sick"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Kick Ass",
+                  "White Rabbit"
+                ]
+              }
+            ],
+            "songCount": 12
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Hawthorne Heights",
+          "artistMatch": {
+            "mbid": "194eeda1-e662-43bc-b9be-32fc1afecc8b",
+            "name": "Hawthorne Heights"
+          },
+          "latestSetlist": {
+            "id": "634fa2f3",
+            "venueId": "5bd4dbe8",
+            "eventDate": "25-04-2026",
+            "lastUpdated": "2026-04-26T11:27:15.678+0000",
+            "artistName": "Hawthorne Heights",
+            "tourName": "If Only You Were Lonely 20th Anniversary Tour",
+            "venueName": "Croxton Park Hotel",
+            "cityName": "Melbourne",
+            "state": "Victoria",
+            "countryCode": "AU",
+            "countryName": "Australia",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "This Is Who We Are",
+                  "We Are So Last Year",
+                  "Language Lessons (Five Words or Less)",
+                  "Pens and Needles",
+                  "Saying Sorry",
+                  "Dead in the Water",
+                  "I Am on Your Side",
+                  "Breathing in Sequence",
+                  "Light Sleeper",
+                  "Cross Me Off Your List",
+                  "Where Can I Stab Myself in the Ears?",
+                  "Decembers",
+                  "Bring You Back",
+                  "Dandelions / Niki FM",
+                  "Like A Cardinal",
+                  "Ohio Is for Lovers"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Lamb Of God",
+          "artistMatch": {
+            "mbid": "298909e4-ebcb-47b8-95e9-cc53b087fc65",
+            "name": "Lamb of God"
+          },
+          "latestSetlist": {
+            "id": "34f5d0b",
+            "venueId": "6bd0725e",
+            "eventDate": "26-04-2026",
+            "lastUpdated": "2026-04-27T03:44:00.202+0000",
+            "artistName": "Lamb of God",
+            "tourName": "Into Oblivion Tour",
+            "venueName": "MGM Music Hall at Fenway",
+            "cityName": "Boston",
+            "state": "Massachusetts",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Ruin",
+                  "Laid to Rest",
+                  "Blood Junkie",
+                  "Into Oblivion",
+                  "Resurrection Man",
+                  "Grace",
+                  "Desolation",
+                  "512",
+                  "Walk With Me in Hell",
+                  "Parasocial Christ",
+                  "Omerta",
+                  "11th Hour",
+                  "Memento Mori",
+                  "Sepsis",
+                  "Redneck"
+                ]
+              }
+            ],
+            "songCount": 15
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "NERV",
+          "artistMatch": {
+            "mbid": "49a5431c-6e4b-45d5-b4d0-879a923c9dc4",
+            "name": "Nerv"
+          },
+          "latestSetlist": {
+            "id": "5b497b40",
+            "venueId": "1bdec5f4",
+            "eventDate": "24-03-2026",
+            "lastUpdated": "2026-03-25T04:23:16.487+0000",
+            "artistName": "Nerv",
+            "venueName": "Atwood Music Hall",
+            "cityName": "Madison",
+            "state": "Wisconsin",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "CHAOS!",
+                  "FAKE!",
+                  "Bad Nature",
+                  "Still Breathing",
+                  "Low",
+                  "Demons",
+                  "Blue",
+                  "PANIC!",
+                  "LOST!",
+                  "Bad Habits"
+                ]
+              }
+            ],
+            "songCount": 10
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Saliva",
+          "artistMatch": {
+            "mbid": "6e650a01-6489-4dc8-85e1-8ec809dd72a2",
+            "name": "Saliva"
+          },
+          "latestSetlist": {
+            "id": "734a5efd",
+            "venueId": "73d71e25",
+            "eventDate": "26-04-2026",
+            "lastUpdated": "2026-04-30T17:50:22.142+0000",
+            "artistName": "Saliva",
+            "venueName": "Milo Concert Hall",
+            "cityName": "Nizhniy Novgorod",
+            "state": "Nizjnij Novgorod",
+            "countryCode": "RU",
+            "countryName": "Russia",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Ladies and Gentlemen",
+                  "Superstar",
+                  "Musta Been Wrong",
+                  "Time Bomb",
+                  "Come Back Stronger",
+                  "Greater Than Less Than",
+                  "I Walk Alone",
+                  "After Me",
+                  "Rest in Pieces",
+                  "High on Me",
+                  "Always",
+                  "Doperide",
+                  "Devil's World",
+                  "They Don't Care About Us / Lose Yourself / One Step Closer",
+                  "Your Disease"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Hero",
+                  "Click Click Boom"
+                ]
+              }
+            ],
+            "songCount": 17
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "The Pretty Wild",
+          "artistMatch": {
+            "mbid": "e9698bb2-bfcf-4f47-8e05-b4901e0c270d",
+            "name": "The Pretty Wild"
+          },
+          "latestSetlist": {
+            "id": "1b4c61d0",
+            "venueId": "bd6c526",
+            "eventDate": "24-04-2026",
+            "lastUpdated": "2026-04-25T04:10:27.739+0000",
+            "artistName": "The Pretty Wild",
+            "venueName": "Nile Theater",
+            "cityName": "Mesa",
+            "state": "Arizona",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "PARADOX",
+                  "bLAcK oPs (m@n!a)",
+                  "OMENS",
+                  "button eyes",
+                  "living ded",
+                  "INFRARED",
+                  "vessüL (SiNGULAR!TY)",
+                  "sLeepwALkeR"
+                ]
+              }
+            ],
+            "songCount": 8
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "The Red Jumpsuit Apparatus",
+          "artistMatch": {
+            "mbid": "f0e820ab-f31a-400d-9c5e-8be1c8c38726",
+            "name": "The Red Jumpsuit Apparatus"
+          },
+          "latestSetlist": {
+            "id": "b4f01fa",
+            "venueId": "73d52611",
+            "eventDate": "05-03-2026",
+            "lastUpdated": "2026-03-06T03:51:08.789+0000",
+            "artistName": "The Red Jumpsuit Apparatus",
+            "tourName": "Don't You Fake It 20th Anniversary",
+            "venueName": "The Orpheum",
+            "cityName": "Tampa",
+            "state": "Florida",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Justify",
+                  "Atrophy",
+                  "Misery Loves Its Company",
+                  "Waiting",
+                  "In Fate's Hands",
+                  "Damn Regret",
+                  "False Pretense",
+                  "Seventeen Ain't So Sweet",
+                  "Cat and Mouse",
+                  "Your Guardian Angel",
+                  "Slipping Through (No Kings)",
+                  "Face Down",
+                  "Grim Goodbye"
+                ]
+              }
+            ],
+            "songCount": 13
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Windwaker",
+          "artistMatch": {
+            "mbid": "2b0ef1ab-e19c-4258-be71-d421b4cdae1c",
+            "name": "Windwaker"
+          },
+          "latestSetlist": {
+            "id": "1b402dc0",
+            "venueId": "2bd7bcf2",
+            "eventDate": "28-01-2026",
+            "lastUpdated": "2026-01-29T09:36:37.291+0000",
+            "artistName": "Windwaker",
+            "venueName": "O2 Academy 2 Islington",
+            "cityName": "London",
+            "state": "England",
+            "countryCode": "GB",
+            "countryName": "United Kingdom",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "SIRENS",
+                  "Fractured State of Mind",
+                  "Superstitious Fantasy",
+                  "The Wall",
+                  "Apathy",
+                  "Break the Rules",
+                  "Dopamine Freestyle",
+                  "Venom",
+                  "Victory lap",
+                  "Tabula Rasa"
+                ]
+              }
+            ],
+            "songCount": 10
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Flyleaf with Lacey Sturm",
+          "artistMatch": null,
+          "latestSetlist": null,
+          "status": "api_error",
+          "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-04-30T21:32:36.556+0000\"\n}"
+        },
+        {
+          "inputBandName": "Wind Walkers",
+          "artistMatch": {
+            "mbid": "c86892ad-0c24-4547-b62d-bc864d98fa36",
+            "name": "Wind Walkers"
+          },
+          "latestSetlist": {
+            "id": "734db6d1",
+            "venueId": "53d29b85",
+            "eventDate": "13-12-2025",
+            "lastUpdated": "2025-12-14T04:50:08.804+0000",
+            "artistName": "Wind Walkers",
+            "venueName": "The Dome at Toyota Presents Oakdale Theatre",
+            "cityName": "Wallingford",
+            "state": "Connecticut",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Dead Talk",
+                  "The End Aesthetic",
+                  "Feeding The Gods",
+                  "Silk & Static",
+                  "Eating My Heart Out",
+                  "Drowning Hymns",
+                  "Bodybag",
+                  "Hangfire"
+                ]
+              }
+            ],
+            "songCount": 8
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Coheed and Cambria",
+          "artistMatch": {
+            "mbid": "ae1b47d5-5128-431c-9d30-e08fd90e0767",
+            "name": "Coheed and Cambria"
+          },
+          "latestSetlist": {
+            "id": "735b6ae5",
+            "venueId": "7bded23c",
+            "eventDate": "12-11-2025",
+            "lastUpdated": "2025-11-13T01:49:51.118+0000",
+            "artistName": "Coheed and Cambria",
+            "venueName": "Pool Deck on Norwegian Jewel",
+            "cityName": "Miami",
+            "state": "Florida",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Yesterday's Lost",
+                  "Goodbye, Sunshine",
+                  "Shoulders",
+                  "Atlas",
+                  "Play the Poet",
+                  "Blind Side Sonny",
+                  "Number City",
+                  "The Gutter",
+                  "Searching for Tomorrow",
+                  "The Continuum II: The Flood",
+                  "A Favor House Atlantic",
+                  "The Liars Club",
+                  "The Running Free"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Corner My Confidence",
+                  "The Continuum III: Tethered Together",
+                  "In Keeping Secrets of Silent Earth: 3"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Holding Absence",
+          "artistMatch": {
+            "mbid": "93dc11f4-ffc4-4039-a5c2-1c2c035b6eb8",
+            "name": "Holding Absence"
+          },
+          "latestSetlist": {
+            "id": "3b5a5c4c",
+            "venueId": "23d62cb7",
+            "eventDate": "16-11-2025",
+            "lastUpdated": "2025-12-14T16:07:02.893+0000",
+            "artistName": "Holding Absence",
+            "venueName": "Tinker Field",
+            "cityName": "Orlando",
+            "state": "Florida",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Gravity",
+                  "Like a Shadow",
+                  "Aching Longing",
+                  "A Crooked Melody",
+                  "Afterlife",
+                  "Wilt"
+                ]
+              }
+            ],
+            "songCount": 6
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "The Used",
+          "artistMatch": {
+            "mbid": "8262d8e4-9137-4bb3-a787-3caabbbc13e9",
+            "name": "The Used"
+          },
+          "latestSetlist": {
+            "id": "2b4cc886",
+            "venueId": "3bd4dcf0",
+            "eventDate": "29-03-2026",
+            "lastUpdated": "2026-03-30T11:43:26.649+0000",
+            "artistName": "The Used",
+            "venueName": "Concert Hall",
+            "cityName": "Sydney",
+            "state": "New South Wales",
+            "countryCode": "AU",
+            "countryName": "Australia",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "The Bird and the Worm",
+                  "Take It Away",
+                  "Buried Myself Alive",
+                  "All That I've Got",
+                  "I Caught Fire",
+                  "Yesterday's Feelings",
+                  "Poetic Tragedy",
+                  "Blood on My Hands",
+                  "Pretty Handsome Awkward"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Say Days Ago",
+                  "Bulimic",
+                  "Sound Effects and Overdramatics",
+                  "Let It Bleed",
+                  "On My Own",
+                  "Blue and Yellow",
+                  "The Taste of Ink",
+                  "Smother Me",
+                  "A Box Full of Sharp Objects"
+                ]
+              }
+            ],
+            "songCount": 18
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Attila",
+          "artistMatch": null,
+          "latestSetlist": null,
+          "status": "api_error",
+          "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-04-30T21:32:38.948+0000\"\n}"
+        },
+        {
+          "inputBandName": "All Time Low",
+          "artistMatch": null,
+          "latestSetlist": null,
+          "status": "api_error",
+          "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-04-30T21:32:39.566+0000\"\n}"
+        },
+        {
+          "inputBandName": "Catch Your Breath",
+          "artistMatch": {
+            "mbid": "da09ff32-675a-49e9-8362-a97147db5680",
+            "name": "Catch Your Breath"
+          },
+          "latestSetlist": {
+            "id": "4b47c3e2",
+            "venueId": "33de7c85",
+            "eventDate": "17-03-2026",
+            "lastUpdated": "2026-03-18T13:43:10.873+0000",
+            "artistName": "Catch Your Breath",
+            "venueName": "Ozark Music Hall",
+            "cityName": "Fayetteville",
+            "state": "Arkansas",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Savages",
+                  "Deadly",
+                  "Dark",
+                  "Ghost Inside the Shell",
+                  "Lost",
+                  "Good in Goodbye",
+                  "Y.S.K.W.",
+                  "21 Gun Salute",
+                  "Dial Tone",
+                  "Shame On Me"
+                ]
+              }
+            ],
+            "songCount": 10
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Rise Against",
+          "artistMatch": {
+            "mbid": "606bf117-494f-4864-891f-09d63ff6aa4b",
+            "name": "Rise Against"
+          },
+          "latestSetlist": {
+            "id": "334c5475",
+            "venueId": "7bd01604",
+            "eventDate": "04-04-2026",
+            "lastUpdated": "2026-04-05T05:49:25.563+0000",
+            "artistName": "Rise Against",
+            "tourName": "2026 North American Tour",
+            "venueName": "Hard Rock Live",
+            "cityName": "Wheatland",
+            "state": "California",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Re-Education (Through Labor)",
+                  "Under the Knife",
+                  "Give It All",
+                  "Help Is on the Way",
+                  "The Good Left Undone",
+                  "Nod",
+                  "Ready to Fall",
+                  "Satellite",
+                  "Hero of War",
+                  "Swing Life Away",
+                  "Chamber the Cartridge",
+                  "Prayer of the Refugee"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Make It Stop (September's Children)",
+                  "Like the Angel",
+                  "Savior"
+                ]
+              }
+            ],
+            "songCount": 15
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Magnolia Park",
+          "artistMatch": {
+            "mbid": "e2d4b394-a2cc-4848-bb15-e5b7c55cc059",
+            "name": "Magnolia Park"
+          },
+          "latestSetlist": {
+            "id": "434f67e7",
+            "venueId": "63d03a2f",
+            "eventDate": "22-04-2026",
+            "lastUpdated": "2026-04-24T03:07:59.481+0000",
+            "artistName": "Magnolia Park",
+            "venueName": "Mickey’s Black Box",
+            "cityName": "Lititz",
+            "state": "Pennsylvania",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Animal",
+                  "Shadow Talk",
+                  "High",
+                  "Cult",
+                  "Omen",
+                  "Chasing Shadows",
+                  "Worship",
+                  "DANGEROUS",
+                  "ASK FOR IT",
+                  "Crave",
+                  "Shallow"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "I2I",
+                  "Misfits"
+                ]
+              }
+            ],
+            "songCount": 13
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Pierce The Veil",
+          "artistMatch": {
+            "mbid": "8ed919fb-eaee-45a1-ba99-b3ede9ca5f1d",
+            "name": "Pierce the Veil"
+          },
+          "latestSetlist": {
+            "id": "3b4e08e8",
+            "venueId": "33d720d9",
+            "eventDate": "22-04-2026",
+            "lastUpdated": "2026-04-29T22:52:29.565+0000",
+            "artistName": "Pierce the Veil",
+            "tourName": "I Can't Hear You World Tour",
+            "venueName": "Neal S. Blaisdell Arena",
+            "cityName": "Honolulu",
+            "state": "Hawaii",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "El rey",
+                  "Death of an Executioner",
+                  "Bulls in the Bronx",
+                  "Pass the Nirvana",
+                  "I'm Low on Gas and You Need a Jacket",
+                  "I'd Rather Die Than Be Famous",
+                  "Where Is My Mind?",
+                  "Floral & Fading",
+                  "Yeah Boy and Doll Face",
+                  "She Makes Dirty Words Sound Pretty",
+                  "I Don't Care If You're Contagious",
+                  "Wonderless",
+                  "May These Noises Startle You in Your Sleep Tonight",
+                  "Hell Above",
+                  "So Far So Fake",
+                  "Emergency Contact",
+                  "Circles"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Disasterology",
+                  "Hold On Till May",
+                  "King for a Day"
+                ]
+              }
+            ],
+            "songCount": 20
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Breaking Benjamin",
+          "artistMatch": {
+            "mbid": "854a1807-025b-42a8-ba8c-2a39717f1d25",
+            "name": "Breaking Benjamin"
+          },
+          "latestSetlist": {
+            "id": "6b4e1eda",
+            "venueId": "3bd644cc",
+            "eventDate": "22-11-2025",
+            "lastUpdated": "2025-11-23T18:45:11.867+0000",
+            "artistName": "Breaking Benjamin",
+            "venueName": "Fremont Street Experience",
+            "cityName": "Las Vegas",
+            "state": "Nevada",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Awaken",
+                  "Follow",
+                  "Blow Me Away",
+                  "So Cold",
+                  "You",
+                  "Evil Angel",
+                  "Failure",
+                  "Red Cold River",
+                  "Blood",
+                  "Dear Agony",
+                  "Dance With the Devil",
+                  "Polyamorous",
+                  "Without You",
+                  "Until the End",
+                  "Breath",
+                  "I Will Not Bow",
+                  "The Diary of Jane"
+                ]
+              }
+            ],
+            "songCount": 17
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        }
+      ]
+    },
+    "dayseeker|my chemical romance": {
+      "generatedAt": "2026-04-30T21:32:49.205Z",
+      "expiresAt": "2026-05-01T21:32:49.205Z",
+      "results": [
+        {
+          "inputBandName": "Dayseeker",
+          "artistMatch": {
+            "mbid": "d9a9b6aa-c5c5-40dc-95ec-0bff029245c0",
+            "name": "Dayseeker"
+          },
+          "latestSetlist": {
+            "id": "134581d5",
+            "venueId": "53d23fad",
+            "eventDate": "07-03-2026",
+            "lastUpdated": "2026-03-08T15:04:59.297+0000",
+            "artistName": "Dayseeker",
+            "venueName": "Sala Tejo",
+            "cityName": "Lisbon",
+            "state": "Lisbon",
+            "countryCode": "PT",
+            "countryName": "Portugal",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Pale Moonlight",
+                  "Shapeshift",
+                  "Burial Plot",
+                  "Crawl Back to My Coffin",
+                  "Bloodlust",
+                  "Without Me",
+                  "Crying While You're Dancing",
+                  "Creature in the Black Night",
+                  "Sleeptalk",
+                  "Neon Grave"
+                ]
+              }
+            ],
+            "songCount": 10
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "My Chemical Romance",
+          "artistMatch": {
+            "mbid": "c07f0676-9143-4217-8a9f-4c26bd636f13",
+            "name": "My Chemical Romance"
+          },
+          "latestSetlist": {
+            "id": "73471a25",
+            "venueId": "3bd14c44",
+            "eventDate": "14-02-2026",
+            "lastUpdated": "2026-04-03T00:53:35.969+0000",
+            "artistName": "My Chemical Romance",
+            "tourName": "The Black Parade 2026",
+            "venueName": "Estadio GNP Seguros",
+            "cityName": "Mexico City",
+            "state": "Distrito Federal",
+            "countryCode": "MX",
+            "countryName": "Mexico",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Mr. Blue Sky",
+                  "Over Fields (The National Anthem of Draag)"
+                ]
+              },
+              {
+                "name": "The Black Parade",
+                "songs": [
+                  "The End.",
+                  "Dead!",
+                  "This Is How I Disappear",
+                  "The Sharpest Lives",
+                  "Welcome to the Black Parade",
+                  "I Don't Love You",
+                  "House of Wolves",
+                  "Cancer",
+                  "Mama",
+                  "Sleep",
+                  "Teenagers",
+                  "Disenchanted",
+                  "Famous Last Words",
+                  "The End.",
+                  "Blood"
+                ]
+              },
+              {
+                "name": "My Chemical Romance",
+                "songs": [
+                  "Metastable",
+                  "Skylines and Turnstiles",
+                  "Na Na Na (Na Na Na Na Na Na Na Na Na)",
+                  "To the End",
+                  "The Foundations of Decay",
+                  "SING",
+                  "I'm Not Okay (I Promise)",
+                  "Planetary (GO!)",
+                  "DESTROYA",
+                  "Heaven Help Us",
+                  "Helena",
+                  "It's Over"
+                ]
+              }
+            ],
+            "songCount": 29
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        }
+      ]
+    },
+    "atreyu|blessthefall|buckcherry|chevelle|daughtry|dayseeker|dope|halestorm|hinder|lit|my chemical romance|powerman 5000|sevendust|shinedown|simple plan|soil|staind|static-x|stone temple pilots|story of the year|yellowcard": {
+      "generatedAt": "2026-04-30T21:33:57.174Z",
+      "expiresAt": "2026-05-01T21:33:57.174Z",
+      "results": [
+        {
+          "inputBandName": "Dayseeker",
+          "artistMatch": {
+            "mbid": "d9a9b6aa-c5c5-40dc-95ec-0bff029245c0",
+            "name": "Dayseeker"
+          },
+          "latestSetlist": {
+            "id": "134581d5",
+            "venueId": "53d23fad",
+            "eventDate": "07-03-2026",
+            "lastUpdated": "2026-03-08T15:04:59.297+0000",
+            "artistName": "Dayseeker",
+            "venueName": "Sala Tejo",
+            "cityName": "Lisbon",
+            "state": "Lisbon",
+            "countryCode": "PT",
+            "countryName": "Portugal",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Pale Moonlight",
+                  "Shapeshift",
+                  "Burial Plot",
+                  "Crawl Back to My Coffin",
+                  "Bloodlust",
+                  "Without Me",
+                  "Crying While You're Dancing",
+                  "Creature in the Black Night",
+                  "Sleeptalk",
+                  "Neon Grave"
+                ]
+              }
+            ],
+            "songCount": 10
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "My Chemical Romance",
+          "artistMatch": {
+            "mbid": "c07f0676-9143-4217-8a9f-4c26bd636f13",
+            "name": "My Chemical Romance"
+          },
+          "latestSetlist": {
+            "id": "73471a25",
+            "venueId": "3bd14c44",
+            "eventDate": "14-02-2026",
+            "lastUpdated": "2026-04-03T00:53:35.969+0000",
+            "artistName": "My Chemical Romance",
+            "tourName": "The Black Parade 2026",
+            "venueName": "Estadio GNP Seguros",
+            "cityName": "Mexico City",
+            "state": "Distrito Federal",
+            "countryCode": "MX",
+            "countryName": "Mexico",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Mr. Blue Sky",
+                  "Over Fields (The National Anthem of Draag)"
+                ]
+              },
+              {
+                "name": "The Black Parade",
+                "songs": [
+                  "The End.",
+                  "Dead!",
+                  "This Is How I Disappear",
+                  "The Sharpest Lives",
+                  "Welcome to the Black Parade",
+                  "I Don't Love You",
+                  "House of Wolves",
+                  "Cancer",
+                  "Mama",
+                  "Sleep",
+                  "Teenagers",
+                  "Disenchanted",
+                  "Famous Last Words",
+                  "The End.",
+                  "Blood"
+                ]
+              },
+              {
+                "name": "My Chemical Romance",
+                "songs": [
+                  "Metastable",
+                  "Skylines and Turnstiles",
+                  "Na Na Na (Na Na Na Na Na Na Na Na Na)",
+                  "To the End",
+                  "The Foundations of Decay",
+                  "SING",
+                  "I'm Not Okay (I Promise)",
+                  "Planetary (GO!)",
+                  "DESTROYA",
+                  "Heaven Help Us",
+                  "Helena",
+                  "It's Over"
+                ]
+              }
+            ],
+            "songCount": 29
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Atreyu",
+          "artistMatch": {
+            "mbid": "17e137fb-59e5-4fd7-af48-afc34995396c",
+            "name": "Atreyu"
+          },
+          "latestSetlist": {
+            "id": "4377b7a7",
+            "venueId": "1bd6cdd8",
+            "eventDate": "29-04-2026",
+            "lastUpdated": "2026-04-30T02:52:01.692+0000",
+            "artistName": "Atreyu",
+            "venueName": "Diamond Ballroom",
+            "cityName": "Oklahoma City",
+            "state": "Oklahoma",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "The End Is Not the End",
+                  "Dead",
+                  "Becoming the Bull",
+                  "The Time Is Now",
+                  "Ex's and Oh's",
+                  "Like a Stone",
+                  "Ego Death",
+                  "Right Side of the Bed",
+                  "All For You",
+                  "Blow"
+                ]
+              }
+            ],
+            "songCount": 10
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Staind",
+          "artistMatch": {
+            "mbid": "777a21a8-0d0f-4cf3-86b4-65bc0eba5649",
+            "name": "Staind"
+          },
+          "latestSetlist": {
+            "id": "4341a74b",
+            "venueId": "2bd08096",
+            "eventDate": "20-09-2025",
+            "lastUpdated": "2025-12-28T16:20:14.615+0000",
+            "artistName": "Staind",
+            "venueName": "Premier Theater at Foxwoods",
+            "cityName": "Mashantucket",
+            "state": "Connecticut",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Lowest in Me",
+                  "Eyes Wide Open",
+                  "Fade",
+                  "Right Here",
+                  "Not Again",
+                  "Epiphany",
+                  "Something to Remind You",
+                  "Wannabe",
+                  "Outside",
+                  "Better Days",
+                  "Paper Wings",
+                  "So Far Away",
+                  "For You"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "It's Been Awhile",
+                  "Mudshovel"
+                ]
+              }
+            ],
+            "songCount": 15
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Sevendust",
+          "artistMatch": {
+            "mbid": "52b9e109-44a0-45eb-a197-226c4abab232",
+            "name": "Sevendust"
+          },
+          "latestSetlist": {
+            "id": "6b4a2e7e",
+            "venueId": "1bd6cdd8",
+            "eventDate": "29-04-2026",
+            "lastUpdated": "2026-04-30T17:06:22.570+0000",
+            "artistName": "Sevendust",
+            "tourName": "One",
+            "venueName": "Diamond Ballroom",
+            "cityName": "Oklahoma City",
+            "state": "Oklahoma",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Home",
+                  "Denial",
+                  "Is This the Real You",
+                  "Splinter",
+                  "Crucified",
+                  "Unbreakable",
+                  "Terminator",
+                  "Pieces",
+                  "Praise",
+                  "Enemy",
+                  "Waffle",
+                  "Threshold",
+                  "Driven",
+                  "Black"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Rumble Fish",
+                  "Face to Face"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Story of the Year",
+          "artistMatch": {
+            "mbid": "e2c3c508-f0ab-49af-92c9-a81d66d67405",
+            "name": "Story of the Year"
+          },
+          "latestSetlist": {
+            "id": "234ad86b",
+            "venueId": "6bde8e8e",
+            "eventDate": "14-03-2026",
+            "lastUpdated": "2026-04-04T16:33:55.999+0000",
+            "artistName": "Story of the Year",
+            "venueName": "Great Park Live",
+            "cityName": "Irvine",
+            "state": "California",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Chariots of Fire",
+                  "Gasoline (All Rage Still Only Numb)",
+                  "And the Hero Will Drown",
+                  "War",
+                  "Tear Me to Pieces",
+                  "Disconnected",
+                  "Anthem of Our Dying Day",
+                  "We’re Not Gonna Make It",
+                  "In the Shadows",
+                  "\"Is This My Fate?\" He Asked Them",
+                  "Until the Day I Die"
+                ]
+              }
+            ],
+            "songCount": 11
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Shinedown",
+          "artistMatch": {
+            "mbid": "adc0f033-95c2-4e0b-87bc-c23ed3f26ce6",
+            "name": "Shinedown"
+          },
+          "latestSetlist": {
+            "id": "4341cb47",
+            "venueId": "3bd2b05c",
+            "eventDate": "16-12-2025",
+            "lastUpdated": "2025-12-17T02:20:47.763+0000",
+            "artistName": "Shinedown",
+            "venueName": "Capital One Arena",
+            "cityName": "Washington",
+            "state": "Washington, D.C.",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Three Six Five",
+                  "A Symptom of Being Human",
+                  "Second Chance",
+                  "Sound of Madness"
+                ]
+              }
+            ],
+            "songCount": 4
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Simple Plan",
+          "artistMatch": {
+            "mbid": "b345af35-205e-4eca-8006-029e5c20127e",
+            "name": "Simple Plan"
+          },
+          "latestSetlist": {
+            "id": "2b4ff8ae",
+            "venueId": "3d63913",
+            "eventDate": "28-03-2026",
+            "lastUpdated": "2026-03-29T04:54:46.058+0000",
+            "artistName": "Simple Plan",
+            "venueName": "Parque Fundidora",
+            "cityName": "Monterrey",
+            "state": "Nuevo León",
+            "countryCode": "MX",
+            "countryName": "Mexico",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Star Wars (Main Theme)",
+                  "I'd Do Anything",
+                  "Nothing Changes",
+                  "Shut Up!",
+                  "Jump",
+                  "Jet Lag",
+                  "Addicted",
+                  "Your Love Is a Lie",
+                  "Welcome to My Life",
+                  "Loser of the Year",
+                  "Summer Paradise",
+                  "All Star / Sk8er Boi / Mr. Brightside",
+                  "What's New Scooby Doo?",
+                  "Where I Belong",
+                  "I'm Just a Kid",
+                  "Perfect"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Chevelle",
+          "artistMatch": {
+            "mbid": "8456e9f7-debf-4579-a86c-33a325a35d2d",
+            "name": "Chevelle"
+          },
+          "latestSetlist": {
+            "id": "534b5bc5",
+            "venueId": "1bd62160",
+            "eventDate": "24-04-2026",
+            "lastUpdated": "2026-04-25T05:27:53.298+0000",
+            "artistName": "Chevelle",
+            "venueName": "Pima County Fairgrounds",
+            "cityName": "Tucson",
+            "state": "Arizona",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Family System",
+                  "Self Destructor",
+                  "Rabbit Hole – Cowards, Pt. 1",
+                  "An Island",
+                  "Face to the Floor",
+                  "Jawbreaker",
+                  "Pale Horse",
+                  "Vitamin R (Leading Us Along)",
+                  "Get Some",
+                  "Take Out the Gunman",
+                  "Piistol Star (Gravity Heals)",
+                  "Hats Off to the Bull",
+                  "Jim Jones (Cowards, Pt. 2)",
+                  "The Clincher",
+                  "Send the Pain Below",
+                  "The Red",
+                  "Comfortable Liar",
+                  "Mars Simula"
+                ]
+              }
+            ],
+            "songCount": 18
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Blessthefall",
+          "artistMatch": {
+            "mbid": "aafa70a4-2f06-4975-935e-b283fc87de7e",
+            "name": "Blessthefall"
+          },
+          "latestSetlist": {
+            "id": "34f3503",
+            "venueId": "73d62e4d",
+            "eventDate": "26-04-2026",
+            "lastUpdated": "2026-04-28T04:34:50.092+0000",
+            "artistName": "Blessthefall",
+            "venueName": "The Princess Theatre",
+            "cityName": "Brisbane",
+            "state": "Queensland",
+            "countryCode": "AU",
+            "countryName": "Australia",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "You Wear a Crown But You're No King",
+                  "Cutthroat",
+                  "Hollow Bodies",
+                  "2.0",
+                  "Youngbloods",
+                  "mallxcore",
+                  "Venom",
+                  "(Interlude)",
+                  "Promised Ones",
+                  "Guys Like You Make Us Look Bad",
+                  "(Interlude)",
+                  "Awakening",
+                  "Hey Baby, Here's That Song You Wanted"
+                ]
+              }
+            ],
+            "songCount": 13
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Static-X",
+          "artistMatch": {
+            "mbid": "8ac9e35c-e92d-4030-99ef-ba4127b1555c",
+            "name": "Static‐X"
+          },
+          "latestSetlist": {
+            "id": "2b447c92",
+            "venueId": "53d61fb1",
+            "eventDate": "26-10-2025",
+            "lastUpdated": "2025-10-27T11:21:27.370+0000",
+            "artistName": "Static‐X",
+            "venueName": "Mohegan Sun Arena",
+            "cityName": "Uncasville",
+            "state": "Connecticut",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Bled for Days",
+                  "Wisconsin Death Trip",
+                  "Fix",
+                  "Terminator Oscillator",
+                  "Love Dump",
+                  "I Am",
+                  "The Trance Is the Motion",
+                  "Black and White",
+                  "Get to the Gone",
+                  "Dirthouse",
+                  "Cold",
+                  "I'm With Stupid",
+                  "Push It"
+                ]
+              }
+            ],
+            "songCount": 13
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Halestorm",
+          "artistMatch": {
+            "mbid": "eaed2193-e026-493b-ac57-113360407b06",
+            "name": "Halestorm"
+          },
+          "latestSetlist": {
+            "id": "6b4c2a82",
+            "venueId": "7bde4e54",
+            "eventDate": "30-01-2026",
+            "lastUpdated": "2026-02-01T03:07:44.585+0000",
+            "artistName": "Halestorm",
+            "venueName": "Carnival Horizon",
+            "cityName": "Miami",
+            "state": "Florida",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "I Miss the Misery",
+                  "Love Bites (So Do I)",
+                  "Fallen Star",
+                  "WATCH OUT!",
+                  "I Get Off",
+                  "Rain Your Blood on Me",
+                  "Like a Woman Can",
+                  "Shiver",
+                  "Freak Like Me",
+                  "Mz. Hyde",
+                  "Everest",
+                  "K-I-L-L-I-N-G",
+                  "Uncomfortable",
+                  "I Gave You Everything",
+                  "I Like It Heavy",
+                  "Here's to Us"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "festivalVenuePriority"
+        },
+        {
+          "inputBandName": "Yellowcard",
+          "artistMatch": {
+            "mbid": "3630fff3-52fc-4e97-ab01-d68fd88e4135",
+            "name": "Yellowcard"
+          },
+          "latestSetlist": {
+            "id": "234e8047",
+            "venueId": "6bd73ed6",
+            "eventDate": "27-02-2026",
+            "lastUpdated": "2026-02-27T21:22:47.507+0000",
+            "artistName": "Yellowcard",
+            "venueName": "Auckland Domain",
+            "cityName": "Auckland",
+            "state": "Auckland",
+            "countryCode": "NZ",
+            "countryName": "New Zealand",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Way Away",
+                  "Breathing",
+                  "Love Letters Lost",
+                  "Rough Landing, Holly",
+                  "Light Up the Sky",
+                  "Bedroom Posters",
+                  "California",
+                  "Empty Apartment",
+                  "Lights and Sounds",
+                  "Only One",
+                  "Better Days",
+                  "Ocean Avenue"
+                ]
+              }
+            ],
+            "songCount": 12
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "DOPE",
+          "artistMatch": null,
+          "latestSetlist": null,
+          "status": "api_error",
+          "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-04-30T21:33:47.607+0000\"\n}"
+        },
+        {
+          "inputBandName": "Stone Temple Pilots",
+          "artistMatch": {
+            "mbid": "8c32bb01-58a3-453b-8050-8c0620edb0e5",
+            "name": "Stone Temple Pilots"
+          },
+          "latestSetlist": {
+            "id": "5b77aff4",
+            "venueId": "1bd62160",
+            "eventDate": "17-04-2026",
+            "lastUpdated": "2026-04-18T19:23:57.491+0000",
+            "artistName": "Stone Temple Pilots",
+            "tourName": "The Rise of Rock World Tour 2026",
+            "venueName": "Pima County Fairgrounds",
+            "cityName": "Tucson",
+            "state": "Arizona",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Wicked Garden",
+                  "Vasoline",
+                  "Big Bang Baby",
+                  "Down",
+                  "Unglued",
+                  "Silvergun Superman",
+                  "Still Remains",
+                  "Big Empty",
+                  "Plush",
+                  "Interstate Love Song",
+                  "Meatplow",
+                  "Crackerman",
+                  "Dead & Bloated",
+                  "Trippin' on a Hole in a Paper Heart",
+                  "Piece of Pie",
+                  "Sex Type Thing"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Powerman 5000",
+          "artistMatch": {
+            "mbid": "0a41f86c-ced1-44e0-95a2-5c8b2368ab1d",
+            "name": "Powerman 5000"
+          },
+          "latestSetlist": {
+            "id": "33773415",
+            "venueId": "3bd62458",
+            "eventDate": "26-04-2026",
+            "lastUpdated": "2026-04-28T03:01:54.539+0000",
+            "artistName": "Powerman 5000",
+            "venueName": "DNA Lounge",
+            "cityName": "San Francisco",
+            "state": "California",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Show Me the Way to Get Out of This World",
+                  "An Eye is Upon You",
+                  "Supernova Goes Pop",
+                  "Tonight the Stars Revolt!",
+                  "Nobody's Real",
+                  "Footsteps and Voices",
+                  "Super Villain",
+                  "Horror Show",
+                  "Cult Leader",
+                  "Play God or Play Dead",
+                  "Black Lipstick",
+                  "Bombshell"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "How to Be a Human",
+                  "Hey, That's Right!",
+                  "When Worlds Collide"
+                ]
+              }
+            ],
+            "songCount": 15
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Daughtry",
+          "artistMatch": {
+            "mbid": "21e3292e-dac8-4609-b57d-402f926aa41f",
+            "name": "Daughtry"
+          },
+          "latestSetlist": {
+            "id": "2377c423",
+            "venueId": "6bd1b6aa",
+            "eventDate": "25-04-2026",
+            "lastUpdated": "2026-04-27T14:48:18.123+0000",
+            "artistName": "Daughtry",
+            "venueName": "Trustmark Park",
+            "cityName": "Pearl",
+            "state": "Mississippi",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "The Seeds",
+                  "Divided",
+                  "The Bottom",
+                  "The Day I Die",
+                  "Separate Ways (Worlds Apart)",
+                  "It's Not Over",
+                  "Waiting for Superman",
+                  "September",
+                  "Home",
+                  "Crashed",
+                  "Antidote",
+                  "The Dam",
+                  "Pieces",
+                  "Over You",
+                  "Heavy Is the Crown"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Artificial"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Hinder",
+          "artistMatch": null,
+          "latestSetlist": null,
+          "status": "api_error",
+          "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-04-30T21:33:49.997+0000\"\n}"
+        },
+        {
+          "inputBandName": "Lit",
+          "artistMatch": null,
+          "latestSetlist": null,
+          "status": "api_error",
+          "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-04-30T21:33:50.598+0000\"\n}"
+        },
+        {
+          "inputBandName": "Soil",
+          "artistMatch": null,
+          "latestSetlist": null,
+          "status": "api_error",
+          "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-04-30T21:33:51.220+0000\"\n}"
+        },
+        {
+          "inputBandName": "Buckcherry",
+          "artistMatch": {
+            "mbid": "822e92ef-72ea-42e0-9af1-b987816b487a",
+            "name": "Buckcherry"
+          },
+          "latestSetlist": {
+            "id": "2b7638d6",
+            "venueId": "53d04329",
+            "eventDate": "11-04-2026",
+            "lastUpdated": "2026-04-15T06:13:55.410+0000",
+            "artistName": "Buckcherry",
+            "venueName": "Harold's Cave Creek Corral",
+            "cityName": "Cave Creek",
+            "state": "Arizona",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Lit Up",
+                  "Roar Like Thunder",
+                  "So Hott",
+                  "Somebody Fucked With Me",
+                  "Whiskey in the Morning",
+                  "Ridin'",
+                  "Let It Burn",
+                  "Too Drunk...",
+                  "Say Fuck It",
+                  "Pain",
+                  "Come On",
+                  "Gluttony",
+                  "Sorry",
+                  "Tight Pants",
+                  "Blackout",
+                  "Crazy Bitch / Sex Machine / Bad Girls / Irresistible Bitch / Proud Mary / Crazy Bitch"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        }
+      ]
+    },
+    "all that remains|atreyu|blessthefall|buckcherry|butcher babies|chevelle|daughtry|dayseeker|dope|halestorm|hinder|lit|my chemical romance|pop evil|powerman 5000|sevendust|shinedown|simple plan|soil|staind|static-x|stone temple pilots|story of the year|the plot in you|yellowcard": {
+      "generatedAt": "2026-04-30T21:37:53.413Z",
+      "expiresAt": "2026-05-01T21:37:53.413Z",
+      "results": [
+        {
+          "inputBandName": "Dayseeker",
+          "artistMatch": {
+            "mbid": "d9a9b6aa-c5c5-40dc-95ec-0bff029245c0",
+            "name": "Dayseeker"
+          },
+          "latestSetlist": {
+            "id": "134581d5",
+            "venueId": "53d23fad",
+            "eventDate": "07-03-2026",
+            "lastUpdated": "2026-03-08T15:04:59.297+0000",
+            "artistName": "Dayseeker",
+            "venueName": "Sala Tejo",
+            "cityName": "Lisbon",
+            "state": "Lisbon",
+            "countryCode": "PT",
+            "countryName": "Portugal",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Pale Moonlight",
+                  "Shapeshift",
+                  "Burial Plot",
+                  "Crawl Back to My Coffin",
+                  "Bloodlust",
+                  "Without Me",
+                  "Crying While You're Dancing",
+                  "Creature in the Black Night",
+                  "Sleeptalk",
+                  "Neon Grave"
+                ]
+              }
+            ],
+            "songCount": 10
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "My Chemical Romance",
+          "artistMatch": {
+            "mbid": "c07f0676-9143-4217-8a9f-4c26bd636f13",
+            "name": "My Chemical Romance"
+          },
+          "latestSetlist": {
+            "id": "73471a25",
+            "venueId": "3bd14c44",
+            "eventDate": "14-02-2026",
+            "lastUpdated": "2026-04-03T00:53:35.969+0000",
+            "artistName": "My Chemical Romance",
+            "tourName": "The Black Parade 2026",
+            "venueName": "Estadio GNP Seguros",
+            "cityName": "Mexico City",
+            "state": "Distrito Federal",
+            "countryCode": "MX",
+            "countryName": "Mexico",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Mr. Blue Sky",
+                  "Over Fields (The National Anthem of Draag)"
+                ]
+              },
+              {
+                "name": "The Black Parade",
+                "songs": [
+                  "The End.",
+                  "Dead!",
+                  "This Is How I Disappear",
+                  "The Sharpest Lives",
+                  "Welcome to the Black Parade",
+                  "I Don't Love You",
+                  "House of Wolves",
+                  "Cancer",
+                  "Mama",
+                  "Sleep",
+                  "Teenagers",
+                  "Disenchanted",
+                  "Famous Last Words",
+                  "The End.",
+                  "Blood"
+                ]
+              },
+              {
+                "name": "My Chemical Romance",
+                "songs": [
+                  "Metastable",
+                  "Skylines and Turnstiles",
+                  "Na Na Na (Na Na Na Na Na Na Na Na Na)",
+                  "To the End",
+                  "The Foundations of Decay",
+                  "SING",
+                  "I'm Not Okay (I Promise)",
+                  "Planetary (GO!)",
+                  "DESTROYA",
+                  "Heaven Help Us",
+                  "Helena",
+                  "It's Over"
+                ]
+              }
+            ],
+            "songCount": 29
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Atreyu",
+          "artistMatch": {
+            "mbid": "17e137fb-59e5-4fd7-af48-afc34995396c",
+            "name": "Atreyu"
+          },
+          "latestSetlist": {
+            "id": "4377b7a7",
+            "venueId": "1bd6cdd8",
+            "eventDate": "29-04-2026",
+            "lastUpdated": "2026-04-30T02:52:01.692+0000",
+            "artistName": "Atreyu",
+            "venueName": "Diamond Ballroom",
+            "cityName": "Oklahoma City",
+            "state": "Oklahoma",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "The End Is Not the End",
+                  "Dead",
+                  "Becoming the Bull",
+                  "The Time Is Now",
+                  "Ex's and Oh's",
+                  "Like a Stone",
+                  "Ego Death",
+                  "Right Side of the Bed",
+                  "All For You",
+                  "Blow"
+                ]
+              }
+            ],
+            "songCount": 10
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Staind",
+          "artistMatch": {
+            "mbid": "777a21a8-0d0f-4cf3-86b4-65bc0eba5649",
+            "name": "Staind"
+          },
+          "latestSetlist": {
+            "id": "4341a74b",
+            "venueId": "2bd08096",
+            "eventDate": "20-09-2025",
+            "lastUpdated": "2025-12-28T16:20:14.615+0000",
+            "artistName": "Staind",
+            "venueName": "Premier Theater at Foxwoods",
+            "cityName": "Mashantucket",
+            "state": "Connecticut",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Lowest in Me",
+                  "Eyes Wide Open",
+                  "Fade",
+                  "Right Here",
+                  "Not Again",
+                  "Epiphany",
+                  "Something to Remind You",
+                  "Wannabe",
+                  "Outside",
+                  "Better Days",
+                  "Paper Wings",
+                  "So Far Away",
+                  "For You"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "It's Been Awhile",
+                  "Mudshovel"
+                ]
+              }
+            ],
+            "songCount": 15
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Sevendust",
+          "artistMatch": {
+            "mbid": "52b9e109-44a0-45eb-a197-226c4abab232",
+            "name": "Sevendust"
+          },
+          "latestSetlist": {
+            "id": "6b4a2e7e",
+            "venueId": "1bd6cdd8",
+            "eventDate": "29-04-2026",
+            "lastUpdated": "2026-04-30T17:06:22.570+0000",
+            "artistName": "Sevendust",
+            "tourName": "One",
+            "venueName": "Diamond Ballroom",
+            "cityName": "Oklahoma City",
+            "state": "Oklahoma",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Home",
+                  "Denial",
+                  "Is This the Real You",
+                  "Splinter",
+                  "Crucified",
+                  "Unbreakable",
+                  "Terminator",
+                  "Pieces",
+                  "Praise",
+                  "Enemy",
+                  "Waffle",
+                  "Threshold",
+                  "Driven",
+                  "Black"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Rumble Fish",
+                  "Face to Face"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Story of the Year",
+          "artistMatch": {
+            "mbid": "e2c3c508-f0ab-49af-92c9-a81d66d67405",
+            "name": "Story of the Year"
+          },
+          "latestSetlist": {
+            "id": "234ad86b",
+            "venueId": "6bde8e8e",
+            "eventDate": "14-03-2026",
+            "lastUpdated": "2026-04-04T16:33:55.999+0000",
+            "artistName": "Story of the Year",
+            "venueName": "Great Park Live",
+            "cityName": "Irvine",
+            "state": "California",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Chariots of Fire",
+                  "Gasoline (All Rage Still Only Numb)",
+                  "And the Hero Will Drown",
+                  "War",
+                  "Tear Me to Pieces",
+                  "Disconnected",
+                  "Anthem of Our Dying Day",
+                  "We’re Not Gonna Make It",
+                  "In the Shadows",
+                  "\"Is This My Fate?\" He Asked Them",
+                  "Until the Day I Die"
+                ]
+              }
+            ],
+            "songCount": 11
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Shinedown",
+          "artistMatch": {
+            "mbid": "adc0f033-95c2-4e0b-87bc-c23ed3f26ce6",
+            "name": "Shinedown"
+          },
+          "latestSetlist": {
+            "id": "4341cb47",
+            "venueId": "3bd2b05c",
+            "eventDate": "16-12-2025",
+            "lastUpdated": "2025-12-17T02:20:47.763+0000",
+            "artistName": "Shinedown",
+            "venueName": "Capital One Arena",
+            "cityName": "Washington",
+            "state": "Washington, D.C.",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Three Six Five",
+                  "A Symptom of Being Human",
+                  "Second Chance",
+                  "Sound of Madness"
+                ]
+              }
+            ],
+            "songCount": 4
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Simple Plan",
+          "artistMatch": {
+            "mbid": "b345af35-205e-4eca-8006-029e5c20127e",
+            "name": "Simple Plan"
+          },
+          "latestSetlist": {
+            "id": "2b4ff8ae",
+            "venueId": "3d63913",
+            "eventDate": "28-03-2026",
+            "lastUpdated": "2026-03-29T04:54:46.058+0000",
+            "artistName": "Simple Plan",
+            "venueName": "Parque Fundidora",
+            "cityName": "Monterrey",
+            "state": "Nuevo León",
+            "countryCode": "MX",
+            "countryName": "Mexico",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Star Wars (Main Theme)",
+                  "I'd Do Anything",
+                  "Nothing Changes",
+                  "Shut Up!",
+                  "Jump",
+                  "Jet Lag",
+                  "Addicted",
+                  "Your Love Is a Lie",
+                  "Welcome to My Life",
+                  "Loser of the Year",
+                  "Summer Paradise",
+                  "All Star / Sk8er Boi / Mr. Brightside",
+                  "What's New Scooby Doo?",
+                  "Where I Belong",
+                  "I'm Just a Kid",
+                  "Perfect"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Chevelle",
+          "artistMatch": {
+            "mbid": "8456e9f7-debf-4579-a86c-33a325a35d2d",
+            "name": "Chevelle"
+          },
+          "latestSetlist": {
+            "id": "534b5bc5",
+            "venueId": "1bd62160",
+            "eventDate": "24-04-2026",
+            "lastUpdated": "2026-04-25T05:27:53.298+0000",
+            "artistName": "Chevelle",
+            "venueName": "Pima County Fairgrounds",
+            "cityName": "Tucson",
+            "state": "Arizona",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Family System",
+                  "Self Destructor",
+                  "Rabbit Hole – Cowards, Pt. 1",
+                  "An Island",
+                  "Face to the Floor",
+                  "Jawbreaker",
+                  "Pale Horse",
+                  "Vitamin R (Leading Us Along)",
+                  "Get Some",
+                  "Take Out the Gunman",
+                  "Piistol Star (Gravity Heals)",
+                  "Hats Off to the Bull",
+                  "Jim Jones (Cowards, Pt. 2)",
+                  "The Clincher",
+                  "Send the Pain Below",
+                  "The Red",
+                  "Comfortable Liar",
+                  "Mars Simula"
+                ]
+              }
+            ],
+            "songCount": 18
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Blessthefall",
+          "artistMatch": {
+            "mbid": "aafa70a4-2f06-4975-935e-b283fc87de7e",
+            "name": "Blessthefall"
+          },
+          "latestSetlist": {
+            "id": "34f3503",
+            "venueId": "73d62e4d",
+            "eventDate": "26-04-2026",
+            "lastUpdated": "2026-04-28T04:34:50.092+0000",
+            "artistName": "Blessthefall",
+            "venueName": "The Princess Theatre",
+            "cityName": "Brisbane",
+            "state": "Queensland",
+            "countryCode": "AU",
+            "countryName": "Australia",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "You Wear a Crown But You're No King",
+                  "Cutthroat",
+                  "Hollow Bodies",
+                  "2.0",
+                  "Youngbloods",
+                  "mallxcore",
+                  "Venom",
+                  "(Interlude)",
+                  "Promised Ones",
+                  "Guys Like You Make Us Look Bad",
+                  "(Interlude)",
+                  "Awakening",
+                  "Hey Baby, Here's That Song You Wanted"
+                ]
+              }
+            ],
+            "songCount": 13
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Static-X",
+          "artistMatch": {
+            "mbid": "8ac9e35c-e92d-4030-99ef-ba4127b1555c",
+            "name": "Static‐X"
+          },
+          "latestSetlist": {
+            "id": "2b447c92",
+            "venueId": "53d61fb1",
+            "eventDate": "26-10-2025",
+            "lastUpdated": "2025-10-27T11:21:27.370+0000",
+            "artistName": "Static‐X",
+            "venueName": "Mohegan Sun Arena",
+            "cityName": "Uncasville",
+            "state": "Connecticut",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Bled for Days",
+                  "Wisconsin Death Trip",
+                  "Fix",
+                  "Terminator Oscillator",
+                  "Love Dump",
+                  "I Am",
+                  "The Trance Is the Motion",
+                  "Black and White",
+                  "Get to the Gone",
+                  "Dirthouse",
+                  "Cold",
+                  "I'm With Stupid",
+                  "Push It"
+                ]
+              }
+            ],
+            "songCount": 13
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Halestorm",
+          "artistMatch": {
+            "mbid": "eaed2193-e026-493b-ac57-113360407b06",
+            "name": "Halestorm"
+          },
+          "latestSetlist": {
+            "id": "6b4c2a82",
+            "venueId": "7bde4e54",
+            "eventDate": "30-01-2026",
+            "lastUpdated": "2026-02-01T03:07:44.585+0000",
+            "artistName": "Halestorm",
+            "venueName": "Carnival Horizon",
+            "cityName": "Miami",
+            "state": "Florida",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "I Miss the Misery",
+                  "Love Bites (So Do I)",
+                  "Fallen Star",
+                  "WATCH OUT!",
+                  "I Get Off",
+                  "Rain Your Blood on Me",
+                  "Like a Woman Can",
+                  "Shiver",
+                  "Freak Like Me",
+                  "Mz. Hyde",
+                  "Everest",
+                  "K-I-L-L-I-N-G",
+                  "Uncomfortable",
+                  "I Gave You Everything",
+                  "I Like It Heavy",
+                  "Here's to Us"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "festivalVenuePriority"
+        },
+        {
+          "inputBandName": "Yellowcard",
+          "artistMatch": {
+            "mbid": "3630fff3-52fc-4e97-ab01-d68fd88e4135",
+            "name": "Yellowcard"
+          },
+          "latestSetlist": {
+            "id": "234e8047",
+            "venueId": "6bd73ed6",
+            "eventDate": "27-02-2026",
+            "lastUpdated": "2026-02-27T21:22:47.507+0000",
+            "artistName": "Yellowcard",
+            "venueName": "Auckland Domain",
+            "cityName": "Auckland",
+            "state": "Auckland",
+            "countryCode": "NZ",
+            "countryName": "New Zealand",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Way Away",
+                  "Breathing",
+                  "Love Letters Lost",
+                  "Rough Landing, Holly",
+                  "Light Up the Sky",
+                  "Bedroom Posters",
+                  "California",
+                  "Empty Apartment",
+                  "Lights and Sounds",
+                  "Only One",
+                  "Better Days",
+                  "Ocean Avenue"
+                ]
+              }
+            ],
+            "songCount": 12
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "DOPE",
+          "artistMatch": null,
+          "latestSetlist": null,
+          "status": "api_error",
+          "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-04-30T21:37:41.443+0000\"\n}"
+        },
+        {
+          "inputBandName": "Stone Temple Pilots",
+          "artistMatch": {
+            "mbid": "8c32bb01-58a3-453b-8050-8c0620edb0e5",
+            "name": "Stone Temple Pilots"
+          },
+          "latestSetlist": {
+            "id": "5b77aff4",
+            "venueId": "1bd62160",
+            "eventDate": "17-04-2026",
+            "lastUpdated": "2026-04-18T19:23:57.491+0000",
+            "artistName": "Stone Temple Pilots",
+            "tourName": "The Rise of Rock World Tour 2026",
+            "venueName": "Pima County Fairgrounds",
+            "cityName": "Tucson",
+            "state": "Arizona",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Wicked Garden",
+                  "Vasoline",
+                  "Big Bang Baby",
+                  "Down",
+                  "Unglued",
+                  "Silvergun Superman",
+                  "Still Remains",
+                  "Big Empty",
+                  "Plush",
+                  "Interstate Love Song",
+                  "Meatplow",
+                  "Crackerman",
+                  "Dead & Bloated",
+                  "Trippin' on a Hole in a Paper Heart",
+                  "Piece of Pie",
+                  "Sex Type Thing"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Powerman 5000",
+          "artistMatch": {
+            "mbid": "0a41f86c-ced1-44e0-95a2-5c8b2368ab1d",
+            "name": "Powerman 5000"
+          },
+          "latestSetlist": {
+            "id": "33773415",
+            "venueId": "3bd62458",
+            "eventDate": "26-04-2026",
+            "lastUpdated": "2026-04-28T03:01:54.539+0000",
+            "artistName": "Powerman 5000",
+            "venueName": "DNA Lounge",
+            "cityName": "San Francisco",
+            "state": "California",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Show Me the Way to Get Out of This World",
+                  "An Eye is Upon You",
+                  "Supernova Goes Pop",
+                  "Tonight the Stars Revolt!",
+                  "Nobody's Real",
+                  "Footsteps and Voices",
+                  "Super Villain",
+                  "Horror Show",
+                  "Cult Leader",
+                  "Play God or Play Dead",
+                  "Black Lipstick",
+                  "Bombshell"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "How to Be a Human",
+                  "Hey, That's Right!",
+                  "When Worlds Collide"
+                ]
+              }
+            ],
+            "songCount": 15
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Daughtry",
+          "artistMatch": {
+            "mbid": "21e3292e-dac8-4609-b57d-402f926aa41f",
+            "name": "Daughtry"
+          },
+          "latestSetlist": {
+            "id": "2377c423",
+            "venueId": "6bd1b6aa",
+            "eventDate": "25-04-2026",
+            "lastUpdated": "2026-04-27T14:48:18.123+0000",
+            "artistName": "Daughtry",
+            "venueName": "Trustmark Park",
+            "cityName": "Pearl",
+            "state": "Mississippi",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "The Seeds",
+                  "Divided",
+                  "The Bottom",
+                  "The Day I Die",
+                  "Separate Ways (Worlds Apart)",
+                  "It's Not Over",
+                  "Waiting for Superman",
+                  "September",
+                  "Home",
+                  "Crashed",
+                  "Antidote",
+                  "The Dam",
+                  "Pieces",
+                  "Over You",
+                  "Heavy Is the Crown"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Artificial"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Hinder",
+          "artistMatch": null,
+          "latestSetlist": null,
+          "status": "api_error",
+          "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-04-30T21:37:43.864+0000\"\n}"
+        },
+        {
+          "inputBandName": "Lit",
+          "artistMatch": null,
+          "latestSetlist": null,
+          "status": "api_error",
+          "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-04-30T21:37:45.045+0000\"\n}"
+        },
+        {
+          "inputBandName": "Soil",
+          "artistMatch": null,
+          "latestSetlist": null,
+          "status": "api_error",
+          "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-04-30T21:37:43.239+0000\"\n}"
+        },
+        {
+          "inputBandName": "Buckcherry",
+          "artistMatch": {
+            "mbid": "822e92ef-72ea-42e0-9af1-b987816b487a",
+            "name": "Buckcherry"
+          },
+          "latestSetlist": {
+            "id": "2b7638d6",
+            "venueId": "53d04329",
+            "eventDate": "11-04-2026",
+            "lastUpdated": "2026-04-15T06:13:55.410+0000",
+            "artistName": "Buckcherry",
+            "venueName": "Harold's Cave Creek Corral",
+            "cityName": "Cave Creek",
+            "state": "Arizona",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Lit Up",
+                  "Roar Like Thunder",
+                  "So Hott",
+                  "Somebody Fucked With Me",
+                  "Whiskey in the Morning",
+                  "Ridin'",
+                  "Let It Burn",
+                  "Too Drunk...",
+                  "Say Fuck It",
+                  "Pain",
+                  "Come On",
+                  "Gluttony",
+                  "Sorry",
+                  "Tight Pants",
+                  "Blackout",
+                  "Crazy Bitch / Sex Machine / Bad Girls / Irresistible Bitch / Proud Mary / Crazy Bitch"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Butcher Babies",
+          "artistMatch": {
+            "mbid": "e43b7e0e-0927-4a66-8cd4-8a6bfb162bd8",
+            "name": "Butcher Babies"
+          },
+          "latestSetlist": {
+            "id": "7b4e82e4",
+            "venueId": "43d4ff93",
+            "eventDate": "28-04-2026",
+            "lastUpdated": "2026-04-29T12:43:37.805+0000",
+            "artistName": "Butcher Babies",
+            "tourName": "Mutation Phase In Europe",
+            "venueName": "Ääniwalli",
+            "cityName": "Helsinki",
+            "state": "Uusimaa",
+            "countryCode": "FI",
+            "countryName": "Finland",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Backstreets of Tennessee",
+                  "Red Thunder",
+                  "Monsters Ball",
+                  "Beaver Cage",
+                  "It's Killin' Time, Baby!",
+                  "Sleeping With the Enemy",
+                  "Lost In Your Touch",
+                  "Black Dove",
+                  "Spittin' Teeth",
+                  "Drum solo",
+                  "Sincerity",
+                  "Last December",
+                  "Magnolia Blvd."
+                ]
+              }
+            ],
+            "songCount": 13
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "All That Remains",
+          "artistMatch": {
+            "mbid": "4f8b7186-b2a2-40db-97ae-6e1cd46d57b1",
+            "name": "All That Remains"
+          },
+          "latestSetlist": {
+            "id": "23770c33",
+            "venueId": "bd0f99e",
+            "eventDate": "29-04-2026",
+            "lastUpdated": "2026-04-30T12:00:38.634+0000",
+            "artistName": "All That Remains",
+            "venueName": "Empire Live",
+            "cityName": "Albany",
+            "state": "New York",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Divine",
+                  "Six",
+                  "Cut Their Tongues Out",
+                  "Not Alone",
+                  "Hold On",
+                  "This Probably Won't End Well",
+                  "Let You Go",
+                  "The Last Time",
+                  "Chiron",
+                  "The Air That I Breathe",
+                  "Fuck Love",
+                  "This Calling",
+                  "What If I Was Nothing?",
+                  "Two Weeks"
+                ]
+              }
+            ],
+            "songCount": 14
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Pop Evil",
+          "artistMatch": {
+            "mbid": "8e3ce660-79ed-4072-bd3d-e8db7a409946",
+            "name": "Pop Evil"
+          },
+          "latestSetlist": {
+            "id": "1b77c500",
+            "venueId": "2bd24056",
+            "eventDate": "25-04-2026",
+            "lastUpdated": "2026-04-27T01:48:10.389+0000",
+            "artistName": "Pop Evil",
+            "tourName": "What Remains",
+            "venueName": "The Rust Belt",
+            "cityName": "East Moline",
+            "state": "Illinois",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Trenches",
+                  "Deathwalk",
+                  "What Remains",
+                  "Deal With the Devil",
+                  "Chaos",
+                  "Last Man Standing",
+                  "Skeletons",
+                  "Paranoid (Crash & Burn)",
+                  "Wishful Thinking",
+                  "Monster You Made",
+                  "Torn to Pieces",
+                  "Be Legendary",
+                  "Work",
+                  "Waking Lions",
+                  "Breathe Again",
+                  "Footsteps",
+                  "100 in a 55"
+                ]
+              }
+            ],
+            "songCount": 17
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "The Plot In You",
+          "artistMatch": {
+            "mbid": "c2e7d4ac-5e30-4b55-99b7-e49d99fd7c63",
+            "name": "The Plot in You"
+          },
+          "latestSetlist": {
+            "id": "13414931",
+            "venueId": "6bd6d222",
+            "eventDate": "29-04-2026",
+            "lastUpdated": "2026-04-30T03:26:47.082+0000",
+            "artistName": "The Plot in You",
+            "venueName": "Centre Bell",
+            "cityName": "Montreal",
+            "state": "Quebec",
+            "countryCode": "CA",
+            "countryName": "Canada",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Don't Look Away",
+                  "Divide",
+                  "You Get One",
+                  "Spare Me",
+                  "Forgotten",
+                  "Silence",
+                  "Left Behind",
+                  "FEEL NOTHING"
+                ]
+              }
+            ],
+            "songCount": 8
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        }
+      ]
+    },
+    "alter bridge|architects|black veil brides|bring me the horizon|good charlotte|motionless in white|the amity affliction|the ghost inside": {
+      "generatedAt": "2026-04-30T21:37:58.431Z",
+      "expiresAt": "2026-05-01T21:37:58.431Z",
+      "results": [
+        {
+          "inputBandName": "Black Veil Brides",
+          "artistMatch": {
+            "mbid": "33319aed-9bd7-4cd1-903c-716845c1b7cd",
+            "name": "Black Veil Brides"
+          },
+          "latestSetlist": {
+            "id": "3b4a60a4",
+            "venueId": "73d6ca9d",
+            "eventDate": "28-04-2026",
+            "lastUpdated": "2026-04-29T05:44:28.728+0000",
+            "artistName": "Black Veil Brides",
+            "tourName": "North American Tour 2026",
+            "venueName": "The Showbox SoDo",
+            "cityName": "Seattle",
+            "state": "Washington",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Intro",
+                  "Knives and Pens",
+                  "Bleeders",
+                  "Coffin",
+                  "Rebel Love Song",
+                  "Hallelujah",
+                  "Faithless",
+                  "Wake Up",
+                  "Vindicate",
+                  "Certainty",
+                  "Beautiful Remains",
+                  "Wretched and Divine",
+                  "Revenger",
+                  "Sweet Blasphemy",
+                  "The Legacy",
+                  "Perfect Weapon"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Lost It All",
+                  "Fallen Angels",
+                  "In the End"
+                ]
+              }
+            ],
+            "songCount": 19
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "The Ghost Inside",
+          "artistMatch": {
+            "mbid": "6fbd58c3-e9b3-4419-a197-0a0f22baed94",
+            "name": "The Ghost Inside"
+          },
+          "latestSetlist": {
+            "id": "5b4c47a8",
+            "venueId": "23d574f7",
+            "eventDate": "13-12-2025",
+            "lastUpdated": "2026-01-26T20:45:53.535+0000",
+            "artistName": "The Ghost Inside",
+            "venueName": "AFAS Live",
+            "cityName": "Amsterdam",
+            "state": "North Holland",
+            "countryCode": "NL",
+            "countryName": "Netherlands",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Avalanche",
+                  "The Outcast",
+                  "Wash It Away",
+                  "Light Years",
+                  "Aftermath",
+                  "Going Under",
+                  "Engine 45",
+                  "Wrath",
+                  "Earn It"
+                ]
+              }
+            ],
+            "songCount": 9
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Alter Bridge",
+          "artistMatch": {
+            "mbid": "60a23fda-a440-4ab9-a344-7dfdd2ed341a",
+            "name": "Alter Bridge"
+          },
+          "latestSetlist": {
+            "id": "2b40c49e",
+            "venueId": "7bd4fed4",
+            "eventDate": "29-04-2026",
+            "lastUpdated": "2026-04-30T03:36:48.100+0000",
+            "artistName": "Alter Bridge",
+            "tourName": "What Lies Within Tour",
+            "venueName": "South Side Ballroom",
+            "cityName": "Dallas",
+            "state": "Texas",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Silent Divide",
+                  "Addicted to Pain",
+                  "Cry of Achilles",
+                  "What Lies Within",
+                  "Fortress",
+                  "Burn It Down",
+                  "Open Your Eyes",
+                  "Broken Wings",
+                  "Watch Over You",
+                  "Tested and Able",
+                  "Ghost of Days Gone By",
+                  "Rise Today",
+                  "Metalingus"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Blackbird",
+                  "Isolation"
+                ]
+              }
+            ],
+            "songCount": 15
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Motionless in White",
+          "artistMatch": {
+            "mbid": "1c5b9bd6-76e8-4fe7-a6df-3bc0b5a452cc",
+            "name": "Motionless in White"
+          },
+          "latestSetlist": {
+            "id": "3414933",
+            "venueId": "6bd6d222",
+            "eventDate": "29-04-2026",
+            "lastUpdated": "2026-04-30T03:21:31.450+0000",
+            "artistName": "Motionless in White",
+            "venueName": "Centre Bell",
+            "cityName": "Montreal",
+            "state": "Quebec",
+            "countryCode": "CA",
+            "countryName": "Canada",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Meltdown",
+                  "Sign of Life",
+                  "Afraid of the Dark",
+                  "Voices",
+                  "Hollow Points",
+                  "Slaughterhouse",
+                  "Scoring the End of the World",
+                  "Another Life",
+                  "Eternally Yours"
+                ]
+              }
+            ],
+            "songCount": 9
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "The Amity Affliction",
+          "artistMatch": {
+            "mbid": "0bfb9d2b-e732-4f28-b2fe-e1d3db9665f1",
+            "name": "The Amity Affliction"
+          },
+          "latestSetlist": {
+            "id": "34db5f3",
+            "venueId": "7bded6e8",
+            "eventDate": "28-04-2026",
+            "lastUpdated": "2026-04-29T13:22:50.102+0000",
+            "artistName": "The Amity Affliction",
+            "tourName": "Spring Horizons",
+            "venueName": "Channel 24",
+            "cityName": "Sacramento",
+            "state": "California",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Vida Nueva",
+                  "Kickboxer",
+                  "Like Love",
+                  "Drag the Lake",
+                  "Heaven Sent",
+                  "All That I Remember",
+                  "It's Hell Down Here",
+                  "All My Friends Are Dead",
+                  "House of Cards",
+                  "Chasing Ghosts",
+                  "Don't Lean on Me",
+                  "All Fucked Up",
+                  "Death's Hand",
+                  "Open Letter",
+                  "Pittsburgh",
+                  "Soak Me in Bleach"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Good Charlotte",
+          "artistMatch": {
+            "mbid": "b267ca80-034e-4dc1-9ed4-ec45f1fed41d",
+            "name": "Good Charlotte"
+          },
+          "latestSetlist": {
+            "id": "1b4e81a4",
+            "venueId": "6bd73ed6",
+            "eventDate": "27-02-2026",
+            "lastUpdated": "2026-02-27T21:21:11.051+0000",
+            "artistName": "Good Charlotte",
+            "tourName": "Motel du Cap World Tour",
+            "venueName": "Auckland Domain",
+            "cityName": "Auckland",
+            "state": "Auckland",
+            "countryCode": "NZ",
+            "countryName": "New Zealand",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "The River",
+                  "Dance Floor Anthem",
+                  "Last Night",
+                  "Girls & Boys",
+                  "Riot Girl",
+                  "The Chronicles of Life and Death",
+                  "The Motivation Proclamation",
+                  "Like It's Her Birthday",
+                  "Wondering",
+                  "Bodies",
+                  "Mean",
+                  "Actual Pain",
+                  "We Are Done",
+                  "Misery",
+                  "Keep Your Hands Off My Girl",
+                  "Predictable",
+                  "Hold On",
+                  "Rejects",
+                  "The Young and the Hopeless",
+                  "Little Things",
+                  "I Just Wanna Live",
+                  "Lifestyles of the Rich & Famous"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "The Anthem"
+                ]
+              }
+            ],
+            "songCount": 23
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Architects",
+          "artistMatch": {
+            "mbid": "d67eb114-0109-47fd-98d8-c68b9f15822f",
+            "name": "Architects"
+          },
+          "latestSetlist": null,
+          "status": "no_setlist_found",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Bring Me The Horizon",
+          "artistMatch": {
+            "mbid": "074e3847-f67f-49f9-81f1-8c8cea147e8e",
+            "name": "Bring Me the Horizon"
+          },
+          "latestSetlist": {
+            "id": "334e24bd",
+            "venueId": "7bdf8eac",
+            "eventDate": "25-04-2026",
+            "lastUpdated": "2026-04-26T18:06:50.359+0000",
+            "artistName": "Bring Me the Horizon",
+            "tourName": "N. American Ascension Program 2",
+            "venueName": "Purple Stage",
+            "cityName": "Las Vegas",
+            "state": "Nevada",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "DArkSide",
+                  "The House of Wolves",
+                  "Happy Song",
+                  "Teardrops",
+                  "Kool-Aid",
+                  "Shadow Moses",
+                  "Kingslayer",
+                  "Follow You",
+                  "Can You Feel My Heart",
+                  "Doomed",
+                  "Drown",
+                  "Throne"
+                ]
+              }
+            ],
+            "songCount": 12
+          },
+          "status": "ok",
+          "selectionMode": "festivalVenuePriority"
+        }
+      ]
+    },
+    "alestorm|alter bridge|architects|black veil brides|bring me the horizon|electric callboy|godsmack|good charlotte|motionless in white|polaris|the amity affliction|the ghost inside|thrice|thrown|tool|we came as romans": {
+      "generatedAt": "2026-04-30T21:40:16.685Z",
+      "expiresAt": "2026-05-01T21:40:16.685Z",
+      "results": [
+        {
+          "inputBandName": "Black Veil Brides",
+          "artistMatch": {
+            "mbid": "33319aed-9bd7-4cd1-903c-716845c1b7cd",
+            "name": "Black Veil Brides"
+          },
+          "latestSetlist": {
+            "id": "3b4a60a4",
+            "venueId": "73d6ca9d",
+            "eventDate": "28-04-2026",
+            "lastUpdated": "2026-04-29T05:44:28.728+0000",
+            "artistName": "Black Veil Brides",
+            "tourName": "North American Tour 2026",
+            "venueName": "The Showbox SoDo",
+            "cityName": "Seattle",
+            "state": "Washington",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Intro",
+                  "Knives and Pens",
+                  "Bleeders",
+                  "Coffin",
+                  "Rebel Love Song",
+                  "Hallelujah",
+                  "Faithless",
+                  "Wake Up",
+                  "Vindicate",
+                  "Certainty",
+                  "Beautiful Remains",
+                  "Wretched and Divine",
+                  "Revenger",
+                  "Sweet Blasphemy",
+                  "The Legacy",
+                  "Perfect Weapon"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Lost It All",
+                  "Fallen Angels",
+                  "In the End"
+                ]
+              }
+            ],
+            "songCount": 19
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "The Ghost Inside",
+          "artistMatch": {
+            "mbid": "6fbd58c3-e9b3-4419-a197-0a0f22baed94",
+            "name": "The Ghost Inside"
+          },
+          "latestSetlist": {
+            "id": "5b4c47a8",
+            "venueId": "23d574f7",
+            "eventDate": "13-12-2025",
+            "lastUpdated": "2026-01-26T20:45:53.535+0000",
+            "artistName": "The Ghost Inside",
+            "venueName": "AFAS Live",
+            "cityName": "Amsterdam",
+            "state": "North Holland",
+            "countryCode": "NL",
+            "countryName": "Netherlands",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Avalanche",
+                  "The Outcast",
+                  "Wash It Away",
+                  "Light Years",
+                  "Aftermath",
+                  "Going Under",
+                  "Engine 45",
+                  "Wrath",
+                  "Earn It"
+                ]
+              }
+            ],
+            "songCount": 9
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Alter Bridge",
+          "artistMatch": {
+            "mbid": "60a23fda-a440-4ab9-a344-7dfdd2ed341a",
+            "name": "Alter Bridge"
+          },
+          "latestSetlist": {
+            "id": "2b40c49e",
+            "venueId": "7bd4fed4",
+            "eventDate": "29-04-2026",
+            "lastUpdated": "2026-04-30T03:36:48.100+0000",
+            "artistName": "Alter Bridge",
+            "tourName": "What Lies Within Tour",
+            "venueName": "South Side Ballroom",
+            "cityName": "Dallas",
+            "state": "Texas",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Silent Divide",
+                  "Addicted to Pain",
+                  "Cry of Achilles",
+                  "What Lies Within",
+                  "Fortress",
+                  "Burn It Down",
+                  "Open Your Eyes",
+                  "Broken Wings",
+                  "Watch Over You",
+                  "Tested and Able",
+                  "Ghost of Days Gone By",
+                  "Rise Today",
+                  "Metalingus"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Blackbird",
+                  "Isolation"
+                ]
+              }
+            ],
+            "songCount": 15
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Motionless in White",
+          "artistMatch": {
+            "mbid": "1c5b9bd6-76e8-4fe7-a6df-3bc0b5a452cc",
+            "name": "Motionless in White"
+          },
+          "latestSetlist": {
+            "id": "3414933",
+            "venueId": "6bd6d222",
+            "eventDate": "29-04-2026",
+            "lastUpdated": "2026-04-30T03:21:31.450+0000",
+            "artistName": "Motionless in White",
+            "venueName": "Centre Bell",
+            "cityName": "Montreal",
+            "state": "Quebec",
+            "countryCode": "CA",
+            "countryName": "Canada",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Meltdown",
+                  "Sign of Life",
+                  "Afraid of the Dark",
+                  "Voices",
+                  "Hollow Points",
+                  "Slaughterhouse",
+                  "Scoring the End of the World",
+                  "Another Life",
+                  "Eternally Yours"
+                ]
+              }
+            ],
+            "songCount": 9
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "The Amity Affliction",
+          "artistMatch": {
+            "mbid": "0bfb9d2b-e732-4f28-b2fe-e1d3db9665f1",
+            "name": "The Amity Affliction"
+          },
+          "latestSetlist": {
+            "id": "34db5f3",
+            "venueId": "7bded6e8",
+            "eventDate": "28-04-2026",
+            "lastUpdated": "2026-04-29T13:22:50.102+0000",
+            "artistName": "The Amity Affliction",
+            "tourName": "Spring Horizons",
+            "venueName": "Channel 24",
+            "cityName": "Sacramento",
+            "state": "California",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Vida Nueva",
+                  "Kickboxer",
+                  "Like Love",
+                  "Drag the Lake",
+                  "Heaven Sent",
+                  "All That I Remember",
+                  "It's Hell Down Here",
+                  "All My Friends Are Dead",
+                  "House of Cards",
+                  "Chasing Ghosts",
+                  "Don't Lean on Me",
+                  "All Fucked Up",
+                  "Death's Hand",
+                  "Open Letter",
+                  "Pittsburgh",
+                  "Soak Me in Bleach"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Good Charlotte",
+          "artistMatch": {
+            "mbid": "b267ca80-034e-4dc1-9ed4-ec45f1fed41d",
+            "name": "Good Charlotte"
+          },
+          "latestSetlist": {
+            "id": "1b4e81a4",
+            "venueId": "6bd73ed6",
+            "eventDate": "27-02-2026",
+            "lastUpdated": "2026-02-27T21:21:11.051+0000",
+            "artistName": "Good Charlotte",
+            "tourName": "Motel du Cap World Tour",
+            "venueName": "Auckland Domain",
+            "cityName": "Auckland",
+            "state": "Auckland",
+            "countryCode": "NZ",
+            "countryName": "New Zealand",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "The River",
+                  "Dance Floor Anthem",
+                  "Last Night",
+                  "Girls & Boys",
+                  "Riot Girl",
+                  "The Chronicles of Life and Death",
+                  "The Motivation Proclamation",
+                  "Like It's Her Birthday",
+                  "Wondering",
+                  "Bodies",
+                  "Mean",
+                  "Actual Pain",
+                  "We Are Done",
+                  "Misery",
+                  "Keep Your Hands Off My Girl",
+                  "Predictable",
+                  "Hold On",
+                  "Rejects",
+                  "The Young and the Hopeless",
+                  "Little Things",
+                  "I Just Wanna Live",
+                  "Lifestyles of the Rich & Famous"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "The Anthem"
+                ]
+              }
+            ],
+            "songCount": 23
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Architects",
+          "artistMatch": {
+            "mbid": "d67eb114-0109-47fd-98d8-c68b9f15822f",
+            "name": "Architects"
+          },
+          "latestSetlist": null,
+          "status": "no_setlist_found",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Bring Me The Horizon",
+          "artistMatch": {
+            "mbid": "074e3847-f67f-49f9-81f1-8c8cea147e8e",
+            "name": "Bring Me the Horizon"
+          },
+          "latestSetlist": {
+            "id": "334e24bd",
+            "venueId": "7bdf8eac",
+            "eventDate": "25-04-2026",
+            "lastUpdated": "2026-04-26T18:06:50.359+0000",
+            "artistName": "Bring Me the Horizon",
+            "tourName": "N. American Ascension Program 2",
+            "venueName": "Purple Stage",
+            "cityName": "Las Vegas",
+            "state": "Nevada",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "DArkSide",
+                  "The House of Wolves",
+                  "Happy Song",
+                  "Teardrops",
+                  "Kool-Aid",
+                  "Shadow Moses",
+                  "Kingslayer",
+                  "Follow You",
+                  "Can You Feel My Heart",
+                  "Doomed",
+                  "Drown",
+                  "Throne"
+                ]
+              }
+            ],
+            "songCount": 12
+          },
+          "status": "ok",
+          "selectionMode": "festivalVenuePriority"
+        },
+        {
+          "inputBandName": "THROWN",
+          "artistMatch": null,
+          "latestSetlist": null,
+          "status": "api_error",
+          "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-04-30T21:40:09.807+0000\"\n}"
+        },
+        {
+          "inputBandName": "Alestorm",
+          "artistMatch": {
+            "mbid": "c0252a1b-0133-46bb-8c4f-cade46349ec3",
+            "name": "Alestorm"
+          },
+          "latestSetlist": {
+            "id": "6b41722a",
+            "venueId": "13d0450d",
+            "eventDate": "26-03-2026",
+            "lastUpdated": "2026-03-27T21:50:00.460+0000",
+            "artistName": "Alestorm",
+            "tourName": "Thunderfisting Latinamerica 2026",
+            "venueName": "VIP Station",
+            "cityName": "São Paulo",
+            "state": "São Paulo",
+            "countryCode": "BR",
+            "countryName": "Brazil",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Keelhauled",
+                  "Killed to Death by Piracy",
+                  "The Sunk'n Norwegian",
+                  "Uzbekistan",
+                  "Mexico",
+                  "Under Blackened Banners",
+                  "Banana",
+                  "Zombies Ate My Pirate Ship",
+                  "Hangover",
+                  "Frozen Piss 2",
+                  "Magnetic North",
+                  "Nancy the Tavern Wench",
+                  "Alestorm",
+                  "1741 (The Battle of Cartagena)",
+                  "The Storm",
+                  "P.A.R.T.Y.",
+                  "Shit Boat (No Fans)"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Drink",
+                  "Wooden Leg!",
+                  "Fucked With an Anchor",
+                  "Rumpelkombo"
+                ]
+              }
+            ],
+            "songCount": 21
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Polaris",
+          "artistMatch": {
+            "mbid": "286431ba-af78-4fc8-9bd5-c20ab0ed4b8c",
+            "name": "Polaris"
+          },
+          "latestSetlist": {
+            "id": "534a97e1",
+            "venueId": "43d337cb",
+            "eventDate": "30-12-2004",
+            "lastUpdated": "2026-01-11T19:38:21.446+0000",
+            "artistName": "Polaris",
+            "venueName": "Hall 1-2",
+            "cityName": "Chiba",
+            "state": "Chiba",
+            "countryCode": "JP",
+            "countryName": "Japan",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Twin Drums",
+                  "Shunkan",
+                  "Shinkokyū",
+                  "Lemon",
+                  "Ryūsei",
+                  "Hikari to Kage"
+                ]
+              }
+            ],
+            "songCount": 6
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Thrice",
+          "artistMatch": {
+            "mbid": "244afcb7-fa9a-49b1-9aa6-0149512d1c52",
+            "name": "Thrice"
+          },
+          "latestSetlist": {
+            "id": "134e89b1",
+            "venueId": "4bd583a6",
+            "eventDate": "19-03-2026",
+            "lastUpdated": "2026-03-20T00:49:01.832+0000",
+            "artistName": "Thrice",
+            "tourName": "European Tour Spring 2026",
+            "venueName": "O2 Forum Kentish Town",
+            "cityName": "London",
+            "state": "England",
+            "countryCode": "GB",
+            "countryName": "United Kingdom",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Blackout",
+                  "Gnash",
+                  "The Artist in the Ambulance",
+                  "Hurricane",
+                  "Holding On",
+                  "Paper Tigers",
+                  "The Dark Glow",
+                  "Still Life",
+                  "The Window",
+                  "Stare at the Sun",
+                  "Crooked Shadows",
+                  "In Exile",
+                  "Of Dust and Nations",
+                  "Black Honey",
+                  "Albatross",
+                  "Beyond the Pines",
+                  "Robot Soft Exorcism",
+                  "The Earth Will Shake"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Vesper Light",
+                  "Deadbolt"
+                ]
+              }
+            ],
+            "songCount": 20
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Godsmack",
+          "artistMatch": {
+            "mbid": "ac2d1c91-3667-46aa-9fe7-170ca7fce9e2",
+            "name": "Godsmack"
+          },
+          "latestSetlist": {
+            "id": "351d537",
+            "venueId": "33d638fd",
+            "eventDate": "12-04-2025",
+            "lastUpdated": "2025-04-12T21:13:37.028+0000",
+            "artistName": "Godsmack",
+            "tourName": "Godsmack World Tour 2025",
+            "venueName": "Turbinenhalle",
+            "cityName": "Oberhausen",
+            "state": "North Rhine-Westphalia",
+            "countryCode": "DE",
+            "countryName": "Germany",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Surrender",
+                  "You and I",
+                  "When Legends Rise",
+                  "1000hp",
+                  "Cryin' Like a Bitch!!",
+                  "Speak",
+                  "Straight Out of Line",
+                  "Awake",
+                  "Keep Away",
+                  "Voodoo",
+                  "Whatever"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "Come Together",
+                  "Bulletproof",
+                  "I Stand Alone"
+                ]
+              }
+            ],
+            "songCount": 14
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "We Came As Romans",
+          "artistMatch": {
+            "mbid": "dc0da7d1-231c-4058-8e6e-1c0801848602",
+            "name": "We Came as Romans"
+          },
+          "latestSetlist": {
+            "id": "4b419772",
+            "venueId": "33d124bd",
+            "eventDate": "14-02-2026",
+            "lastUpdated": "2026-02-14T09:44:57.984+0000",
+            "artistName": "We Came as Romans",
+            "venueName": "Riviera Beach Club",
+            "cityName": "Elwood",
+            "state": "Victoria",
+            "countryCode": "AU",
+            "countryName": "Australia",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "ALL IS BEAUTIFUL...",
+                  "bad luck",
+                  "red smoke",
+                  "Cold Like War",
+                  "one by one",
+                  "culture wound",
+                  "Darkbloom",
+                  "no rest for the dreamer",
+                  "where did you go?",
+                  "Black Hole",
+                  "Daggers"
+                ]
+              }
+            ],
+            "songCount": 11
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Electric Callboy",
+          "artistMatch": {
+            "mbid": "cf075492-d880-4afc-b87b-d6b03e33dacc",
+            "name": "Electric Callboy"
+          },
+          "latestSetlist": {
+            "id": "1b4e2d68",
+            "venueId": "5bd6cba0",
+            "eventDate": "25-04-2026",
+            "lastUpdated": "2026-04-26T10:33:09.769+0000",
+            "artistName": "Electric Callboy",
+            "tourName": "Tanzneid World Tour",
+            "venueName": "PNE Forum",
+            "cityName": "Vancouver",
+            "state": "British Columbia",
+            "countryCode": "CA",
+            "countryName": "Canada",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "TANZNEID",
+                  "Still Waiting",
+                  "Tekkno Train",
+                  "Hypa Hypa",
+                  "MC Thunder",
+                  "Neon",
+                  "Pump It",
+                  "Hurrikan / Overkill / All the Small Things / Bodies",
+                  "Revery",
+                  "Hypercharged",
+                  "Mindreader",
+                  "Monsieur Moustache vs. Clitcat / Muffin Purper-Gurk / We Are the Mess / Crystals",
+                  "Drum Solo",
+                  "Fuckboi",
+                  "Everytime We Touch",
+                  "MC Thunder II (Dancing Like a Ninja)",
+                  "Elevator Operator"
+                ]
+              },
+              {
+                "name": "Set 2",
+                "songs": [
+                  "RATATATA",
+                  "Spaceman",
+                  "We Got the Moves"
+                ]
+              }
+            ],
+            "songCount": 20
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        },
+        {
+          "inputBandName": "Tool",
+          "artistMatch": {
+            "mbid": "66fc5bf8-daa4-4241-b378-9bc9077939d2",
+            "name": "Tool"
+          },
+          "latestSetlist": {
+            "id": "6b43c2fa",
+            "venueId": "33d720d9",
+            "eventDate": "20-12-2025",
+            "lastUpdated": "2025-12-29T06:28:27.907+0000",
+            "artistName": "Tool",
+            "tourName": "Pacific Rim Tour 2025",
+            "venueName": "Neal S. Blaisdell Arena",
+            "cityName": "Honolulu",
+            "state": "Hawaii",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Fear Inoculum",
+                  "The Grudge",
+                  "Disposition",
+                  "H.",
+                  "Lost Keys (Blame Hofmann)",
+                  "Rosetta Stoned",
+                  "Crawl Away",
+                  "Pneuma",
+                  "Jambi",
+                  "Stinkfist"
+                ]
+              },
+              {
+                "name": "Encore",
+                "songs": [
+                  "Chocolate Chip Trip",
+                  "Hand of Doom",
+                  "Invincible",
+                  "Happy Birthday to You",
+                  "Forty Six & 2",
+                  "Dancing Queen"
+                ]
+              }
+            ],
+            "songCount": 16
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        }
+      ]
     }
   }
 }
