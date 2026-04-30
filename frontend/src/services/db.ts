@@ -26,7 +26,22 @@ export async function initDb(): Promise<void> {
       data          TEXT NOT NULL,
       synced_at     TEXT NOT NULL
     );
+
+    CREATE TABLE IF NOT EXISTS breakpoints (
+      artist              TEXT PRIMARY KEY NOT NULL,
+      type                TEXT NOT NULL,
+      song_index          INTEGER,
+      departure_time      TEXT,
+      arrival_song_index  INTEGER
+    );
   `);
+
+  // Migrations — safe to run repeatedly, ignored if column already exists
+  try {
+    await db.execAsync(`ALTER TABLE breakpoints ADD COLUMN arrival_song_index INTEGER;`);
+  } catch {
+    // column already exists on this device, nothing to do
+  }
 }
 
 // Selected bands
@@ -86,4 +101,40 @@ export async function getAllCachedSetlists(): Promise<CachedSetlist[]> {
 export async function clearSetlistCache(): Promise<void> {
   const db = getDb();
   await db.runAsync("DELETE FROM setlists");
+}
+
+// Breakpoints
+
+export type BreakpointRow = {
+  artist: string;
+  type: "song" | "time";
+  songIndex: number | null;
+  departureTime: string | null;
+  arrivalSongIndex: number | null;
+};
+
+export async function getBreakpoints(): Promise<BreakpointRow[]> {
+  const db = getDb();
+  return db.getAllAsync<BreakpointRow>(
+    "SELECT artist, type, song_index as songIndex, departure_time as departureTime, arrival_song_index as arrivalSongIndex FROM breakpoints"
+  );
+}
+
+export async function saveBreakpoint(bp: BreakpointRow): Promise<void> {
+  const db = getDb();
+  await db.runAsync(
+    `INSERT INTO breakpoints (artist, type, song_index, departure_time, arrival_song_index)
+     VALUES (?, ?, ?, ?, ?)
+     ON CONFLICT(artist) DO UPDATE SET
+       type = excluded.type,
+       song_index = excluded.song_index,
+       departure_time = excluded.departure_time,
+       arrival_song_index = excluded.arrival_song_index`,
+    [bp.artist, bp.type, bp.songIndex ?? null, bp.departureTime ?? null, bp.arrivalSongIndex ?? null]
+  );
+}
+
+export async function deleteBreakpoint(artist: string): Promise<void> {
+  const db = getDb();
+  await db.runAsync("DELETE FROM breakpoints WHERE artist = ?", [artist]);
 }

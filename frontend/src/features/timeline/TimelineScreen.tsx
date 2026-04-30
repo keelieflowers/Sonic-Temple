@@ -19,11 +19,14 @@ if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useColors } from "@/src/providers/theme/ThemeProvider";
+import { useBreakpoints } from "@/src/providers/breakpoints/BreakpointProvider";
+import { useLineup } from "@/src/providers/lineup/LineupProvider";
 import { fontSizes, radii, spacing } from "@/src/theme";
 import { getAllCachedSetlists } from "@/src/services/db";
 import { syncArtistSetlists, SyncProgress } from "@/src/services/sync";
 import { SCHEDULE, ScheduleEntry } from "@/src/data/schedule";
 import { ArtistShowResult } from "@/src/shared/Types";
+import { BreakpointSheet } from "./BreakpointSheet";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -55,6 +58,9 @@ const DEV_NOW_OVERRIDE: string | null = null;
 
 // Pixels per minute for conflict column offset
 const PX_PER_MIN = 2.5;
+
+// Estimated walk time between stages in minutes
+const TRAVEL_MIN = 8;
 
 // ─── Utilities ────────────────────────────────────────────────────────────────
 
@@ -399,16 +405,59 @@ type ConflictCardProps = {
 
 function ConflictCard({ item, setlistMap, nowMinutes, isLiveDay, isFinished, colors }: ConflictCardProps) {
   const s = styles(colors);
+  const { getBreakpoint, setBreakpoint, removeBreakpoint } = useBreakpoints();
+  const { toggleBand } = useLineup();
   const { entries } = item;
   const earliestStart = Math.min(...entries.map((e) => toMinutes(e.startTime)));
   const latestEnd = Math.max(...entries.map((e) => toMinutes(e.endTime)));
   const [focusedArtist, setFocusedArtist] = useState<string | null>(null);
   const [lockedHeight, setLockedHeight] = useState<number | null>(null);
+  const [sheetTarget, setSheetTarget] = useState<ScheduleEntry | null>(null);
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
   const focusedEntry = focusedArtist != null
     ? (entries.find((e) => e.artist === focusedArtist) ?? null)
     : null;
+
+  // For each entry, compute arrival time based on another entry's departure breakpoint
+  const arrivalMap = new Map<string, number>();
+  for (const entry of entries) {
+    const bp = getBreakpoint(entry.artist);
+    if (bp?.departureTime) {
+      const [h, m] = bp.departureTime.split(":").map(Number);
+      const arrival = h * 60 + m + TRAVEL_MIN;
+      for (const other of entries) {
+        if (other.artist !== entry.artist) {
+          const existing = arrivalMap.get(other.artist);
+          if (existing == null || arrival < existing) arrivalMap.set(other.artist, arrival);
+        }
+      }
+    }
+  }
+
+  // Inverse: if an entry has an arrival song marker, compute "leave by" for all other entries
+  const leaveByMap = new Map<string, { min: number; songName: string }>();
+  for (const entry of entries) {
+    const bp = getBreakpoint(entry.artist);
+    if (bp?.arrivalSongIndex != null) {
+      const songs = setlistMap.get(entry.artist)?.latestSetlist?.sections.flatMap((s) => s.songs) ?? [];
+      const song = songs[bp.arrivalSongIndex];
+      if (song) {
+        const eStart = toMinutes(entry.startTime);
+        const eDuration = toMinutes(entry.endTime) - eStart;
+        const songMin = eStart + (bp.arrivalSongIndex / songs.length) * eDuration;
+        const leaveBy = songMin - TRAVEL_MIN;
+        for (const other of entries) {
+          if (other.artist !== entry.artist) {
+            const existing = leaveByMap.get(other.artist);
+            if (existing == null || leaveBy < existing.min) {
+              leaveByMap.set(other.artist, { min: leaveBy, songName: song });
+            }
+          }
+        }
+      }
+    }
+  }
 
   const animateTransition = (next: () => void) => {
     Animated.timing(fadeAnim, { toValue: 0, duration: 110, useNativeDriver: true }).start(() => {
@@ -443,10 +492,12 @@ function ConflictCard({ item, setlistMap, nowMinutes, isLiveDay, isFinished, col
         <TouchableOpacity
           style={[
             s.conflictColumnExpanded,
-            lockedHeight != null && { height: lockedHeight } ,
+            lockedHeight != null && { height: lockedHeight },
           ]}
           onPress={handleCollapse}
+          onLongPress={() => setSheetTarget(focusedEntry)}
           activeOpacity={0.95}
+          delayLongPress={400}
         >
           <Animated.View style={{ opacity: fadeAnim, width: "100%" }}>
             <ConflictColumn
@@ -455,6 +506,9 @@ function ConflictCard({ item, setlistMap, nowMinutes, isLiveDay, isFinished, col
               nowMinutes={nowMinutes}
               isLiveDay={isLiveDay}
               offsetPx={0}
+              breakpoint={getBreakpoint(focusedEntry.artist) ?? null}
+              arrivalMin={arrivalMap.get(focusedEntry.artist) ?? null}
+              leaveBy={leaveByMap.get(focusedEntry.artist) ?? null}
               colors={colors}
               expanded
             />
@@ -476,7 +530,9 @@ function ConflictCard({ item, setlistMap, nowMinutes, isLiveDay, isFinished, col
                 <TouchableOpacity
                   style={s.conflictColumnTouchable}
                   onPress={() => handleFocus(entry.artist)}
+                  onLongPress={() => setSheetTarget(entry)}
                   activeOpacity={0.7}
+                  delayLongPress={400}
                 >
                   <ConflictColumn
                     entry={entry}
@@ -484,6 +540,9 @@ function ConflictCard({ item, setlistMap, nowMinutes, isLiveDay, isFinished, col
                     nowMinutes={nowMinutes}
                     isLiveDay={isLiveDay}
                     offsetPx={offsetPx}
+                    breakpoint={getBreakpoint(entry.artist) ?? null}
+                    arrivalMin={arrivalMap.get(entry.artist) ?? null}
+                    leaveBy={leaveByMap.get(entry.artist) ?? null}
                     colors={colors}
                   />
                 </TouchableOpacity>
@@ -491,6 +550,18 @@ function ConflictCard({ item, setlistMap, nowMinutes, isLiveDay, isFinished, col
             );
           })}
         </Animated.View>
+      )}
+
+      {sheetTarget && (
+        <BreakpointSheet
+          entry={sheetTarget}
+          setlistResult={setlistMap.get(sheetTarget.artist) ?? null}
+          existing={getBreakpoint(sheetTarget.artist) ?? null}
+          onSave={setBreakpoint}
+          onDelete={() => removeBreakpoint(sheetTarget!.artist)}
+          onDropArtist={() => toggleBand(sheetTarget!.artist)}
+          onClose={() => setSheetTarget(null)}
+        />
       )}
     </View>
   );
@@ -502,11 +573,14 @@ type ConflictColumnProps = {
   nowMinutes: number;
   isLiveDay: boolean;
   offsetPx: number;
+  breakpoint: import("@/src/services/db").BreakpointRow | null;
+  arrivalMin: number | null;
+  leaveBy: { min: number; songName: string } | null;
   colors: ReturnType<typeof useColors>;
   expanded?: boolean;
 };
 
-function ConflictColumn({ entry, setlistResult, nowMinutes, isLiveDay, offsetPx, colors, expanded }: ConflictColumnProps) {
+function ConflictColumn({ entry, setlistResult, nowMinutes, isLiveDay, offsetPx, breakpoint, arrivalMin, leaveBy, colors, expanded }: ConflictColumnProps) {
   const s = styles(colors);
   const startMin = toMinutes(entry.startTime);
   const endMin = toMinutes(entry.endTime);
@@ -514,11 +588,54 @@ function ConflictColumn({ entry, setlistResult, nowMinutes, isLiveDay, offsetPx,
   const isPlaying = isLiveDay && nowMinutes >= startMin && nowMinutes < endMin;
   const songs = setlistResult?.latestSetlist?.sections.flatMap((sec) => sec.songs) ?? [];
 
+  const departureMin = (() => {
+    if (!breakpoint) return null;
+    if (breakpoint.departureTime) {
+      const [h, m] = breakpoint.departureTime.split(":").map(Number);
+      return h * 60 + m;
+    }
+    return null;
+  })();
+
+  const breakpointLabel = (() => {
+    if (!breakpoint) return null;
+    if (breakpoint.type === "song" && breakpoint.songIndex != null && songs[breakpoint.songIndex]) {
+      return `🚩 After "${songs[breakpoint.songIndex]}"`;
+    }
+    if (departureMin != null) return `🚩 Leaving ${formatTime(departureMin)}`;
+    return null;
+  })();
+
+  const arrivalLabel = (() => {
+    if (!breakpoint || breakpoint.arrivalSongIndex == null) return null;
+    const song = songs[breakpoint.arrivalSongIndex];
+    if (!song) return null;
+    const arrMin = startMin + (breakpoint.arrivalSongIndex / songs.length) * duration;
+    return `📍 Must see "${song}" · ${formatTime(arrMin)}`;
+  })();
+
   return (
     <View style={[s.conflictColumn, !expanded && { marginTop: offsetPx }]}>
       <Text style={[s.columnArtist, expanded && s.columnTextCentered]} numberOfLines={2}>{entry.artist}</Text>
       <Text style={[s.columnStage, expanded && s.columnTextCentered]} numberOfLines={1}>{entry.stage}</Text>
       <Text style={[s.columnTime, expanded && s.columnTextCentered]}>{formatTime(startMin)} – {formatTime(endMin)}</Text>
+
+      {breakpointLabel && (
+        <Text style={[s.columnBreakpoint, expanded && s.columnTextCentered]}>{breakpointLabel}</Text>
+      )}
+      {arrivalLabel && (
+        <Text style={[s.columnArrivalMustSee, expanded && s.columnTextCentered]}>{arrivalLabel}</Text>
+      )}
+      {arrivalMin != null && (
+        <Text style={[s.columnArrival, expanded && s.columnTextCentered]}>
+          ↳ Arriving ~{formatTime(arrivalMin)}
+        </Text>
+      )}
+      {leaveBy != null && (
+        <Text style={[s.columnLeaveBy, expanded && s.columnTextCentered]}>
+          ↳ Leave by {formatTime(leaveBy.min)} for "{leaveBy.songName}"
+        </Text>
+      )}
 
       {isPlaying && (
         <Text style={[s.columnMinsLeft, expanded && s.columnTextCentered]}>{endMin - nowMinutes} min left</Text>
@@ -535,18 +652,51 @@ function ConflictColumn({ entry, setlistResult, nowMinutes, isLiveDay, offsetPx,
               : nowMinutes >= nextSongMin ? "played"
               : nowMinutes >= songMin ? "current"
               : "upcoming";
+            const isBreakpointSong = breakpoint?.type === "song" && breakpoint.songIndex === i;
+            const afterBreakpoint = breakpoint?.type === "song" && breakpoint.songIndex != null && i > breakpoint.songIndex;
+            const afterDepartureTime = departureMin != null && songMin >= departureMin;
+            const isDeparted = afterBreakpoint || afterDepartureTime;
+
+            const isArrivalSong = breakpoint?.arrivalSongIndex === i;
+            const beforeArrival = breakpoint?.arrivalSongIndex != null && i < breakpoint.arrivalSongIndex;
+            const afterLeaveBy = leaveBy != null && songMin >= leaveBy.min;
+
+            const prevSongMin = i > 0 ? startMin + ((i - 1) / songs.length) * duration : startMin;
+            const isFirstAfterArrival = arrivalMin != null && prevSongMin < arrivalMin && songMin >= arrivalMin;
+            const missedByArrival = arrivalMin != null && nextSongMin <= arrivalMin;
+
             return (
-              <Text
-                key={i}
-                style={[
-                  s.columnSong,
-                  status === "current" && s.columnSongCurrent,
-                  status === "played" && s.columnSongPlayed,
-                ]}
-                numberOfLines={1}
-              >
-                {formatTimeShort(songMin)}  {status === "current" ? "▶ " : ""}{song}
-              </Text>
+              <React.Fragment key={i}>
+                {isFirstAfterArrival && (
+                  <View style={s.arrivalDivider}>
+                    <View style={s.arrivalDividerLine} />
+                    <Text style={s.arrivalDividerText}>you arrive</Text>
+                    <View style={s.arrivalDividerLine} />
+                  </View>
+                )}
+                {leaveBy != null && i > 0 && prevSongMin < leaveBy.min && songMin >= leaveBy.min && (
+                  <View style={s.leaveByDivider}>
+                    <View style={s.leaveByDividerLine} />
+                    <Text style={s.leaveByDividerText}>leave now</Text>
+                    <View style={s.leaveByDividerLine} />
+                  </View>
+                )}
+                <Text
+                  style={[
+                    s.columnSong,
+                    status === "current" && s.columnSongCurrent,
+                    status === "played" && s.columnSongPlayed,
+                    isDeparted && s.columnSongAfterBreakpoint,
+                    missedByArrival && s.columnSongMissed,
+                    beforeArrival && s.columnSongBeforeArrival,
+                    isArrivalSong && s.columnSongArrival,
+                    afterLeaveBy && s.columnSongAfterLeaveBy,
+                  ]}
+                  numberOfLines={1}
+                >
+                  {formatTimeShort(songMin)}  {status === "current" ? "▶ " : ""}{song}{isBreakpointSong ? "  🚩" : ""}{isArrivalSong ? "  📍" : ""}
+                </Text>
+              </React.Fragment>
             );
           })}
         </View>
@@ -570,6 +720,8 @@ type SetCardProps = {
 
 function SetCard({ entry, setlistResult, nowMinutes, isLiveDay, isFinished, colors }: SetCardProps) {
   const s = styles(colors);
+  const { getBreakpoint, setBreakpoint, removeBreakpoint } = useBreakpoints();
+  const { toggleBand } = useLineup();
   const startMin = toMinutes(entry.startTime);
   const endMin = toMinutes(entry.endTime);
   const duration = endMin - startMin;
@@ -577,17 +729,49 @@ function SetCard({ entry, setlistResult, nowMinutes, isLiveDay, isFinished, colo
   const isPlaying = isLiveDay && nowMinutes >= startMin && nowMinutes < endMin;
   const minsRemaining = isPlaying ? endMin - nowMinutes : 0;
   const [expanded, setExpanded] = useState(isPlaying);
+  const [sheetOpen, setSheetOpen] = useState(false);
   const songs = setlistResult?.latestSetlist?.sections.flatMap((sec) => sec.songs) ?? [];
+  const breakpoint = getBreakpoint(entry.artist);
+
+  const breakpointLabel = (() => {
+    if (!breakpoint) return null;
+    if (breakpoint.type === "song" && breakpoint.songIndex != null && songs.length > 0) {
+      const song = songs[breakpoint.songIndex];
+      return song ? `Leaving after "${song}"` : null;
+    }
+    if (breakpoint.departureTime) {
+      const [h, m] = breakpoint.departureTime.split(":").map(Number);
+      return `Leaving at ${formatTime(h * 60 + m)}`;
+    }
+    return null;
+  })();
+
+  const setCardArrivalLabel = (() => {
+    if (!breakpoint || breakpoint.arrivalSongIndex == null) return null;
+    const song = songs[breakpoint.arrivalSongIndex];
+    if (!song) return null;
+    const arrMin = startMin + (breakpoint.arrivalSongIndex / songs.length) * duration;
+    return `📍 Must see "${song}" · ${formatTime(arrMin)}`;
+  })();
 
   return (
     <View style={[s.card, isFinished && s.cardFinished]}>
-      <TouchableOpacity style={s.cardHeader} onPress={() => setExpanded((v) => !v)} activeOpacity={0.7}>
+      <TouchableOpacity
+        style={s.cardHeader}
+        onPress={() => setExpanded((v) => !v)}
+        onLongPress={() => setSheetOpen(true)}
+        activeOpacity={0.7}
+        delayLongPress={400}
+      >
         <Text style={s.artistName} numberOfLines={1}>{entry.artist}</Text>
         {setlistResult?.selectionMode === "festivalVenuePriority" && (
           <FontAwesome name="star" size={12} color={colors.success} />
         )}
         {setlistResult?.selectionMode === "recencyFallback" && (
           <FontAwesome name="clock-o" size={12} color={colors.textMuted} />
+        )}
+        {breakpoint && (
+          <FontAwesome name="flag" size={12} color={colors.primary} />
         )}
         {isPlaying && (
           <View style={s.liveBadge}>
@@ -602,8 +786,27 @@ function SetCard({ entry, setlistResult, nowMinutes, isLiveDay, isFinished, colo
         <Text style={s.stageTime}> · {formatTime(startMin)} – {formatTime(endMin)}</Text>
       </Text>
 
+      {breakpointLabel && (
+        <Text style={s.breakpointLabel}>{breakpointLabel}</Text>
+      )}
+      {setCardArrivalLabel && (
+        <Text style={s.arrivalLabel}>{setCardArrivalLabel}</Text>
+      )}
+
       {isPlaying && (
         <Text style={s.minsRemaining}>{minsRemaining} min remaining</Text>
+      )}
+
+      {sheetOpen && (
+        <BreakpointSheet
+          entry={entry}
+          setlistResult={setlistResult}
+          existing={breakpoint ?? null}
+          onSave={setBreakpoint}
+          onDelete={() => removeBreakpoint(entry.artist)}
+          onDropArtist={() => toggleBand(entry.artist)}
+          onClose={() => setSheetOpen(false)}
+        />
       )}
 
       {expanded && (
@@ -768,6 +971,24 @@ const styles = (colors: ReturnType<typeof useColors>) =>
     columnSong: { color: colors.text, fontSize: fontSizes.xs },
     columnSongCurrent: { color: colors.success, fontWeight: "700" },
     columnSongPlayed: { color: colors.textMuted, opacity: 0.4 },
+    columnSongAfterBreakpoint: { opacity: 0.3 },
+    columnSongMissed: { opacity: 0.25 },
+    columnSongBeforeArrival: { opacity: 0.3 },
+    columnSongArrival: { color: colors.success, fontWeight: "700" as const },
+    columnBreakpoint: { color: colors.primary, fontSize: fontSizes.xs, fontWeight: "600", marginBottom: 2 },
+    columnArrivalMustSee: { color: colors.success, fontSize: fontSizes.xs, fontWeight: "600", marginBottom: 2 },
+    columnArrival: { color: colors.success, fontSize: fontSizes.xs, fontWeight: "600", marginBottom: 2 },
+    columnLeaveBy: { color: colors.primary, fontSize: fontSizes.xs, fontWeight: "600", marginBottom: 2 },
+    columnSongAfterLeaveBy: { opacity: 0.3 },
+    leaveByDivider: { flexDirection: "row" as const, alignItems: "center" as const, gap: spacing.xs, marginVertical: spacing.xs },
+    leaveByDividerLine: { flex: 1, height: 1, backgroundColor: colors.primary, opacity: 0.4 },
+    leaveByDividerText: { color: colors.primary, fontSize: 9, fontWeight: "700" as const, letterSpacing: 0.5 },
+    arrivalDivider: {
+      flexDirection: "row", alignItems: "center", gap: spacing.xs,
+      marginVertical: spacing.xs,
+    },
+    arrivalDividerLine: { flex: 1, height: 1, backgroundColor: colors.success, opacity: 0.4 },
+    arrivalDividerText: { color: colors.success, fontSize: 9, fontWeight: "700", letterSpacing: 0.5 },
     columnNoSetlist: { color: colors.textMuted, fontSize: fontSizes.xs, fontStyle: "italic" },
     columnTextCentered: { textAlign: "center" as const },
     columnSongsCentered: { alignItems: "center" as const },
@@ -787,6 +1008,19 @@ const styles = (colors: ReturnType<typeof useColors>) =>
     stageLine: { fontSize: fontSizes.sm, marginBottom: spacing.xs },
     stageName: { color: colors.primary, fontWeight: "700" },
     stageTime: { color: colors.textMuted, fontWeight: "400" },
+    breakpointLabel: {
+      color: colors.primary,
+      fontSize: fontSizes.xs,
+      fontWeight: "600" as const,
+      marginTop: 2,
+      marginBottom: 2,
+    },
+    arrivalLabel: {
+      color: colors.success,
+      fontSize: fontSizes.xs,
+      fontWeight: "600" as const,
+      marginBottom: spacing.xs,
+    },
     minsRemaining: { color: colors.success, fontSize: fontSizes.xs, fontWeight: "600", marginBottom: spacing.xs },
     songList: { marginTop: spacing.sm, gap: 2 },
     songRow: { flexDirection: "row", gap: spacing.sm },
