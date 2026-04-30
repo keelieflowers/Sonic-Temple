@@ -282,6 +282,48 @@
       "mbid": "e2d4b394-a2cc-4848-bb15-e5b7c55cc059",
       "matchedArtistName": "Magnolia Park",
       "updatedAt": "2026-04-30T00:16:05.461Z"
+    },
+    "demon hunter": {
+      "inputBandName": "Demon Hunter",
+      "mbid": "73fe4a37-6860-4bb5-b3ec-0d0c367900ea",
+      "matchedArtistName": "Demon Hunter",
+      "updatedAt": "2026-04-30T00:31:53.300Z"
+    },
+    "saliva": {
+      "inputBandName": "Saliva",
+      "mbid": "2c733f82-7ebe-4ce7-892f-9c938b0c9b58",
+      "matchedArtistName": "Saliva",
+      "updatedAt": "2026-04-30T00:31:54.376Z"
+    },
+    "lamb of god": {
+      "inputBandName": "Lamb Of God",
+      "mbid": "298909e4-ebcb-47b8-95e9-cc53b087fc65",
+      "matchedArtistName": "Lamb of God",
+      "updatedAt": "2026-04-30T00:31:54.999Z"
+    },
+    "bloodywood": {
+      "inputBandName": "Bloodywood",
+      "mbid": "fd5c04e2-34a1-4bb2-afd1-b526c4819379",
+      "matchedArtistName": "Bloodywood",
+      "updatedAt": "2026-04-30T00:31:55.591Z"
+    },
+    "conquer divide": {
+      "inputBandName": "Conquer Divide",
+      "mbid": "6b6da5b9-5620-4127-b90e-465be8d9b82a",
+      "matchedArtistName": "Conquer Divide",
+      "updatedAt": "2026-04-30T00:31:56.195Z"
+    },
+    "avatar": {
+      "inputBandName": "Avatar",
+      "mbid": "e51c3136-b94d-49de-8f1e-19faf3ef3566",
+      "matchedArtistName": "Avatar",
+      "updatedAt": "2026-04-30T00:31:56.810Z"
+    },
+    "a skylit drive": {
+      "inputBandName": "A Skylit Drive",
+      "mbid": "33464f19-aa8b-4bbf-982d-05f5e78643c8",
+      "matchedArtistName": "A Skylit Drive",
+      "updatedAt": "2026-04-30T00:31:58.630Z"
     }
   }
 }
