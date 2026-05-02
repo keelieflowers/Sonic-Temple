@@ -35,14 +35,25 @@ export async function requestNotificationPermissions(): Promise<boolean> {
 export async function scheduleTestNotification(): Promise<void> {
   await requestNotificationPermissions();
   await Notifications.scheduleNotificationAsync({
-    identifier: "test-notification",
+    identifier: "test-departure",
     content: {
-      title: "Test Notification 🤘",
-      body: "Notifications are working!",
+      title: "Time to go 🚩",
+      body: "Leave Main Stage now — breakpoint for Metallica",
     },
     trigger: {
       type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
       seconds: 5,
+    },
+  });
+  await Notifications.scheduleNotificationAsync({
+    identifier: "test-arrival",
+    content: {
+      title: "Head to Audio Stage now 📍",
+      body: '"Battery" by Metallica is coming up',
+    },
+    trigger: {
+      type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+      seconds: 8,
     },
   });
 }

@@ -77,8 +77,8 @@ export function SettingsScreen() {
           <FontAwesome name="bell" size={16} color={testingSent ? colors.success : colors.primary} />
           <View style={s.rowText}>
             <Text style={s.rowLabel}>Send test notification</Text>
-            <Text style={s.rowSub}>
-              {testingSent ? "Fires in 5 seconds — check your lock screen" : "Verify notifications are working on this device"}
+            <Text style={s.rowSub} numberOfLines={1}>
+              {testingSent ? "Two sample alerts incoming — check your lock screen" : "Preview departure and arrival alerts on this device"}
             </Text>
           </View>
           {testingSent && <FontAwesome name="check" size={14} color={colors.success} />}
@@ -100,7 +100,7 @@ export function SettingsScreen() {
           }
           <View style={s.rowText}>
             <Text style={s.rowLabel}>Force sync setlists</Text>
-            <Text style={s.rowSub}>Re-fetch setlists for all {selectedBands.size} selected artists</Text>
+            <Text style={s.rowSub} numberOfLines={1}>Re-fetch setlists for all {selectedBands.size} selected artists</Text>
           </View>
         </TouchableOpacity>
 
@@ -117,8 +117,8 @@ export function SettingsScreen() {
             : <FontAwesome name="refresh" size={16} color={colors.primary} />
           }
           <View style={s.rowText}>
-            <Text style={s.rowLabel}>Refresh MBID cache</Text>
-            <Text style={s.rowSub}>Force backend to re-fetch artist IDs from MusicBrainz</Text>
+            <Text style={s.rowLabel}>Refresh backend cache</Text>
+            <Text style={s.rowSub} numberOfLines={1}>Force backend to re-fetch artist IDs and setlists from source</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -169,10 +169,10 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       backgroundColor: colors.card,
       marginHorizontal: spacing.md,
       borderRadius: radii.md,
-      padding: spacing.md,
+      paddingHorizontal: spacing.md,
       gap: spacing.md,
       marginBottom: spacing.xs,
-      minHeight: 56,
+      height: 64,
     },
     rowDisabled: {
       opacity: 0.5,

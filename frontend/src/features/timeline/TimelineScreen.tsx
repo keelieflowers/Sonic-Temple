@@ -764,6 +764,8 @@ function SetCard({ entry, setlistResult, nowMinutes, isLiveDay, isFinished, colo
       <TouchableOpacity
         style={s.cardHeader}
         onPress={() => setExpanded((v) => !v)}
+        onLongPress={() => setSheetOpen(true)}
+        delayLongPress={400}
         activeOpacity={0.7}
       >
         <Text style={s.artistName} numberOfLines={1}>{entry.artist}</Text>

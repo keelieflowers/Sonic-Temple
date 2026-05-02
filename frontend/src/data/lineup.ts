@@ -20,7 +20,7 @@ export const SONIC_TEMPLE_2026: DayLineup[] = [
       "L.S. Dunes",
       "Carnifex",
       "Fleshgod Apocalypse",
-      "Flyleaf with Lacey Sturm",
+      "Flyleaf",
       "Wind Walkers",
       "Bodysnatcher",
       "Coheed and Cambria",
