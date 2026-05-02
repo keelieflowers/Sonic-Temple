@@ -1,6 +1,7 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React, { useState } from "react";
 import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Constants from "expo-constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useQueryClient } from "@tanstack/react-query";
 import { useColors } from "@/src/providers/theme/ThemeProvider";
@@ -32,7 +33,8 @@ export function SettingsScreen() {
   };
 
   const handleForceSetlistSync = async () => {
-    if (selectedBands.size === 0) {
+    const bandCount = selectedBands.size;
+    if (bandCount === 0) {
       Alert.alert("No artists selected", "Select artists in the Artists tab first.");
       return;
     }
@@ -40,7 +42,7 @@ export function SettingsScreen() {
     try {
       await syncArtistSetlists([...selectedBands]);
       await queryClient.invalidateQueries({ queryKey: ["all-cached-setlists"] });
-      Alert.alert("Done", `Synced setlists for ${selectedBands.size} artists.`);
+      Alert.alert("Done", `Synced setlists for ${bandCount} artists.`);
     } catch {
       Alert.alert("Error", "Setlist sync failed. Check your connection.");
     } finally {
@@ -122,6 +124,7 @@ export function SettingsScreen() {
           </View>
         </TouchableOpacity>
       </View>
+      <Text style={s.versionLabel}>v{Constants.expoConfig?.version ?? "—"}</Text>
     </SafeAreaView>
   );
 }
@@ -194,5 +197,11 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       height: 1,
       backgroundColor: colors.divider,
       marginHorizontal: spacing.md + spacing.md + 16 + spacing.md,
+    },
+    versionLabel: {
+      color: colors.textMuted,
+      fontSize: fontSizes.xs,
+      textAlign: "center",
+      paddingVertical: spacing.lg,
     },
   });

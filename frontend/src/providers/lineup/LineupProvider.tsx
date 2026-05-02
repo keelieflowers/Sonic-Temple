@@ -24,11 +24,11 @@ export const LineupProvider = ({ children }: { children: React.ReactNode }) => {
   const [selectedBands, setSelectedBands] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    getSelectedBands().then((saved) => {
-      if (saved.length > 0) {
-        setSelectedBands(new Set(saved));
-      }
-    });
+    getSelectedBands()
+      .then((saved) => {
+        if (saved.length > 0) setSelectedBands(new Set(saved));
+      })
+      .catch((err) => console.error("[LineupProvider] Failed to load saved bands:", err));
   }, []);
 
   const toggleBand = useCallback((name: string) => {

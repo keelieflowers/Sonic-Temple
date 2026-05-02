@@ -1,8 +1,8 @@
 import * as Notifications from "expo-notifications";
 import { BreakpointRow } from "./db";
 import { ScheduleEntry } from "@/src/data/schedule";
-
-const TRAVEL_MIN = 8;
+import { toMinutes } from "@/src/utils/time";
+import { TRAVEL_MIN } from "@/src/constants/timing";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -13,11 +13,6 @@ Notifications.setNotificationHandler({
     shouldShowList: true,
   }),
 });
-
-function toMinutes(time: string): number {
-  const [h, m] = time.split(":").map(Number);
-  return h * 60 + m;
-}
 
 function festivalDateTime(date: string, totalMinutes: number): Date {
   const d = new Date(date);
