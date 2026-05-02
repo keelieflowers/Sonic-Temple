@@ -66,7 +66,6 @@ export function BreakpointSheet({ entry, setlistResult, existing, onSave, onDele
   const [selectedTime, setSelectedTime] = useState<string | null>(
     existing?.type === "time" ? (existing.departureTime ?? null) : null
   );
-  const lastTapRef = useRef<{ index: number; time: number } | null>(null);
 
   const slideAnim = useRef(new Animated.Value(400)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -88,18 +87,16 @@ export function BreakpointSheet({ entry, setlistResult, existing, onSave, onDele
   const canSave = activeTab === "song" ? selectedSongIndex != null || arrivalSongIndex != null : selectedTime != null;
 
   const handleSongTap = (i: number) => {
-    const now = Date.now();
-    const last = lastTapRef.current;
-    if (last && last.index === i && now - last.time < 300) {
-      // Double-tap: toggle arrival marker
-      lastTapRef.current = null;
-      setArrivalSongIndex((prev) => (prev === i ? null : i));
-      if (selectedSongIndex === i) setSelectedSongIndex(null);
+    if (selectedSongIndex === i) {
+      // departure → arrival
+      setSelectedSongIndex(null);
+      setArrivalSongIndex(i);
+    } else if (arrivalSongIndex === i) {
+      // arrival → clear
+      setArrivalSongIndex(null);
     } else {
-      // Single tap: set departure
-      lastTapRef.current = { index: i, time: now };
-      setSelectedSongIndex((prev) => (prev === i ? null : i));
-      if (arrivalSongIndex === i) setArrivalSongIndex(null);
+      // none → departure
+      setSelectedSongIndex(i);
     }
   };
 
@@ -179,7 +176,7 @@ export function BreakpointSheet({ entry, setlistResult, existing, onSave, onDele
         <ScrollView style={s.scrollArea} contentContainerStyle={s.scrollContent}>
           {activeTab === "song" && hasSongs && (
             <>
-              <Text style={s.songHint}>Tap to mark departure · Double-tap to mark arrival</Text>
+              <Text style={s.songHint}>Tap to cycle: departure 🚩 → arrive 📍 → clear</Text>
               {songs.map((song, i) => {
                 const songMin = startMin + (i / songs.length) * duration;
                 const nextMin = i + 1 < songs.length

@@ -755,13 +755,16 @@ function SetCard({ entry, setlistResult, nowMinutes, isLiveDay, isFinished, colo
   })();
 
   return (
-    <View style={[s.card, isFinished && s.cardFinished]}>
+    <TouchableOpacity
+      style={[s.card, isFinished && s.cardFinished]}
+      onLongPress={() => setSheetOpen(true)}
+      delayLongPress={400}
+      activeOpacity={1}
+    >
       <TouchableOpacity
         style={s.cardHeader}
         onPress={() => setExpanded((v) => !v)}
-        onLongPress={() => setSheetOpen(true)}
         activeOpacity={0.7}
-        delayLongPress={400}
       >
         <Text style={s.artistName} numberOfLines={1}>{entry.artist}</Text>
         {setlistResult?.selectionMode === "festivalVenuePriority" && (
@@ -853,7 +856,7 @@ function SetCard({ entry, setlistResult, nowMinutes, isLiveDay, isFinished, colo
           )}
         </>
       )}
-    </View>
+    </TouchableOpacity>
   );
 }
 
