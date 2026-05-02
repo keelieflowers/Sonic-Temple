@@ -1,4 +1,5 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import * as WebBrowser from "expo-web-browser";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
@@ -15,7 +16,10 @@ import { fontSizes, radii, spacing } from "@/src/theme";
 import { BreakpointRow } from "@/src/services/db";
 import { ArtistShowResult } from "@/src/shared/Types";
 import { ScheduleEntry } from "@/src/data/schedule";
-import { scheduleBreakpointNotifications, cancelBreakpointNotifications } from "@/src/services/notifications";
+import {
+  scheduleBreakpointNotifications,
+  cancelBreakpointNotifications,
+} from "@/src/services/notifications";
 
 type Props = {
   entry: ScheduleEntry;
@@ -45,11 +49,43 @@ function minutesToHHMM(totalMinutes: number): string {
   return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
 }
 
-export function BreakpointSheet({ entry, setlistResult, existing, onSave, onDelete, onDropArtist, onClose }: Props) {
+function buildSetlistUrl(result: ArtistShowResult): string | null {
+  if (result.artistMatch?.url) return result.artistMatch.url;
+  if (result.artistMatch?.mbid && result.artistMatch?.name) {
+    const slug = result.artistMatch.name
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+    const mbidShort = result.artistMatch.mbid.split("-")[0];
+    return `https://www.setlist.fm/setlists/${slug}-${mbidShort}.html`;
+  }
+  return null;
+}
+
+// setlist.fm returns dates as DD-MM-YYYY
+function formatEventDate(dateStr: string): string {
+  const [day, month, year] = dateStr.split("-").map(Number);
+  return new Date(year, month - 1, day).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+}
+
+export function BreakpointSheet({
+  entry,
+  setlistResult,
+  existing,
+  onSave,
+  onDelete,
+  onDropArtist,
+  onClose,
+}: Props) {
   const colors = useColors();
   const s = styles(colors);
 
-  const songs = setlistResult?.latestSetlist?.sections.flatMap((sec) => sec.songs) ?? [];
+  const songs =
+    setlistResult?.latestSetlist?.sections.flatMap((sec) => sec.songs) ?? [];
   const hasSongs = songs.length > 0;
   const startMin = toMinutes(entry.startTime);
   const endMin = toMinutes(entry.endTime);
@@ -73,30 +109,47 @@ export function BreakpointSheet({ entry, setlistResult, existing, onSave, onDele
 
   useEffect(() => {
     Animated.parallel([
-      Animated.timing(fadeAnim, { toValue: 1, duration: 200, useNativeDriver: true }),
-      Animated.spring(slideAnim, { toValue: 0, tension: 65, friction: 11, useNativeDriver: true }),
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+      Animated.spring(slideAnim, {
+        toValue: 0,
+        tension: 65,
+        friction: 11,
+        useNativeDriver: true,
+      }),
     ]).start();
   }, []);
 
   const dismiss = () => {
     Animated.parallel([
-      Animated.timing(fadeAnim, { toValue: 0, duration: 150, useNativeDriver: true }),
-      Animated.timing(slideAnim, { toValue: 400, duration: 200, useNativeDriver: true }),
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 150,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 400,
+        duration: 200,
+        useNativeDriver: true,
+      }),
     ]).start(onClose);
   };
 
-  const canSave = activeTab === "song" ? selectedSongIndex != null || arrivalSongIndex != null : selectedTime != null;
+  const canSave =
+    activeTab === "song"
+      ? selectedSongIndex != null || arrivalSongIndex != null
+      : selectedTime != null;
 
   const handleSongTap = (i: number) => {
     if (selectedSongIndex === i) {
-      // departure → arrival
       setSelectedSongIndex(null);
       setArrivalSongIndex(i);
     } else if (arrivalSongIndex === i) {
-      // arrival → clear
       setArrivalSongIndex(null);
     } else {
-      // none → departure
       setSelectedSongIndex(i);
     }
   };
@@ -105,9 +158,12 @@ export function BreakpointSheet({ entry, setlistResult, existing, onSave, onDele
     let bp: BreakpointRow | null = null;
     if (activeTab === "song") {
       const depIdx = selectedSongIndex;
-      const nextSongMin = depIdx != null && depIdx + 1 < songs.length
-        ? startMin + ((depIdx + 1) / songs.length) * duration
-        : depIdx != null ? endMin : null;
+      const nextSongMin =
+        depIdx != null && depIdx + 1 < songs.length
+          ? startMin + ((depIdx + 1) / songs.length) * duration
+          : depIdx != null
+          ? endMin
+          : null;
       bp = {
         artist: entry.artist,
         type: "song",
@@ -137,11 +193,19 @@ export function BreakpointSheet({ entry, setlistResult, existing, onSave, onDele
     dismiss();
   };
 
-  // Build time slots at 5-min intervals for the set
   const timeSlots: string[] = [];
   for (let m = startMin + 5; m < endMin; m += 5) {
     timeSlots.push(minutesToHHMM(m));
   }
+
+  const setlistUrl = setlistResult ? buildSetlistUrl(setlistResult) : null;
+  const setlist = setlistResult?.latestSetlist;
+  const isFestival = setlistResult?.selectionMode === "festivalVenuePriority";
+
+  const metaParts: string[] = [];
+  if (setlist?.cityName) metaParts.push(setlist.cityName);
+  if (setlist?.eventDate) metaParts.push(formatEventDate(setlist.eventDate));
+  if (setlist?.songCount) metaParts.push(`${setlist.songCount} songs`);
 
   return (
     <Modal transparent animationType="none" onRequestClose={dismiss}>
@@ -149,16 +213,74 @@ export function BreakpointSheet({ entry, setlistResult, existing, onSave, onDele
         <Pressable style={{ flex: 1 }} onPress={dismiss} />
       </Animated.View>
 
-      <Animated.View style={[s.sheet, { transform: [{ translateY: slideAnim }] }]}>
+      <Animated.View
+        style={[s.sheet, { transform: [{ translateY: slideAnim }] }]}
+      >
         {/* Header */}
         <View style={s.header}>
-          <View style={s.headerText}>
-            <Text style={s.headerTitle}>Breakpoint</Text>
-            <Text style={s.headerArtist} numberOfLines={1}>{entry.artist}</Text>
+          <View style={s.headerLeft}>
+            <Text style={s.artistName} numberOfLines={1}>
+              {entry.artist}
+            </Text>
+            <Text style={s.setInfo}>
+              {entry.stage} · {entry.day} · {formatTime(startMin)}–
+              {formatTime(endMin)}
+            </Text>
           </View>
-          <TouchableOpacity onPress={dismiss} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
-            <FontAwesome name="times" size={18} color={colors.textMuted} />
-          </TouchableOpacity>
+          <View style={s.headerActions}>
+            {setlistUrl && (
+              <TouchableOpacity
+                onPress={() => WebBrowser.openBrowserAsync(setlistUrl)}
+                hitSlop={{ top: 10, bottom: 10, left: 12, right: 4 }}
+                style={s.linkBtn}
+              >
+                <FontAwesome
+                  name="external-link"
+                  size={15}
+                  color={colors.primary}
+                />
+              </TouchableOpacity>
+            )}
+            <TouchableOpacity
+              onPress={dismiss}
+              hitSlop={{ top: 10, bottom: 10, left: 4, right: 10 }}
+            >
+              <FontAwesome name="times" size={18} color={colors.textMuted} />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        {/* Setlist metadata strip */}
+        <View style={s.metaStrip}>
+          {setlist ? (
+            <>
+              <View style={[s.badge, isFestival ? s.badgeFestival : s.badgeRecent]}>
+                <Text
+                  style={[
+                    s.badgeText,
+                    isFestival ? s.badgeTextFestival : s.badgeTextRecent,
+                  ]}
+                >
+                  {isFestival ? "Festival" : "Recent"}
+                </Text>
+              </View>
+              <Text style={s.metaText} numberOfLines={1}>
+                {metaParts.join(" · ")}
+              </Text>
+            </>
+          ) : (
+            <Text style={s.metaEmpty}>No setlist data</Text>
+          )}
+        </View>
+
+        {/* When to leave */}
+        <View style={s.sectionHeader}>
+          <Text style={s.sectionTitle}>When to leave</Text>
+          {activeTab === "song" && hasSongs && (
+            <Text style={s.sectionHint}>
+              Tap to cycle: leave 🚩 → arrive 📍 → clear
+            </Text>
+          )}
         </View>
 
         {/* Tabs */}
@@ -168,73 +290,117 @@ export function BreakpointSheet({ entry, setlistResult, existing, onSave, onDele
               style={[s.tab, activeTab === "song" && s.tabActive]}
               onPress={() => setActiveTab("song")}
             >
-              <Text style={[s.tabText, activeTab === "song" && s.tabTextActive]}>By Song</Text>
+              <Text
+                style={[s.tabText, activeTab === "song" && s.tabTextActive]}
+              >
+                By Song
+              </Text>
             </TouchableOpacity>
           )}
           <TouchableOpacity
             style={[s.tab, activeTab === "time" && s.tabActive]}
             onPress={() => setActiveTab("time")}
           >
-            <Text style={[s.tabText, activeTab === "time" && s.tabTextActive]}>By Time</Text>
+            <Text
+              style={[s.tabText, activeTab === "time" && s.tabTextActive]}
+            >
+              By Time
+            </Text>
           </TouchableOpacity>
         </View>
 
         {/* Content */}
-        <ScrollView style={s.scrollArea} contentContainerStyle={s.scrollContent}>
-          {activeTab === "song" && hasSongs && (
-            <>
-              <Text style={s.songHint}>Tap to cycle: departure 🚩 → arrive 📍 → clear</Text>
-              {songs.map((song, i) => {
-                const songMin = startMin + (i / songs.length) * duration;
-                const nextMin = i + 1 < songs.length
+        <ScrollView
+          style={s.scrollArea}
+          contentContainerStyle={s.scrollContent}
+        >
+          {activeTab === "song" &&
+            hasSongs &&
+            songs.map((song, i) => {
+              const songMin = startMin + (i / songs.length) * duration;
+              const nextMin =
+                i + 1 < songs.length
                   ? startMin + ((i + 1) / songs.length) * duration
                   : endMin;
-                const isDeparture = selectedSongIndex === i;
-                const isArrival = arrivalSongIndex === i;
-                return (
-                  <TouchableOpacity
-                    key={i}
-                    style={[s.row, isDeparture && s.rowSelected, isArrival && s.rowArrival]}
-                    onPress={() => handleSongTap(i)}
-                    activeOpacity={0.7}
-                  >
-                    <View style={s.rowLeft}>
-                      <Text style={s.rowTime}>{formatTime(songMin)}</Text>
-                      <Text
-                        style={[s.rowLabel, isDeparture && s.rowLabelSelected, isArrival && s.rowLabelArrival]}
-                        numberOfLines={1}
-                      >
-                        {song}
+              const isDeparture = selectedSongIndex === i;
+              const isArrival = arrivalSongIndex === i;
+              return (
+                <TouchableOpacity
+                  key={i}
+                  style={[
+                    s.row,
+                    isDeparture && s.rowSelected,
+                    isArrival && s.rowArrival,
+                  ]}
+                  onPress={() => handleSongTap(i)}
+                  activeOpacity={0.7}
+                >
+                  <View style={s.rowLeft}>
+                    <Text style={s.rowTime}>{formatTime(songMin)}</Text>
+                    <Text
+                      style={[
+                        s.rowLabel,
+                        isDeparture && s.rowLabelSelected,
+                        isArrival && s.rowLabelArrival,
+                      ]}
+                      numberOfLines={1}
+                    >
+                      {song}
+                    </Text>
+                  </View>
+                  <View style={s.rowRight}>
+                    {isDeparture && (
+                      <Text style={s.rowDeparture}>
+                        leave ~{formatTime(nextMin)}
                       </Text>
-                    </View>
-                    <View style={s.rowRight}>
-                      {isDeparture && <Text style={s.rowDeparture}>leave ~{formatTime(nextMin)}</Text>}
-                      {isArrival && <Text style={s.rowArrivalLabel}>must arrive</Text>}
-                      {isDeparture && <FontAwesome name="flag" size={14} color={colors.primary} />}
-                      {isArrival && <FontAwesome name="map-marker" size={14} color={colors.success} />}
-                    </View>
-                  </TouchableOpacity>
-                );
-              })}
-            </>
-          )}
+                    )}
+                    {isArrival && (
+                      <Text style={s.rowArrivalLabel}>must arrive</Text>
+                    )}
+                    {isDeparture && (
+                      <FontAwesome
+                        name="flag"
+                        size={14}
+                        color={colors.primary}
+                      />
+                    )}
+                    {isArrival && (
+                      <FontAwesome
+                        name="map-marker"
+                        size={14}
+                        color={colors.success}
+                      />
+                    )}
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
 
-          {activeTab === "time" && timeSlots.map((slot) => {
-            const [h, m] = slot.split(":").map(Number);
-            const mins = h * 60 + m;
-            const selected = selectedTime === slot;
-            return (
-              <TouchableOpacity
-                key={slot}
-                style={[s.row, selected && s.rowSelected]}
-                onPress={() => setSelectedTime(slot)}
-                activeOpacity={0.7}
-              >
-                <Text style={[s.rowTimeOnly, selected && s.rowLabelSelected]}>{formatTime(mins)}</Text>
-                {selected && <FontAwesome name="flag" size={14} color={colors.primary} />}
-              </TouchableOpacity>
-            );
-          })}
+          {activeTab === "time" &&
+            timeSlots.map((slot) => {
+              const [h, m] = slot.split(":").map(Number);
+              const mins = h * 60 + m;
+              const selected = selectedTime === slot;
+              return (
+                <TouchableOpacity
+                  key={slot}
+                  style={[s.row, selected && s.rowSelected]}
+                  onPress={() => setSelectedTime(slot)}
+                  activeOpacity={0.7}
+                >
+                  <Text style={[s.rowTimeOnly, selected && s.rowLabelSelected]}>
+                    {formatTime(mins)}
+                  </Text>
+                  {selected && (
+                    <FontAwesome
+                      name="flag"
+                      size={14}
+                      color={colors.primary}
+                    />
+                  )}
+                </TouchableOpacity>
+              );
+            })}
         </ScrollView>
 
         {/* Footer */}
@@ -253,7 +419,13 @@ export function BreakpointSheet({ entry, setlistResult, existing, onSave, onDele
               <Text style={s.saveBtnText}>Save Breakpoint</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={s.dropBtn} onPress={() => { onDropArtist(); dismiss(); }}>
+          <TouchableOpacity
+            style={s.dropBtn}
+            onPress={() => {
+              onDropArtist();
+              dismiss();
+            }}
+          >
             <FontAwesome name="times-circle" size={13} color={colors.error} />
             <Text style={s.dropBtnText}>Drop {entry.artist} from my lineup</Text>
           </TouchableOpacity>
@@ -277,40 +449,105 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       backgroundColor: colors.background,
       borderTopLeftRadius: radii.lg,
       borderTopRightRadius: radii.lg,
-      maxHeight: "80%",
+      maxHeight: "85%",
       shadowColor: "#000",
       shadowOffset: { width: 0, height: -3 },
       shadowOpacity: 0.15,
       shadowRadius: 8,
       elevation: 10,
     },
+    // Header
     header: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: "flex-start",
       paddingHorizontal: spacing.lg,
       paddingTop: spacing.lg,
+      paddingBottom: spacing.md,
+    },
+    headerLeft: { flex: 1 },
+    artistName: {
+      color: colors.text,
+      fontSize: fontSizes.xl,
+      fontWeight: "700",
+      letterSpacing: -0.3,
+    },
+    setInfo: {
+      color: colors.textMuted,
+      fontSize: fontSizes.xs,
+      marginTop: 3,
+    },
+    headerActions: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.md,
+      paddingTop: 2,
+    },
+    linkBtn: {},
+    // Metadata strip
+    metaStrip: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.sm,
+      paddingHorizontal: spacing.lg,
       paddingBottom: spacing.md,
       borderBottomWidth: 1,
       borderBottomColor: colors.divider,
     },
-    headerText: { flex: 1 },
-    headerTitle: {
+    badge: {
+      paddingHorizontal: 8,
+      paddingVertical: 3,
+      borderRadius: radii.sm,
+    },
+    badgeFestival: {
+      backgroundColor: "#F5C40028",
+    },
+    badgeRecent: {
+      backgroundColor: colors.cardSecondary,
+    },
+    badgeText: {
+      fontSize: fontSizes.xs,
+      fontWeight: "700",
+      letterSpacing: 0.3,
+    },
+    badgeTextFestival: {
+      color: "#A07A00",
+    },
+    badgeTextRecent: {
+      color: colors.textMuted,
+    },
+    metaText: {
+      flex: 1,
+      color: colors.textMuted,
+      fontSize: fontSizes.xs,
+    },
+    metaEmpty: {
+      color: colors.textMuted,
+      fontSize: fontSizes.xs,
+      fontStyle: "italic",
+    },
+    // Section header
+    sectionHeader: {
+      paddingHorizontal: spacing.lg,
+      paddingTop: spacing.md,
+      paddingBottom: spacing.xs,
+      gap: 2,
+    },
+    sectionTitle: {
       color: colors.textMuted,
       fontSize: fontSizes.xs,
       fontWeight: "600",
-      letterSpacing: 0.5,
       textTransform: "uppercase",
+      letterSpacing: 0.5,
     },
-    headerArtist: {
-      color: colors.text,
-      fontSize: fontSizes.lg,
-      fontWeight: "700",
-      marginTop: 2,
+    sectionHint: {
+      color: colors.textMuted,
+      fontSize: fontSizes.xs,
     },
+    // Tabs
     tabs: {
       flexDirection: "row",
       paddingHorizontal: spacing.md,
-      paddingTop: spacing.sm,
+      paddingBottom: spacing.xs,
       gap: spacing.sm,
     },
     tab: {
@@ -319,10 +556,18 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       borderRadius: radii.sm,
     },
     tabActive: { backgroundColor: colors.cardSecondary },
-    tabText: { color: colors.textMuted, fontSize: fontSizes.sm, fontWeight: "600" },
+    tabText: {
+      color: colors.textMuted,
+      fontSize: fontSizes.sm,
+      fontWeight: "600",
+    },
     tabTextActive: { color: colors.text },
-    scrollArea: { maxHeight: 320 },
-    scrollContent: { paddingHorizontal: spacing.md, paddingVertical: spacing.sm },
+    // Scroll content
+    scrollArea: { maxHeight: 300 },
+    scrollContent: {
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm,
+    },
     row: {
       flexDirection: "row",
       alignItems: "center",
@@ -334,16 +579,25 @@ const styles = (colors: ReturnType<typeof useColors>) =>
     },
     rowSelected: { backgroundColor: colors.cardSecondary },
     rowArrival: { backgroundColor: colors.success + "18" },
-    songHint: { color: colors.textMuted, fontSize: fontSizes.xs, marginBottom: spacing.sm, paddingHorizontal: spacing.xs },
-    rowLabelArrival: { color: colors.success, fontWeight: "600" as const },
-    rowArrivalLabel: { color: colors.success, fontSize: fontSizes.xs },
-    rowLeft: { flex: 1, flexDirection: "row", alignItems: "center", gap: spacing.md },
-    rowRight: { flexDirection: "row", alignItems: "center", gap: spacing.sm },
+    rowLeft: {
+      flex: 1,
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.md,
+    },
+    rowRight: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.sm,
+    },
     rowTime: { color: colors.textMuted, fontSize: fontSizes.xs, width: 72 },
     rowTimeOnly: { flex: 1, color: colors.text, fontSize: fontSizes.md },
     rowLabel: { flex: 1, color: colors.text, fontSize: fontSizes.sm },
     rowLabelSelected: { color: colors.primary, fontWeight: "600" },
+    rowLabelArrival: { color: colors.success, fontWeight: "600" },
     rowDeparture: { color: colors.textMuted, fontSize: fontSizes.xs },
+    rowArrivalLabel: { color: colors.success, fontSize: fontSizes.xs },
+    // Footer
     footer: {
       gap: spacing.sm,
       padding: spacing.lg,
@@ -355,23 +609,6 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       flexDirection: "row",
       gap: spacing.sm,
     },
-    dropBtn: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: spacing.sm,
-      paddingVertical: spacing.sm,
-    },
-    dropBtnText: { color: colors.error, fontSize: fontSizes.sm },
-    deleteBtn: {
-      flex: 1,
-      paddingVertical: spacing.md,
-      borderRadius: radii.md,
-      borderWidth: 1,
-      borderColor: colors.error,
-      alignItems: "center",
-    },
-    deleteBtnText: { color: colors.error, fontSize: fontSizes.sm, fontWeight: "600" },
     saveBtn: {
       flex: 2,
       paddingVertical: spacing.md,
@@ -380,5 +617,30 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       alignItems: "center",
     },
     saveBtnDisabled: { opacity: 0.4 },
-    saveBtnText: { color: "#fff", fontSize: fontSizes.sm, fontWeight: "700" },
+    saveBtnText: {
+      color: "#fff",
+      fontSize: fontSizes.sm,
+      fontWeight: "700",
+    },
+    deleteBtn: {
+      flex: 1,
+      paddingVertical: spacing.md,
+      borderRadius: radii.md,
+      borderWidth: 1,
+      borderColor: colors.error,
+      alignItems: "center",
+    },
+    deleteBtnText: {
+      color: colors.error,
+      fontSize: fontSizes.sm,
+      fontWeight: "600",
+    },
+    dropBtn: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: spacing.sm,
+      paddingVertical: spacing.sm,
+    },
+    dropBtnText: { color: colors.error, fontSize: fontSizes.sm },
   });
