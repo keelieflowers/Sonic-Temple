@@ -2,6 +2,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as WebBrowser from "expo-web-browser";
 import React, { useEffect, useRef, useState } from "react";
 import {
+  ActivityIndicator,
   Animated,
   Modal,
   PanResponder,
@@ -12,6 +13,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useQueryClient } from "@tanstack/react-query";
 import { useColors } from "@/src/providers/theme/ThemeProvider";
 import { fontSizes, radii, spacing } from "@/src/theme";
 import { BreakpointRow } from "@/src/services/db";
@@ -21,6 +23,7 @@ import {
   scheduleBreakpointNotifications,
   cancelBreakpointNotifications,
 } from "@/src/services/notifications";
+import { syncArtistSetlists } from "@/src/services/sync";
 import { toMinutes, formatTime, minutesToHHMM } from "@/src/utils/time";
 
 type Props = {
@@ -67,6 +70,18 @@ export function BreakpointSheet({
 }: Props) {
   const colors = useColors();
   const s = styles(colors);
+  const queryClient = useQueryClient();
+  const [syncing, setSyncing] = useState(false);
+
+  const handleRefresh = async () => {
+    setSyncing(true);
+    try {
+      await syncArtistSetlists([entry.artist]);
+      await queryClient.invalidateQueries({ queryKey: ["all-cached-setlists"] });
+    } finally {
+      setSyncing(false);
+    }
+  };
 
   const songs =
     setlistResult?.latestSetlist?.sections.flatMap((sec) => sec.songs) ?? [];
@@ -254,6 +269,16 @@ export function BreakpointSheet({
                 />
               </TouchableOpacity>
             )}
+            <TouchableOpacity
+              onPress={handleRefresh}
+              disabled={syncing}
+              hitSlop={{ top: 10, bottom: 10, left: 8, right: 8 }}
+            >
+              {syncing
+                ? <ActivityIndicator size="small" color={colors.primary} />
+                : <FontAwesome name="refresh" size={15} color={colors.primary} />
+              }
+            </TouchableOpacity>
             <TouchableOpacity
               onPress={dismiss}
               hitSlop={{ top: 10, bottom: 10, left: 4, right: 10 }}
