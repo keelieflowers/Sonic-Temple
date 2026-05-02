@@ -1,6 +1,7 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React, { useState } from "react";
 import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Constants from "expo-constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useQueryClient } from "@tanstack/react-query";
 import { useColors } from "@/src/providers/theme/ThemeProvider";
@@ -123,6 +124,7 @@ export function SettingsScreen() {
           </View>
         </TouchableOpacity>
       </View>
+      <Text style={s.versionLabel}>v{Constants.expoConfig?.version ?? "—"}</Text>
     </SafeAreaView>
   );
 }
@@ -195,5 +197,11 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       height: 1,
       backgroundColor: colors.divider,
       marginHorizontal: spacing.md + spacing.md + 16 + spacing.md,
+    },
+    versionLabel: {
+      color: colors.textMuted,
+      fontSize: fontSizes.xs,
+      textAlign: "center",
+      paddingVertical: spacing.lg,
     },
   });
