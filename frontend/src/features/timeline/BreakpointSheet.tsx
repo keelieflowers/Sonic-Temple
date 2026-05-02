@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
   Modal,
+  PanResponder,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -106,6 +107,29 @@ export function BreakpointSheet({
 
   const slideAnim = useRef(new Animated.Value(400)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
+  const dismissRef = useRef<() => void>(() => {});
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (_, gs) => gs.dy > 2,
+      onPanResponderMove: (_, gs) => {
+        if (gs.dy > 0) slideAnim.setValue(gs.dy);
+      },
+      onPanResponderRelease: (_, gs) => {
+        if (gs.dy > 80 || gs.vy > 0.5) {
+          dismissRef.current();
+        } else {
+          Animated.spring(slideAnim, {
+            toValue: 0,
+            tension: 65,
+            friction: 11,
+            useNativeDriver: true,
+          }).start();
+        }
+      },
+    })
+  ).current;
 
   useEffect(() => {
     Animated.parallel([
@@ -137,6 +161,7 @@ export function BreakpointSheet({
       }),
     ]).start(onClose);
   };
+  dismissRef.current = dismiss;
 
   const canSave =
     activeTab === "song"
@@ -216,6 +241,11 @@ export function BreakpointSheet({
       <Animated.View
         style={[s.sheet, { transform: [{ translateY: slideAnim }] }]}
       >
+        {/* Drag handle */}
+        <View style={s.dragHandleArea} {...panResponder.panHandlers}>
+          <View style={s.dragPill} />
+        </View>
+
         {/* Header */}
         <View style={s.header}>
           <View style={s.headerLeft}>
@@ -455,6 +485,18 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       shadowOpacity: 0.15,
       shadowRadius: 8,
       elevation: 10,
+    },
+    // Drag handle
+    dragHandleArea: {
+      alignItems: "center",
+      paddingTop: spacing.sm,
+      paddingBottom: spacing.xs,
+    },
+    dragPill: {
+      width: 36,
+      height: 4,
+      borderRadius: 2,
+      backgroundColor: colors.divider,
     },
     // Header
     header: {
