@@ -15,6 +15,7 @@ import { fontSizes, radii, spacing } from "@/src/theme";
 import { BreakpointRow } from "@/src/services/db";
 import { ArtistShowResult } from "@/src/shared/Types";
 import { ScheduleEntry } from "@/src/data/schedule";
+import { scheduleBreakpointNotifications, cancelBreakpointNotifications } from "@/src/services/notifications";
 
 type Props = {
   entry: ScheduleEntry;
@@ -101,31 +102,37 @@ export function BreakpointSheet({ entry, setlistResult, existing, onSave, onDele
   };
 
   const handleSave = () => {
+    let bp: BreakpointRow | null = null;
     if (activeTab === "song") {
       const depIdx = selectedSongIndex;
       const nextSongMin = depIdx != null && depIdx + 1 < songs.length
         ? startMin + ((depIdx + 1) / songs.length) * duration
         : depIdx != null ? endMin : null;
-      onSave({
+      bp = {
         artist: entry.artist,
         type: "song",
         songIndex: depIdx,
         departureTime: nextSongMin != null ? minutesToHHMM(nextSongMin) : null,
         arrivalSongIndex: arrivalSongIndex,
-      });
+      };
     } else if (activeTab === "time" && selectedTime != null) {
-      onSave({
+      bp = {
         artist: entry.artist,
         type: "time",
         songIndex: null,
         departureTime: selectedTime,
         arrivalSongIndex: null,
-      });
+      };
+    }
+    if (bp) {
+      onSave(bp);
+      scheduleBreakpointNotifications(entry, bp, songs);
     }
     dismiss();
   };
 
   const handleDelete = () => {
+    cancelBreakpointNotifications(entry.artist);
     onDelete();
     dismiss();
   };

@@ -5,6 +5,7 @@ import {
   getBreakpoints,
   saveBreakpoint,
 } from "@/src/services/db";
+import { cancelBreakpointNotifications } from "@/src/services/notifications";
 
 type BreakpointContextValue = {
   breakpoints: Map<string, BreakpointRow>;
@@ -35,7 +36,7 @@ export const BreakpointProvider = ({ children }: { children: React.ReactNode }) 
   }, []);
 
   const removeBreakpoint = useCallback(async (artist: string) => {
-    await deleteBreakpoint(artist);
+    await Promise.all([deleteBreakpoint(artist), cancelBreakpointNotifications(artist)]);
     setBreakpoints((prev) => {
       const next = new Map(prev);
       next.delete(artist);
