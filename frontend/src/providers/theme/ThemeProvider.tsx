@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo } from "react";
+import React, { createContext, useContext } from "react";
 import { ColorTokens, colors } from "@/src/theme";
 
 type ThemeContextValue = {
@@ -8,8 +8,7 @@ type ThemeContextValue = {
 const ThemeContext = createContext<ThemeContextValue>({ colors });
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const value = useMemo(() => ({ colors }), []);
-  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
+  return <ThemeContext.Provider value={{ colors }}>{children}</ThemeContext.Provider>;
 };
 
 export const useColors = () => useContext(ThemeContext).colors;

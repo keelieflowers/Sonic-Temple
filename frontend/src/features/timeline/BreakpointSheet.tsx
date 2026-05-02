@@ -21,6 +21,7 @@ import {
   scheduleBreakpointNotifications,
   cancelBreakpointNotifications,
 } from "@/src/services/notifications";
+import { toMinutes, formatTime, minutesToHHMM } from "@/src/utils/time";
 
 type Props = {
   entry: ScheduleEntry;
@@ -31,24 +32,6 @@ type Props = {
   onDropArtist: () => void;
   onClose: () => void;
 };
-
-function toMinutes(time: string): number {
-  const [h, m] = time.split(":").map(Number);
-  return h * 60 + m;
-}
-
-function formatTime(totalMinutes: number): string {
-  const h = Math.floor(totalMinutes / 60);
-  const m = Math.floor(totalMinutes % 60);
-  const hDisplay = h % 12 || 12;
-  return `${hDisplay}:${String(m).padStart(2, "0")} ${h >= 12 ? "PM" : "AM"}`;
-}
-
-function minutesToHHMM(totalMinutes: number): string {
-  const h = Math.floor(totalMinutes / 60);
-  const m = Math.floor(totalMinutes % 60);
-  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
-}
 
 function buildSetlistUrl(result: ArtistShowResult): string | null {
   if (result.artistMatch?.url) return result.artistMatch.url;

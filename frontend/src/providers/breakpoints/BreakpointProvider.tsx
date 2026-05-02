@@ -25,9 +25,11 @@ export const BreakpointProvider = ({ children }: { children: React.ReactNode }) 
   const [breakpoints, setBreakpoints] = useState<Map<string, BreakpointRow>>(new Map());
 
   useEffect(() => {
-    getBreakpoints().then((rows) => {
-      setBreakpoints(new Map(rows.map((r) => [r.artist, r])));
-    });
+    getBreakpoints()
+      .then((rows) => {
+        setBreakpoints(new Map(rows.map((r) => [r.artist, r])));
+      })
+      .catch((err) => console.error("[BreakpointProvider] Failed to load breakpoints:", err));
   }, []);
 
   const setBreakpoint = useCallback(async (bp: BreakpointRow) => {

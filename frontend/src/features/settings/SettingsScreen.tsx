@@ -32,7 +32,8 @@ export function SettingsScreen() {
   };
 
   const handleForceSetlistSync = async () => {
-    if (selectedBands.size === 0) {
+    const bandCount = selectedBands.size;
+    if (bandCount === 0) {
       Alert.alert("No artists selected", "Select artists in the Artists tab first.");
       return;
     }
@@ -40,7 +41,7 @@ export function SettingsScreen() {
     try {
       await syncArtistSetlists([...selectedBands]);
       await queryClient.invalidateQueries({ queryKey: ["all-cached-setlists"] });
-      Alert.alert("Done", `Synced setlists for ${selectedBands.size} artists.`);
+      Alert.alert("Done", `Synced setlists for ${bandCount} artists.`);
     } catch {
       Alert.alert("Error", "Setlist sync failed. Check your connection.");
     } finally {
