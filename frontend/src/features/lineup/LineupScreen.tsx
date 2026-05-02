@@ -53,7 +53,6 @@ export function ArtistsScreen() {
           onChangeText={setSearchQuery}
           autoCapitalize="none"
           autoCorrect={false}
-          clearButtonMode="while-editing"
         />
         {isSearching && (
           <TouchableOpacity onPress={() => setSearchQuery("")} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
