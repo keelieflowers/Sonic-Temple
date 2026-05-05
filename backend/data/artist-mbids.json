@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "artists": {
     "my chemical romance": {
       "inputBandName": "My Chemical Romance",
@@ -63,15 +63,15 @@
     },
     "alpha wolf": {
       "inputBandName": "Alpha Wolf",
-      "mbid": "bd894021-3f45-45a4-b188-fc0b1d16e21a",
+      "mbid": "ea89deb6-10f0-4c85-bf32-cc1102dc8d58",
       "matchedArtistName": "Alpha Wolf",
-      "updatedAt": "2026-04-29T22:53:25.632Z"
+      "updatedAt": "2026-05-05T22:53:25.632Z"
     },
     "citizen": {
       "inputBandName": "Citizen",
-      "mbid": "9a5b3d06-9d9f-4ec9-bbb9-5b5e47c7cbd8",
+      "mbid": "bd743cdc-74a1-4669-bcf9-3942594dc09a",
       "matchedArtistName": "Citizen",
-      "updatedAt": "2026-04-29T22:53:31.055Z"
+      "updatedAt": "2026-05-05T22:53:31.055Z"
     },
     "coheed and cambria": {
       "inputBandName": "Coheed and Cambria",
@@ -129,9 +129,9 @@
     },
     "attila": {
       "inputBandName": "Attila",
-      "mbid": "e849a193-3cd6-49c4-89f5-e108f5756459",
+      "mbid": "f0b1619b-6b76-4633-9a83-85b11a17ad98",
       "matchedArtistName": "Attila",
-      "updatedAt": "2026-04-29T23:37:42.333Z"
+      "updatedAt": "2026-05-05T23:37:42.333Z"
     },
     "catch your breath": {
       "inputBandName": "Catch Your Breath",
@@ -141,9 +141,9 @@
     },
     "all time low": {
       "inputBandName": "All Time Low",
-      "mbid": "89fa1615-11b5-444f-b378-6f9b61b944a8",
+      "mbid": "62162215-b023-4f0e-84bd-1e9412d5b32c",
       "matchedArtistName": "All Time Low",
-      "updatedAt": "2026-04-29T23:38:21.651Z"
+      "updatedAt": "2026-05-05T23:38:21.651Z"
     },
     "pierce the veil": {
       "inputBandName": "Pierce The Veil",
@@ -165,9 +165,9 @@
     },
     "lit": {
       "inputBandName": "Lit",
-      "mbid": "b9fb0c05-86e4-4fef-8d0b-c3576dd7d6ee",
-      "matchedArtistName": "Bo Lit",
-      "updatedAt": "2026-04-30T00:08:59.709Z"
+      "mbid": "5ccb9a53-092d-4806-b337-470a582893d7",
+      "matchedArtistName": "Lit",
+      "updatedAt": "2026-05-05T00:08:59.709Z"
     },
     "daughtry": {
       "inputBandName": "Daughtry",
@@ -177,15 +177,15 @@
     },
     "soil": {
       "inputBandName": "Soil",
-      "mbid": "9dd8e506-67cc-4846-a5d8-6fe78804bf4b",
-      "matchedArtistName": "Acidic Soil",
-      "updatedAt": "2026-04-30T00:09:00.951Z"
+      "mbid": "5ccb9a53-092d-4806-b337-470a582893d7",
+      "matchedArtistName": "SOiL",
+      "updatedAt": "2026-05-05T00:09:00.951Z"
     },
     "hinder": {
       "inputBandName": "Hinder",
-      "mbid": "b2704b11-9e3f-4785-abbd-4191653113a8",
+      "mbid": "39b22a9e-59dd-412b-ac3c-0725c807c72b",
       "matchedArtistName": "Hinder",
-      "updatedAt": "2026-04-30T00:09:01.574Z"
+      "updatedAt": "2026-05-05T00:09:01.574Z"
     },
     "powerman 5000": {
       "inputBandName": "Powerman 5000",
@@ -213,9 +213,9 @@
     },
     "dope": {
       "inputBandName": "DOPE",
-      "mbid": "9dfc5c29-3cd0-4a23-8e5a-4d0cbc856435",
-      "matchedArtistName": "2 Dope",
-      "updatedAt": "2026-04-30T00:09:17.319Z"
+      "mbid": "c48ff56b-0a0e-453c-be56-741d47c33056",
+      "matchedArtistName": "Dope",
+      "updatedAt": "2026-05-05T00:09:17.319Z"
     },
     "halestorm": {
       "inputBandName": "Halestorm",
@@ -303,9 +303,9 @@
     },
     "bloodywood": {
       "inputBandName": "Bloodywood",
-      "mbid": "fd5c04e2-34a1-4bb2-afd1-b526c4819379",
+      "mbid": "4e478f4f-a1e5-4ac9-84a3-f58f5c6454ab",
       "matchedArtistName": "Bloodywood",
-      "updatedAt": "2026-04-30T00:31:55.591Z"
+      "updatedAt": "2026-05-05T00:31:55.591Z"
     },
     "conquer divide": {
       "inputBandName": "Conquer Divide",
@@ -387,9 +387,9 @@
     },
     "bush": {
       "inputBandName": "BUSH",
-      "mbid": "ec370707-9879-4d55-91c4-12312260c527",
-      "matchedArtistName": "Atomic Bush",
-      "updatedAt": "2026-04-30T00:53:28.125Z"
+      "mbid": "93ccd76c-3790-4435-a8bf-02bc26294b93",
+      "matchedArtistName": "Bush",
+      "updatedAt": "2026-05-05T00:53:28.125Z"
     },
     "architects": {
       "inputBandName": "Architects",
@@ -405,15 +405,15 @@
     },
     "p.o.d.": {
       "inputBandName": "P.O.D.",
-      "mbid": "b3b81e34-2bfa-4d3c-be35-8a528f06fcd0",
+      "mbid": "57e79d57-b795-475e-9fa2-5dd9d5513b8c",
       "matchedArtistName": "P.O.D.",
-      "updatedAt": "2026-04-30T00:53:31.724Z"
+      "updatedAt": "2026-05-05T00:53:31.724Z"
     },
     "thrown": {
       "inputBandName": "THROWN",
-      "mbid": "2ac0666d-2890-4832-8fde-feb98168dce5",
+      "mbid": "fd012922-72b2-4aa7-b796-012f2177c5af",
       "matchedArtistName": "Thrown",
-      "updatedAt": "2026-04-30T00:53:33.514Z"
+      "updatedAt": "2026-05-05T00:53:33.514Z"
     },
     "alestorm": {
       "inputBandName": "Alestorm",
@@ -471,9 +471,9 @@
     },
     "novelists": {
       "inputBandName": "Novelists",
-      "mbid": "fb0b5025-8554-43cd-856a-90e6db8bb032",
+      "mbid": "4ba1bd10-44fb-4335-a295-37f26c8a5f37",
       "matchedArtistName": "Novelists",
-      "updatedAt": "2026-04-30T22:26:48.474Z"
+      "updatedAt": "2026-05-05T22:26:48.474Z"
     },
     "palaye royale": {
       "inputBandName": "Palaye Royale",
@@ -481,11 +481,11 @@
       "matchedArtistName": "Palaye Royale",
       "updatedAt": "2026-04-30T22:26:49.084Z"
     },
-    "cky": {
-      "inputBandName": "CKY",
-      "mbid": "4ed35152-5207-4101-8904-6cb5d159b545",
-      "matchedArtistName": "CKY",
-      "updatedAt": "2026-04-30T22:26:49.685Z"
+    "gideon": {
+      "inputBandName": "Gideon",
+      "mbid": "cd7df2ab-c974-4438-b440-baf38332d7aa",
+      "matchedArtistName": "Gideon",
+      "updatedAt": "2026-05-05T22:26:49.685Z"
     },
     "knuckle puck": {
       "inputBandName": "Knuckle Puck",
@@ -495,9 +495,9 @@
     },
     "snot": {
       "inputBandName": "Snot",
-      "mbid": "9252d017-0596-480d-8495-0f2947dd8708",
+      "mbid": "ede553ac-e7ee-443a-9d63-765e7e31e424",
       "matchedArtistName": "Snot",
-      "updatedAt": "2026-04-30T22:26:51.494Z"
+      "updatedAt": "2026-05-05T22:26:51.494Z"
     },
     "make them suffer": {
       "inputBandName": "Make Them Suffer",
@@ -513,9 +513,9 @@
     },
     "biohazard": {
       "inputBandName": "Biohazard",
-      "mbid": "1671eead-c0e9-4a1c-a5c5-fe16de4411f2",
+      "mbid": "be5fe2ab-007c-4610-8d53-d81675d06a09",
       "matchedArtistName": "Biohazard",
-      "updatedAt": "2026-04-30T22:27:05.135Z"
+      "updatedAt": "2026-05-05T22:27:05.135Z"
     },
     "august burns red": {
       "inputBandName": "August Burns Red",
@@ -525,9 +525,9 @@
     },
     "carcass": {
       "inputBandName": "Carcass",
-      "mbid": "dcf567cb-1753-4b4a-b233-2074f8f5e924",
+      "mbid": "d50a4b89-ff1f-4659-9fde-f76f8d5b3c89",
       "matchedArtistName": "CARCASS",
-      "updatedAt": "2026-04-30T22:27:06.906Z"
+      "updatedAt": "2026-05-05T22:27:06.906Z"
     },
     "motion city soundtrack": {
       "inputBandName": "Motion City Soundtrack",
@@ -543,9 +543,9 @@
     },
     "marilyn manson": {
       "inputBandName": "Marilyn Manson",
-      "mbid": "80cadd99-f560-41e3-babd-16292bbd248a",
+      "mbid": "5dfdca28-9ddc-4853-933c-8bc97d87beec",
       "matchedArtistName": "Marilyn Manson",
-      "updatedAt": "2026-04-30T22:27:09.939Z"
+      "updatedAt": "2026-05-05T22:27:09.939Z"
     },
     "state champs": {
       "inputBandName": "State Champs",
@@ -567,9 +567,15 @@
     },
     "body count feat. ice-t": {
       "inputBandName": "Body Count feat. Ice-T",
-      "mbid": "f6ceb3a1-6d49-416f-9e64-97155108eb44",
+      "mbid": "8b12db5d-54a9-4014-9fa8-d646ac291361",
       "matchedArtistName": "Body Count feat. Ice‐T",
-      "updatedAt": "2026-04-30T22:27:12.356Z"
+      "updatedAt": "2026-05-05T22:27:12.356Z"
+    },
+    "flyleaf with lacey sturm": {
+      "inputBandName": "Flyleaf with Lacey Sturm",
+      "mbid": "9011971a-df29-4b57-8889-2e5e9a645cbe",
+      "matchedArtistName": "Flyleaf",
+      "updatedAt": "2026-05-05T22:27:12.356Z"
     }
   }
 }
