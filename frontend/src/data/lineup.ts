@@ -96,7 +96,7 @@ export const SONIC_TEMPLE_2026: DayLineup[] = [
       "All That Remains",
       "Novelists",
       "Palaye Royale",
-      "CKY",
+      "Gideon",
       "Knuckle Puck",
       "Pop Evil",
       "Alpha Wolf",
