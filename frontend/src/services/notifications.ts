@@ -2,7 +2,7 @@ import * as Notifications from "expo-notifications";
 import { BreakpointRow } from "./db";
 import { ScheduleEntry } from "@/src/data/schedule";
 import { toMinutes } from "@/src/utils/time";
-import { TRAVEL_MIN } from "@/src/constants/timing";
+import { TRAVEL_MIN, MUST_SEE_NOTICE_MIN } from "@/src/constants/timing";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -107,6 +107,30 @@ export async function scheduleBreakpointNotifications(
       }
     }
   }
+}
+
+export async function scheduleMustSeeNotification(entry: ScheduleEntry): Promise<void> {
+  const granted = await requestNotificationPermissions();
+  if (!granted) return;
+
+  const fireDate = festivalDateTime(entry.date, toMinutes(entry.startTime) - MUST_SEE_NOTICE_MIN);
+  if (fireDate.getTime() <= Date.now()) return;
+
+  await Notifications.scheduleNotificationAsync({
+    identifier: `must-see-${entry.artist}`,
+    content: {
+      title: `★ ${entry.artist} in ${MUST_SEE_NOTICE_MIN} min`,
+      body: `Head to ${entry.stage} · ${entry.startTime}`,
+    },
+    trigger: {
+      type: Notifications.SchedulableTriggerInputTypes.DATE,
+      date: fireDate,
+    },
+  });
+}
+
+export async function cancelMustSeeNotification(artist: string): Promise<void> {
+  await Notifications.cancelScheduledNotificationAsync(`must-see-${artist}`);
 }
 
 export async function cancelBreakpointNotifications(artist: string): Promise<void> {

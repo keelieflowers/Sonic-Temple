@@ -2,11 +2,11 @@ import { ArtistShowResult } from "@/src/shared/Types";
 
 const BASE_URL = process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:3001";
 
-export async function fetchArtistShows(bandNames: string[]): Promise<ArtistShowResult[]> {
+export async function fetchArtistShows(bandNames: string[], forceRefresh = false): Promise<ArtistShowResult[]> {
   const response = await fetch(`${BASE_URL}/api/festival/artist-shows`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ bandNames }),
+    body: JSON.stringify({ bandNames, forceRefresh }),
   });
 
   if (!response.ok) {

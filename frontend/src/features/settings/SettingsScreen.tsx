@@ -8,7 +8,6 @@ import { useColors } from "@/src/providers/theme/ThemeProvider";
 import { useLineup } from "@/src/providers/lineup/LineupProvider";
 import { fontSizes, radii, spacing } from "@/src/theme";
 import { syncArtistSetlists } from "@/src/services/sync";
-import { refreshMbidCache } from "@/src/services/api";
 import { scheduleTestNotification, requestNotificationPermissions } from "@/src/services/notifications";
 
 export function SettingsScreen() {
@@ -18,7 +17,7 @@ export function SettingsScreen() {
   const { selectedBands } = useLineup();
 
   const [syncingSetlists, setSyncingSetlists] = useState(false);
-  const [syncingMbids, setSyncingMbids] = useState(false);
+  const [forceSyncingSetlists, setForceSyncingSetlists] = useState(false);
   const [testingSent, setTestingSent] = useState(false);
 
   const handleTestNotification = async () => {
@@ -50,15 +49,21 @@ export function SettingsScreen() {
     }
   };
 
-  const handleRefreshMbids = async () => {
-    setSyncingMbids(true);
+  const handleForceBackendRefresh = async () => {
+    const bandCount = selectedBands.size;
+    if (bandCount === 0) {
+      Alert.alert("No artists selected", "Select artists in the Artists tab first.");
+      return;
+    }
+    setForceSyncingSetlists(true);
     try {
-      await refreshMbidCache();
-      Alert.alert("Done", "MBID cache refreshed.");
+      await syncArtistSetlists([...selectedBands], undefined, true);
+      await queryClient.invalidateQueries({ queryKey: ["all-cached-setlists"] });
+      Alert.alert("Done", `Force-refreshed setlists for ${bandCount} artists.`);
     } catch {
       Alert.alert("Error", "Could not reach the backend. Is it running?");
     } finally {
-      setSyncingMbids(false);
+      setForceSyncingSetlists(false);
     }
   };
 
@@ -109,18 +114,18 @@ export function SettingsScreen() {
         <View style={s.divider} />
 
         <TouchableOpacity
-          style={[s.row, syncingMbids && s.rowDisabled]}
-          onPress={handleRefreshMbids}
+          style={[s.row, forceSyncingSetlists && s.rowDisabled]}
+          onPress={handleForceBackendRefresh}
           activeOpacity={0.7}
-          disabled={syncingMbids}
+          disabled={forceSyncingSetlists}
         >
-          {syncingMbids
+          {forceSyncingSetlists
             ? <ActivityIndicator size="small" color={colors.primary} />
             : <FontAwesome name="refresh" size={16} color={colors.primary} />
           }
           <View style={s.rowText}>
-            <Text style={s.rowLabel}>Refresh backend cache</Text>
-            <Text style={s.rowSub} numberOfLines={1}>Force backend to re-fetch artist IDs and setlists from source</Text>
+            <Text style={s.rowLabel}>Force refresh setlists</Text>
+            <Text style={s.rowSub} numberOfLines={1}>Bypass backend cache and pull latest from Setlist.fm for {selectedBands.size} artists</Text>
           </View>
         </TouchableOpacity>
       </View>

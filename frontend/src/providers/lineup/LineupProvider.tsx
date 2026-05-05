@@ -7,6 +7,8 @@ import {
   setBandHidden,
   setBandTier,
 } from "@/src/services/db";
+import { SCHEDULE } from "@/src/data/schedule";
+import { scheduleMustSeeNotification, cancelMustSeeNotification } from "@/src/services/notifications";
 
 type BandMeta = { hidden: boolean; tier: string | null };
 
@@ -87,21 +89,23 @@ export const LineupProvider = ({ children }: { children: React.ReactNode }) => {
   );
 
   const toggleMustSee = useCallback((name: string) => {
+    const entry = SCHEDULE.find((e) => e.artist === name);
     setBandMeta((prev) => {
       const next = new Map(prev);
       const meta = next.get(name);
       if (!meta) {
-        // Not in lineup yet — add and mark must-see
         upsertBand(name).then(() => setBandTier(name, "must_see"));
         next.set(name, { hidden: false, tier: "must_see" });
+        if (entry) scheduleMustSeeNotification(entry);
       } else if (meta.tier === "must_see") {
         setBandTier(name, null);
         next.set(name, { ...meta, tier: null });
+        cancelMustSeeNotification(name);
       } else {
-        // Also unhide if they were hidden — must-see implies you want them in timeline
         if (meta.hidden) setBandHidden(name, false);
         setBandTier(name, "must_see");
         next.set(name, { ...meta, hidden: false, tier: "must_see" });
+        if (entry) scheduleMustSeeNotification(entry);
       }
       return next;
     });

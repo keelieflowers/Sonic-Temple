@@ -17,7 +17,8 @@ export type SyncResult = {
 
 export async function syncArtistSetlists(
   bandNames: string[],
-  onProgress?: (progress: SyncProgress) => void
+  onProgress?: (progress: SyncProgress) => void,
+  forceRefresh = false
 ): Promise<SyncResult> {
   const total = bandNames.length;
   let completed = 0;
@@ -32,7 +33,7 @@ export async function syncArtistSetlists(
     let results: ArtistShowResult[] = [];
 
     try {
-      results = await fetchArtistShows(batch);
+      results = await fetchArtistShows(batch, forceRefresh);
     } catch {
       failed += batch.length;
       completed += batch.length;
