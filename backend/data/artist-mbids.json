@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
+  "version": "0.2.0",
   "artists": {
     "my chemical romance": {
       "inputBandName": "My Chemical Romance",
@@ -720,6 +720,12 @@
       "mbid": "16456fed-c9f2-4adf-b6ea-97b648c474d2",
       "matchedArtistName": "Dance Gavin Dance",
       "updatedAt": "2026-05-02T16:15:50.460Z"
+    },
+    "flyleaf": {
+      "inputBandName": "Flyleaf",
+      "mbid": "9011971a-df29-4b57-8889-2e5e9a645cbe",
+      "matchedArtistName": "Flyleaf",
+      "updatedAt": "2026-05-05T23:01:44.625Z"
     }
   }
 }
