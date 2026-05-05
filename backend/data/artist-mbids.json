@@ -576,6 +576,156 @@
       "mbid": "9011971a-df29-4b57-8889-2e5e9a645cbe",
       "matchedArtistName": "Flyleaf",
       "updatedAt": "2026-05-05T22:27:12.356Z"
+    },
+    "new found glory": {
+      "inputBandName": "New Found Glory",
+      "mbid": "6acb932e-840d-47ac-8e0d-725ad8a6e52c",
+      "matchedArtistName": "New Found Glory",
+      "updatedAt": "2026-05-02T15:57:19.331Z"
+    },
+    "nekrogoblikon": {
+      "inputBandName": "Nekrogoblikon",
+      "mbid": "a0befa17-6652-43c7-a211-3c84432f15cd",
+      "matchedArtistName": "Nekrogoblikon",
+      "updatedAt": "2026-05-02T16:03:17.741Z"
+    },
+    "disembodied tyrant": {
+      "inputBandName": "Disembodied Tyrant",
+      "mbid": "5dc7897b-c10c-4009-ab93-e7f2c8a76c21",
+      "matchedArtistName": "Disembodied Tyrant",
+      "updatedAt": "2026-05-02T16:03:19.551Z"
+    },
+    "suffocation": {
+      "inputBandName": "Suffocation",
+      "mbid": "5db9f569-cadd-4f8b-b460-d4031b0b3716",
+      "matchedArtistName": "Suffocation",
+      "updatedAt": "2026-05-02T16:03:20.751Z"
+    },
+    "fozzy": {
+      "inputBandName": "Fozzy",
+      "mbid": "d6cc88c5-5d20-4997-ab0c-3e455c6e3c24",
+      "matchedArtistName": "Fozzy",
+      "updatedAt": "2026-05-02T16:03:21.356Z"
+    },
+    "fleshgod apocalypse": {
+      "inputBandName": "Fleshgod Apocalypse",
+      "mbid": "48cb4248-889d-45ed-8462-acb29c002a8d",
+      "matchedArtistName": "Fleshgod Apocalypse",
+      "updatedAt": "2026-05-02T16:03:21.949Z"
+    },
+    "carnifex": {
+      "inputBandName": "Carnifex",
+      "mbid": "b463a831-8ea0-40c4-9a56-34cfe0896931",
+      "matchedArtistName": "Carnifex",
+      "updatedAt": "2026-05-02T16:03:23.155Z"
+    },
+    "l.s. dunes": {
+      "inputBandName": "L.S. Dunes",
+      "mbid": "5bd58bb8-7afc-4664-9b7e-77a687e00137",
+      "matchedArtistName": "L.S. Dunes",
+      "updatedAt": "2026-05-02T16:03:23.742Z"
+    },
+    "bodysnatcher": {
+      "inputBandName": "Bodysnatcher",
+      "mbid": "70f5a84c-9b0e-4440-ad46-0bbb690c161b",
+      "matchedArtistName": "Bodysnatcher",
+      "updatedAt": "2026-05-02T16:03:25.525Z"
+    },
+    "napalm death": {
+      "inputBandName": "Napalm Death",
+      "mbid": "ce7bba8b-026b-4aa6-bddb-f98ed6d595e4",
+      "matchedArtistName": "Napalm Death",
+      "updatedAt": "2026-05-02T16:03:26.787Z"
+    },
+    "cattle decapitation": {
+      "inputBandName": "Cattle Decapitation",
+      "mbid": "0bfb489b-7da8-4b28-b144-eee7599ed1e9",
+      "matchedArtistName": "Cattle Decapitation",
+      "updatedAt": "2026-05-02T16:03:29.768Z"
+    },
+    "thy art is murder": {
+      "inputBandName": "Thy Art Is Murder",
+      "mbid": "d846000e-71cf-4eb3-a462-9badab2c3eca",
+      "matchedArtistName": "Thy Art Is Murder",
+      "updatedAt": "2026-05-02T16:03:30.961Z"
+    },
+    "dying fetus": {
+      "inputBandName": "Dying Fetus",
+      "mbid": "f76167bb-c117-4022-8b6b-54c796edf5c9",
+      "matchedArtistName": "Dying Fetus",
+      "updatedAt": "2026-05-02T16:03:43.115Z"
+    },
+    "whitechapel": {
+      "inputBandName": "Whitechapel",
+      "mbid": "48d41e5c-0d42-4ef4-8bad-ff9e9736f19d",
+      "matchedArtistName": "Whitechapel",
+      "updatedAt": "2026-05-02T16:03:43.701Z"
+    },
+    "slaughter to prevail": {
+      "inputBandName": "Slaughter To Prevail",
+      "mbid": "4cda7e49-b8cc-4efe-a8f6-b294d812496d",
+      "matchedArtistName": "Slaughter to Prevail",
+      "updatedAt": "2026-05-02T16:03:44.927Z"
+    },
+    "cradle of filth": {
+      "inputBandName": "Cradle Of Filth",
+      "mbid": "7e26cbe1-b8f5-4215-af82-e43d5f8ff308",
+      "matchedArtistName": "Cradle of Filth",
+      "updatedAt": "2026-05-02T16:03:46.133Z"
+    },
+    "behemoth": {
+      "inputBandName": "Behemoth",
+      "mbid": "9f877f3a-e408-4aad-853c-5addeb0a6a14",
+      "matchedArtistName": "Behemoth",
+      "updatedAt": "2026-05-02T16:03:47.308Z"
+    },
+    "not enough space": {
+      "inputBandName": "Not Enough Space",
+      "mbid": "b0d52057-f2f4-49ea-b886-39e392e00cb5",
+      "matchedArtistName": "Not Enough Space",
+      "updatedAt": "2026-05-02T16:15:35.164Z"
+    },
+    "everclear": {
+      "inputBandName": "Everclear",
+      "mbid": "3604c99d-c146-4276-aa0c-9376d333aeb8",
+      "matchedArtistName": "Everclear",
+      "updatedAt": "2026-05-02T16:15:35.763Z"
+    },
+    "woe, is me": {
+      "inputBandName": "Woe, Is Me",
+      "mbid": "52ebe714-8400-45c6-9091-e9c3238b4eb6",
+      "matchedArtistName": "Woe is Me",
+      "updatedAt": "2026-05-02T16:15:36.383Z"
+    },
+    "lorna shore": {
+      "inputBandName": "Lorna Shore",
+      "mbid": "e86fc1f5-d632-44b2-8aea-38f83aadffe8",
+      "matchedArtistName": "Lorna Shore",
+      "updatedAt": "2026-05-02T16:15:38.180Z"
+    },
+    "in flames": {
+      "inputBandName": "In Flames",
+      "mbid": "31745282-b1ea-4d62-939f-226b14d68e7c",
+      "matchedArtistName": "In Flames",
+      "updatedAt": "2026-05-02T16:15:49.253Z"
+    },
+    "chiodos": {
+      "inputBandName": "Chiodos",
+      "mbid": "b755836a-0cb6-4577-a678-55a5a6402d70",
+      "matchedArtistName": "Chiodos",
+      "updatedAt": "2026-05-02T16:15:49.847Z"
+    },
+    "dance gavin dance": {
+      "inputBandName": "Dance Gavin Dance",
+      "mbid": "16456fed-c9f2-4adf-b6ea-97b648c474d2",
+      "matchedArtistName": "Dance Gavin Dance",
+      "updatedAt": "2026-05-02T16:15:50.460Z"
+    },
+    "gideon": {
+      "inputBandName": "Gideon",
+      "mbid": "e86444be-91ef-461c-839a-cd154aeef767",
+      "matchedArtistName": "Gideon",
+      "updatedAt": "2026-05-05T22:06:29.999Z"
     }
   }
 }
