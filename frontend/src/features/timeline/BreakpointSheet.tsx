@@ -25,6 +25,7 @@ import {
 } from "@/src/services/notifications";
 import { syncArtistSetlists } from "@/src/services/sync";
 import { toMinutes, formatTime, minutesToHHMM } from "@/src/utils/time";
+import { useLineup } from "@/src/providers/lineup/LineupProvider";
 
 type Props = {
   entry: ScheduleEntry;
@@ -70,6 +71,8 @@ export function BreakpointSheet({
 }: Props) {
   const colors = useColors();
   const s = styles(colors);
+  const { isMustSee, toggleMustSee } = useLineup();
+  const mustSee = isMustSee(entry.artist);
   const queryClient = useQueryClient();
   const [syncing, setSyncing] = useState(false);
 
@@ -247,9 +250,12 @@ export function BreakpointSheet({
         {/* Header */}
         <View style={s.header}>
           <View style={s.headerLeft}>
-            <Text style={s.artistName} numberOfLines={1}>
-              {entry.artist}
-            </Text>
+            <TouchableOpacity style={s.artistNameRow} onPress={() => toggleMustSee(entry.artist)} activeOpacity={0.7} hitSlop={{ top: 8, bottom: 8, left: 8, right: 0 }}>
+              <FontAwesome name={mustSee ? "star" : "star-o"} size={18} color={mustSee ? colors.warning : colors.textMuted} />
+              <Text style={s.artistName} numberOfLines={1}>
+                {entry.artist}
+              </Text>
+            </TouchableOpacity>
             <Text style={s.setInfo}>
               {entry.stage} · {entry.day} · {formatTime(startMin)}–
               {formatTime(endMin)}
@@ -257,32 +263,17 @@ export function BreakpointSheet({
           </View>
           <View style={s.headerActions}>
             {setlistUrl && (
-              <TouchableOpacity
-                onPress={() => WebBrowser.openBrowserAsync(setlistUrl)}
-                hitSlop={{ top: 10, bottom: 10, left: 12, right: 4 }}
-                style={s.linkBtn}
-              >
-                <FontAwesome
-                  name="external-link"
-                  size={15}
-                  color={colors.primary}
-                />
+              <TouchableOpacity onPress={() => WebBrowser.openBrowserAsync(setlistUrl)} hitSlop={{ top: 13, bottom: 13, left: 13, right: 13 }}>
+                <FontAwesome name="external-link" size={15} color={colors.primary} />
               </TouchableOpacity>
             )}
-            <TouchableOpacity
-              onPress={handleRefresh}
-              disabled={syncing}
-              hitSlop={{ top: 10, bottom: 10, left: 8, right: 8 }}
-            >
+            <TouchableOpacity onPress={handleRefresh} disabled={syncing} hitSlop={{ top: 13, bottom: 13, left: 13, right: 13 }}>
               {syncing
                 ? <ActivityIndicator size="small" color={colors.primary} />
                 : <FontAwesome name="refresh" size={15} color={colors.primary} />
               }
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={dismiss}
-              hitSlop={{ top: 10, bottom: 10, left: 4, right: 10 }}
-            >
+            <TouchableOpacity onPress={dismiss} hitSlop={{ top: 13, bottom: 13, left: 13, right: 13 }}>
               <FontAwesome name="times" size={18} color={colors.textMuted} />
             </TouchableOpacity>
           </View>
@@ -316,7 +307,7 @@ export function BreakpointSheet({
           <Text style={s.sectionTitle}>When to leave</Text>
           {activeTab === "song" && hasSongs && (
             <Text style={s.sectionHint}>
-              Tap to cycle: leave 🚩 → arrive 📍 → clear
+              Tap to cycle: leave → arrive → clear
             </Text>
           )}
         </View>
@@ -515,6 +506,11 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       paddingBottom: spacing.md,
     },
     headerLeft: { flex: 1 },
+    artistNameRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.sm,
+    },
     artistName: {
       color: colors.text,
       fontSize: fontSizes.xl,
@@ -532,7 +528,6 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       gap: spacing.md,
       paddingTop: 2,
     },
-    linkBtn: {},
     // Metadata strip
     metaStrip: {
       flexDirection: "row",

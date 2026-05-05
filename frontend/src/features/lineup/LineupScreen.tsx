@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Image, SectionList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, Image, SectionList, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useColors } from "@/src/providers/theme/ThemeProvider";
@@ -8,7 +8,7 @@ import { useLineup } from "@/src/providers/lineup/LineupProvider";
 
 export function ArtistsScreen() {
   const colors = useColors();
-  const { lineup, isSelected, toggleBand, selectDay, deselectDay } = useLineup();
+  const { lineup, isSelected, isMustSee, toggleBand, toggleMustSee, selectDay, deselectDay } = useLineup();
   const [collapsedDays, setCollapsedDays] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState("");
   const searchRef = useRef<TextInput>(null);
@@ -121,13 +121,25 @@ export function ArtistsScreen() {
         }}
         renderItem={({ item }) => {
           const selected = isSelected(item);
+          const mustSee = isMustSee(item);
           return (
             <TouchableOpacity
               style={[s.row, selected && s.rowSelected]}
               onPress={() => toggleBand(item)}
+              onLongPress={() => {
+                Alert.alert(item, undefined, [
+                  {
+                    text: mustSee ? "Remove Must See" : "★ Mark as Must See",
+                    onPress: () => toggleMustSee(item),
+                  },
+                  { text: "Cancel", style: "cancel" },
+                ]);
+              }}
+              delayLongPress={400}
               activeOpacity={0.7}
             >
               <Text style={[s.bandName, !selected && s.bandNameDim]}>{item}</Text>
+              {mustSee && <Text style={s.mustSeeStar}>★</Text>}
               <View style={[s.checkbox, selected && s.checkboxSelected]}>
                 {selected && <Text style={s.checkmark}>✓</Text>}
               </View>
@@ -265,5 +277,10 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       color: colors.card,
       fontSize: fontSizes.xs,
       fontWeight: "700",
+    },
+    mustSeeStar: {
+      color: colors.warning,
+      fontSize: fontSizes.sm,
+      marginRight: spacing.xs,
     },
   });

@@ -27,7 +27,7 @@ export function SetCard({ entry, setlistResult, nowMinutes, isLiveDay, isFinishe
   const colors = useColors();
   const s = styles(colors);
   const { getBreakpoint, setBreakpoint, removeBreakpoint } = useBreakpoints();
-  const { toggleBand } = useLineup();
+  const { toggleBand, isMustSee } = useLineup();
   const startMin = toMinutes(entry.startTime);
   const endMin = toMinutes(entry.endTime);
   const duration = endMin - startMin;
@@ -74,6 +74,9 @@ export function SetCard({ entry, setlistResult, nowMinutes, isLiveDay, isFinishe
         delayLongPress={400}
         activeOpacity={0.7}
       >
+        {isMustSee(entry.artist) && (
+          <FontAwesome name="star" size={12} color={colors.warning} />
+        )}
         <Text style={s.artistName} numberOfLines={1}>{entry.artist}</Text>
         {setlistResult?.selectionMode === "festivalVenuePriority" && (
           <FontAwesome name="star" size={12} color={colors.success} />

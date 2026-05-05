@@ -18,7 +18,9 @@ export async function initDb(): Promise<void> {
     PRAGMA journal_mode = WAL;
 
     CREATE TABLE IF NOT EXISTS selected_bands (
-      name TEXT PRIMARY KEY NOT NULL
+      name   TEXT PRIMARY KEY NOT NULL,
+      hidden INTEGER NOT NULL DEFAULT 0,
+      tier   TEXT
     );
 
     CREATE TABLE IF NOT EXISTS setlists (
@@ -39,29 +41,52 @@ export async function initDb(): Promise<void> {
   // Migrations — safe to run repeatedly, ignored if column already exists
   try {
     await db.execAsync(`ALTER TABLE breakpoints ADD COLUMN arrival_song_index INTEGER;`);
-  } catch {
-    // column already exists on this device, nothing to do
-  }
+  } catch {}
+  try {
+    await db.execAsync(`ALTER TABLE selected_bands ADD COLUMN hidden INTEGER NOT NULL DEFAULT 0;`);
+  } catch {}
+  try {
+    await db.execAsync(`ALTER TABLE selected_bands ADD COLUMN tier TEXT;`);
+  } catch {}
 }
 
 // Selected bands
 
-export async function getSelectedBands(): Promise<string[]> {
+export type BandRow = {
+  name: string;
+  hidden: number;
+  tier: string | null;
+};
+
+export async function getSelectedBands(): Promise<BandRow[]> {
   const db = getDb();
-  const rows = await db.getAllAsync<{ name: string }>(
-    "SELECT name FROM selected_bands ORDER BY name"
+  return db.getAllAsync<BandRow>(
+    "SELECT name, hidden, tier FROM selected_bands ORDER BY name"
   );
-  return rows.map((r) => r.name);
 }
 
-export async function saveSelectedBands(names: string[]): Promise<void> {
+export async function upsertBand(name: string): Promise<void> {
   const db = getDb();
-  await db.withTransactionAsync(async () => {
-    await db.runAsync("DELETE FROM selected_bands");
-    for (const name of names) {
-      await db.runAsync("INSERT INTO selected_bands (name) VALUES (?)", [name]);
-    }
-  });
+  await db.runAsync(
+    `INSERT INTO selected_bands (name, hidden, tier) VALUES (?, 0, NULL) ON CONFLICT(name) DO NOTHING`,
+    [name]
+  );
+}
+
+export async function setBandHidden(name: string, hidden: boolean): Promise<void> {
+  const db = getDb();
+  await db.runAsync(
+    "UPDATE selected_bands SET hidden = ? WHERE name = ?",
+    [hidden ? 1 : 0, name]
+  );
+}
+
+export async function setBandTier(name: string, tier: string | null): Promise<void> {
+  const db = getDb();
+  await db.runAsync(
+    "UPDATE selected_bands SET tier = ? WHERE name = ?",
+    [tier, name]
+  );
 }
 
 // Setlist cache
