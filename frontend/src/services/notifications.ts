@@ -15,7 +15,8 @@ Notifications.setNotificationHandler({
 });
 
 function festivalDateTime(date: string, totalMinutes: number): Date {
-  const d = new Date(date);
+  const [year, month, day] = date.split("-").map(Number);
+  const d = new Date(year, month - 1, day); // local time, avoids UTC-midnight timezone shift
   d.setHours(Math.floor(totalMinutes / 60), Math.floor(totalMinutes % 60), 0, 0);
   return d;
 }

@@ -1,6 +1,8 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import React, { useState } from "react";
-import { ActivityIndicator, Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import React, { useCallback, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useQueryClient } from "@tanstack/react-query";
@@ -18,6 +20,18 @@ export function SettingsScreen() {
 
   const [syncingSetlists, setSyncingSetlists] = useState(false);
   const [forceSyncingSetlists, setForceSyncingSetlists] = useState(false);
+  const [scheduledNotifs, setScheduledNotifs] = useState<Notifications.NotificationRequest[]>([]);
+
+  const loadScheduledNotifs = useCallback(async () => {
+    const all = await Notifications.getAllScheduledNotificationsAsync();
+    setScheduledNotifs(all.sort((a, b) => {
+      const aSeconds = (a.trigger as any).seconds ?? 0;
+      const bSeconds = (b.trigger as any).seconds ?? 0;
+      return aSeconds - bSeconds;
+    }));
+  }, []);
+
+  useFocusEffect(useCallback(() => { loadScheduledNotifs(); }, [loadScheduledNotifs]));
   const [testingSent, setTestingSent] = useState(false);
 
   const handleTestNotification = async () => {
@@ -28,6 +42,7 @@ export function SettingsScreen() {
     }
     await scheduleTestNotification();
     setTestingSent(true);
+    loadScheduledNotifs();
     setTimeout(() => setTestingSent(false), 6000);
   };
 
@@ -67,8 +82,15 @@ export function SettingsScreen() {
     }
   };
 
+  function notifIcon(id: string) {
+    if (id.startsWith("must-see-")) return { name: "star" as const, color: colors.warning };
+    if (id.startsWith("bp-depart-")) return { name: "flag" as const, color: colors.primary };
+    return { name: "map-marker" as const, color: colors.success };
+  }
+
   return (
     <SafeAreaView style={s.container} edges={["top"]}>
+      <ScrollView contentContainerStyle={s.scrollContent}>
       <Text style={s.screenTitle}>Settings</Text>
 
       <View style={s.section}>
@@ -90,6 +112,34 @@ export function SettingsScreen() {
           </View>
           {testingSent && <FontAwesome name="check" size={14} color={colors.success} />}
         </TouchableOpacity>
+
+        {scheduledNotifs.length > 0 && (
+          <View style={s.notifList}>
+            {scheduledNotifs.map((n) => {
+              const icon = notifIcon(n.identifier);
+              const trigger = n.trigger as any;
+              let triggerDate: Date | null = null;
+              if (trigger.type === "timeInterval" && trigger.seconds) {
+                triggerDate = new Date(Date.now() + trigger.seconds * 1000);
+              }
+              const timeStr = triggerDate
+                ? triggerDate.toLocaleString("en-US", { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })
+                : null;
+              return (
+                <View key={n.identifier} style={s.notifRow}>
+                  <FontAwesome name={icon.name} size={12} color={icon.color} style={s.notifIcon} />
+                  <View style={s.notifText}>
+                    <View style={s.notifTitleRow}>
+                      <Text style={s.notifTitle} numberOfLines={1}>{n.content.title}</Text>
+                      {timeStr && <Text style={s.notifTime}>{timeStr}</Text>}
+                    </View>
+                    {n.content.body && <Text style={s.notifBody} numberOfLines={1}>{n.content.body}</Text>}
+                  </View>
+                </View>
+              );
+            })}
+          </View>
+        )}
       </View>
 
       <View style={s.section}>
@@ -130,6 +180,7 @@ export function SettingsScreen() {
         </TouchableOpacity>
       </View>
       <Text style={s.versionLabel}>v{Constants.expoConfig?.version ?? "—"}</Text>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -203,6 +254,31 @@ const styles = (colors: ReturnType<typeof useColors>) =>
       backgroundColor: colors.divider,
       marginHorizontal: spacing.md + spacing.md + 16 + spacing.md,
     },
+    scrollContent: {
+      paddingBottom: spacing.xl,
+    },
+    notifList: {
+      marginHorizontal: spacing.md,
+      marginTop: spacing.xs,
+      backgroundColor: colors.card,
+      borderRadius: radii.md,
+      overflow: "hidden",
+    },
+    notifRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.divider,
+      gap: spacing.sm,
+    },
+    notifIcon: { width: 16, textAlign: "center" },
+    notifText: { flex: 1 },
+    notifTitleRow: { flexDirection: "row", justifyContent: "space-between", alignItems: "baseline", gap: spacing.sm },
+    notifTitle: { color: colors.text, fontSize: fontSizes.sm, fontWeight: "500", flex: 1 },
+    notifBody: { color: colors.textMuted, fontSize: fontSizes.xs, marginTop: 1 },
+    notifTime: { color: colors.textMuted, fontSize: fontSizes.xs },
     versionLabel: {
       color: colors.textMuted,
       fontSize: fontSizes.xs,
