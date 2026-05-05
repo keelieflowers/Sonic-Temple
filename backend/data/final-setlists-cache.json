@@ -30875,6 +30875,44 @@
           "error": "Setlist API 404: {\n   \"code\" : 404,\n   \"status\" : \"Not Found\",\n   \"message\" : \"not found\",\n   \"timestamp\" : \"2026-05-05T22:06:32.959+0000\"\n}"
         }
       ]
+    },
+    "gideon": {
+      "generatedAt": "2026-05-05T22:20:33.333Z",
+      "expiresAt": "2026-05-06T22:20:33.333Z",
+      "results": [
+        {
+          "inputBandName": "Gideon",
+          "artistMatch": {
+            "mbid": "cd7df2ab-c974-4438-b440-baf38332d7aa",
+            "name": "Gideon"
+          },
+          "latestSetlist": {
+            "id": "4b77f35e",
+            "venueId": "6bd78682",
+            "eventDate": "18-04-2026",
+            "lastUpdated": "2026-04-23T00:47:01.297+0000",
+            "artistName": "Gideon",
+            "venueName": "Chilkoot Charlie's",
+            "cityName": "Anchorage",
+            "state": "Alaska",
+            "countryCode": "US",
+            "countryName": "United States",
+            "sections": [
+              {
+                "name": "Set 1",
+                "songs": [
+                  "Wrong One",
+                  "Push It Back",
+                  "SLEEP"
+                ]
+              }
+            ],
+            "songCount": 3
+          },
+          "status": "ok",
+          "selectionMode": "recencyFallback"
+        }
+      ]
     }
   }
 }
