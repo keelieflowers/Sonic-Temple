@@ -726,6 +726,12 @@
       "mbid": "9011971a-df29-4b57-8889-2e5e9a645cbe",
       "matchedArtistName": "Flyleaf",
       "updatedAt": "2026-05-05T23:01:44.625Z"
+    },
+    "cky": {
+      "inputBandName": "CKY",
+      "mbid": "4ed35152-5207-4101-8904-6cb5d159b545",
+      "matchedArtistName": "CKY",
+      "updatedAt": "2026-05-05T23:39:41.713Z"
     }
   }
 }
