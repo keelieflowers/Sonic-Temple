@@ -315,7 +315,7 @@
     },
     "avatar": {
       "inputBandName": "Avatar",
-      "mbid": "e51c3136-b94d-49de-8f1e-19faf3ef3566",
+      "mbid": "a8d77515-f7b7-4d71-9646-8446a3b2a341",
       "matchedArtistName": "Avatar",
       "updatedAt": "2026-04-30T00:31:56.810Z"
     },
@@ -393,9 +393,9 @@
     },
     "architects": {
       "inputBandName": "Architects",
-      "mbid": "d67eb114-0109-47fd-98d8-c68b9f15822f",
+      "mbid": "05dffdbe-dc6e-4c8d-a075-50a09c4cb45c",
       "matchedArtistName": "Architects",
-      "updatedAt": "2026-04-30T00:53:28.712Z"
+      "updatedAt": "2026-05-06T00:53:28.712Z"
     },
     "the amity affliction": {
       "inputBandName": "The Amity Affliction",
@@ -429,9 +429,9 @@
     },
     "polaris": {
       "inputBandName": "Polaris",
-      "mbid": "286431ba-af78-4fc8-9bd5-c20ab0ed4b8c",
+      "mbid": "6ffb7be4-0a53-4014-853d-83790cd5e091",
       "matchedArtistName": "Polaris",
-      "updatedAt": "2026-04-30T00:53:36.540Z"
+      "updatedAt": "2026-05-06T00:53:36.540Z"
     },
     "thrice": {
       "inputBandName": "Thrice",
@@ -643,11 +643,11 @@
       "matchedArtistName": "Cattle Decapitation",
       "updatedAt": "2026-05-02T16:03:29.768Z"
     },
-    "thy art is murder": {
-      "inputBandName": "Thy Art Is Murder",
-      "mbid": "d846000e-71cf-4eb3-a462-9badab2c3eca",
-      "matchedArtistName": "Thy Art Is Murder",
-      "updatedAt": "2026-05-02T16:03:30.961Z"
+    "200 stab wounds": {
+      "inputBandName": "200 Stab Wounds",
+      "mbid": "e9c41776-b083-443d-af79-4c6923db6db2",
+      "matchedArtistName": "200 Stab Wounds",
+      "updatedAt": "2026-05-06T16:03:30.961Z"
     },
     "dying fetus": {
       "inputBandName": "Dying Fetus",
