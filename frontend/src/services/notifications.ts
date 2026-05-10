@@ -2,7 +2,7 @@ import * as Notifications from "expo-notifications";
 import { BreakpointRow } from "./db";
 import { ScheduleEntry } from "@/src/data/schedule";
 import { toMinutes } from "@/src/utils/time";
-import { TRAVEL_MIN, MUST_SEE_NOTICE_MIN } from "@/src/constants/timing";
+import { MUST_SEE_NOTICE_MIN } from "@/src/constants/timing";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -65,9 +65,6 @@ export async function scheduleBreakpointNotifications(
   if (!granted) return;
 
   const now = Date.now();
-  const startMin = toMinutes(entry.startTime);
-  const endMin = toMinutes(entry.endTime);
-  const duration = endMin - startMin;
 
   // Departure reminder — fires at bp.departureTime
   if (bp.departureTime) {
@@ -87,12 +84,11 @@ export async function scheduleBreakpointNotifications(
     }
   }
 
-  // Arrival reminder — fires TRAVEL_MIN before the arrival song
-  if (bp.arrivalSongIndex != null && songs.length > 0) {
+  // Arrival reminder — fires at the pre-stored time (locked in when breakpoint was saved)
+  if (bp.arrivalSongIndex != null && bp.arrivalNotificationTime) {
     const song = songs[bp.arrivalSongIndex];
     if (song) {
-      const songMin = startMin + (bp.arrivalSongIndex / songs.length) * duration;
-      const fireDate = festivalDateTime(entry.date, songMin - TRAVEL_MIN);
+      const fireDate = festivalDateTime(entry.date, toMinutes(bp.arrivalNotificationTime));
       if (fireDate.getTime() > now) {
         await Notifications.scheduleNotificationAsync({
           identifier: `bp-arrive-${entry.artist}`,

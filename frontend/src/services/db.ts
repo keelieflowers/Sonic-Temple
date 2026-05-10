@@ -30,17 +30,21 @@ export async function initDb(): Promise<void> {
     );
 
     CREATE TABLE IF NOT EXISTS breakpoints (
-      artist              TEXT PRIMARY KEY NOT NULL,
-      type                TEXT NOT NULL,
-      song_index          INTEGER,
-      departure_time      TEXT,
-      arrival_song_index  INTEGER
+      artist                    TEXT PRIMARY KEY NOT NULL,
+      type                      TEXT NOT NULL,
+      song_index                INTEGER,
+      departure_time            TEXT,
+      arrival_song_index        INTEGER,
+      arrival_notification_time TEXT
     );
   `);
 
   // Migrations — safe to run repeatedly, ignored if column already exists
   try {
     await db.execAsync(`ALTER TABLE breakpoints ADD COLUMN arrival_song_index INTEGER;`);
+  } catch {}
+  try {
+    await db.execAsync(`ALTER TABLE breakpoints ADD COLUMN arrival_notification_time TEXT;`);
   } catch {}
   try {
     await db.execAsync(`ALTER TABLE selected_bands ADD COLUMN hidden INTEGER NOT NULL DEFAULT 0;`);
@@ -136,26 +140,28 @@ export type BreakpointRow = {
   songIndex: number | null;
   departureTime: string | null;
   arrivalSongIndex: number | null;
+  arrivalNotificationTime: string | null;
 };
 
 export async function getBreakpoints(): Promise<BreakpointRow[]> {
   const db = getDb();
   return db.getAllAsync<BreakpointRow>(
-    "SELECT artist, type, song_index as songIndex, departure_time as departureTime, arrival_song_index as arrivalSongIndex FROM breakpoints"
+    "SELECT artist, type, song_index as songIndex, departure_time as departureTime, arrival_song_index as arrivalSongIndex, arrival_notification_time as arrivalNotificationTime FROM breakpoints"
   );
 }
 
 export async function saveBreakpoint(bp: BreakpointRow): Promise<void> {
   const db = getDb();
   await db.runAsync(
-    `INSERT INTO breakpoints (artist, type, song_index, departure_time, arrival_song_index)
-     VALUES (?, ?, ?, ?, ?)
+    `INSERT INTO breakpoints (artist, type, song_index, departure_time, arrival_song_index, arrival_notification_time)
+     VALUES (?, ?, ?, ?, ?, ?)
      ON CONFLICT(artist) DO UPDATE SET
        type = excluded.type,
        song_index = excluded.song_index,
        departure_time = excluded.departure_time,
-       arrival_song_index = excluded.arrival_song_index`,
-    [bp.artist, bp.type, bp.songIndex ?? null, bp.departureTime ?? null, bp.arrivalSongIndex ?? null]
+       arrival_song_index = excluded.arrival_song_index,
+       arrival_notification_time = excluded.arrival_notification_time`,
+    [bp.artist, bp.type, bp.songIndex ?? null, bp.departureTime ?? null, bp.arrivalSongIndex ?? null, bp.arrivalNotificationTime ?? null]
   );
 }
 

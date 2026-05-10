@@ -25,6 +25,7 @@ import {
 } from "@/src/services/notifications";
 import { syncArtistSetlists } from "@/src/services/sync";
 import { toMinutes, formatTime, minutesToHHMM } from "@/src/utils/time";
+import { TRAVEL_MIN } from "@/src/constants/timing";
 import { useLineup } from "@/src/providers/lineup/LineupProvider";
 
 type Props = {
@@ -190,12 +191,17 @@ export function BreakpointSheet({
           : depIdx != null
           ? endMin
           : null;
+      const arrivalNotifMin =
+        arrivalSongIndex != null && songs.length > 0
+          ? startMin + (arrivalSongIndex / songs.length) * duration - TRAVEL_MIN
+          : null;
       bp = {
         artist: entry.artist,
         type: "song",
         songIndex: depIdx,
         departureTime: nextSongMin != null ? minutesToHHMM(nextSongMin) : null,
         arrivalSongIndex: arrivalSongIndex,
+        arrivalNotificationTime: arrivalNotifMin != null ? minutesToHHMM(arrivalNotifMin) : null,
       };
     } else if (activeTab === "time" && selectedTime != null) {
       bp = {
@@ -204,6 +210,7 @@ export function BreakpointSheet({
         songIndex: null,
         departureTime: selectedTime,
         arrivalSongIndex: null,
+        arrivalNotificationTime: null,
       };
     }
     if (bp) {
