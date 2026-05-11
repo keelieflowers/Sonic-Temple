@@ -1,5 +1,6 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import * as WebBrowser from "expo-web-browser";
+import { useRouter } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
@@ -74,6 +75,7 @@ export function BreakpointSheet({
   const s = styles(colors);
   const { isMustSee, toggleMustSee } = useLineup();
   const mustSee = isMustSee(entry.artist);
+  const router = useRouter();
   const queryClient = useQueryClient();
   const [syncing, setSyncing] = useState(false);
 
@@ -164,6 +166,16 @@ export function BreakpointSheet({
     ]).start(onClose);
   };
   dismissRef.current = dismiss;
+
+  const handleOpenMap = () => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, { toValue: 0, duration: 150, useNativeDriver: true }),
+      Animated.timing(slideAnim, { toValue: 400, duration: 200, useNativeDriver: true }),
+    ]).start(() => {
+      onClose();
+      router.navigate({ pathname: "/(tabs)/map", params: { stage: entry.stage } });
+    });
+  };
 
   const canSave =
     activeTab === "song"
@@ -279,6 +291,9 @@ export function BreakpointSheet({
                 ? <ActivityIndicator size="small" color={colors.primary} />
                 : <FontAwesome name="refresh" size={15} color={colors.primary} />
               }
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleOpenMap} hitSlop={{ top: 13, bottom: 13, left: 13, right: 13 }}>
+              <FontAwesome name="map-marker" size={16} color={colors.primary} />
             </TouchableOpacity>
             <TouchableOpacity onPress={dismiss} hitSlop={{ top: 13, bottom: 13, left: 13, right: 13 }}>
               <FontAwesome name="times" size={18} color={colors.textMuted} />

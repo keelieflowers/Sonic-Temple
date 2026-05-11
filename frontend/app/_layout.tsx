@@ -8,6 +8,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ThemeProvider } from "@/src/providers/theme/ThemeProvider";
 import { LineupProvider } from "@/src/providers/lineup/LineupProvider";
 import { BreakpointProvider } from "@/src/providers/breakpoints/BreakpointProvider";
+import { PartnerLineupProvider } from "@/src/providers/partnerLineup/PartnerLineupProvider";
 import { initDb } from "@/src/services/db";
 
 SplashScreen.preventAutoHideAsync();
@@ -23,6 +24,7 @@ export default function RootLayout() {
     <ThemeProvider>
       <LineupProvider>
         <BreakpointProvider>
+        <PartnerLineupProvider>
         <QueryClientProvider client={queryClient}>
           <SafeAreaProvider>
             <GestureHandlerRootView style={{ flex: 1 }}>
@@ -34,6 +36,7 @@ export default function RootLayout() {
             </GestureHandlerRootView>
           </SafeAreaProvider>
         </QueryClientProvider>
+        </PartnerLineupProvider>
         </BreakpointProvider>
       </LineupProvider>
     </ThemeProvider>

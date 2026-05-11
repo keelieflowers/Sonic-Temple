@@ -1,13 +1,14 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React, { useCallback, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
-import { ActivityIndicator, Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Alert, ScrollView, Share, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useQueryClient } from "@tanstack/react-query";
 import { useColors } from "@/src/providers/theme/ThemeProvider";
 import { useLineup } from "@/src/providers/lineup/LineupProvider";
+import { usePartnerLineup } from "@/src/providers/partnerLineup/PartnerLineupProvider";
 import { fontSizes, radii, spacing } from "@/src/theme";
 import { syncArtistSetlists } from "@/src/services/sync";
 import { scheduleTestNotification, requestNotificationPermissions } from "@/src/services/notifications";
@@ -17,7 +18,9 @@ export function SettingsScreen() {
   const s = styles(colors);
   const queryClient = useQueryClient();
   const { selectedBands } = useLineup();
+  const { partnerBands, importPartnerBands, clearPartner } = usePartnerLineup();
 
+  const [importText, setImportText] = useState("");
   const [syncingSetlists, setSyncingSetlists] = useState(false);
   const [forceSyncingSetlists, setForceSyncingSetlists] = useState(false);
   const [scheduledNotifs, setScheduledNotifs] = useState<Notifications.NotificationRequest[]>([]);
@@ -82,6 +85,35 @@ export function SettingsScreen() {
     }
   };
 
+  const handleExport = async () => {
+    const payload = JSON.stringify({ bands: [...selectedBands] });
+    await Share.share({ message: payload });
+  };
+
+  const handleImport = async () => {
+    const text = importText.trim();
+    if (!text) return;
+    try {
+      const parsed = JSON.parse(text);
+      const bands: unknown = parsed?.bands;
+      if (!Array.isArray(bands) || bands.some((b) => typeof b !== "string")) {
+        throw new Error("bad format");
+      }
+      await importPartnerBands(bands as string[]);
+      setImportText("");
+      Alert.alert("Imported", `${bands.length} artists loaded from partner lineup.`);
+    } catch {
+      Alert.alert("Invalid data", "Couldn't parse that. Make sure you pasted the full exported text.");
+    }
+  };
+
+  const handleClearPartner = () => {
+    Alert.alert("Clear partner lineup?", "This removes the imported picks from your view.", [
+      { text: "Clear", style: "destructive", onPress: clearPartner },
+      { text: "Cancel", style: "cancel" },
+    ]);
+  };
+
   function notifIcon(id: string) {
     if (id.startsWith("must-see-")) return { name: "star" as const, color: colors.warning };
     if (id.startsWith("bp-depart-")) return { name: "flag" as const, color: colors.primary };
@@ -140,6 +172,50 @@ export function SettingsScreen() {
             })}
           </View>
         )}
+      </View>
+
+      <View style={s.section}>
+        <Text style={s.sectionTitle}>PARTNER LINEUP</Text>
+
+        <TouchableOpacity style={s.row} onPress={handleExport} activeOpacity={0.7}>
+          <FontAwesome name="share" size={16} color={colors.primary} />
+          <View style={s.rowText}>
+            <Text style={s.rowLabel}>Export my picks</Text>
+            <Text style={s.rowSub}>{selectedBands.size} artists · share via iMessage, AirDrop, etc.</Text>
+          </View>
+        </TouchableOpacity>
+
+        {partnerBands.size > 0 && (
+          <>
+            <View style={s.divider} />
+            <TouchableOpacity style={s.row} onPress={handleClearPartner} activeOpacity={0.7}>
+              <FontAwesome name="user" size={16} color={colors.success} />
+              <View style={s.rowText}>
+                <Text style={s.rowLabel}>Partner picks loaded</Text>
+                <Text style={s.rowSub}>{partnerBands.size} artists · tap to clear</Text>
+              </View>
+              <FontAwesome name="times" size={14} color={colors.textMuted} />
+            </TouchableOpacity>
+          </>
+        )}
+
+        <View style={s.importBox}>
+          <TextInput
+            style={[s.importInput, { color: colors.text }]}
+            placeholder="Paste partner export here…"
+            placeholderTextColor={colors.textMuted}
+            value={importText}
+            onChangeText={setImportText}
+            multiline
+            autoCorrect={false}
+            autoCapitalize="none"
+          />
+          {importText.trim().length > 0 && (
+            <TouchableOpacity style={s.importBtn} onPress={handleImport} activeOpacity={0.8}>
+              <Text style={s.importBtnText}>Import</Text>
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
 
       <View style={s.section}>
@@ -279,6 +355,31 @@ const styles = (colors: ReturnType<typeof useColors>) =>
     notifTitle: { color: colors.text, fontSize: fontSizes.sm, fontWeight: "500", flex: 1 },
     notifBody: { color: colors.textMuted, fontSize: fontSizes.xs, marginTop: 1 },
     notifTime: { color: colors.textMuted, fontSize: fontSizes.xs },
+    importBox: {
+      marginHorizontal: spacing.md,
+      marginTop: spacing.xs,
+      backgroundColor: colors.card,
+      borderRadius: radii.md,
+      padding: spacing.md,
+      gap: spacing.sm,
+    },
+    importInput: {
+      fontSize: fontSizes.sm,
+      minHeight: 60,
+      textAlignVertical: "top",
+    },
+    importBtn: {
+      alignSelf: "flex-end",
+      backgroundColor: colors.primary,
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm,
+      borderRadius: radii.sm,
+    },
+    importBtnText: {
+      color: "#fff",
+      fontSize: fontSizes.sm,
+      fontWeight: "700",
+    },
     versionLabel: {
       color: colors.textMuted,
       fontSize: fontSizes.xs,

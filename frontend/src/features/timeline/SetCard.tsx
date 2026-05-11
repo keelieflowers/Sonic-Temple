@@ -9,6 +9,7 @@ import {
 import { useColors } from "@/src/providers/theme/ThemeProvider";
 import { useBreakpoints } from "@/src/providers/breakpoints/BreakpointProvider";
 import { useLineup } from "@/src/providers/lineup/LineupProvider";
+import { usePartnerLineup } from "@/src/providers/partnerLineup/PartnerLineupProvider";
 import { fontSizes, radii, spacing } from "@/src/theme";
 import { toMinutes, formatTime } from "@/src/utils/time";
 import { ArtistShowResult } from "@/src/shared/Types";
@@ -28,6 +29,8 @@ export function SetCard({ entry, setlistResult, nowMinutes, isLiveDay, isFinishe
   const s = styles(colors);
   const { getBreakpoint, setBreakpoint, removeBreakpoint } = useBreakpoints();
   const { toggleBand, isMustSee } = useLineup();
+  const { partnerBands } = usePartnerLineup();
+  const sharedWithPartner = partnerBands.size > 0 && partnerBands.has(entry.artist);
   const startMin = toMinutes(entry.startTime);
   const endMin = toMinutes(entry.endTime);
   const duration = endMin - startMin;
@@ -83,6 +86,9 @@ export function SetCard({ entry, setlistResult, nowMinutes, isLiveDay, isFinishe
         )}
         {setlistResult?.selectionMode === "recencyFallback" && (
           <FontAwesome name="clock-o" size={12} color={colors.textMuted} />
+        )}
+        {sharedWithPartner && (
+          <FontAwesome name="user" size={12} color={colors.success} />
         )}
         {breakpoint && (
           <FontAwesome name="flag" size={12} color={colors.primary} />

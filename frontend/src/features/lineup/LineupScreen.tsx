@@ -5,10 +5,12 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useColors } from "@/src/providers/theme/ThemeProvider";
 import { fontSizes, radii, spacing } from "@/src/theme";
 import { useLineup } from "@/src/providers/lineup/LineupProvider";
+import { usePartnerLineup } from "@/src/providers/partnerLineup/PartnerLineupProvider";
 
 export function ArtistsScreen() {
   const colors = useColors();
   const { lineup, isSelected, isMustSee, toggleBand, toggleMustSee, selectDay, deselectDay } = useLineup();
+  const { partnerBands } = usePartnerLineup();
   const [collapsedDays, setCollapsedDays] = useState<Set<string>>(new Set());
   const [searchQuery, setSearchQuery] = useState("");
   const searchRef = useRef<TextInput>(null);
@@ -122,6 +124,7 @@ export function ArtistsScreen() {
         renderItem={({ item }) => {
           const selected = isSelected(item);
           const mustSee = isMustSee(item);
+          const sharedWithPartner = partnerBands.size > 0 && partnerBands.has(item);
           return (
             <TouchableOpacity
               style={[s.row, selected && s.rowSelected]}
@@ -139,6 +142,9 @@ export function ArtistsScreen() {
               activeOpacity={0.7}
             >
               <Text style={[s.bandName, !selected && s.bandNameDim]}>{item}</Text>
+              {sharedWithPartner && (
+                <FontAwesome name="user" size={12} color={colors.success} style={s.partnerIcon} />
+              )}
               {mustSee && <Text style={s.mustSeeStar}>★</Text>}
               <View style={[s.checkbox, selected && s.checkboxSelected]}>
                 {selected && <Text style={s.checkmark}>✓</Text>}
@@ -281,6 +287,9 @@ const styles = (colors: ReturnType<typeof useColors>) =>
     mustSeeStar: {
       color: colors.warning,
       fontSize: fontSizes.sm,
+      marginRight: spacing.xs,
+    },
+    partnerIcon: {
       marginRight: spacing.xs,
     },
   });

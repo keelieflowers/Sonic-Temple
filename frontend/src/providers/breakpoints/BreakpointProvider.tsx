@@ -3,6 +3,7 @@ import {
   BreakpointRow,
   deleteBreakpoint,
   getBreakpoints,
+  initDb,
   saveBreakpoint,
 } from "@/src/services/db";
 import { cancelBreakpointNotifications } from "@/src/services/notifications";
@@ -25,7 +26,8 @@ export const BreakpointProvider = ({ children }: { children: React.ReactNode }) 
   const [breakpoints, setBreakpoints] = useState<Map<string, BreakpointRow>>(new Map());
 
   useEffect(() => {
-    getBreakpoints()
+    initDb()
+      .then(() => getBreakpoints())
       .then((rows) => {
         setBreakpoints(new Map(rows.map((r) => [r.artist, r])));
       })

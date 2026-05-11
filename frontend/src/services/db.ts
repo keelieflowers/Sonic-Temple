@@ -37,6 +37,10 @@ export async function initDb(): Promise<void> {
       arrival_song_index        INTEGER,
       arrival_notification_time TEXT
     );
+
+    CREATE TABLE IF NOT EXISTS partner_bands (
+      name TEXT PRIMARY KEY NOT NULL
+    );
   `);
 
   // Migrations — safe to run repeatedly, ignored if column already exists
@@ -168,4 +172,25 @@ export async function saveBreakpoint(bp: BreakpointRow): Promise<void> {
 export async function deleteBreakpoint(artist: string): Promise<void> {
   const db = getDb();
   await db.runAsync("DELETE FROM breakpoints WHERE artist = ?", [artist]);
+}
+
+// Partner bands
+
+export async function getPartnerBands(): Promise<string[]> {
+  const db = getDb();
+  const rows = await db.getAllAsync<{ name: string }>("SELECT name FROM partner_bands");
+  return rows.map((r) => r.name);
+}
+
+export async function setPartnerBands(names: string[]): Promise<void> {
+  const db = getDb();
+  await db.execAsync("DELETE FROM partner_bands");
+  for (const name of names) {
+    await db.runAsync("INSERT OR IGNORE INTO partner_bands (name) VALUES (?)", [name]);
+  }
+}
+
+export async function clearPartnerBands(): Promise<void> {
+  const db = getDb();
+  await db.execAsync("DELETE FROM partner_bands");
 }
