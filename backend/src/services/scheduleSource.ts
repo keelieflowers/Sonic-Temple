@@ -1,5 +1,7 @@
 import { readFile } from "node:fs/promises";
 
+const LIVE_FEED_TIMEOUT_MS = 8000;
+
 type RawShow = {
   object?: { title?: string };
 };
@@ -25,8 +27,10 @@ export class ScheduleSource {
   }
 
   private async getBandNamesFromLiveFeed(): Promise<string[]> {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), LIVE_FEED_TIMEOUT_MS);
     try {
-      const response = await fetch(this.scheduleUrl);
+      const response = await fetch(this.scheduleUrl, { signal: controller.signal });
       if (!response.ok) {
         return [];
       }
@@ -34,6 +38,8 @@ export class ScheduleSource {
       return this.extractUniqueBandNamesFromRaw(payload);
     } catch {
       return [];
+    } finally {
+      clearTimeout(timeout);
     }
   }
 

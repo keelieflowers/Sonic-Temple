@@ -26,6 +26,8 @@ function normalizeBandName(name: string): string {
 }
 
 export class FinalSetlistCacheStore {
+  private writeQueue: Promise<void> = Promise.resolve();
+
   constructor(private readonly filePath: string) {}
 
   // Returns results for all requested artists only when every artist is present
@@ -61,17 +63,21 @@ export class FinalSetlistCacheStore {
   // Stores each artist's result individually so no two queries can produce
   // conflicting copies of the same artist.
   async set(bandNames: string[], results: ArtistShowResult[], ttlHours: number): Promise<CacheEntry> {
-    const data = await this.readStore();
     const now = new Date();
     const generatedAt = now.toISOString();
     const expiresAt = new Date(now.getTime() + ttlHours * 60 * 60 * 1000).toISOString();
 
-    for (const result of results) {
-      const key = normalizeBandName(result.inputBandName);
-      data.entries[key] = { generatedAt, expiresAt, result };
-    }
+    const write = async () => {
+      const data = await this.readStore();
+      for (const result of results) {
+        const key = normalizeBandName(result.inputBandName);
+        data.entries[key] = { generatedAt, expiresAt, result };
+      }
+      await this.writeStore(data);
+    };
+    this.writeQueue = this.writeQueue.then(write, write);
+    await this.writeQueue;
 
-    await this.writeStore(data);
     return { generatedAt, expiresAt, results };
   }
 

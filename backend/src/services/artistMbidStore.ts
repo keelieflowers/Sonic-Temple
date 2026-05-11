@@ -21,6 +21,7 @@ function normalizeKey(inputBandName: string): string {
 
 export class ArtistMbidStore {
   private readonly filePath: string;
+  private writeQueue: Promise<void> = Promise.resolve();
 
   constructor(filePath: string) {
     this.filePath = filePath;
@@ -38,23 +39,27 @@ export class ArtistMbidStore {
     matchedArtistName: string,
     extras?: { disambiguation?: string; url?: string }
   ): Promise<void> {
-    const data = await this.readStore();
-    const key = normalizeKey(inputBandName);
-
-    data.artists[key] = {
-      inputBandName,
-      mbid,
-      matchedArtistName,
-      ...(extras?.disambiguation !== undefined && { disambiguation: extras.disambiguation }),
-      ...(extras?.url !== undefined && { url: extras.url }),
-      updatedAt: new Date().toISOString()
+    const write = async () => {
+      const data = await this.readStore();
+      const key = normalizeKey(inputBandName);
+      data.artists[key] = {
+        inputBandName,
+        mbid,
+        matchedArtistName,
+        ...(extras?.disambiguation !== undefined && { disambiguation: extras.disambiguation }),
+        ...(extras?.url !== undefined && { url: extras.url }),
+        updatedAt: new Date().toISOString()
+      };
+      await this.writeStore(data);
     };
-
-    await this.writeStore(data);
+    this.writeQueue = this.writeQueue.then(write, write);
+    await this.writeQueue;
   }
 
   async clear(): Promise<void> {
-    await this.writeStore({ version: "0.3.0", artists: {} });
+    const write = () => this.writeStore({ version: "0.3.0", artists: {} });
+    this.writeQueue = this.writeQueue.then(write, write);
+    await this.writeQueue;
   }
 
   private async readStore(): Promise<ArtistStoreFile> {
