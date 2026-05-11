@@ -8,7 +8,8 @@ export function buildConflictMap(entries: ScheduleEntry[]): Map<string, string[]
     for (let j = i + 1; j < entries.length; j++) {
       const a = entries[i];
       const b = entries[j];
-      if (toMinutes(a.startTime) < toMinutes(b.endTime) && toMinutes(b.startTime) < toMinutes(a.endTime)) {
+      const overlapMinutes = Math.min(toMinutes(a.endTime), toMinutes(b.endTime)) - Math.max(toMinutes(a.startTime), toMinutes(b.startTime));
+      if (overlapMinutes > 5) {
         if (!map.has(a.artist)) map.set(a.artist, []);
         if (!map.has(b.artist)) map.set(b.artist, []);
         map.get(a.artist)!.push(b.artist);
