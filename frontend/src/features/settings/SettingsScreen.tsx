@@ -3,12 +3,14 @@ import React, { useCallback, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { ActivityIndicator, Alert, ScrollView, Share, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import * as Notifications from "expo-notifications";
+import { clearSetlistCache } from "@/src/services/db";
 import Constants from "expo-constants";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useQueryClient } from "@tanstack/react-query";
 import { useColors } from "@/src/providers/theme/ThemeProvider";
 import { useLineup } from "@/src/providers/lineup/LineupProvider";
 import { usePartnerLineup } from "@/src/providers/partnerLineup/PartnerLineupProvider";
+import { useBreakpoints } from "@/src/providers/breakpoints/BreakpointProvider";
 import { fontSizes, radii, spacing } from "@/src/theme";
 import { syncArtistSetlists } from "@/src/services/sync";
 import { scheduleTestNotification, requestNotificationPermissions } from "@/src/services/notifications";
@@ -17,8 +19,9 @@ export function SettingsScreen() {
   const colors = useColors();
   const s = styles(colors);
   const queryClient = useQueryClient();
-  const { selectedBands } = useLineup();
+  const { selectedBands, clearAll: clearLineup } = useLineup();
   const { partnerBands, importPartnerBands, clearPartner } = usePartnerLineup();
+  const { clearAll: clearBreakpoints } = useBreakpoints();
 
   const [importText, setImportText] = useState("");
   const [syncingSetlists, setSyncingSetlists] = useState(false);
@@ -86,15 +89,22 @@ export function SettingsScreen() {
   };
 
   const handleExport = async () => {
-    const payload = JSON.stringify({ bands: [...selectedBands] });
-    await Share.share({ message: payload });
+    const bands = [...selectedBands].sort();
+    const payload = JSON.stringify({ bands });
+    const list = bands.join(" · ");
+    await Share.share({
+      message: `My Sonic Temple 2026 picks (${bands.length} artist${bands.length === 1 ? "" : "s"}):\n${list}\n\n— Paste the line below into the Sonic Temple app to import —\n${payload}`,
+    });
   };
 
   const handleImport = async () => {
     const text = importText.trim();
     if (!text) return;
     try {
-      const parsed = JSON.parse(text);
+      // Support both raw JSON and the pretty share format (JSON embedded at end)
+      const jsonMatch = text.match(/(\{"bands":\[.*?\]\})/s);
+      const jsonStr = jsonMatch ? jsonMatch[1] : text;
+      const parsed = JSON.parse(jsonStr);
       const bands: unknown = parsed?.bands;
       if (!Array.isArray(bands) || bands.some((b) => typeof b !== "string")) {
         throw new Error("bad format");
@@ -112,6 +122,31 @@ export function SettingsScreen() {
       { text: "Clear", style: "destructive", onPress: clearPartner },
       { text: "Cancel", style: "cancel" },
     ]);
+  };
+
+  const handleClearAllData = () => {
+    Alert.alert(
+      "Clear all data?",
+      "This removes your selected artists, breakpoints, setlist cache, and partner lineup. This cannot be undone.",
+      [
+        {
+          text: "Clear everything",
+          style: "destructive",
+          onPress: async () => {
+            await Promise.all([
+              clearLineup(),
+              clearBreakpoints(),
+              clearPartner(),
+              clearSetlistCache(),
+              Notifications.cancelAllScheduledNotificationsAsync(),
+            ]);
+            await queryClient.invalidateQueries({ queryKey: ["all-cached-setlists"] });
+            loadScheduledNotifs();
+          },
+        },
+        { text: "Cancel", style: "cancel" },
+      ]
+    );
   };
 
   function notifIcon(id: string) {
@@ -252,6 +287,16 @@ export function SettingsScreen() {
           <View style={s.rowText}>
             <Text style={s.rowLabel}>Force refresh setlists</Text>
             <Text style={s.rowSub} numberOfLines={1}>Bypass backend cache and pull latest from Setlist.fm for {selectedBands.size} artists</Text>
+          </View>
+        </TouchableOpacity>
+
+        <View style={s.divider} />
+
+        <TouchableOpacity style={s.row} onPress={handleClearAllData} activeOpacity={0.7}>
+          <FontAwesome name="trash" size={16} color={colors.error} />
+          <View style={s.rowText}>
+            <Text style={[s.rowLabel, { color: colors.error }]}>Clear all data</Text>
+            <Text style={s.rowSub}>Remove all artists, breakpoints, and cached setlists</Text>
           </View>
         </TouchableOpacity>
       </View>

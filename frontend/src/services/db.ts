@@ -194,3 +194,13 @@ export async function clearPartnerBands(): Promise<void> {
   const db = getDb();
   await db.execAsync("DELETE FROM partner_bands");
 }
+
+export async function clearAllBands(): Promise<void> {
+  const db = getDb();
+  await db.execAsync("DELETE FROM selected_bands");
+}
+
+export async function clearAllBreakpoints(): Promise<void> {
+  const db = getDb();
+  await db.execAsync("DELETE FROM breakpoints");
+}

@@ -5,6 +5,7 @@ import {
   getBreakpoints,
   initDb,
   saveBreakpoint,
+  clearAllBreakpoints,
 } from "@/src/services/db";
 import { cancelBreakpointNotifications } from "@/src/services/notifications";
 
@@ -13,6 +14,7 @@ type BreakpointContextValue = {
   setBreakpoint: (bp: BreakpointRow) => Promise<void>;
   removeBreakpoint: (artist: string) => Promise<void>;
   getBreakpoint: (artist: string) => BreakpointRow | undefined;
+  clearAll: () => Promise<void>;
 };
 
 const BreakpointContext = createContext<BreakpointContextValue>({
@@ -20,6 +22,7 @@ const BreakpointContext = createContext<BreakpointContextValue>({
   setBreakpoint: async () => undefined,
   removeBreakpoint: async () => undefined,
   getBreakpoint: () => undefined,
+  clearAll: async () => undefined,
 });
 
 export const BreakpointProvider = ({ children }: { children: React.ReactNode }) => {
@@ -53,9 +56,14 @@ export const BreakpointProvider = ({ children }: { children: React.ReactNode }) 
     [breakpoints]
   );
 
+  const clearAll = useCallback(async () => {
+    await clearAllBreakpoints();
+    setBreakpoints(new Map());
+  }, []);
+
   const value = useMemo(
-    () => ({ breakpoints, setBreakpoint, removeBreakpoint, getBreakpoint }),
-    [breakpoints, setBreakpoint, removeBreakpoint, getBreakpoint]
+    () => ({ breakpoints, setBreakpoint, removeBreakpoint, getBreakpoint, clearAll }),
+    [breakpoints, setBreakpoint, removeBreakpoint, getBreakpoint, clearAll]
   );
 
   return <BreakpointContext.Provider value={value}>{children}</BreakpointContext.Provider>;

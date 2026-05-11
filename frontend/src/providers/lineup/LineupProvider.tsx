@@ -6,6 +6,7 @@ import {
   upsertBand,
   setBandHidden,
   setBandTier,
+  clearAllBands,
 } from "@/src/services/db";
 import { SCHEDULE } from "@/src/data/schedule";
 import { scheduleMustSeeNotification, cancelMustSeeNotification } from "@/src/services/notifications";
@@ -21,6 +22,7 @@ type LineupContextValue = {
   toggleMustSee: (name: string) => void;
   selectDay: (day: string) => void;
   deselectDay: (day: string) => void;
+  clearAll: () => Promise<void>;
 };
 
 const LineupContext = createContext<LineupContextValue>({
@@ -32,6 +34,7 @@ const LineupContext = createContext<LineupContextValue>({
   toggleMustSee: () => undefined,
   selectDay: () => undefined,
   deselectDay: () => undefined,
+  clearAll: async () => undefined,
 });
 
 export const LineupProvider = ({ children }: { children: React.ReactNode }) => {
@@ -144,9 +147,14 @@ export const LineupProvider = ({ children }: { children: React.ReactNode }) => {
     });
   }, []);
 
+  const clearAll = useCallback(async () => {
+    await clearAllBands();
+    setBandMeta(new Map());
+  }, []);
+
   const value = useMemo(
-    () => ({ lineup: SONIC_TEMPLE_2026, selectedBands, toggleBand, isSelected, isMustSee, toggleMustSee, selectDay, deselectDay }),
-    [selectedBands, toggleBand, isSelected, isMustSee, toggleMustSee, selectDay, deselectDay]
+    () => ({ lineup: SONIC_TEMPLE_2026, selectedBands, toggleBand, isSelected, isMustSee, toggleMustSee, selectDay, deselectDay, clearAll }),
+    [selectedBands, toggleBand, isSelected, isMustSee, toggleMustSee, selectDay, deselectDay, clearAll]
   );
 
   return <LineupContext.Provider value={value}>{children}</LineupContext.Provider>;
