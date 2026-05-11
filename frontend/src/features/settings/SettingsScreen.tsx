@@ -89,22 +89,15 @@ export function SettingsScreen() {
   };
 
   const handleExport = async () => {
-    const bands = [...selectedBands].sort();
-    const payload = JSON.stringify({ bands });
-    const list = bands.join(" · ");
-    await Share.share({
-      message: `My Sonic Temple 2026 picks (${bands.length} artist${bands.length === 1 ? "" : "s"}):\n${list}\n\n— Paste the line below into the Sonic Temple app to import —\n${payload}`,
-    });
+    const payload = JSON.stringify({ bands: [...selectedBands] });
+    await Share.share({ message: payload });
   };
 
   const handleImport = async () => {
     const text = importText.trim();
     if (!text) return;
     try {
-      // Support both raw JSON and the pretty share format (JSON embedded at end)
-      const jsonMatch = text.match(/(\{"bands":\[.*?\]\})/s);
-      const jsonStr = jsonMatch ? jsonMatch[1] : text;
-      const parsed = JSON.parse(jsonStr);
+      const parsed = JSON.parse(text);
       const bands: unknown = parsed?.bands;
       if (!Array.isArray(bands) || bands.some((b) => typeof b !== "string")) {
         throw new Error("bad format");
