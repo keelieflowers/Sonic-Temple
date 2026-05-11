@@ -43,6 +43,30 @@ function similarityScore(query: string, candidate: string): number {
   return overlapScore + containsScore - lengthPenalty - featurePenalty;
 }
 
+// Tiebreaker: prefer artists whose disambiguation signals the genres we care about.
+// Applied as a bonus on top of name similarity so a clear name match always wins.
+const GENRE_PRIORITY: { pattern: RegExp; bonus: number }[] = [
+  { pattern: /\brock\b/i, bonus: 50 },
+  { pattern: /\bmetal\b/i, bonus: 40 },
+  { pattern: /\balt\b/i, bonus: 30 },
+  { pattern: /\bpunk\b/i, bonus: 20 }
+];
+
+function disambiguationBonus(disambiguation?: string): number {
+  if (!disambiguation) return 0;
+  for (const { pattern, bonus } of GENRE_PRIORITY) {
+    if (pattern.test(disambiguation)) return bonus;
+  }
+  return 0;
+}
+
+function totalScore(normalizedInput: string, artist: SetlistApiArtist): number {
+  return (
+    similarityScore(normalizedInput, normalizeArtistName(artist.name ?? "")) +
+    disambiguationBonus(artist.disambiguation)
+  );
+}
+
 export function pickBestArtistMatch(
   inputBandName: string,
   artists: SetlistApiArtist[]
@@ -52,26 +76,22 @@ export function pickBestArtistMatch(
     return artists[0];
   }
 
-  return [...artists].sort((a, b) => {
-    const aScore = similarityScore(normalizedInput, normalizeArtistName(a.name ?? ""));
-    const bScore = similarityScore(normalizedInput, normalizeArtistName(b.name ?? ""));
-    return bScore - aScore;
-  })[0];
+  return [...artists].sort((a, b) => totalScore(normalizedInput, b) - totalScore(normalizedInput, a))[0];
+}
+
+export function getBestArtistCandidateExported(inputBandName: string, artists: SetlistApiArtist[]) {
+  return getBestArtistCandidate(inputBandName, artists);
 }
 
 function getBestArtistCandidate(inputBandName: string, artists: SetlistApiArtist[]) {
   const normalizedInput = normalizeArtistName(inputBandName);
-  const ranked = [...artists].sort((a, b) => {
-    const aScore = similarityScore(normalizedInput, normalizeArtistName(a.name ?? ""));
-    const bScore = similarityScore(normalizedInput, normalizeArtistName(b.name ?? ""));
-    return bScore - aScore;
-  });
+  const ranked = [...artists].sort(
+    (a, b) => totalScore(normalizedInput, b) - totalScore(normalizedInput, a)
+  );
   const best = ranked[0];
-  const bestScore = best ? similarityScore(normalizedInput, normalizeArtistName(best.name ?? "")) : -Infinity;
+  const bestScore = best ? totalScore(normalizedInput, best) : -Infinity;
   const second = ranked[1];
-  const secondScore = second
-    ? similarityScore(normalizedInput, normalizeArtistName(second.name ?? ""))
-    : -Infinity;
+  const secondScore = second ? totalScore(normalizedInput, second) : -Infinity;
 
   const ambiguous = !best || bestScore < 160 || bestScore - secondScore < 60;
   return { best, ambiguous, bestScore, secondScore };
@@ -257,7 +277,10 @@ export async function buildArtistShowResults(
           artist = pickBestArtistMatch(inputBandName, artists);
           if (artist?.mbid && artist?.name) {
             if (!options?.appendOnlyMissingMbid || !cached) {
-              await mbidStore?.set(inputBandName, artist.mbid, artist.name);
+              await mbidStore?.set(inputBandName, artist.mbid, artist.name, {
+                disambiguation: artist.disambiguation,
+                url: artist.url
+              });
             }
           }
         }
@@ -360,7 +383,10 @@ export async function refreshArtistMbidCache(
           };
         }
 
-        await mbidStore.set(inputBandName, artist.mbid, artist.name);
+        await mbidStore.set(inputBandName, artist.mbid, artist.name, {
+          disambiguation: artist.disambiguation,
+          url: artist.url
+        });
         return {
           inputBandName,
           status: "stored" as const,

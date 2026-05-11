@@ -1,15 +1,17 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
-type StoredArtist = {
+export type StoredArtist = {
   inputBandName: string;
   mbid: string;
   matchedArtistName: string;
+  disambiguation?: string;
+  url?: string;
   updatedAt: string;
 };
 
 type ArtistStoreFile = {
-  version: "0.2.0";
+  version: "0.3.0";
   artists: Record<string, StoredArtist>;
 };
 
@@ -30,7 +32,12 @@ export class ArtistMbidStore {
     return data.artists[key] ?? null;
   }
 
-  async set(inputBandName: string, mbid: string, matchedArtistName: string): Promise<void> {
+  async set(
+    inputBandName: string,
+    mbid: string,
+    matchedArtistName: string,
+    extras?: { disambiguation?: string; url?: string }
+  ): Promise<void> {
     const data = await this.readStore();
     const key = normalizeKey(inputBandName);
 
@@ -38,6 +45,8 @@ export class ArtistMbidStore {
       inputBandName,
       mbid,
       matchedArtistName,
+      ...(extras?.disambiguation !== undefined && { disambiguation: extras.disambiguation }),
+      ...(extras?.url !== undefined && { url: extras.url }),
       updatedAt: new Date().toISOString()
     };
 
@@ -45,19 +54,20 @@ export class ArtistMbidStore {
   }
 
   async clear(): Promise<void> {
-    await this.writeStore({ version: "0.2.0", artists: {} });
+    await this.writeStore({ version: "0.3.0", artists: {} });
   }
 
   private async readStore(): Promise<ArtistStoreFile> {
     try {
       const raw = await readFile(this.filePath, "utf8");
-      const parsed = JSON.parse(raw) as Partial<ArtistStoreFile>;
+      // Accept both 0.2.0 (no disambiguation/url) and 0.3.0
+      const parsed = JSON.parse(raw) as { version?: string; artists?: Record<string, StoredArtist> };
       return {
-        version: "0.2.0",
+        version: "0.3.0",
         artists: parsed.artists ?? {}
       };
     } catch {
-      return { version: "0.2.0", artists: {} };
+      return { version: "0.3.0", artists: {} };
     }
   }
 

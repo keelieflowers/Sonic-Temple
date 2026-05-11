@@ -1,29 +1,37 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "artists": {
     "my chemical romance": {
       "inputBandName": "My Chemical Romance",
       "mbid": "c07f0676-9143-4217-8a9f-4c26bd636f13",
       "matchedArtistName": "My Chemical Romance",
-      "updatedAt": "2026-04-29T19:32:11.780Z"
+      "updatedAt": "2026-04-29T19:32:11.780Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/my-chemical-romance-3bd6bcd4.html"
     },
     "tool": {
       "inputBandName": "Tool",
       "mbid": "66fc5bf8-daa4-4241-b378-9bc9077939d2",
       "matchedArtistName": "Tool",
-      "updatedAt": "2026-04-29T19:32:12.040Z"
+      "updatedAt": "2026-04-29T19:32:12.040Z",
+      "disambiguation": "American rock band",
+      "url": "https://www.setlist.fm/setlists/tool-2bd6d836.html"
     },
     "bring me the horizon": {
       "inputBandName": "Bring Me The Horizon",
       "mbid": "074e3847-f67f-49f9-81f1-8c8cea147e8e",
       "matchedArtistName": "Bring Me the Horizon",
-      "updatedAt": "2026-04-29T19:32:14.446Z"
+      "updatedAt": "2026-04-29T19:32:14.446Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/bring-me-the-horizon-73d6f639.html"
     },
     "breaking benjamin": {
       "inputBandName": "Breaking Benjamin",
       "mbid": "854a1807-025b-42a8-ba8c-2a39717f1d25",
       "matchedArtistName": "Breaking Benjamin",
-      "updatedAt": "2026-04-29T19:36:21.796Z"
+      "updatedAt": "2026-04-29T19:36:21.796Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/breaking-benjamin-5bd6bfc0.html"
     },
     "bad omens": {
       "inputBandName": "Bad Omens",
@@ -41,25 +49,33 @@
       "inputBandName": "Rise Against",
       "mbid": "606bf117-494f-4864-891f-09d63ff6aa4b",
       "matchedArtistName": "Rise Against",
-      "updatedAt": "2026-04-29T22:48:08.970Z"
+      "updatedAt": "2026-04-29T22:48:08.970Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/rise-against-6bd68a0e.html"
     },
     "holding absence": {
       "inputBandName": "Holding Absence",
       "mbid": "93dc11f4-ffc4-4039-a5c2-1c2c035b6eb8",
       "matchedArtistName": "Holding Absence",
-      "updatedAt": "2026-04-29T22:50:04.941Z"
+      "updatedAt": "2026-04-29T22:50:04.941Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/holding-absence-23cf90f7.html"
     },
     "kreator": {
       "inputBandName": "Kreator",
       "mbid": "39822e8d-f24e-4f07-b51b-28b22e59fbdb",
       "matchedArtistName": "Kreator",
-      "updatedAt": "2026-04-29T22:50:04.431Z"
+      "updatedAt": "2026-04-29T22:50:04.431Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/kreator-63d68e97.html"
     },
     "all that remains": {
       "inputBandName": "All That Remains",
       "mbid": "4f8b7186-b2a2-40db-97ae-6e1cd46d57b1",
       "matchedArtistName": "All That Remains",
-      "updatedAt": "2026-04-29T22:53:19.031Z"
+      "updatedAt": "2026-04-29T22:53:19.031Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/all-that-remains-5bd68330.html"
     },
     "alpha wolf": {
       "inputBandName": "Alpha Wolf",
@@ -77,37 +93,49 @@
       "inputBandName": "Coheed and Cambria",
       "mbid": "ae1b47d5-5128-431c-9d30-e08fd90e0767",
       "matchedArtistName": "Coheed and Cambria",
-      "updatedAt": "2026-04-29T22:53:31.730Z"
+      "updatedAt": "2026-04-29T22:53:31.730Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/coheed-and-cambria-53d67789.html"
     },
     "the red jumpsuit apparatus": {
       "inputBandName": "The Red Jumpsuit Apparatus",
       "mbid": "f0e820ab-f31a-400d-9c5e-8be1c8c38726",
       "matchedArtistName": "The Red Jumpsuit Apparatus",
-      "updatedAt": "2026-04-29T23:28:29.131Z"
+      "updatedAt": "2026-04-29T23:28:29.131Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/the-red-jumpsuit-apparatus-4bd68faa.html"
     },
     "windwaker": {
       "inputBandName": "Windwaker",
       "mbid": "2b0ef1ab-e19c-4258-be71-d421b4cdae1c",
       "matchedArtistName": "Windwaker",
-      "updatedAt": "2026-04-29T23:36:46.383Z"
+      "updatedAt": "2026-04-29T23:36:46.383Z",
+      "disambiguation": "AU | metalcore",
+      "url": "https://www.setlist.fm/setlists/windwaker-4bcbd7c2.html"
     },
     "egypt central": {
       "inputBandName": "Egypt Central",
       "mbid": "e76b3a0a-e658-4478-b31e-5a5a24eb65d7",
       "matchedArtistName": "Egypt Central",
-      "updatedAt": "2026-04-29T23:37:09.738Z"
+      "updatedAt": "2026-04-29T23:37:09.738Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/egypt-central-4bd7df46.html"
     },
     "the pretty wild": {
       "inputBandName": "The Pretty Wild",
       "mbid": "e9698bb2-bfcf-4f47-8e05-b4901e0c270d",
       "matchedArtistName": "The Pretty Wild",
-      "updatedAt": "2026-04-29T23:37:09.216Z"
+      "updatedAt": "2026-04-29T23:37:09.216Z",
+      "disambiguation": "U.S. female rock/metal music duo",
+      "url": "https://www.setlist.fm/setlists/the-pretty-wild-53fbeffd.html"
     },
     "hawthorne heights": {
       "inputBandName": "Hawthorne Heights",
       "mbid": "194eeda1-e662-43bc-b9be-32fc1afecc8b",
       "matchedArtistName": "Hawthorne Heights",
-      "updatedAt": "2026-04-29T23:37:16.336Z"
+      "updatedAt": "2026-04-29T23:37:16.336Z",
+      "disambiguation": "US post hardcore band",
+      "url": "https://www.setlist.fm/setlists/hawthorne-heights-7bd6f660.html"
     },
     "nerv": {
       "inputBandName": "NERV",
@@ -119,13 +147,17 @@
       "inputBandName": "Wind Walkers",
       "mbid": "c86892ad-0c24-4547-b62d-bc864d98fa36",
       "matchedArtistName": "Wind Walkers",
-      "updatedAt": "2026-04-29T23:37:32.557Z"
+      "updatedAt": "2026-04-29T23:37:32.557Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/wind-walkers-13cfe9a9.html"
     },
     "the used": {
       "inputBandName": "The Used",
       "mbid": "8262d8e4-9137-4bb3-a787-3caabbbc13e9",
       "matchedArtistName": "The Used",
-      "updatedAt": "2026-04-29T23:37:41.664Z"
+      "updatedAt": "2026-04-29T23:37:41.664Z",
+      "disambiguation": "American post hardcore band",
+      "url": "https://www.setlist.fm/setlists/the-used-6bd6f666.html"
     },
     "attila": {
       "inputBandName": "Attila",
@@ -137,7 +169,9 @@
       "inputBandName": "Catch Your Breath",
       "mbid": "da09ff32-675a-49e9-8362-a97147db5680",
       "matchedArtistName": "Catch Your Breath",
-      "updatedAt": "2026-04-29T23:38:17.041Z"
+      "updatedAt": "2026-04-29T23:38:17.041Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/catch-your-breath-23ff3497.html"
     },
     "all time low": {
       "inputBandName": "All Time Low",
@@ -149,19 +183,25 @@
       "inputBandName": "Pierce The Veil",
       "mbid": "8ed919fb-eaee-45a1-ba99-b3ede9ca5f1d",
       "matchedArtistName": "Pierce the Veil",
-      "updatedAt": "2026-04-29T23:38:19.014Z"
+      "updatedAt": "2026-04-29T23:38:19.014Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/pierce-the-veil-63d6f637.html"
     },
     "dayseeker": {
       "inputBandName": "Dayseeker",
       "mbid": "d9a9b6aa-c5c5-40dc-95ec-0bff029245c0",
       "matchedArtistName": "Dayseeker",
-      "updatedAt": "2026-04-29T23:38:56.789Z"
+      "updatedAt": "2026-04-29T23:38:56.789Z",
+      "disambiguation": "post-hardcore band from California",
+      "url": "https://www.setlist.fm/setlists/dayseeker-4bc6e386.html"
     },
     "buckcherry": {
       "inputBandName": "Buckcherry",
       "mbid": "822e92ef-72ea-42e0-9af1-b987816b487a",
       "matchedArtistName": "Buckcherry",
-      "updatedAt": "2026-04-29T23:50:27.671Z"
+      "updatedAt": "2026-04-29T23:50:27.671Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/buckcherry-73d65641.html"
     },
     "lit": {
       "inputBandName": "Lit",
@@ -173,11 +213,13 @@
       "inputBandName": "Daughtry",
       "mbid": "21e3292e-dac8-4609-b57d-402f926aa41f",
       "matchedArtistName": "Daughtry",
-      "updatedAt": "2026-04-30T00:09:00.425Z"
+      "updatedAt": "2026-04-30T00:09:00.425Z",
+      "disambiguation": "American rock band fronted by Chris Daughtry",
+      "url": "https://www.setlist.fm/setlists/daughtry-3d6bd9f.html"
     },
     "soil": {
       "inputBandName": "Soil",
-      "mbid": "5ccb9a53-092d-4806-b337-470a582893d7",
+      "mbid": "39a1b293-8e17-4a1c-b50b-034c40e24461",
       "matchedArtistName": "SOiL",
       "updatedAt": "2026-05-05T00:09:00.951Z"
     },
@@ -185,31 +227,41 @@
       "inputBandName": "Hinder",
       "mbid": "39b22a9e-59dd-412b-ac3c-0725c807c72b",
       "matchedArtistName": "Hinder",
-      "updatedAt": "2026-05-05T00:09:01.574Z"
+      "updatedAt": "2026-05-05T00:09:01.574Z",
+      "disambiguation": "American rock band",
+      "url": "https://www.setlist.fm/setlists/hinder-3bd6bcd8.html"
     },
     "powerman 5000": {
       "inputBandName": "Powerman 5000",
       "mbid": "0a41f86c-ced1-44e0-95a2-5c8b2368ab1d",
       "matchedArtistName": "Powerman 5000",
-      "updatedAt": "2026-04-30T00:09:03.906Z"
+      "updatedAt": "2026-04-30T00:09:03.906Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/powerman-5000-bd6a5b2.html"
     },
     "the word alive": {
       "inputBandName": "The Word Alive",
       "mbid": "e2cd69b3-ef80-4d53-aa86-a97d6f44573a",
       "matchedArtistName": "The Word Alive",
-      "updatedAt": "2026-04-30T00:09:15.438Z"
+      "updatedAt": "2026-04-30T00:09:15.438Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/the-word-alive-3d57dfb.html"
     },
     "stone temple pilots": {
       "inputBandName": "Stone Temple Pilots",
       "mbid": "8c32bb01-58a3-453b-8050-8c0620edb0e5",
       "matchedArtistName": "Stone Temple Pilots",
-      "updatedAt": "2026-04-30T00:09:15.961Z"
+      "updatedAt": "2026-04-30T00:09:15.961Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/stone-temple-pilots-bd6b9ee.html"
     },
     "yellowcard": {
       "inputBandName": "Yellowcard",
       "mbid": "3630fff3-52fc-4e97-ab01-d68fd88e4135",
       "matchedArtistName": "Yellowcard",
-      "updatedAt": "2026-04-30T00:09:16.588Z"
+      "updatedAt": "2026-04-30T00:09:16.588Z",
+      "disambiguation": "US pop punk band",
+      "url": "https://www.setlist.fm/setlists/yellowcard-23d6a427.html"
     },
     "dope": {
       "inputBandName": "DOPE",
@@ -221,13 +273,17 @@
       "inputBandName": "Halestorm",
       "mbid": "eaed2193-e026-493b-ac57-113360407b06",
       "matchedArtistName": "Halestorm",
-      "updatedAt": "2026-04-30T00:09:17.752Z"
+      "updatedAt": "2026-04-30T00:09:17.752Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/halestorm-2bd4d4aa.html"
     },
     "static-x": {
       "inputBandName": "Static-X",
       "mbid": "8ac9e35c-e92d-4030-99ef-ba4127b1555c",
-      "matchedArtistName": "Static‐X",
-      "updatedAt": "2026-04-30T00:09:18.385Z"
+      "matchedArtistName": "Static-X",
+      "updatedAt": "2026-04-30T00:09:18.385Z",
+      "disambiguation": "industrial metal band",
+      "url": "https://www.setlist.fm/setlists/staticx-bd6994e.html"
     },
     "blessthefall": {
       "inputBandName": "Blessthefall",
@@ -239,7 +295,9 @@
       "inputBandName": "Paleface Swiss",
       "mbid": "6be0e54b-d3ff-4c17-b7e6-f82d0f624a47",
       "matchedArtistName": "Paleface Swiss",
-      "updatedAt": "2026-04-30T00:09:19.632Z"
+      "updatedAt": "2026-04-30T00:09:19.632Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/paleface-swiss-7bf2a240.html"
     },
     "chevelle": {
       "inputBandName": "Chevelle",
@@ -251,67 +309,89 @@
       "inputBandName": "Atreyu",
       "mbid": "17e137fb-59e5-4fd7-af48-afc34995396c",
       "matchedArtistName": "Atreyu",
-      "updatedAt": "2026-04-30T00:09:20.781Z"
+      "updatedAt": "2026-04-30T00:09:20.781Z",
+      "disambiguation": "US metalcore band",
+      "url": "https://www.setlist.fm/setlists/atreyu-13d699dd.html"
     },
     "staind": {
       "inputBandName": "Staind",
       "mbid": "777a21a8-0d0f-4cf3-86b4-65bc0eba5649",
       "matchedArtistName": "Staind",
-      "updatedAt": "2026-04-30T00:09:21.367Z"
+      "updatedAt": "2026-04-30T00:09:21.367Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/staind-33d6bcc9.html"
     },
     "story of the year": {
       "inputBandName": "Story of the Year",
       "mbid": "e2c3c508-f0ab-49af-92c9-a81d66d67405",
       "matchedArtistName": "Story of the Year",
-      "updatedAt": "2026-04-30T00:09:21.936Z"
+      "updatedAt": "2026-04-30T00:09:21.936Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/story-of-the-year-43d68faf.html"
     },
     "shinedown": {
       "inputBandName": "Shinedown",
       "mbid": "adc0f033-95c2-4e0b-87bc-c23ed3f26ce6",
       "matchedArtistName": "Shinedown",
-      "updatedAt": "2026-04-30T00:09:22.579Z"
+      "updatedAt": "2026-04-30T00:09:22.579Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/shinedown-13d6b925.html"
     },
     "simple plan": {
       "inputBandName": "Simple Plan",
       "mbid": "b345af35-205e-4eca-8006-029e5c20127e",
       "matchedArtistName": "Simple Plan",
-      "updatedAt": "2026-04-30T00:09:23.183Z"
+      "updatedAt": "2026-04-30T00:09:23.183Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/simple-plan-53d68fa9.html"
     },
     "magnolia park": {
       "inputBandName": "Magnolia Park",
       "mbid": "e2d4b394-a2cc-4848-bb15-e5b7c55cc059",
       "matchedArtistName": "Magnolia Park",
-      "updatedAt": "2026-04-30T00:16:05.461Z"
+      "updatedAt": "2026-04-30T00:16:05.461Z",
+      "disambiguation": "pop punk/alternative rock band",
+      "url": "https://www.setlist.fm/setlists/magnolia-park-4bf237c2.html"
     },
     "demon hunter": {
       "inputBandName": "Demon Hunter",
       "mbid": "73fe4a37-6860-4bb5-b3ec-0d0c367900ea",
       "matchedArtistName": "Demon Hunter",
-      "updatedAt": "2026-04-30T00:31:53.300Z"
+      "updatedAt": "2026-04-30T00:31:53.300Z",
+      "disambiguation": "US Christian metal band",
+      "url": "https://www.setlist.fm/setlists/demon-hunter-4bd68f2a.html"
     },
     "saliva": {
       "inputBandName": "Saliva",
       "mbid": "6e650a01-6489-4dc8-85e1-8ec809dd72a2",
       "matchedArtistName": "Saliva",
-      "updatedAt": "2026-04-30T00:31:54.376Z"
+      "updatedAt": "2026-04-30T00:31:54.376Z",
+      "disambiguation": "US rock band",
+      "url": "https://www.setlist.fm/setlists/saliva-3d6b90f.html"
     },
     "lamb of god": {
       "inputBandName": "Lamb Of God",
       "mbid": "298909e4-ebcb-47b8-95e9-cc53b087fc65",
       "matchedArtistName": "Lamb of God",
-      "updatedAt": "2026-04-30T00:31:54.999Z"
+      "updatedAt": "2026-04-30T00:31:54.999Z",
+      "disambiguation": "American metal",
+      "url": "https://www.setlist.fm/setlists/lamb-of-god-bd699de.html"
     },
     "bloodywood": {
       "inputBandName": "Bloodywood",
       "mbid": "4e478f4f-a1e5-4ac9-84a3-f58f5c6454ab",
       "matchedArtistName": "Bloodywood",
-      "updatedAt": "2026-05-05T00:31:55.591Z"
+      "updatedAt": "2026-05-05T00:31:55.591Z",
+      "disambiguation": "Indian folk metal band from New Delhi",
+      "url": "https://www.setlist.fm/setlists/bloodywood-63c80293.html"
     },
     "conquer divide": {
       "inputBandName": "Conquer Divide",
       "mbid": "6b6da5b9-5620-4127-b90e-465be8d9b82a",
       "matchedArtistName": "Conquer Divide",
-      "updatedAt": "2026-04-30T00:31:56.195Z"
+      "updatedAt": "2026-04-30T00:31:56.195Z",
+      "disambiguation": "post-hardcore / metalcore band",
+      "url": "https://www.setlist.fm/setlists/conquer-divide-7bd99674.html"
     },
     "avatar": {
       "inputBandName": "Avatar",
@@ -329,13 +409,17 @@
       "inputBandName": "Sevendust",
       "mbid": "52b9e109-44a0-45eb-a197-226c4abab232",
       "matchedArtistName": "Sevendust",
-      "updatedAt": "2026-04-30T00:49:15.330Z"
+      "updatedAt": "2026-04-30T00:49:15.330Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/sevendust-13d6995d.html"
     },
     "butcher babies": {
       "inputBandName": "Butcher Babies",
       "mbid": "e43b7e0e-0927-4a66-8cd4-8a6bfb162bd8",
       "matchedArtistName": "Butcher Babies",
-      "updatedAt": "2026-04-30T00:53:16.671Z"
+      "updatedAt": "2026-04-30T00:53:16.671Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/butcher-babies-23df9853.html"
     },
     "pop evil": {
       "inputBandName": "Pop Evil",
@@ -347,19 +431,25 @@
       "inputBandName": "The Plot In You",
       "mbid": "c2e7d4ac-5e30-4b55-99b7-e49d99fd7c63",
       "matchedArtistName": "The Plot in You",
-      "updatedAt": "2026-04-30T00:53:17.874Z"
+      "updatedAt": "2026-04-30T00:53:17.874Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/the-plot-in-you-3d18dc3.html"
     },
     "black veil brides": {
       "inputBandName": "Black Veil Brides",
       "mbid": "33319aed-9bd7-4cd1-903c-716845c1b7cd",
       "matchedArtistName": "Black Veil Brides",
-      "updatedAt": "2026-04-30T00:53:18.473Z"
+      "updatedAt": "2026-04-30T00:53:18.473Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/black-veil-brides-53d2bf81.html"
     },
     "the ghost inside": {
       "inputBandName": "The Ghost Inside",
       "mbid": "6fbd58c3-e9b3-4419-a197-0a0f22baed94",
       "matchedArtistName": "The Ghost Inside",
-      "updatedAt": "2026-04-30T00:53:19.077Z"
+      "updatedAt": "2026-04-30T00:53:19.077Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/the-ghost-inside-bd7e5da.html"
     },
     "alter bridge": {
       "inputBandName": "Alter Bridge",
@@ -371,19 +461,25 @@
       "inputBandName": "Motionless in White",
       "mbid": "1c5b9bd6-76e8-4fe7-a6df-3bc0b5a452cc",
       "matchedArtistName": "Motionless in White",
-      "updatedAt": "2026-04-30T00:53:20.290Z"
+      "updatedAt": "2026-04-30T00:53:20.290Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/motionless-in-white-3bd410a0.html"
     },
     "the wonder years": {
       "inputBandName": "The Wonder Years",
       "mbid": "ae13e1fc-a2b1-4e3c-bfb9-737d3aeb7dab",
       "matchedArtistName": "The Wonder Years",
-      "updatedAt": "2026-04-30T00:53:20.894Z"
+      "updatedAt": "2026-04-30T00:53:20.894Z",
+      "disambiguation": "US emo",
+      "url": "https://www.setlist.fm/setlists/the-wonder-years-1bd63d38.html"
     },
     "good charlotte": {
       "inputBandName": "Good Charlotte",
       "mbid": "b267ca80-034e-4dc1-9ed4-ec45f1fed41d",
       "matchedArtistName": "Good Charlotte",
-      "updatedAt": "2026-04-30T00:53:27.520Z"
+      "updatedAt": "2026-04-30T00:53:27.520Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/good-charlotte-43d68fab.html"
     },
     "bush": {
       "inputBandName": "BUSH",
@@ -395,19 +491,25 @@
       "inputBandName": "Architects",
       "mbid": "05dffdbe-dc6e-4c8d-a075-50a09c4cb45c",
       "matchedArtistName": "Architects",
-      "updatedAt": "2026-05-06T00:53:28.712Z"
+      "updatedAt": "2026-05-06T00:53:28.712Z",
+      "disambiguation": "British metal band",
+      "url": "https://www.setlist.fm/setlists/architects-13d61531.html"
     },
     "the amity affliction": {
       "inputBandName": "The Amity Affliction",
       "mbid": "0bfb9d2b-e732-4f28-b2fe-e1d3db9665f1",
       "matchedArtistName": "The Amity Affliction",
-      "updatedAt": "2026-04-30T00:53:29.306Z"
+      "updatedAt": "2026-04-30T00:53:29.306Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/the-amity-affliction-43d67beb.html"
     },
     "p.o.d.": {
       "inputBandName": "P.O.D.",
       "mbid": "57e79d57-b795-475e-9fa2-5dd9d5513b8c",
       "matchedArtistName": "P.O.D.",
-      "updatedAt": "2026-05-05T00:53:31.724Z"
+      "updatedAt": "2026-05-05T00:53:31.724Z",
+      "disambiguation": "American metal band \u2013 Payable on Death",
+      "url": "https://www.setlist.fm/setlists/pod-1bd69978.html"
     },
     "thrown": {
       "inputBandName": "THROWN",
@@ -419,13 +521,17 @@
       "inputBandName": "Alestorm",
       "mbid": "c0252a1b-0133-46bb-8c4f-cade46349ec3",
       "matchedArtistName": "Alestorm",
-      "updatedAt": "2026-04-30T00:53:34.120Z"
+      "updatedAt": "2026-04-30T00:53:34.120Z",
+      "disambiguation": "Scottish folk/power metal band",
+      "url": "https://www.setlist.fm/setlists/alestorm-1bd7b980.html"
     },
     "anberlin": {
       "inputBandName": "Anberlin",
       "mbid": "c648509e-9916-4c56-ab63-652a03da16dd",
       "matchedArtistName": "Anberlin",
-      "updatedAt": "2026-04-30T00:53:34.716Z"
+      "updatedAt": "2026-04-30T00:53:34.716Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/anberlin-2bd6b8d6.html"
     },
     "polaris": {
       "inputBandName": "Polaris",
@@ -437,49 +543,65 @@
       "inputBandName": "Thrice",
       "mbid": "244afcb7-fa9a-49b1-9aa6-0149512d1c52",
       "matchedArtistName": "Thrice",
-      "updatedAt": "2026-04-30T00:53:37.127Z"
+      "updatedAt": "2026-04-30T00:53:37.127Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/thrice-6bd6f60a.html"
     },
     "godsmack": {
       "inputBandName": "Godsmack",
       "mbid": "ac2d1c91-3667-46aa-9fe7-170ca7fce9e2",
       "matchedArtistName": "Godsmack",
-      "updatedAt": "2026-04-30T00:53:37.720Z"
+      "updatedAt": "2026-04-30T00:53:37.720Z",
+      "disambiguation": "American metal band",
+      "url": "https://www.setlist.fm/setlists/godsmack-13d69911.html"
     },
     "we came as romans": {
       "inputBandName": "We Came As Romans",
       "mbid": "dc0da7d1-231c-4058-8e6e-1c0801848602",
       "matchedArtistName": "We Came as Romans",
-      "updatedAt": "2026-04-30T00:53:38.337Z"
+      "updatedAt": "2026-04-30T00:53:38.337Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/we-came-as-romans-7bd41a00.html"
     },
     "electric callboy": {
       "inputBandName": "Electric Callboy",
       "mbid": "cf075492-d880-4afc-b87b-d6b03e33dacc",
       "matchedArtistName": "Electric Callboy",
-      "updatedAt": "2026-04-30T00:53:38.945Z"
+      "updatedAt": "2026-04-30T00:53:38.945Z",
+      "disambiguation": "German metalcore, fka Eskimo Callboy",
+      "url": "https://www.setlist.fm/setlists/electric-callboy-2bd270b2.html"
     },
     "amira elfeky": {
       "inputBandName": "Amira Elfeky",
       "mbid": "e2f82804-26c7-4269-95e0-1ed7a4dda6f5",
       "matchedArtistName": "Amira Elfeky",
-      "updatedAt": "2026-04-30T22:26:45.477Z"
+      "updatedAt": "2026-04-30T22:26:45.477Z",
+      "disambiguation": "American heavy metal singer / songwriter",
+      "url": "https://www.setlist.fm/setlists/amira-elfeky-bf90d92.html"
     },
     "allt": {
       "inputBandName": "Allt",
       "mbid": "bd25b4a6-09ee-4c88-96f3-04464e36c2e5",
       "matchedArtistName": "Allt",
-      "updatedAt": "2026-04-30T22:26:46.077Z"
+      "updatedAt": "2026-04-30T22:26:46.077Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/allt-33fed839.html"
     },
     "novelists": {
       "inputBandName": "Novelists",
       "mbid": "4ba1bd10-44fb-4335-a295-37f26c8a5f37",
       "matchedArtistName": "Novelists",
-      "updatedAt": "2026-05-05T22:26:48.474Z"
+      "updatedAt": "2026-05-05T22:26:48.474Z",
+      "disambiguation": "French djent / progressive metal band",
+      "url": "https://www.setlist.fm/setlists/novelists-63d89207.html"
     },
     "palaye royale": {
       "inputBandName": "Palaye Royale",
       "mbid": "669b08a0-2144-4800-a446-1522cfef228c",
       "matchedArtistName": "Palaye Royale",
-      "updatedAt": "2026-04-30T22:26:49.084Z"
+      "updatedAt": "2026-04-30T22:26:49.084Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/palaye-royale-5bccbb10.html"
     },
     "gideon": {
       "inputBandName": "Gideon",
@@ -491,25 +613,33 @@
       "inputBandName": "Knuckle Puck",
       "mbid": "68ff4824-8451-481c-b4cf-57c2c64d8c00",
       "matchedArtistName": "Knuckle Puck",
-      "updatedAt": "2026-04-30T22:26:50.288Z"
+      "updatedAt": "2026-04-30T22:26:50.288Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/knuckle-puck-5bd8a340.html"
     },
     "snot": {
       "inputBandName": "Snot",
       "mbid": "ede553ac-e7ee-443a-9d63-765e7e31e424",
       "matchedArtistName": "Snot",
-      "updatedAt": "2026-05-05T22:26:51.494Z"
+      "updatedAt": "2026-05-05T22:26:51.494Z",
+      "disambiguation": "US nu metal band",
+      "url": "https://www.setlist.fm/setlists/snot-73d60e01.html"
     },
     "make them suffer": {
       "inputBandName": "Make Them Suffer",
       "mbid": "b6f8cce8-cbac-48a0-b0fa-d6cc06447928",
       "matchedArtistName": "Make Them Suffer",
-      "updatedAt": "2026-04-30T22:27:03.937Z"
+      "updatedAt": "2026-04-30T22:27:03.937Z",
+      "disambiguation": "Australian metalcore",
+      "url": "https://www.setlist.fm/setlists/make-them-suffer-63dfdeb3.html"
     },
     "coal chamber": {
       "inputBandName": "Coal Chamber",
       "mbid": "f3430779-bbec-437b-944d-1fbf45d2e786",
       "matchedArtistName": "Coal Chamber",
-      "updatedAt": "2026-04-30T22:27:04.534Z"
+      "updatedAt": "2026-04-30T22:27:04.534Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/coal-chamber-1bd69920.html"
     },
     "biohazard": {
       "inputBandName": "Biohazard",
@@ -521,25 +651,33 @@
       "inputBandName": "August Burns Red",
       "mbid": "5bac9b4f-2f1c-4d39-8d11-231d5b6650ce",
       "matchedArtistName": "August Burns Red",
-      "updatedAt": "2026-04-30T22:27:06.345Z"
+      "updatedAt": "2026-04-30T22:27:06.345Z",
+      "disambiguation": "US metalcore band",
+      "url": "https://www.setlist.fm/setlists/august-burns-red-7bd6f66c.html"
     },
     "carcass": {
       "inputBandName": "Carcass",
       "mbid": "d50a4b89-ff1f-4659-9fde-f76f8d5b3c89",
       "matchedArtistName": "CARCASS",
-      "updatedAt": "2026-05-05T22:27:06.906Z"
+      "updatedAt": "2026-05-05T22:27:06.906Z",
+      "disambiguation": "British grindcore/technical death metal",
+      "url": "https://www.setlist.fm/setlists/carcass-1bd6fdbc.html"
     },
     "motion city soundtrack": {
       "inputBandName": "Motion City Soundtrack",
       "mbid": "190e78ac-8f44-4bf1-a4ff-95ed9376ad9e",
       "matchedArtistName": "Motion City Soundtrack",
-      "updatedAt": "2026-04-30T22:27:08.135Z"
+      "updatedAt": "2026-04-30T22:27:08.135Z",
+      "disambiguation": "Minnesota pop punk band",
+      "url": "https://www.setlist.fm/setlists/motion-city-soundtrack-23d6b8eb.html"
     },
     "mayday parade": {
       "inputBandName": "Mayday Parade",
       "mbid": "39076047-fce8-44cc-a388-4f6baba4acb4",
       "matchedArtistName": "Mayday Parade",
-      "updatedAt": "2026-04-30T22:27:09.335Z"
+      "updatedAt": "2026-04-30T22:27:09.335Z",
+      "disambiguation": "US pop punk/emo pop band",
+      "url": "https://www.setlist.fm/setlists/mayday-parade-23d6b8cb.html"
     },
     "marilyn manson": {
       "inputBandName": "Marilyn Manson",
@@ -557,18 +695,22 @@
       "inputBandName": "Sepultura",
       "mbid": "1d93c839-22e7-4f76-ad84-d27039efc048",
       "matchedArtistName": "Sepultura",
-      "updatedAt": "2026-04-30T22:27:11.174Z"
+      "updatedAt": "2026-04-30T22:27:11.174Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/sepultura-bd699d6.html"
     },
     "the story so far": {
       "inputBandName": "The Story So Far",
       "mbid": "c762b3e7-eb93-4ef5-b59a-d672b84da833",
       "matchedArtistName": "The Story So Far",
-      "updatedAt": "2026-04-30T22:27:11.750Z"
+      "updatedAt": "2026-04-30T22:27:11.750Z",
+      "disambiguation": "Punk rock band from Chicago, IL (late 90s-early 2000s)",
+      "url": "https://www.setlist.fm/setlists/the-story-so-far-6bc6b25e.html"
     },
     "body count feat. ice-t": {
       "inputBandName": "Body Count feat. Ice-T",
       "mbid": "8b12db5d-54a9-4014-9fa8-d646ac291361",
-      "matchedArtistName": "Body Count feat. Ice‐T",
+      "matchedArtistName": "Body Count feat. Ice-T",
       "updatedAt": "2026-05-05T22:27:12.356Z"
     },
     "flyleaf with lacey sturm": {
@@ -581,37 +723,49 @@
       "inputBandName": "New Found Glory",
       "mbid": "6acb932e-840d-47ac-8e0d-725ad8a6e52c",
       "matchedArtistName": "New Found Glory",
-      "updatedAt": "2026-05-02T15:57:19.331Z"
+      "updatedAt": "2026-05-02T15:57:19.331Z",
+      "disambiguation": "US pop punk",
+      "url": "https://www.setlist.fm/setlists/new-found-glory-2bd6b8be.html"
     },
     "nekrogoblikon": {
       "inputBandName": "Nekrogoblikon",
       "mbid": "a0befa17-6652-43c7-a211-3c84432f15cd",
       "matchedArtistName": "Nekrogoblikon",
-      "updatedAt": "2026-05-02T16:03:17.741Z"
+      "updatedAt": "2026-05-02T16:03:17.741Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/nekrogoblikon-13d5bda1.html"
     },
     "disembodied tyrant": {
       "inputBandName": "Disembodied Tyrant",
       "mbid": "5dc7897b-c10c-4009-ab93-e7f2c8a76c21",
       "matchedArtistName": "Disembodied Tyrant",
-      "updatedAt": "2026-05-02T16:03:19.551Z"
+      "updatedAt": "2026-05-02T16:03:19.551Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/disembodied-tyrant-13fd8df9.html"
     },
     "suffocation": {
       "inputBandName": "Suffocation",
       "mbid": "5db9f569-cadd-4f8b-b460-d4031b0b3716",
       "matchedArtistName": "Suffocation",
-      "updatedAt": "2026-05-02T16:03:20.751Z"
+      "updatedAt": "2026-05-02T16:03:20.751Z",
+      "disambiguation": "New York death metal",
+      "url": "https://www.setlist.fm/setlists/suffocation-43d6a7d7.html"
     },
     "fozzy": {
       "inputBandName": "Fozzy",
       "mbid": "d6cc88c5-5d20-4997-ab0c-3e455c6e3c24",
       "matchedArtistName": "Fozzy",
-      "updatedAt": "2026-05-02T16:03:21.356Z"
+      "updatedAt": "2026-05-02T16:03:21.356Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/fozzy-7bd6baf8.html"
     },
     "fleshgod apocalypse": {
       "inputBandName": "Fleshgod Apocalypse",
       "mbid": "48cb4248-889d-45ed-8462-acb29c002a8d",
       "matchedArtistName": "Fleshgod Apocalypse",
-      "updatedAt": "2026-05-02T16:03:21.949Z"
+      "updatedAt": "2026-05-02T16:03:21.949Z",
+      "disambiguation": "Italian death metal",
+      "url": "https://www.setlist.fm/setlists/fleshgod-apocalypse-23d41083.html"
     },
     "carnifex": {
       "inputBandName": "Carnifex",
@@ -635,13 +789,17 @@
       "inputBandName": "Napalm Death",
       "mbid": "ce7bba8b-026b-4aa6-bddb-f98ed6d595e4",
       "matchedArtistName": "Napalm Death",
-      "updatedAt": "2026-05-02T16:03:26.787Z"
+      "updatedAt": "2026-05-02T16:03:26.787Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/napalm-death-13d6f5fd.html"
     },
     "cattle decapitation": {
       "inputBandName": "Cattle Decapitation",
       "mbid": "0bfb489b-7da8-4b28-b144-eee7599ed1e9",
       "matchedArtistName": "Cattle Decapitation",
-      "updatedAt": "2026-05-02T16:03:29.768Z"
+      "updatedAt": "2026-05-02T16:03:29.768Z",
+      "disambiguation": "American deathgrind band",
+      "url": "https://www.setlist.fm/setlists/cattle-decapitation-3bd6fc5c.html"
     },
     "200 stab wounds": {
       "inputBandName": "200 Stab Wounds",
@@ -653,7 +811,9 @@
       "inputBandName": "Dying Fetus",
       "mbid": "f76167bb-c117-4022-8b6b-54c796edf5c9",
       "matchedArtistName": "Dying Fetus",
-      "updatedAt": "2026-05-02T16:03:43.115Z"
+      "updatedAt": "2026-05-02T16:03:43.115Z",
+      "disambiguation": "United States brutal death metal/grindcore",
+      "url": "https://www.setlist.fm/setlists/dying-fetus-4bd6a7d6.html"
     },
     "whitechapel": {
       "inputBandName": "Whitechapel",
@@ -665,13 +825,17 @@
       "inputBandName": "Slaughter To Prevail",
       "mbid": "4cda7e49-b8cc-4efe-a8f6-b294d812496d",
       "matchedArtistName": "Slaughter to Prevail",
-      "updatedAt": "2026-05-02T16:03:44.927Z"
+      "updatedAt": "2026-05-02T16:03:44.927Z",
+      "disambiguation": "Russian deathcore from Yekarinburg",
+      "url": "https://www.setlist.fm/setlists/slaughter-to-prevail-6bc5e6de.html"
     },
     "cradle of filth": {
       "inputBandName": "Cradle Of Filth",
       "mbid": "7e26cbe1-b8f5-4215-af82-e43d5f8ff308",
       "matchedArtistName": "Cradle of Filth",
-      "updatedAt": "2026-05-02T16:03:46.133Z"
+      "updatedAt": "2026-05-02T16:03:46.133Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/cradle-of-filth-63d6828b.html"
     },
     "behemoth": {
       "inputBandName": "Behemoth",
@@ -683,43 +847,57 @@
       "inputBandName": "Not Enough Space",
       "mbid": "b0d52057-f2f4-49ea-b886-39e392e00cb5",
       "matchedArtistName": "Not Enough Space",
-      "updatedAt": "2026-05-02T16:15:35.164Z"
+      "updatedAt": "2026-05-02T16:15:35.164Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/not-enough-space-2bf860d6.html"
     },
     "everclear": {
       "inputBandName": "Everclear",
       "mbid": "3604c99d-c146-4276-aa0c-9376d333aeb8",
       "matchedArtistName": "Everclear",
-      "updatedAt": "2026-05-02T16:15:35.763Z"
+      "updatedAt": "2026-05-02T16:15:35.763Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/everclear-7bd6b6f4.html"
     },
     "woe, is me": {
       "inputBandName": "Woe, Is Me",
-      "mbid": "52ebe714-8400-45c6-9091-e9c3238b4eb6",
+      "mbid": "97f6bb3d-d399-4980-b0ad-e676faa07cd1",
       "matchedArtistName": "Woe is Me",
-      "updatedAt": "2026-05-02T16:15:36.383Z"
+      "updatedAt": "2026-05-02T16:15:36.383Z",
+      "disambiguation": "Atlanta metalcore band",
+      "url": "https://www.setlist.fm/setlists/woe-is-me-33d8a861.html"
     },
     "lorna shore": {
       "inputBandName": "Lorna Shore",
       "mbid": "e86fc1f5-d632-44b2-8aea-38f83aadffe8",
       "matchedArtistName": "Lorna Shore",
-      "updatedAt": "2026-05-02T16:15:38.180Z"
+      "updatedAt": "2026-05-02T16:15:38.180Z",
+      "disambiguation": "American deathcore band",
+      "url": "https://www.setlist.fm/setlists/lorna-shore-5bd24b50.html"
     },
     "in flames": {
       "inputBandName": "In Flames",
       "mbid": "31745282-b1ea-4d62-939f-226b14d68e7c",
       "matchedArtistName": "In Flames",
-      "updatedAt": "2026-05-02T16:15:49.253Z"
+      "updatedAt": "2026-05-02T16:15:49.253Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/in-flames-43d6837f.html"
     },
     "chiodos": {
       "inputBandName": "Chiodos",
       "mbid": "b755836a-0cb6-4577-a678-55a5a6402d70",
       "matchedArtistName": "Chiodos",
-      "updatedAt": "2026-05-02T16:15:49.847Z"
+      "updatedAt": "2026-05-02T16:15:49.847Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/chiodos-73d6f67d.html"
     },
     "dance gavin dance": {
       "inputBandName": "Dance Gavin Dance",
       "mbid": "16456fed-c9f2-4adf-b6ea-97b648c474d2",
       "matchedArtistName": "Dance Gavin Dance",
-      "updatedAt": "2026-05-02T16:15:50.460Z"
+      "updatedAt": "2026-05-02T16:15:50.460Z",
+      "disambiguation": "",
+      "url": "https://www.setlist.fm/setlists/dance-gavin-dance-6bd6f65a.html"
     },
     "flyleaf": {
       "inputBandName": "Flyleaf",
