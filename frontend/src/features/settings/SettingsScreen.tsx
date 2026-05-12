@@ -2,6 +2,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import React, { useCallback, useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { ActivityIndicator, Alert, ScrollView, Share, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import * as Linking from "expo-linking";
 import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -86,24 +87,44 @@ export function SettingsScreen() {
   };
 
   const handleExport = async () => {
-    const payload = JSON.stringify({ bands: [...selectedBands] });
-    await Share.share({ message: payload });
+    const encoded = encodeURIComponent(JSON.stringify({ bands: [...selectedBands] }));
+    const url = `frontend://import?d=${encoded}`;
+    await Share.share({ message: url });
   };
 
   const handleImport = async () => {
     const text = importText.trim();
     if (!text) return;
     try {
-      const parsed = JSON.parse(text);
-      const bands: unknown = parsed?.bands;
-      if (!Array.isArray(bands) || bands.some((b) => typeof b !== "string")) {
-        throw new Error("bad format");
+      let bands: string[];
+
+      if (text.startsWith("frontend://")) {
+        // New deep-link format
+        const parsed = Linking.parse(text);
+        const d = parsed.queryParams?.d;
+        if (typeof d !== "string") throw new Error("bad format");
+        let data: unknown;
+        try {
+          data = JSON.parse(d);
+        } catch {
+          data = JSON.parse(decodeURIComponent(d));
+        }
+        const b: unknown = (data as Record<string, unknown>)?.bands;
+        if (!Array.isArray(b) || b.some((x) => typeof x !== "string")) throw new Error("bad format");
+        bands = b as string[];
+      } else {
+        // Legacy raw-JSON format
+        const parsed = JSON.parse(text);
+        const b: unknown = parsed?.bands;
+        if (!Array.isArray(b) || b.some((x) => typeof x !== "string")) throw new Error("bad format");
+        bands = b as string[];
       }
-      await importPartnerBands(bands as string[]);
+
+      await importPartnerBands(bands);
       setImportText("");
       Alert.alert("Imported", `${bands.length} artists loaded from partner lineup.`);
     } catch {
-      Alert.alert("Invalid data", "Couldn't parse that. Make sure you pasted the full exported text.");
+      Alert.alert("Invalid data", "Couldn't parse that. Make sure you pasted the full link or exported text.");
     }
   };
 
@@ -181,7 +202,7 @@ export function SettingsScreen() {
           <FontAwesome name="share" size={16} color={colors.primary} />
           <View style={s.rowText}>
             <Text style={s.rowLabel}>Export my picks</Text>
-            <Text style={s.rowSub}>{selectedBands.size} artists · share via iMessage, AirDrop, etc.</Text>
+            <Text style={s.rowSub}>{selectedBands.size} artists · sends a tappable link</Text>
           </View>
         </TouchableOpacity>
 
@@ -202,7 +223,7 @@ export function SettingsScreen() {
         <View style={s.importBox}>
           <TextInput
             style={[s.importInput, { color: colors.text }]}
-            placeholder="Paste partner export here…"
+            placeholder="Paste partner link or export here…"
             placeholderTextColor={colors.textMuted}
             value={importText}
             onChangeText={setImportText}
