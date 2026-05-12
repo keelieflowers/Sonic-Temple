@@ -30,9 +30,17 @@ export function SettingsScreen() {
   const loadScheduledNotifs = useCallback(async () => {
     const all = await Notifications.getAllScheduledNotificationsAsync();
     setScheduledNotifs(all.sort((a, b) => {
-      const aSeconds = (a.trigger as any).seconds ?? 0;
-      const bSeconds = (b.trigger as any).seconds ?? 0;
-      return aSeconds - bSeconds;
+      const fireMs = (t: any): number => {
+        if (t.type === "timeInterval") return Date.now() + (t.seconds ?? 0) * 1000;
+        if (t.type === "calendar" && t.dateComponents) {
+          const dc = t.dateComponents;
+          if (dc.year != null && dc.month != null && dc.day != null)
+            return new Date(dc.year, dc.month - 1, dc.day, dc.hour ?? 0, dc.minute ?? 0).getTime();
+        }
+        if (t.type === "date" && t.value != null) return t.value;
+        return 0;
+      };
+      return fireMs(a.trigger) - fireMs(b.trigger);
     }));
   }, []);
 
@@ -189,6 +197,13 @@ export function SettingsScreen() {
               let triggerDate: Date | null = null;
               if (trigger.type === "timeInterval" && trigger.seconds) {
                 triggerDate = new Date(Date.now() + trigger.seconds * 1000);
+              } else if (trigger.type === "calendar" && trigger.dateComponents) {
+                const dc = trigger.dateComponents;
+                if (dc.year != null && dc.month != null && dc.day != null) {
+                  triggerDate = new Date(dc.year, dc.month - 1, dc.day, dc.hour ?? 0, dc.minute ?? 0, 0, 0);
+                }
+              } else if (trigger.type === "date" && trigger.value != null) {
+                triggerDate = new Date(trigger.value);
               }
               const timeStr = triggerDate
                 ? triggerDate.toLocaleString("en-US", { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })
