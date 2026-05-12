@@ -121,10 +121,18 @@ function parseSetlistDate(dateText?: string): Date | null {
   return date;
 }
 
-function hasSongs(setlist: SetlistApiSetlist): boolean {
-  return (setlist.sets?.set ?? []).some((set) =>
-    (set.song ?? []).some((song) => Boolean(song.name?.trim()))
+const MIN_SETLIST_SONG_COUNT = 5;
+
+function countSongs(setlist: SetlistApiSetlist): number {
+  return (setlist.sets?.set ?? []).reduce(
+    (total, set) =>
+      total + (set.song ?? []).filter((song) => Boolean(song.name?.trim())).length,
+    0
   );
+}
+
+function hasSufficientSongs(setlist: SetlistApiSetlist): boolean {
+  return countSongs(setlist) >= MIN_SETLIST_SONG_COUNT;
 }
 
 function pickLatestCompletedSetlist(setlists: SetlistApiSetlist[], now: Date = new Date()) {
@@ -142,7 +150,7 @@ function pickLatestCompletedSetlist(setlists: SetlistApiSetlist[], now: Date = n
     .map((setlist) => ({ setlist, date: parseSetlistDate(setlist.eventDate) }))
     .filter(
       (item): item is { setlist: SetlistApiSetlist; date: Date } =>
-        item.date !== null && item.date.getTime() <= yesterdayUtc && hasSongs(item.setlist)
+        item.date !== null && item.date.getTime() <= yesterdayUtc && hasSufficientSongs(item.setlist)
     )
     .sort((a, b) => b.date.getTime() - a.date.getTime());
 
@@ -184,7 +192,7 @@ function pickBestSetlistWithFestivalVenuePriority(
       (item): item is { setlist: SetlistApiSetlist; date: Date; priority: number } =>
         item.date !== null &&
         item.date.getTime() <= yesterdayUtc &&
-        hasSongs(item.setlist) &&
+        hasSufficientSongs(item.setlist) &&
         item.priority !== undefined
     )
     .sort((a, b) => {

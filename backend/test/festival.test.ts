@@ -71,7 +71,13 @@ describe('festivalService', () => {
             set: [
               {
                 name: 'Main',
-                song: [{ name: 'Artificial Suicide' }, { name: 'Dethrone' }],
+                song: [
+                  { name: 'Artificial Suicide' },
+                  { name: 'Dethrone' },
+                  { name: 'Just Pretend' },
+                  { name: 'The Death of Peace of Mind' },
+                  { name: 'Never Know' },
+                ],
               },
             ],
           },
@@ -82,10 +88,13 @@ describe('festivalService', () => {
     const result = await buildArtistShowResults(['Bad Omens'], client);
     assert.equal(result[0].status, 'ok');
     assert.equal(result[0].artistMatch?.name, 'Bad Omens');
-    assert.equal(result[0].latestSetlist?.songCount, 2);
+    assert.equal(result[0].latestSetlist?.songCount, 5);
     assert.deepEqual(result[0].latestSetlist?.sections[0]?.songs, [
       'Artificial Suicide',
       'Dethrone',
+      'Just Pretend',
+      'The Death of Peace of Mind',
+      'Never Know',
     ]);
   });
 
@@ -126,13 +135,25 @@ describe('festivalService', () => {
           id: 'recent-valid',
           eventDate: '20-04-2026',
           sets: {
-            set: [{ name: 'Set 1', song: [{ name: 'Can You Feel My Heart' }] }],
+            set: [{ name: 'Set 1', song: [
+              { name: 'Can You Feel My Heart' },
+              { name: 'Antivist' },
+              { name: 'Shadow Moses' },
+              { name: 'Throne' },
+              { name: 'Happy Song' },
+            ]}],
           },
         },
         {
           id: 'older-valid',
           eventDate: '10-04-2026',
-          sets: { set: [{ name: 'Set 1', song: [{ name: 'Drown' }] }] },
+          sets: { set: [{ name: 'Set 1', song: [
+            { name: 'Drown' },
+            { name: 'Avalanche' },
+            { name: 'True Friends' },
+            { name: 'Follow You' },
+            { name: 'Doomed' },
+          ]}] },
         },
       ],
     });
@@ -145,6 +166,31 @@ describe('festivalService', () => {
     assert.equal(result[0].latestSetlist?.id, 'recent-valid');
   });
 
+  it('skips rained-out setlists with fewer than 5 songs and falls back to the next valid one', async () => {
+    const client = makeClientMock({
+      searchArtistsByName: async () => [{ mbid: 'artist-id', name: 'Band' }],
+      searchSetlistsByArtistMbid: async () => [
+        {
+          id: 'rained-out',
+          eventDate: '20-04-2026',
+          sets: { set: [{ song: [{ name: 'Song A' }, { name: 'Song B' }, { name: 'Song C' }] }] },
+        },
+        {
+          id: 'full-show',
+          eventDate: '10-04-2026',
+          sets: { set: [{ song: [
+            { name: 'Song D' }, { name: 'Song E' }, { name: 'Song F' },
+            { name: 'Song G' }, { name: 'Song H' },
+          ]}] },
+        },
+      ],
+    });
+
+    const result = await buildArtistShowResults(['Band'], client);
+    assert.equal(result[0].status, 'ok');
+    assert.equal(result[0].latestSetlist?.id, 'full-show');
+  });
+
   it('prefers festival venue ids over pure recency', async () => {
     const client = makeClientMock({
       searchArtistsByName: async () => [{ mbid: 'artist-id', name: 'Band' }],
@@ -153,13 +199,19 @@ describe('festivalService', () => {
           id: 'newest-non-festival',
           eventDate: '20-04-2026',
           venue: { id: 'non-festival' },
-          sets: { set: [{ song: [{ name: 'Song A' }] }] },
+          sets: { set: [{ song: [
+            { name: 'Song A' }, { name: 'Song B' }, { name: 'Song C' },
+            { name: 'Song D' }, { name: 'Song E' },
+          ]}] },
         },
         {
           id: 'festival-priority',
           eventDate: '18-04-2026',
           venue: { id: 'festival-stage-id' },
-          sets: { set: [{ song: [{ name: 'Song B' }] }] },
+          sets: { set: [{ song: [
+            { name: 'Song F' }, { name: 'Song G' }, { name: 'Song H' },
+            { name: 'Song I' }, { name: 'Song J' },
+          ]}] },
         },
       ],
     });
@@ -183,7 +235,11 @@ describe('festivalService', () => {
         {
           id: 'cached-setlist',
           eventDate: '20-04-2026',
-          sets: { set: [{ song: [{ name: 'Cached Song' }] }] },
+          sets: { set: [{ song: [
+            { name: 'Cached Song 1' }, { name: 'Cached Song 2' },
+            { name: 'Cached Song 3' }, { name: 'Cached Song 4' },
+            { name: 'Cached Song 5' },
+          ]}] },
         },
       ],
     });
