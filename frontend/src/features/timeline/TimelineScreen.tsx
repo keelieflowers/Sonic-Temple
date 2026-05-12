@@ -211,6 +211,7 @@ export function TimelineScreen({ selectedBands }: Props) {
           contentContainerStyle={{ padding: spacing.md, paddingBottom: spacing.xl }}
           sections={sections}
           keyExtractor={itemKey}
+          extraData={setlistMap}
           renderSectionHeader={({ section }) => {
             if (section.sectionType === "playing") {
               return (
