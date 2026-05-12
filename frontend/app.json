@@ -3,6 +3,7 @@
     "name": "Sonic Temple",
     "slug": "sonic-temple",
     "version": "1.0.1",
+    "platforms": ["ios", "android"],
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "frontend",
@@ -27,11 +28,7 @@
       },
       "predictiveBackGestureEnabled": false
     },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
-    },
+
     "updates": {
       "url": "https://u.expo.dev/4f8a7fde-715b-42a2-a911-a273391a0edf"
     },
