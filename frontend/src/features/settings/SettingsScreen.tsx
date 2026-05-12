@@ -96,7 +96,7 @@ export function SettingsScreen() {
   };
 
   const handleExport = async () => {
-    const apiUrl = process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:3001";
+    const apiUrl = process.env.EXPO_PUBLIC_API_URL ?? "https://api.festivalapp.flowersdev.click";
     try {
       const res = await fetch(`${apiUrl}/api/share`, {
         method: "POST",
