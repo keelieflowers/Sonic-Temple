@@ -87,12 +87,18 @@ export function SettingsScreen() {
   };
 
   const handleExport = async () => {
-    const json = JSON.stringify({ bands: [...selectedBands] });
-    // btoa doesn't handle non-ASCII (e.g. accented band names) — use the
-    // encodeURIComponent trick to get a unicode-safe base64 string.
-    const encoded = btoa(unescape(encodeURIComponent(json)));
-    const url = `frontend://import?d=${encoded}`;
-    await Share.share({ message: url });
+    try {
+      const res = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/share`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ bands: [...selectedBands] }),
+      });
+      if (!res.ok) throw new Error("server error");
+      const { url } = await res.json() as { url: string };
+      await Share.share({ message: url });
+    } catch {
+      Alert.alert("Export failed", "Couldn't create share link. Check your connection.");
+    }
   };
 
   const handleImport = async () => {

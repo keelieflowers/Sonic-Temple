@@ -1,5 +1,6 @@
 import express from "express";
 import { createFestivalRouter } from "./routes/festival.js";
+import { createShareRouter } from "./routes/share.js";
 import { FinalSetlistCacheStore } from "./services/finalSetlistCacheStore.js";
 import { ArtistMbidStore } from "./services/artistMbidStore.js";
 import { Logger } from "./services/logger.js";
@@ -13,7 +14,8 @@ export function createApp(
   scheduleSource: ScheduleSource,
   festivalVenueIds: string[],
   cacheTtlHours: number,
-  logger: Logger
+  logger: Logger,
+  baseUrl: string = "https://api.festivalapp.flowersdev.click"
 ) {
   const app = express();
   app.use(express.json());
@@ -33,5 +35,6 @@ export function createApp(
       logger
     )
   );
+  app.use("/share", createShareRouter(baseUrl));
   return app;
 }
