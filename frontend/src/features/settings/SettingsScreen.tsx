@@ -58,7 +58,7 @@ export function SettingsScreen() {
     }
     setSyncingSetlists(true);
     try {
-      await syncArtistSetlists([...selectedBands]);
+      await syncArtistSetlists([...selectedBands], undefined, true);
       await queryClient.invalidateQueries({ queryKey: ["all-cached-setlists"] });
       Alert.alert("Done", `Synced setlists for ${bandCount} artists.`);
     } catch {

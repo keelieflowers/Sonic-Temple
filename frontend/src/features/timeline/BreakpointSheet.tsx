@@ -82,7 +82,7 @@ export function BreakpointSheet({
   const handleRefresh = async () => {
     setSyncing(true);
     try {
-      await syncArtistSetlists([entry.artist]);
+      await syncArtistSetlists([entry.artist], undefined, true);
       await queryClient.invalidateQueries({ queryKey: ["all-cached-setlists"] });
     } finally {
       setSyncing(false);
