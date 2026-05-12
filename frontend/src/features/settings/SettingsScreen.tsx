@@ -5,6 +5,7 @@ import { ActivityIndicator, Alert, ScrollView, Share, StyleSheet, Text, TextInpu
 import * as Linking from "expo-linking";
 import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
+import * as Updates from "expo-updates";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useQueryClient } from "@tanstack/react-query";
 import { useColors } from "@/src/providers/theme/ThemeProvider";
@@ -93,11 +94,15 @@ export function SettingsScreen() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ bands: [...selectedBands] }),
       });
-      if (!res.ok) throw new Error("server error");
+      if (!res.ok) {
+        const body = await res.text().catch(() => "(no body)");
+        throw new Error(`HTTP ${res.status}: ${body}`);
+      }
       const { url } = await res.json() as { url: string };
       await Share.share({ message: url });
-    } catch {
-      Alert.alert("Export failed", "Couldn't create share link. Check your connection.");
+    } catch (err) {
+      const detail = err instanceof Error ? err.message : String(err);
+      Alert.alert("Export failed", detail);
     }
   };
 
@@ -285,7 +290,10 @@ export function SettingsScreen() {
           </View>
         </TouchableOpacity>
       </View>
-      <Text style={s.versionLabel}>v{Constants.expoConfig?.version ?? "—"}</Text>
+      <Text style={s.versionLabel}>
+        v{Constants.expoConfig?.version ?? "—"}
+        {Updates.updateId ? `  ·  update ${Updates.updateId.slice(0, 8)}` : "  ·  no update loaded"}
+      </Text>
       </ScrollView>
     </SafeAreaView>
   );
