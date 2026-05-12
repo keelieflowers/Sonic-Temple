@@ -88,7 +88,7 @@ export function SettingsScreen() {
 
   const handleExport = async () => {
     const encoded = encodeURIComponent(JSON.stringify({ bands: [...selectedBands] }));
-    const url = `sonictemple://import?d=${encoded}`;
+    const url = `frontend://import?d=${encoded}`;
     await Share.share({ message: url });
   };
 
@@ -98,7 +98,7 @@ export function SettingsScreen() {
     try {
       let bands: string[];
 
-      if (text.startsWith("sonictemple://")) {
+      if (text.startsWith("frontend://")) {
         // New deep-link format
         const parsed = Linking.parse(text);
         const d = parsed.queryParams?.d;
