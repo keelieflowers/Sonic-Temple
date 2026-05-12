@@ -193,18 +193,8 @@ export function SettingsScreen() {
           <View style={s.notifList}>
             {scheduledNotifs.map((n) => {
               const icon = notifIcon(n.identifier);
-              const trigger = n.trigger as any;
-              let triggerDate: Date | null = null;
-              if (trigger.type === "timeInterval" && trigger.seconds) {
-                triggerDate = new Date(Date.now() + trigger.seconds * 1000);
-              } else if (trigger.type === "calendar" && trigger.dateComponents) {
-                const dc = trigger.dateComponents;
-                if (dc.year != null && dc.month != null && dc.day != null) {
-                  triggerDate = new Date(dc.year, dc.month - 1, dc.day, dc.hour ?? 0, dc.minute ?? 0, 0, 0);
-                }
-              } else if (trigger.type === "date" && trigger.value != null) {
-                triggerDate = new Date(trigger.value);
-              }
+              const fireTime = (n.content.data as any)?.fireTime;
+              const triggerDate: Date | null = fireTime ? new Date(fireTime) : null;
               const timeStr = triggerDate
                 ? triggerDate.toLocaleString("en-US", { weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })
                 : null;

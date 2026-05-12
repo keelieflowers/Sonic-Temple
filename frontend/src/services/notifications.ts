@@ -75,6 +75,7 @@ export async function scheduleBreakpointNotifications(
         content: {
           title: "Time to go 🚩",
           body: `Leave ${entry.stage} now — breakpoint for ${entry.artist}`,
+          data: { fireTime: fireDate.getTime() },
         },
         trigger: {
           type: Notifications.SchedulableTriggerInputTypes.DATE,
@@ -95,6 +96,7 @@ export async function scheduleBreakpointNotifications(
           content: {
             title: `Head to ${entry.stage} now 📍`,
             body: `"${song}" by ${entry.artist} is coming up`,
+            data: { fireTime: fireDate.getTime() },
           },
           trigger: {
             type: Notifications.SchedulableTriggerInputTypes.DATE,
@@ -118,6 +120,7 @@ export async function scheduleMustSeeNotification(entry: ScheduleEntry): Promise
     content: {
       title: `★ ${entry.artist} in ${MUST_SEE_NOTICE_MIN} min`,
       body: `Head to ${entry.stage} · ${entry.startTime}`,
+      data: { fireTime: fireDate.getTime() },
     },
     trigger: {
       type: Notifications.SchedulableTriggerInputTypes.DATE,
