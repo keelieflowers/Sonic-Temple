@@ -35,6 +35,6 @@ export function createApp(
       logger
     )
   );
-  app.use("/share", createShareRouter(baseUrl));
+  app.use("/api/share", createShareRouter(baseUrl));
   return app;
 }

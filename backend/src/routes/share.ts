@@ -25,7 +25,7 @@ export function createShareRouter(baseUrl: string): Router {
       return;
     }
     const id = createShare(result.data.bands);
-    res.json({ url: `${baseUrl}/share/${id}` });
+    res.json({ url: `${baseUrl}/api/share/${id}` });
   });
 
   // GET /share/:id — serve an OG preview page that redirects to the deep link

@@ -88,7 +88,7 @@ export function SettingsScreen() {
 
   const handleExport = async () => {
     try {
-      const res = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/share`, {
+      const res = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/api/share`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ bands: [...selectedBands] }),
