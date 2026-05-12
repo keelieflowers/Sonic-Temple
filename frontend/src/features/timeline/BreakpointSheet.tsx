@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
   Animated,
   Modal,
   PanResponder,
@@ -82,7 +83,11 @@ export function BreakpointSheet({
   const handleRefresh = async () => {
     setSyncing(true);
     try {
-      await syncArtistSetlists([entry.artist], undefined, true);
+      const { failed } = await syncArtistSetlists([entry.artist], undefined, true);
+      if (failed > 0) {
+        Alert.alert("Refresh failed", "Could not reach the server. Is it running?");
+        return;
+      }
       await queryClient.invalidateQueries({ queryKey: ["all-cached-setlists"] });
     } finally {
       setSyncing(false);

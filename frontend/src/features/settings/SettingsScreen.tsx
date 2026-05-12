@@ -58,9 +58,15 @@ export function SettingsScreen() {
     }
     setSyncingSetlists(true);
     try {
-      await syncArtistSetlists([...selectedBands], undefined, true);
+      const result = await syncArtistSetlists([...selectedBands], undefined, true);
       await queryClient.invalidateQueries({ queryKey: ["all-cached-setlists"] });
-      Alert.alert("Done", `Synced setlists for ${bandCount} artists.`);
+      if (result.failed === bandCount) {
+        Alert.alert("Error", "Setlist sync failed. Is the server running?");
+      } else if (result.failed > 0) {
+        Alert.alert("Partial sync", `Synced ${result.synced} of ${bandCount} artists. ${result.failed} failed.`);
+      } else {
+        Alert.alert("Done", `Synced setlists for ${bandCount} artists.`);
+      }
     } catch {
       Alert.alert("Error", "Setlist sync failed. Check your connection.");
     } finally {
@@ -76,9 +82,15 @@ export function SettingsScreen() {
     }
     setForceSyncingSetlists(true);
     try {
-      await syncArtistSetlists([...selectedBands], undefined, true);
+      const result = await syncArtistSetlists([...selectedBands], undefined, true);
       await queryClient.invalidateQueries({ queryKey: ["all-cached-setlists"] });
-      Alert.alert("Done", `Force-refreshed setlists for ${bandCount} artists.`);
+      if (result.failed === bandCount) {
+        Alert.alert("Error", "Could not reach the backend. Is it running?");
+      } else if (result.failed > 0) {
+        Alert.alert("Partial refresh", `Refreshed ${result.synced} of ${bandCount} artists. ${result.failed} failed.`);
+      } else {
+        Alert.alert("Done", `Force-refreshed setlists for ${bandCount} artists.`);
+      }
     } catch {
       Alert.alert("Error", "Could not reach the backend. Is it running?");
     } finally {
