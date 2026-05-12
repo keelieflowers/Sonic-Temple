@@ -88,8 +88,9 @@ export function SettingsScreen() {
   };
 
   const handleExport = async () => {
+    const apiUrl = process.env.EXPO_PUBLIC_API_URL ?? "http://localhost:3001";
     try {
-      const res = await fetch(`${process.env.EXPO_PUBLIC_API_URL}/api/share`, {
+      const res = await fetch(`${apiUrl}/api/share`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ bands: [...selectedBands] }),
@@ -102,7 +103,7 @@ export function SettingsScreen() {
       await Share.share({ message: url });
     } catch (err) {
       const detail = err instanceof Error ? err.message : String(err);
-      Alert.alert("Export failed", detail);
+      Alert.alert("Export failed", `${apiUrl}\n\n${detail}`);
     }
   };
 
