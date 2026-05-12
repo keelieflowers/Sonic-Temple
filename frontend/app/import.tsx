@@ -20,12 +20,16 @@ export default function ImportScreen() {
       }
 
       try {
-        // Expo Router typically URL-decodes query params, but decode defensively.
+        // d is base64 (new) or url-encoded JSON (old) — try both.
         let parsed: unknown;
         try {
-          parsed = JSON.parse(d);
+          parsed = JSON.parse(decodeURIComponent(escape(atob(d))));
         } catch {
-          parsed = JSON.parse(decodeURIComponent(d));
+          try {
+            parsed = JSON.parse(d);
+          } catch {
+            parsed = JSON.parse(decodeURIComponent(d));
+          }
         }
 
         const bands: unknown = (parsed as Record<string, unknown>)?.bands;

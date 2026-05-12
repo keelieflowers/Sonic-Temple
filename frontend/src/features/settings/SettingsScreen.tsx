@@ -87,7 +87,10 @@ export function SettingsScreen() {
   };
 
   const handleExport = async () => {
-    const encoded = encodeURIComponent(JSON.stringify({ bands: [...selectedBands] }));
+    const json = JSON.stringify({ bands: [...selectedBands] });
+    // btoa doesn't handle non-ASCII (e.g. accented band names) — use the
+    // encodeURIComponent trick to get a unicode-safe base64 string.
+    const encoded = btoa(unescape(encodeURIComponent(json)));
     const url = `frontend://import?d=${encoded}`;
     await Share.share({ message: url });
   };
@@ -99,13 +102,13 @@ export function SettingsScreen() {
       let bands: string[];
 
       if (text.startsWith("frontend://")) {
-        // New deep-link format
+        // Deep-link format — d is base64 (new) or url-encoded JSON (old)
         const parsed = Linking.parse(text);
         const d = parsed.queryParams?.d;
         if (typeof d !== "string") throw new Error("bad format");
         let data: unknown;
         try {
-          data = JSON.parse(d);
+          data = JSON.parse(decodeURIComponent(escape(atob(d))));
         } catch {
           data = JSON.parse(decodeURIComponent(d));
         }
